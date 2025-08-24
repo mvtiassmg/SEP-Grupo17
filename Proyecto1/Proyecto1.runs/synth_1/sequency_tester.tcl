@@ -71,6 +71,7 @@ proc create_report { reportName command } {
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param chipscope.maxJobs 5
+set_param xicom.use_bs_reader 1
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7z010clg400-1
 
@@ -87,7 +88,7 @@ set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_vhdl -library xil_defaultlib {
-  {E:/2025-2/IEE2473 - Laboratorio de Electronica Analogica y Digital/LAB_01_IEE2473/LAB_01_IEE2473.srcs/sources_1/new/ClockDivider.vhd}
+  {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/new/ClockDivider.vhd}
   {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/new/led_secuency.vhd}
   {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/new/sequency_tester.vhd}
 }

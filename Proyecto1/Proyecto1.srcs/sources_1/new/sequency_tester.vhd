@@ -9,11 +9,8 @@ entity sequency_tester is
 end sequency_tester;
 
 architecture Behavioral of sequency_tester is
-
-    -- Señal para el reloj dividido de 2 Hz
     signal clk_2Hz : std_logic;
 
-    -- Instancia del ClockDivider
     component ClockDivider is
         generic (
             FREQ_IN  : integer := 125_000_000;
@@ -25,7 +22,6 @@ architecture Behavioral of sequency_tester is
         );
     end component;
 
-    -- Instancia del LED Secuency
     component led_secuency is
         Port (
             clk_in : in  std_logic;
@@ -35,18 +31,16 @@ architecture Behavioral of sequency_tester is
 
 begin
 
-    -- ClockDivider: genera 2 Hz a partir de 125 MHz
     u_clkdiv : ClockDivider
         generic map (
             FREQ_IN  => 125_000_000,
-            FREQ_OUT => 2       -- frecuencia deseada 2 Hz
+            FREQ_OUT => 2
         )
         port map (
             clk_in  => clk,
             clk_out => clk_2Hz
         );
 
-    -- Secuencia de LEDs
     u_ledseq : led_secuency
         port map (
             clk_in => clk_2Hz,
