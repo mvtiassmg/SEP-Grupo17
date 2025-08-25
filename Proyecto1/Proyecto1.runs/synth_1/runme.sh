@@ -24,7 +24,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1'
+HD_PWD='E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log
@@ -40,4 +40,4 @@ EAStep()
      fi
 }
 
-EAStep vivado -log sequency_tester.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source sequency_tester.tcl
+EAStep vivado -log lvl_logic.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source lvl_logic.tcl
