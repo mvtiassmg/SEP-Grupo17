@@ -3,9 +3,11 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity lvl_logic is
-  port ( clk_game : in  std_logic; btn: in  std_logic;
+  port ( clk_game : in  std_logic; 
+  btn: in  std_logic;
     reset    : in  std_logic;   -- activo en '1'
-    flag     : out std_logic := '0');
+    flag     : out std_logic := '0';
+    idx: out unsigned(1 downto 0) := (others => '0') );
 end lvl_logic;
 
 architecture Behavioral of lvl_logic is
@@ -15,6 +17,7 @@ begin process(clk_game, reset)
     if reset = '1' then --Reset
       contador := 0;
       flag <= '0';
+      idx <= (others => '0');
     elsif rising_edge(clk_game) then   
       if contador = 3 then -- Si estamos en el 4to led
         if btn = '1' then
@@ -27,6 +30,7 @@ begin process(clk_game, reset)
         contador := contador + 1; --Flujo del led, por defecto no ganamos
         flag <= '0';  
       end if;
+      idx <= to_unsigned(contador, 2);
     end if;
   end process;
 end Behavioral;
