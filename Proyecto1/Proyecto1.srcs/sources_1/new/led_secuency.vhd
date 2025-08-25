@@ -18,12 +18,12 @@ begin
         variable led_on: integer := 0;
     begin
         if rising_edge(clk_in) then
-            counter := counter + 1;
+            counter := counter + 1; 
             if counter = 4 then
-                counter := 0;
+                counter := 0; -- Cambiamos instantáneamente el contador
             end if;
 
-            led_on := 3 - counter;
+            led_on := 3 - counter; --Posición del led encendido
             led_reg <= (others => '0'); 
             led_reg(led_on) <= '1';
         end if;
