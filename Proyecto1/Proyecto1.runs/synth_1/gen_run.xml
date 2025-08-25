@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7z010clg400-1" LaunchTime="1756080819">
+<GenRun Id="synth_1" LaunchPart="xc7z010clg400-1" LaunchTime="1756090775">
   <File Type="PA-TCL" Name="sequency_tester.tcl"/>
-  <File Type="RDS-PROPCONSTRS" Name="sequency_tester_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="sequency_tester_reports.tcl"/>
   <File Type="RDS-RDS" Name="sequency_tester.vds"/>
   <File Type="RDS-UTIL" Name="sequency_tester_utilization_synth.rpt"/>
   <File Type="RDS-UTIL-PB" Name="sequency_tester_utilization_synth.pb"/>
   <File Type="RDS-DCP" Name="sequency_tester.dcp"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="sequency_tester_timing_summary_synth.rpt"/>
-  <File Type="VDS-TIMING-PB" Name="sequency_tester_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/ClockDivider.vhd">
@@ -29,14 +26,14 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/new/lvl_logic.vhd">
+    <File Path="$PSRCDIR/sources_1/new/difficulty_lvl.vhd">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/new/difficulty_lvl.vhd">
+    <File Path="$PSRCDIR/sources_1/new/lvl_logic.vhd">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>

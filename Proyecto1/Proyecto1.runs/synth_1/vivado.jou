@@ -2,8 +2,8 @@
 # Vivado v2020.1 (64-bit)
 # SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
 # IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
-# Start of session at: Sun Aug 24 20:13:47 2025
-# Process ID: 13392
+# Start of session at: Sun Aug 24 22:59:38 2025
+# Process ID: 6536
 # Current directory: C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1
 # Command line: vivado.exe -log sequency_tester.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source sequency_tester.tcl
 # Log file: C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/sequency_tester.vds
