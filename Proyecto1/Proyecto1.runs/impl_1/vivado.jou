@@ -2,11 +2,11 @@
 # Vivado v2020.1 (64-bit)
 # SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
 # IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
-# Start of session at: Mon Aug 25 01:08:03 2025
-# Process ID: 25216
+# Start of session at: Wed Aug 27 09:30:59 2025
+# Process ID: 18496
 # Current directory: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1
-# Command line: vivado.exe -log lvl_logic.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source lvl_logic.tcl -notrace
-# Log file: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/lvl_logic.vdi
+# Command line: vivado.exe -log MemorySequency.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source MemorySequency.tcl -notrace
+# Log file: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/MemorySequency.vdi
 # Journal file: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1\vivado.jou
 #-----------------------------------------------------------
-source lvl_logic.tcl -notrace
+source MemorySequency.tcl -notrace
