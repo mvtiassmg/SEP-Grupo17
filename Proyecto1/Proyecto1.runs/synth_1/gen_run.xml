@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7z010clg400-1" LaunchTime="1756098447">
-  <File Type="PA-TCL" Name="lvl_logic.tcl"/>
-  <File Type="RDS-PROPCONSTRS" Name="lvl_logic_drc_synth.rpt"/>
-  <File Type="REPORTS-TCL" Name="lvl_logic_reports.tcl"/>
-  <File Type="RDS-RDS" Name="lvl_logic.vds"/>
-  <File Type="RDS-UTIL" Name="lvl_logic_utilization_synth.rpt"/>
-  <File Type="RDS-UTIL-PB" Name="lvl_logic_utilization_synth.pb"/>
-  <File Type="RDS-DCP" Name="lvl_logic.dcp"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="lvl_logic_timing_summary_synth.rpt"/>
-  <File Type="VDS-TIMING-PB" Name="lvl_logic_timing_summary_synth.pb"/>
+<GenRun Id="synth_1" LaunchPart="xc7z010clg400-1" LaunchTime="1756301398">
+  <File Type="PA-TCL" Name="MemorySequency.tcl"/>
+  <File Type="RDS-PROPCONSTRS" Name="MemorySequency_drc_synth.rpt"/>
+  <File Type="REPORTS-TCL" Name="MemorySequency_reports.tcl"/>
+  <File Type="RDS-RDS" Name="MemorySequency.vds"/>
+  <File Type="RDS-UTIL" Name="MemorySequency_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="MemorySequency_utilization_synth.pb"/>
+  <File Type="RDS-DCP" Name="MemorySequency.dcp"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="MemorySequency_timing_summary_synth.rpt"/>
+  <File Type="VDS-TIMING-PB" Name="MemorySequency_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/ClockDivider.vhd">
@@ -17,36 +17,15 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/new/lvl_logic.vhd">
+    <File Path="$PSRCDIR/sources_1/new/MemorySequency.vhd">
       <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/new/led_secuency.vhd">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/new/sequency_tester.vhd">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/new/difficulty_lvl.vhd">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="lvl_logic"/>
+      <Option Name="TopModule" Val="MemorySequency"/>
     </Config>
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">

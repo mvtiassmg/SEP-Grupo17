@@ -4,7 +4,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity sequency_tester is
     Port (
         clk : in  std_logic; 
-        led        : out std_logic_vector(3 downto 0)
+        led : out std_logic_vector(3 downto 0)
     );
 end sequency_tester;
 
