@@ -4,8 +4,10 @@ use ieee.numeric_std.all;
 
 entity MemorySequency is
     Port (
-        clk : in  std_logic;
-        led : out std_logic_vector(3 downto 0)   -- <== faltaba rango
+        clk     : in std_logic; -- Clk de la Zybo
+        game_on : in std_logic; -- Señal que da inicio o reinicio al juego
+        reset   : in std_logic; -- Señal que detiene y resetea el juego
+        led     : out std_logic_vector(3 downto 0) -- Salida LED
     );
 end MemorySequency;
 
@@ -13,12 +15,12 @@ architecture Behavioral of MemorySequency is
 
     component ClockDivider is 
         generic (
-            FREQ_IN  : integer := 125_000_000;
-            FREQ_OUT : integer
+            FREQ_IN  : integer := 125_000_000
         );
         Port ( 
-            clk_in  : in  std_logic; 
-            clk_out : out std_logic
+            clk_in   : in  std_logic;
+            FREQ_OUT : in integer;
+            clk_out  : out std_logic
         );
     end component;    
     
@@ -78,32 +80,45 @@ architecture Behavioral of MemorySequency is
     );
 
     signal clk_ds  : std_logic := '0';
+    signal freq_ctrl : integer := 2;
 
 begin
     
-    -- Instancia del divisor de reloj
     u_ClkDiv : ClockDivider
         generic map ( 
-            FREQ_IN  => 125_000_000,
-            FREQ_OUT => 4
+            FREQ_IN  => 125_000_000
         )
         port map (
             clk_in  => clk,
+            FREQ_OUT => freq_ctrl,
             clk_out => clk_ds
         );
         
-    -- Proceso que recorre la ROM
-    process(clk_ds)
+    process(clk_ds, reset, game_on)
         variable counter : integer := 0;
     begin
-        if rising_edge(clk_ds) then 
-            if counter = 49 then
-                counter := 0;
-            else 
-                counter := counter + 1;
-            end if;                   
-            
+        if reset = '1' then 
+            counter := 0;
+            freq_ctrl <= 2;
+            led <= "0000";
+        end if;
+        
+        if game_on = '1' then
+            if rising_edge(clk_ds) then 
+                if counter = 49 then
+                    counter := 0;
+                    if freq_ctrl < 10 then
+                        freq_ctrl <= 2 * freq_ctrl; 
+                    end if;
+                    
+                else 
+                    counter := counter + 1;
+                end if;                 
+                led <= rom_data(counter);
+            end if;
+        else 
             led <= rom_data(counter);
+            
         end if;
     end process;
             
