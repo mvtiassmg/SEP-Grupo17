@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
-| Date         : Wed Aug 27 09:30:48 2025
+| Date         : Wed Aug 27 10:42:51 2025
 | Host         : LAPTOP-PPEH9OE5 running 64-bit major release  (build 9200)
 | Command      : report_utilization -file MemorySequency_utilization_synth.rpt -pb MemorySequency_utilization_synth.pb
 | Design       : MemorySequency
@@ -30,12 +30,12 @@ Table of Contents
 +-------------------------+------+-------+-----------+-------+
 |        Site Type        | Used | Fixed | Available | Util% |
 +-------------------------+------+-------+-----------+-------+
-| Slice LUTs*             |   28 |     0 |     17600 |  0.16 |
-|   LUT as Logic          |   28 |     0 |     17600 |  0.16 |
+| Slice LUTs*             | 1119 |     0 |     17600 |  6.36 |
+|   LUT as Logic          | 1119 |     0 |     17600 |  6.36 |
 |   LUT as Memory         |    0 |     0 |      6000 |  0.00 |
-| Slice Registers         |   61 |     0 |     35200 |  0.17 |
-|   Register as Flip Flop |   61 |     0 |     35200 |  0.17 |
-|   Register as Latch     |    0 |     0 |     35200 |  0.00 |
+| Slice Registers         |  159 |     0 |     35200 |  0.45 |
+|   Register as Flip Flop |  127 |     0 |     35200 |  0.36 |
+|   Register as Latch     |   32 |     0 |     35200 |  0.09 |
 | F7 Muxes                |    0 |     0 |      8800 |  0.00 |
 | F8 Muxes                |    0 |     0 |      4400 |  0.00 |
 +-------------------------+------+-------+-----------+-------+
@@ -54,10 +54,10 @@ Table of Contents
 | 0     |            _ |         Set |            - |
 | 0     |            _ |       Reset |            - |
 | 0     |          Yes |           - |            - |
-| 0     |          Yes |           - |          Set |
-| 0     |          Yes |           - |        Reset |
+| 33    |          Yes |           - |          Set |
+| 94    |          Yes |           - |        Reset |
 | 0     |          Yes |         Set |            - |
-| 61    |          Yes |       Reset |            - |
+| 32    |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -90,7 +90,7 @@ Table of Contents
 +-----------------------------+------+-------+-----------+-------+
 |          Site Type          | Used | Fixed | Available | Util% |
 +-----------------------------+------+-------+-----------+-------+
-| Bonded IOB                  |    5 |     0 |       100 |  5.00 |
+| Bonded IOB                  |    7 |     0 |       100 |  7.00 |
 | Bonded IPADs                |    0 |     0 |         2 |  0.00 |
 | Bonded IOPADs               |    0 |     0 |       130 |  0.00 |
 | PHY_CONTROL                 |    0 |     0 |         2 |  0.00 |
@@ -146,16 +146,20 @@ Table of Contents
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| FDRE     |   61 |        Flop & Latch |
-| CARRY4   |   14 |          CarryLogic |
-| LUT4     |   11 |                 LUT |
-| LUT5     |   10 |                 LUT |
-| LUT6     |    5 |                 LUT |
+| LUT5     |  795 |                 LUT |
+| CARRY4   |  265 |          CarryLogic |
+| LUT2     |  147 |                 LUT |
+| LUT3     |  115 |                 LUT |
+| LUT4     |  109 |                 LUT |
+| FDCE     |   62 |        Flop & Latch |
+| LUT1     |   61 |                 LUT |
+| FDPE     |   33 |        Flop & Latch |
+| LDCE     |   32 |        Flop & Latch |
+| FDRE     |   32 |        Flop & Latch |
+| LUT6     |   24 |                 LUT |
 | OBUF     |    4 |                  IO |
-| LUT1     |    3 |                 LUT |
+| IBUF     |    3 |                  IO |
 | BUFG     |    2 |               Clock |
-| LUT2     |    1 |                 LUT |
-| IBUF     |    1 |                  IO |
 +----------+------+---------------------+
 
 
