@@ -26,16 +26,17 @@ begin
             if FREQ_OUT > 0 then
                 MAX_COUNT := FREQ_IN / (2 * FREQ_OUT);
             else
-                MAX_COUNT := 1; -- evita división por cero
+                MAX_COUNT := 1; 
             end if;
 
             if counter >= MAX_COUNT - 1 then
                 counter <= 0;
-                clk_reg <= not clk_reg; -- alterna la salida
+                clk_reg <= not clk_reg;
             else
                 counter <= counter + 1;
             end if;
         end if;
     end process;
-end Behavioral;
+end Behavioral; 
+
 

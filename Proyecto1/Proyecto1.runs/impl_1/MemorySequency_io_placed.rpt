@@ -1,8 +1,8 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------
 | Tool Version              : Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
-| Date                      : Sun Aug 31 22:13:46 2025
-| Host                      : Macbook running 64-bit major release  (build 9200)
+| Date                      : Sat Sep  6 13:22:39 2025
+| Host                      : LAPTOP-PPEH9OE5 running 64-bit major release  (build 9200)
 | Command                   : report_io -file MemorySequency_io_placed.rpt
 | Design                    : MemorySequency
 | Device                    : xc7z010
@@ -25,7 +25,7 @@ Table of Contents
 +---------------+
 | Total User IO |
 +---------------+
-|             7 |
+|             9 |
 +---------------+
 
 
@@ -350,7 +350,7 @@ Table of Contents
 | T13        |             |            | GND                     | GND           |             |         |            |      |                     |                      |     0.0 |            |           |          |      |                  |              |                   |              |
 | T14        |             | High Range | IO_L5P_T0_34            | User IO       |             |      34 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
 | T15        |             | High Range | IO_L5N_T0_34            | User IO       |             |      34 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
-| T16        |             | High Range | IO_L9P_T1_DQS_34        | User IO       |             |      34 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
+| T16        | song_sel[1] | High Range | IO_L9P_T1_DQS_34        | INPUT         | LVCMOS33    |      34 |            |      |                     |                 NONE |         | FIXED      |           |          |      | NONE             |              |                   |              |
 | T17        |             | High Range | IO_L20P_T3_34           | User IO       |             |      34 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
 | T18        |             | High Range | VCCO_34                 | VCCO          |             |      34 |            |      |                     |                      |    3.30 |            |           |          |      |                  |              |                   |              |
 | T19        |             | High Range | IO_25_34                | User IO       |             |      34 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
@@ -407,7 +407,7 @@ Table of Contents
 | W10        |             |            | NC                      | Not Connected |             |         |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
 | W11        |             |            | NC                      | Not Connected |             |         |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
 | W12        |             |            | GND                     | GND           |             |         |            |      |                     |                      |     0.0 |            |           |          |      |                  |              |                   |              |
-| W13        |             | High Range | IO_L4N_T0_34            | User IO       |             |      34 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
+| W13        | song_sel[0] | High Range | IO_L4N_T0_34            | INPUT         | LVCMOS33    |      34 |            |      |                     |                 NONE |         | FIXED      |           |          |      | NONE             |              |                   |              |
 | W14        |             | High Range | IO_L8P_T1_34            | User IO       |             |      34 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
 | W15        |             | High Range | IO_L10N_T1_34           | User IO       |             |      34 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
 | W16        |             | High Range | IO_L18N_T2_34           | User IO       |             |      34 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
