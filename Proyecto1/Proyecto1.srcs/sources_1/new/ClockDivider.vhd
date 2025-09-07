@@ -7,7 +7,7 @@ entity ClockDivider is
     );
     Port (
         clk_in   : in  std_logic;
-        FREQ_OUT : in  integer;         -- Frecuencia de salida, dinámica
+        FREQ_OUT : in  integer; 
         clk_out  : out std_logic
     );
 end ClockDivider;
