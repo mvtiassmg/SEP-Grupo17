@@ -1,79 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7z010clg400-1" LaunchTime="1757179303">
-  <File Type="BITSTR-BMM" Name="MemorySequency_bd.bmm"/>
-  <File Type="OPT-METHODOLOGY-DRC" Name="MemorySequency_methodology_drc_opted.rpt"/>
-  <File Type="INIT-TIMING" Name="MemorySequency_timing_summary_init.rpt"/>
-  <File Type="ROUTE-PWR" Name="MemorySequency_power_routed.rpt"/>
-  <File Type="PA-TCL" Name="MemorySequency.tcl"/>
-  <File Type="OPT-TIMING" Name="MemorySequency_timing_summary_opted.rpt"/>
-  <File Type="OPT-DCP" Name="MemorySequency_opt.dcp"/>
-  <File Type="ROUTE-PWR-SUM" Name="MemorySequency_power_summary_routed.pb"/>
-  <File Type="REPORTS-TCL" Name="MemorySequency_reports.tcl"/>
-  <File Type="OPT-DRC" Name="MemorySequency_drc_opted.rpt"/>
-  <File Type="OPT-HWDEF" Name="MemorySequency.hwdef"/>
-  <File Type="PWROPT-DCP" Name="MemorySequency_pwropt.dcp"/>
-  <File Type="PWROPT-DRC" Name="MemorySequency_drc_pwropted.rpt"/>
-  <File Type="PWROPT-TIMING" Name="MemorySequency_timing_summary_pwropted.rpt"/>
-  <File Type="PLACE-DCP" Name="MemorySequency_placed.dcp"/>
-  <File Type="PLACE-IO" Name="MemorySequency_io_placed.rpt"/>
-  <File Type="PLACE-CLK" Name="MemorySequency_clock_utilization_placed.rpt"/>
-  <File Type="PLACE-UTIL" Name="MemorySequency_utilization_placed.rpt"/>
-  <File Type="PLACE-UTIL-PB" Name="MemorySequency_utilization_placed.pb"/>
-  <File Type="PLACE-CTRL" Name="MemorySequency_control_sets_placed.rpt"/>
-  <File Type="PLACE-SIMILARITY" Name="MemorySequency_incremental_reuse_placed.rpt"/>
-  <File Type="PLACE-PRE-SIMILARITY" Name="MemorySequency_incremental_reuse_pre_placed.rpt"/>
-  <File Type="PLACE-TIMING" Name="MemorySequency_timing_summary_placed.rpt"/>
-  <File Type="POSTPLACE-PWROPT-DCP" Name="MemorySequency_postplace_pwropt.dcp"/>
-  <File Type="BG-BIN" Name="MemorySequency.bin"/>
-  <File Type="POSTPLACE-PWROPT-TIMING" Name="MemorySequency_timing_summary_postplace_pwropted.rpt"/>
-  <File Type="PHYSOPT-DCP" Name="MemorySequency_physopt.dcp"/>
-  <File Type="PHYSOPT-DRC" Name="MemorySequency_drc_physopted.rpt"/>
-  <File Type="BITSTR-MSK" Name="MemorySequency.msk"/>
-  <File Type="PHYSOPT-TIMING" Name="MemorySequency_timing_summary_physopted.rpt"/>
-  <File Type="ROUTE-ERROR-DCP" Name="MemorySequency_routed_error.dcp"/>
-  <File Type="ROUTE-DCP" Name="MemorySequency_routed.dcp"/>
-  <File Type="ROUTE-BLACKBOX-DCP" Name="MemorySequency_routed_bb.dcp"/>
-  <File Type="ROUTE-DRC" Name="MemorySequency_drc_routed.rpt"/>
-  <File Type="ROUTE-DRC-PB" Name="MemorySequency_drc_routed.pb"/>
-  <File Type="ROUTE-DRC-RPX" Name="MemorySequency_drc_routed.rpx"/>
-  <File Type="BITSTR-MMI" Name="MemorySequency.mmi"/>
-  <File Type="ROUTE-METHODOLOGY-DRC" Name="MemorySequency_methodology_drc_routed.rpt"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="MemorySequency_methodology_drc_routed.rpx"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="MemorySequency_methodology_drc_routed.pb"/>
-  <File Type="ROUTE-PWR-RPX" Name="MemorySequency_power_routed.rpx"/>
-  <File Type="ROUTE-STATUS" Name="MemorySequency_route_status.rpt"/>
-  <File Type="ROUTE-STATUS-PB" Name="MemorySequency_route_status.pb"/>
-  <File Type="ROUTE-TIMINGSUMMARY" Name="MemorySequency_timing_summary_routed.rpt"/>
-  <File Type="ROUTE-TIMING-PB" Name="MemorySequency_timing_summary_routed.pb"/>
-  <File Type="ROUTE-TIMING-RPX" Name="MemorySequency_timing_summary_routed.rpx"/>
-  <File Type="ROUTE-SIMILARITY" Name="MemorySequency_incremental_reuse_routed.rpt"/>
-  <File Type="ROUTE-CLK" Name="MemorySequency_clock_utilization_routed.rpt"/>
-  <File Type="ROUTE-BUS-SKEW" Name="MemorySequency_bus_skew_routed.rpt"/>
-  <File Type="ROUTE-BUS-SKEW-PB" Name="MemorySequency_bus_skew_routed.pb"/>
-  <File Type="ROUTE-BUS-SKEW-RPX" Name="MemorySequency_bus_skew_routed.rpx"/>
-  <File Type="POSTROUTE-PHYSOPT-DCP" Name="MemorySequency_postroute_physopt.dcp"/>
-  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="MemorySequency_postroute_physopt_bb.dcp"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="MemorySequency_timing_summary_postroute_physopted.rpt"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="MemorySequency_timing_summary_postroute_physopted.pb"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="MemorySequency_timing_summary_postroute_physopted.rpx"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW" Name="MemorySequency_bus_skew_postroute_physopted.rpt"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-PB" Name="MemorySequency_bus_skew_postroute_physopted.pb"/>
-  <File Type="BG-BIT" Name="MemorySequency.bit"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-RPX" Name="MemorySequency_bus_skew_postroute_physopted.rpx"/>
-  <File Type="BITSTR-RBT" Name="MemorySequency.rbt"/>
-  <File Type="BITSTR-NKY" Name="MemorySequency.nky"/>
-  <File Type="PDI-FILE" Name="MemorySequency.pdi"/>
-  <File Type="RCFI_FILE" Name="MemorySequency.rcfi"/>
-  <File Type="CFI_FILE" Name="MemorySequency.cfi"/>
-  <File Type="RNPI_FILE" Name="MemorySequency.rnpi"/>
-  <File Type="NPI_FILE" Name="MemorySequency.npi"/>
-  <File Type="RBD_FILE" Name="MemorySequency.rbd"/>
+<GenRun Id="impl_1" LaunchPart="xc7z010clg400-1" LaunchTime="1757214123">
+  <File Type="BITSTR-BMM" Name="GuitarSep_Top_bd.bmm"/>
+  <File Type="OPT-METHODOLOGY-DRC" Name="GuitarSep_Top_methodology_drc_opted.rpt"/>
+  <File Type="INIT-TIMING" Name="GuitarSep_Top_timing_summary_init.rpt"/>
+  <File Type="ROUTE-PWR" Name="GuitarSep_Top_power_routed.rpt"/>
+  <File Type="PA-TCL" Name="GuitarSep_Top.tcl"/>
+  <File Type="OPT-TIMING" Name="GuitarSep_Top_timing_summary_opted.rpt"/>
+  <File Type="OPT-DCP" Name="GuitarSep_Top_opt.dcp"/>
+  <File Type="ROUTE-PWR-SUM" Name="GuitarSep_Top_power_summary_routed.pb"/>
+  <File Type="REPORTS-TCL" Name="GuitarSep_Top_reports.tcl"/>
+  <File Type="OPT-DRC" Name="GuitarSep_Top_drc_opted.rpt"/>
+  <File Type="OPT-HWDEF" Name="GuitarSep_Top.hwdef"/>
+  <File Type="PWROPT-DCP" Name="GuitarSep_Top_pwropt.dcp"/>
+  <File Type="PWROPT-DRC" Name="GuitarSep_Top_drc_pwropted.rpt"/>
+  <File Type="PWROPT-TIMING" Name="GuitarSep_Top_timing_summary_pwropted.rpt"/>
+  <File Type="PLACE-DCP" Name="GuitarSep_Top_placed.dcp"/>
+  <File Type="PLACE-IO" Name="GuitarSep_Top_io_placed.rpt"/>
+  <File Type="PLACE-CLK" Name="GuitarSep_Top_clock_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL" Name="GuitarSep_Top_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL-PB" Name="GuitarSep_Top_utilization_placed.pb"/>
+  <File Type="PLACE-CTRL" Name="GuitarSep_Top_control_sets_placed.rpt"/>
+  <File Type="PLACE-SIMILARITY" Name="GuitarSep_Top_incremental_reuse_placed.rpt"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="GuitarSep_Top_incremental_reuse_pre_placed.rpt"/>
+  <File Type="PLACE-TIMING" Name="GuitarSep_Top_timing_summary_placed.rpt"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="GuitarSep_Top_postplace_pwropt.dcp"/>
+  <File Type="BG-BIN" Name="GuitarSep_Top.bin"/>
+  <File Type="POSTPLACE-PWROPT-TIMING" Name="GuitarSep_Top_timing_summary_postplace_pwropted.rpt"/>
+  <File Type="PHYSOPT-DCP" Name="GuitarSep_Top_physopt.dcp"/>
+  <File Type="PHYSOPT-DRC" Name="GuitarSep_Top_drc_physopted.rpt"/>
+  <File Type="BITSTR-MSK" Name="GuitarSep_Top.msk"/>
+  <File Type="PHYSOPT-TIMING" Name="GuitarSep_Top_timing_summary_physopted.rpt"/>
+  <File Type="ROUTE-ERROR-DCP" Name="GuitarSep_Top_routed_error.dcp"/>
+  <File Type="ROUTE-DCP" Name="GuitarSep_Top_routed.dcp"/>
+  <File Type="ROUTE-BLACKBOX-DCP" Name="GuitarSep_Top_routed_bb.dcp"/>
+  <File Type="ROUTE-DRC" Name="GuitarSep_Top_drc_routed.rpt"/>
+  <File Type="ROUTE-DRC-PB" Name="GuitarSep_Top_drc_routed.pb"/>
+  <File Type="ROUTE-DRC-RPX" Name="GuitarSep_Top_drc_routed.rpx"/>
+  <File Type="BITSTR-MMI" Name="GuitarSep_Top.mmi"/>
+  <File Type="ROUTE-METHODOLOGY-DRC" Name="GuitarSep_Top_methodology_drc_routed.rpt"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="GuitarSep_Top_methodology_drc_routed.rpx"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="GuitarSep_Top_methodology_drc_routed.pb"/>
+  <File Type="ROUTE-PWR-RPX" Name="GuitarSep_Top_power_routed.rpx"/>
+  <File Type="ROUTE-STATUS" Name="GuitarSep_Top_route_status.rpt"/>
+  <File Type="ROUTE-STATUS-PB" Name="GuitarSep_Top_route_status.pb"/>
+  <File Type="ROUTE-TIMINGSUMMARY" Name="GuitarSep_Top_timing_summary_routed.rpt"/>
+  <File Type="ROUTE-TIMING-PB" Name="GuitarSep_Top_timing_summary_routed.pb"/>
+  <File Type="ROUTE-TIMING-RPX" Name="GuitarSep_Top_timing_summary_routed.rpx"/>
+  <File Type="ROUTE-SIMILARITY" Name="GuitarSep_Top_incremental_reuse_routed.rpt"/>
+  <File Type="ROUTE-CLK" Name="GuitarSep_Top_clock_utilization_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW" Name="GuitarSep_Top_bus_skew_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW-PB" Name="GuitarSep_Top_bus_skew_routed.pb"/>
+  <File Type="ROUTE-BUS-SKEW-RPX" Name="GuitarSep_Top_bus_skew_routed.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="GuitarSep_Top_postroute_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="GuitarSep_Top_postroute_physopt_bb.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="GuitarSep_Top_timing_summary_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="GuitarSep_Top_timing_summary_postroute_physopted.pb"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="GuitarSep_Top_timing_summary_postroute_physopted.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW" Name="GuitarSep_Top_bus_skew_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-PB" Name="GuitarSep_Top_bus_skew_postroute_physopted.pb"/>
+  <File Type="BG-BIT" Name="GuitarSep_Top.bit"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-RPX" Name="GuitarSep_Top_bus_skew_postroute_physopted.rpx"/>
+  <File Type="BITSTR-RBT" Name="GuitarSep_Top.rbt"/>
+  <File Type="BITSTR-NKY" Name="GuitarSep_Top.nky"/>
+  <File Type="PDI-FILE" Name="GuitarSep_Top.pdi"/>
+  <File Type="RCFI_FILE" Name="GuitarSep_Top.rcfi"/>
+  <File Type="CFI_FILE" Name="GuitarSep_Top.cfi"/>
+  <File Type="RNPI_FILE" Name="GuitarSep_Top.rnpi"/>
+  <File Type="NPI_FILE" Name="GuitarSep_Top.npi"/>
+  <File Type="RBD_FILE" Name="GuitarSep_Top.rbd"/>
   <File Type="BITSTR-LTX" Name="debug_nets.ltx"/>
-  <File Type="BITSTR-LTX" Name="MemorySequency.ltx"/>
-  <File Type="BITSTR-SYSDEF" Name="MemorySequency.sysdef"/>
-  <File Type="BG-BGN" Name="MemorySequency.bgn"/>
-  <File Type="BG-DRC" Name="MemorySequency.drc"/>
-  <File Type="RDI-RDI" Name="MemorySequency.vdi"/>
+  <File Type="BITSTR-LTX" Name="GuitarSep_Top.ltx"/>
+  <File Type="BITSTR-SYSDEF" Name="GuitarSep_Top.sysdef"/>
+  <File Type="BG-BGN" Name="GuitarSep_Top.bgn"/>
+  <File Type="BG-DRC" Name="GuitarSep_Top.drc"/>
+  <File Type="RDI-RDI" Name="GuitarSep_Top.vdi"/>
   <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
@@ -83,7 +83,7 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/new/Song_Selector.vhd">
+    <File Path="$PSRCDIR/sources_1/new/Game_SM.vhd">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -95,9 +95,28 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PSRCDIR/sources_1/new/Song_Selector.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/GuitarSep_Top.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/ScoreCounter.vhd">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="MemorySequency"/>
+      <Option Name="TopModule" Val="GuitarSep_Top"/>
     </Config>
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
