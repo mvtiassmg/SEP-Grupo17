@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
-| Date             : Mon Sep  8 00:32:27 2025
+| Date             : Mon Sep  8 05:09:30 2025
 | Host             : LAPTOP-PPEH9OE5 running 64-bit major release  (build 9200)
 | Command          : report_power -file GuitarSep_Top_power_routed.rpt -pb GuitarSep_Top_power_summary_routed.pb -rpx GuitarSep_Top_power_routed.rpx
 | Design           : GuitarSep_Top
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+----------------------------------+
-| Total On-Chip Power (W)  | 29.827 (Junction temp exceeded!) |
+| Total On-Chip Power (W)  | 22.596 (Junction temp exceeded!) |
 | Design Power Budget (W)  | Unspecified*                     |
 | Power Budget Margin (W)  | NA                               |
-| Dynamic (W)              | 29.078                           |
+| Dynamic (W)              | 21.847                           |
 | Device Static (W)        | 0.749                            |
 | Effective TJA (C/W)      | 11.5                             |
 | Max Ambient (C)          | 0.0                              |
@@ -52,16 +52,16 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Slice Logic    |    10.432 |     1669 |       --- |             --- |
-|   LUT as Logic |     8.556 |     1103 |     17600 |            6.27 |
-|   CARRY4       |     1.816 |      288 |      4400 |            6.55 |
-|   Register     |     0.034 |      139 |     35200 |            0.39 |
+| Slice Logic    |    10.307 |     1612 |       --- |             --- |
+|   LUT as Logic |     8.470 |     1093 |     17600 |            6.21 |
+|   CARRY4       |     1.790 |      274 |      4400 |            6.23 |
 |   BUFG         |     0.026 |        2 |        32 |            6.25 |
-|   Others       |     0.000 |       12 |       --- |             --- |
-| Signals        |     9.204 |     1379 |       --- |             --- |
-| I/O            |     9.442 |       16 |       100 |           16.00 |
+|   Register     |     0.021 |      115 |     35200 |            0.33 |
+|   Others       |     0.000 |        9 |       --- |             --- |
+| Signals        |     9.015 |     1348 |       --- |             --- |
+| I/O            |     2.525 |       16 |       100 |           16.00 |
 | Static Power   |     0.749 |          |           |                 |
-| Total          |    29.827 |          |           |                 |
+| Total          |    22.596 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -71,9 +71,9 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |    19.797 |      19.668 |      0.129 |       NA    | Unspecified | NA         |
-| Vccaux    |       1.800 |     0.385 |       0.345 |      0.040 |       NA    | Unspecified | NA         |
-| Vcco33    |       3.300 |     2.665 |       2.664 |      0.001 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |    19.483 |      19.354 |      0.129 |       NA    | Unspecified | NA         |
+| Vccaux    |       1.800 |     0.132 |       0.091 |      0.040 |       NA    | Unspecified | NA         |
+| Vcco33    |       3.300 |     0.707 |       0.706 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -145,13 +145,12 @@ Table of Contents
 +-------------------+-----------+
 | Name              | Power (W) |
 +-------------------+-----------+
-| GuitarSep_Top     |    29.078 |
-|   u_ClkDiv        |    18.144 |
-|   u_GameSM        |     0.261 |
-|   u_MemSeq        |     0.836 |
-|   u_ScoreDisplay  |     0.306 |
-|     clk_div_inst  |     0.171 |
-|     score_counter |     0.080 |
+| GuitarSep_Top     |    21.847 |
+|   u_ClkDiv        |    18.021 |
+|   u_GameSM        |     0.270 |
+|   u_MemSeq        |     0.916 |
+|   u_ScoreDisplay  |     0.022 |
+|     score_counter |     0.022 |
 +-------------------+-----------+
 
 

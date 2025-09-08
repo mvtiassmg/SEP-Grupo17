@@ -15,9 +15,7 @@ end ScoreCounter;
 
 architecture Behavioral of ScoreCounter is
 
-    ----------------------------------------------------------------
-    -- Function: cuenta bits activos en el vector
-    ----------------------------------------------------------------
+    -- Función para contar bits en 1
     function count_ones(vec : std_logic_vector(3 downto 0)) return integer is
         variable result : integer := 0;
     begin
@@ -29,58 +27,54 @@ architecture Behavioral of ScoreCounter is
         return result;
     end function;
 
-    ----------------------------------------------------------------
-    -- Procedure: actualiza score y errores
-    ----------------------------------------------------------------
-    procedure update_score(
-         note_out  : in  std_logic_vector(3 downto 0);
-         btn_push  : in  std_logic_vector(3 downto 0);
-         score   : inout integer;
-         errors  : inout integer
-    ) is
-        variable ones : integer;
-    begin
-        ones := count_ones(note_out);
-
-        if note_out = btn_push then
-            score := score + ones;  -- 1 punto si simple, 2 si doble
-        else
-            errors := errors + 1;
-        end if;
-    end procedure;
-
-    ----------------------------------------------------------------
-    -- Señales internas
-    ----------------------------------------------------------------
-    signal score_reg : integer := 0;
-    signal error_reg : integer := 0;
+    -- Registros internos
+    signal score_reg     : integer range 0 to 31 := 0;
+    signal error_reg     : integer range 0 to 31 := 0;
+    signal matched       : std_logic := '0';  -- Evita doble conteo de aciertos
+    signal error_counted : std_logic := '0';  -- Evita doble conteo de errores
+    signal prev_note     : std_logic_vector(3 downto 0) := "0000";
 
 begin
-    ----------------------------------------------------------------
-    -- Proceso secuencial
-    ----------------------------------------------------------------
-    process(clk)
-        variable v_score : integer := 0;
-        variable v_error : integer := 0;
+
+    process(clk, reset)
     begin
-        if rising_edge(clk) then
-            if reset = '1' then
-                v_score := 0;
-                v_error := 0;
-            else
-                update_score(note_out, btn_push, v_score, v_error);
+        if reset = '1' then
+            score_reg     <= 0;
+            error_reg     <= 0;
+            matched       <= '0';
+            error_counted <= '0';
+            prev_note     <= "0000";
+
+        elsif rising_edge(clk) then
+            -- Reset de flags cuando cambia la nota
+            if note_out /= prev_note then
+                matched       <= '0';
+                error_counted <= '0';
+                prev_note     <= note_out;
             end if;
 
-            score_reg <= v_score;
-            error_reg <= v_error;
+            -- Lógica de aciertos
+            if note_out /= "0000" then
+                if btn_push = note_out and matched = '0' then
+                    score_reg <= score_reg + count_ones(note_out);
+                    matched   <= '1';
+                    error_counted <= '0'; -- Reinicia flag de error al acertar
+                end if;
+            end if;
+
+            -- Lógica de errores
+            if btn_push /= note_out and btn_push /= "0000" then
+                if error_counted = '0' then
+                    error_reg <= error_reg + 1;
+                    error_counted <= '1';
+                    matched <= '0'; -- Reinicia flag de acierto al fallar
+                end if;
+            end if;
         end if;
     end process;
 
-    ----------------------------------------------------------------
     -- Salidas
-    ----------------------------------------------------------------
     score  <= score_reg;
     errors <= error_reg;
 
 end Behavioral;
-
