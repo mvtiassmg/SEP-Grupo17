@@ -1,0 +1,1065 @@
+/*
+
+Xilinx Vivado v2020.1 (64-bit) [Major: 2020, Minor: 1]
+SW Build: 2902540 on Wed May 27 19:54:49 MDT 2020
+IP Build: 2902112 on Wed May 27 22:43:36 MDT 2020
+
+Process ID (PID): 27044
+License: Customer
+
+Current time: 	Sun Sep 07 19:36:17 CLST 2025
+Time zone: 	Chile Standard Time (America/Santiago)
+
+OS: Windows 10
+OS Version: 10.0
+OS Architecture: amd64
+Available processors (cores): 16
+
+Screen size: 2560x1600
+Screen resolution (DPI): 150
+Available screens: 1
+Default font: family=Segoe UI,name=Segoe UI,style=plain,size=18
+
+Java version: 	9.0.4 64-bit
+Java home: 	C:/Xilinx/Vivado/2020.1/tps/win64/jre9.0.4
+Java executable location: 	C:/Xilinx/Vivado/2020.1/tps/win64/jre9.0.4/bin/java.exe
+Java initial memory (-Xms): 	128 MB
+Java maximum memory (-Xmx):	 3 GB
+
+
+User name: 	tomas
+User home directory: C:/Users/tomas
+User working directory: C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1
+User country: 	419
+User language: 	es
+User locale: 	es_419
+
+RDI_BASEROOT: C:/Xilinx/Vivado
+HDI_APPROOT: C:/Xilinx/Vivado/2020.1
+RDI_DATADIR: C:/Xilinx/Vivado/2020.1/data
+RDI_BINDIR: C:/Xilinx/Vivado/2020.1/bin
+
+Vivado preferences file location: C:/Users/tomas/AppData/Roaming/Xilinx/Vivado/2020.1/vivado.xml
+Vivado preferences directory: C:/Users/tomas/AppData/Roaming/Xilinx/Vivado/2020.1/
+Vivado layouts directory: C:/Users/tomas/AppData/Roaming/Xilinx/Vivado/2020.1/data/layouts
+PlanAhead jar file location: 	C:/Xilinx/Vivado/2020.1/lib/classes/planAhead.jar
+Vivado log file location: 	C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/vivado.log
+Vivado journal file location: 	C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/vivado.jou
+Engine tmp dir: 	C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/.Xil/Vivado-27044-Macbook
+
+Xilinx Environment Variables
+----------------------------
+XILINX: C:/Xilinx/Vivado/2020.1/ids_lite/ISE
+XILINX_DSP: C:/Xilinx/Vivado/2020.1/ids_lite/ISE
+XILINX_PLANAHEAD: C:/Xilinx/Vivado/2020.1
+XILINX_SDK: C:/Xilinx/Vitis/2020.1
+XILINX_VITIS: C:/Xilinx/Vitis/2020.1
+XILINX_VIVADO: C:/Xilinx/Vivado/2020.1
+XILINX_VIVADO_HLS: C:/Xilinx/Vivado/2020.1
+
+
+GUI allocated memory:	154 MB
+GUI max memory:		3,072 MB
+Engine allocated memory: 1,035 MB
+
+Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+*/
+
+// TclEventType: START_GUI
+// Tcl Message: start_gui 
+// TclEventType: PROJECT_OPEN_DIALOG
+// bz (cs):  Open Project : addNotify
+// Opening Vivado Project: C:\Users\tomas\OneDrive\Escritorio\Universidad\SEP\Proyecto\SEP-Grupo17\Proyecto1\Proyecto1.xpr. Version: Vivado v2020.1 
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// Tcl Message: open_project C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.xpr 
+// Tcl Message: INFO: [ProjectBase 1-489] The host OS only allows 260 characters in a normal path. The project is stored in a path with more than 80 characters. If you experience issues with IP, Block Designs, or files not being found, please consider moving the project to a location with a shorter path. Alternately consider using the OS subst command to map part of the path to a drive letter. Current project path is 'C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1' 
+// TclEventType: MSGMGR_MOVEMSG
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_CURRENT
+// TclEventType: PROJECT_DASHBOARD_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_NEW
+// Tcl Message: open_project C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.xpr 
+// Tcl Message: INFO: [ProjectBase 1-489] The host OS only allows 260 characters in a normal path. The project is stored in a path with more than 80 characters. If you experience issues with IP, Block Designs, or files not being found, please consider moving the project to a location with a shorter path. Alternately consider using the OS subst command to map part of the path to a drive letter. Current project path is 'C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1' INFO: [Project 1-313] Project file moved from 'E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1' since last save. 
+// Tcl Message: Scanning sources... Finished scanning sources 
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1704] No user IP repositories specified 
+// TclEventType: PROJECT_NEW
+// [GUI Memory]: 128 MB (+132136kb) [00:00:13]
+// [Engine Memory]: 1,035 MB (+933685kb) [00:00:13]
+// WARNING: HEventQueue.dispatchEvent() is taking  3181 ms.
+// Tcl Message: INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2020.1/data/ip'. 
+// HMemoryUtils.trashcanNow. Engine heap size: 1,035 MB. GUI used memory: 70 MB. Current time: 9/7/25, 7:36:21 PM CLST
+// Tcl Message: open_project: Time (s): cpu = 00:00:15 ; elapsed = 00:00:07 . Memory (MB): peak = 1050.773 ; gain = 0.000 
+// Project name: Proyecto1; location: C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1; part: xc7z010clg400-1
+dismissDialog("Open Project"); // bz (cs)
+// Tcl Command: 'rdi::info_commands {device::*}'
+// Tcl Command: 'rdi::info_commands {debug::*}'
+// Tcl Command: 'rdi::info_commands {*}'
+// Tcl Message: update_compile_order -fileset sources_1 
+// Elapsed time: 64 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, GuitarSep_Top(Structural) (GuitarSep_Top.vhd)]", 1, true); // B (F, cs) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, GuitarSep_Top(Structural) (GuitarSep_Top.vhd)]", 1, true, false, false, false, false, true); // B (F, cs) - Double Click - Node
+// Elapsed time: 13 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, GuitarSep_Top(Structural) (GuitarSep_Top.vhd), u_GameSM : Game_SM(Behavioral) (Game_SM.vhd)]", 2, false); // B (F, cs)
+// [GUI Memory]: 136 MB (+1662kb) [00:01:35]
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, GuitarSep_Top(Structural) (GuitarSep_Top.vhd), u_GameSM : Game_SM(Behavioral) (Game_SM.vhd)]", 2, false, false, false, false, false, true); // B (F, cs) - Double Click
+// [GUI Memory]: 148 MB (+5181kb) [00:01:54]
+// Elapsed time: 19 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, GuitarSep_Top(Structural) (GuitarSep_Top.vhd), u_GameSM : Game_SM(Behavioral) (Game_SM.vhd)]", 2, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, GuitarSep_Top(Structural) (GuitarSep_Top.vhd), u_ClkDiv : ClockDivider(Behavioral) (ClockDivider.vhd)]", 3, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, GuitarSep_Top(Structural) (GuitarSep_Top.vhd), u_ClkDiv : ClockDivider(Behavioral) (ClockDivider.vhd)]", 3, false, false, false, false, false, true); // B (F, cs) - Double Click
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, GuitarSep_Top(Structural) (GuitarSep_Top.vhd), u_MemSeq : MemorySequency(Behavioral) (MemorySequency.vhd)]", 4, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, GuitarSep_Top(Structural) (GuitarSep_Top.vhd), u_MemSeq : MemorySequency(Behavioral) (MemorySequency.vhd)]", 4, false, false, false, false, false, true); // B (F, cs) - Double Click
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, GuitarSep_Top(Structural) (GuitarSep_Top.vhd), u_SongSelector : Song_Selector(Behavioral) (Song_Selector.vhd)]", 5, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, GuitarSep_Top(Structural) (GuitarSep_Top.vhd), u_SongSelector : Song_Selector(Behavioral) (Song_Selector.vhd)]", 5, false, false, false, false, false, true); // B (F, cs) - Double Click
+// Elapsed time: 406 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 2); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ClockDivider.vhd", 3); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "MemorySequency.vhd", 4); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Song_Selector.vhd", 5); // m (l, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, ScoreCounter(Behavioral) (ScoreCounter.vhd)]", 6, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, ScoreCounter(Behavioral) (ScoreCounter.vhd)]", 6, false, false, false, false, false, true); // B (F, cs) - Double Click
+// Elapsed time: 191 seconds
+selectCodeEditor("ScoreCounter.vhd", 586, 396); // bP (w, cs)
+selectCodeEditor("ScoreCounter.vhd", 581, 420); // bP (w, cs)
+selectCodeEditor("ScoreCounter.vhd", 585, 436); // bP (w, cs)
+// Elapsed time: 67 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Song_Selector.vhd", 5); // m (l, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, GuitarSep_Top(Structural) (GuitarSep_Top.vhd)]", 1, true); // B (F, cs) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, GuitarSep_Top(Structural) (GuitarSep_Top.vhd)]", 1, true, false, false, false, false, true); // B (F, cs) - Double Click - Node
+// Elapsed time: 11 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 2); // m (l, cs)
+// Elapsed time: 85 seconds
+selectCodeEditor("Game_SM.vhd", 978, 162); // bP (w, cs)
+// Elapsed time: 81 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+// Elapsed time: 10 seconds
+selectCodeEditor("GuitarSep_Top.vhd", 557, 442); // bP (w, cs)
+selectCodeEditor("GuitarSep_Top.vhd", 495, 461); // bP (w, cs)
+// Elapsed time: 44 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 2); // m (l, cs)
+// Elapsed time: 19 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 6); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 2); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 6); // m (l, cs)
+// Elapsed time: 10 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 2); // m (l, cs)
+selectCodeEditor("Game_SM.vhd", 860, 183); // bP (w, cs)
+// Elapsed time: 12 seconds
+selectCodeEditor("Game_SM.vhd", 1013, 235); // bP (w, cs)
+// Elapsed time: 10 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 6); // m (l, cs)
+// Elapsed time: 64 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 2); // m (l, cs)
+// Elapsed time: 20 seconds
+selectCodeEditor("Game_SM.vhd", 693, 487); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 288, 548); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 122, 543); // bP (w, cs)
+// Elapsed time: 54 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 6); // m (l, cs)
+// Elapsed time: 37 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Song_Selector.vhd", 5); // m (l, cs)
+// Elapsed time: 23 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "MemorySequency.vhd", 4); // m (l, cs)
+// Elapsed time: 23 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ClockDivider.vhd", 3); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+// Elapsed time: 11 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 2); // m (l, cs)
+// Elapsed time: 10 seconds
+selectCodeEditor("Game_SM.vhd", 506, 234); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 506, 234, false, false, false, false, true); // bP (w, cs) - Double Click
+// Elapsed time: 11 seconds
+selectCodeEditor("Game_SM.vhd", 315, 684); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 199, 408); // bP (w, cs)
+typeControlKey((HResource) null, "Game_SM.vhd", 'v'); // bP (w, cs)
+typeControlKey(null, null, 'z');
+selectCodeEditor("Game_SM.vhd", 165, 452); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 7, 450); // bP (w, cs)
+typeControlKey((HResource) null, "Game_SM.vhd", 'v'); // bP (w, cs)
+// Elapsed time: 38 seconds
+selectCodeEditor("Game_SM.vhd", 393, 268); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 393, 268, false, false, false, false, true); // bP (w, cs) - Double Click
+selectCodeEditor("Game_SM.vhd", 393, 268); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 412, 247); // bP (w, cs)
+// Elapsed time: 47 seconds
+selectCodeEditor("Game_SM.vhd", 413, 394); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 651, 684); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 6); // m (l, cs)
+selectCodeEditor("ScoreCounter.vhd", 436, 398, false, false, false, true, false); // bP (w, cs) - Popup Trigger
+selectCodeEditor("ScoreCounter.vhd", 306, 477); // bP (w, cs)
+// HMemoryUtils.trashcanNow. Engine heap size: 1,035 MB. GUI used memory: 91 MB. Current time: 9/7/25, 8:06:25 PM CLST
+// Elapsed time: 324 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ClockDivider.vhd", 3); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 6); // m (l, cs)
+// Elapsed time: 24 seconds
+selectCodeEditor("ScoreCounter.vhd", 298, 544); // bP (w, cs)
+selectCodeEditor("ScoreCounter.vhd", 298, 544, false, false, false, false, true); // bP (w, cs) - Double Click
+selectCodeEditor("ScoreCounter.vhd", 264, 585); // bP (w, cs)
+selectCodeEditor("ScoreCounter.vhd", 264, 585, false, false, false, false, true); // bP (w, cs) - Double Click
+selectCodeEditor("ScoreCounter.vhd", 343, 663); // bP (w, cs)
+// Elapsed time: 101 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Song_Selector.vhd", 5); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "MemorySequency.vhd", 4); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ClockDivider.vhd", 3); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 2); // m (l, cs)
+// Elapsed time: 13 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+// Elapsed time: 53 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 6); // m (l, cs)
+selectCodeEditor("ScoreCounter.vhd", 409, 604); // bP (w, cs)
+// Elapsed time: 34 seconds
+selectCodeEditor("ScoreCounter.vhd", 36, 361); // bP (w, cs)
+// Elapsed time: 73 seconds
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, GuitarSep_Top(Structural) (GuitarSep_Top.vhd)]", 1); // B (F, cs)
+// Elapsed time: 19 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Song_Selector.vhd", 5); // m (l, cs)
+// Elapsed time: 304 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+// Elapsed time: 44 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 2); // m (l, cs)
+// Elapsed time: 65 seconds
+selectCodeEditor("Game_SM.vhd", 53, 515); // bP (w, cs)
+// Elapsed time: 171 seconds
+selectCodeEditor("Game_SM.vhd", 844, 414); // bP (w, cs)
+// Elapsed time: 68 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+// Elapsed time: 32 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 2); // m (l, cs)
+// Elapsed time: 16 seconds
+selectButton(RDIResourceCommand.RDICommands_SETTINGS, "settings"); // E (g, cs)
+// Run Command: RDIResourceCommand.RDICommands_SETTINGS
+// d (cs): Settings: addNotify
+expandTree(PAResourceQtoS.SettingsDialog_OPTIONS_TREE, "[optionsRoot, Text Editor]", 7); // B (E, d)
+selectTree(PAResourceQtoS.SettingsDialog_OPTIONS_TREE, "[optionsRoot, Text Editor, Fonts and Colors]", 11, false); // B (E, d)
+selectButton(RDIResource.BaseDialog_CANCEL, "Cancel"); // a (d)
+dismissDialog("Settings"); // d (cs)
+selectButton(RDIResourceCommand.RDICommands_SETTINGS, "settings"); // E (g, cs)
+// Run Command: RDIResourceCommand.RDICommands_SETTINGS
+// d (cs): Settings: addNotify
+// Elapsed time: 12 seconds
+selectTree(PAResourceQtoS.SettingsDialog_OPTIONS_TREE, "[optionsRoot, Colors]", 18, true); // B (E, d) - Node
+dismissDialog("Settings"); // d (cs)
+// Elapsed time: 25 seconds
+selectCodeEditor("Game_SM.vhd", 553, 728); // bP (w, cs)
+// HMemoryUtils.trashcanNow. Engine heap size: 1,035 MB. GUI used memory: 69 MB. Current time: 9/7/25, 8:36:27 PM CLST
+// Elapsed time: 1072 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+// Elapsed time: 15 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 2); // m (l, cs)
+// Elapsed time: 23 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+// Elapsed time: 65 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 2); // m (l, cs)
+// Elapsed time: 48 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+// Elapsed time: 15 seconds
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Constraints]", 7); // B (F, cs)
+collapseTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Constraints]", 7); // B (F, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 2); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "MemorySequency.vhd", 4); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Song_Selector.vhd", 5); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "MemorySequency.vhd", 4); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ClockDivider.vhd", 3); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 2); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Project Summary", 0); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 2); // m (l, cs)
+selectCodeEditor("Game_SM.vhd", 319, 605); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 414, 642); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 277, 685); // bP (w, cs)
+// Elapsed time: 29 seconds
+selectCodeEditor("Game_SM.vhd", 212, 500); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 154, 460); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 165, 474); // bP (w, cs)
+// Elapsed time: 65 seconds
+selectCodeEditor("Game_SM.vhd", 366, 366); // bP (w, cs)
+// Elapsed time: 16 seconds
+selectCodeEditor("Game_SM.vhd", 555, 375); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 508, 394); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 544, 377); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 536, 518); // bP (w, cs)
+// Elapsed time: 40 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Song_Selector.vhd", 5); // m (l, cs)
+closeView(PAResourceOtoP.PAViews_CODE, "Code"); // F
+closeView(PAResourceOtoP.PAViews_CODE, "Code"); // F
+// Elapsed time: 25 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 2); // m (l, cs)
+// Elapsed time: 14 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Project Summary", 0); // m (l, cs)
+// Elapsed time: 10 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+// Elapsed time: 18 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ClockDivider.vhd", 3); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 2); // m (l, cs)
+selectCodeEditor("Game_SM.vhd", 469, 371); // bP (w, cs)
+// Elapsed time: 16 seconds
+selectButton(PAResourceCommand.PACommandNames_ADD_SOURCES, "Sources_add_sources"); // E (g, cs)
+// Run Command: PAResourceCommand.PACommandNames_ADD_SOURCES
+// c (cs): Add Sources: addNotify
+selectButton("NEXT", "Next >"); // JButton (j, c)
+selectButton(PAResourceQtoS.SrcChooserPanel_CREATE_FILE, "Create File"); // a (E, c)
+// F (c): Create Source File: addNotify
+setText(PAResourceAtoD.CreateSrcFileDialog_FILE_NAME, "ScoreDisplay"); // ac (Q, F)
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (F)
+dismissDialog("Create Source File"); // F (c)
+selectButton(PAResourceQtoS.SrcChooserPanel_CREATE_FILE, "Create File"); // a (E, c)
+// F (c): Create Source File: addNotify
+dismissDialog("Create Source File"); // F (c)
+selectButton("FINISH", "Finish"); // JButton (j, c)
+// 'h' command handler elapsed time: 14 seconds
+dismissDialog("Add Sources"); // c (cs)
+// Tcl Message: close [ open C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/new/ScoreDisplay.vhd w ] 
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: add_files C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/new/ScoreDisplay.vhd 
+// I (cs): Define Module: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (I)
+// TclEventType: FILE_SET_CHANGE
+selectButton("OptionPane.button", "Yes"); // JButton (v, C)
+dismissDialog("Define Module"); // I (cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 4); // m (l, cs)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+// Elapsed time: 17 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, ScoreCounter(Behavioral) (ScoreCounter.vhd)]", 6, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, ScoreCounter(Behavioral) (ScoreCounter.vhd)]", 6, false, false, false, false, false, true); // B (F, cs) - Double Click
+// Elapsed time: 10 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, ScoreDisplay(Behavioral) (ScoreDisplay.vhd)]", 7, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, ScoreDisplay(Behavioral) (ScoreDisplay.vhd)]", 7, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, ScoreDisplay(Behavioral) (ScoreDisplay.vhd)]", 7, false, false, false, false, false, true); // B (F, cs) - Double Click
+selectCodeEditor("ScoreDisplay.vhd", 503, 680); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 4); // m (l, cs)
+// Elapsed time: 18 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ClockDivider.vhd", 3); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 5); // m (l, cs)
+selectCodeEditor("ScoreDisplay.vhd", 189, 546); // bP (w, cs)
+selectButton(RDIResourceCommand.RDICommands_LINE_COMMENT, (String) null); // E (g, cs)
+selectCodeEditor("ScoreDisplay.vhd", 217, 637); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 138, 542); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 114, 545); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 124, 557); // bP (w, cs)
+// Elapsed time: 47 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 4); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 5); // m (l, cs)
+selectCodeEditor("ScoreDisplay.vhd", 128, 548); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 117, 548); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 4); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 5); // m (l, cs)
+typeControlKey(null, null, 'z');
+// Elapsed time: 36 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 4); // m (l, cs)
+// Elapsed time: 40 seconds
+selectCodeEditor("ScoreCounter.vhd", 475, 630); // bP (w, cs)
+selectCodeEditor("ScoreCounter.vhd", 206, 522); // bP (w, cs)
+// Elapsed time: 26 seconds
+setText(RDIResource.HCodeEditor_SEARCH_TEXT_COMBO_BOX, "note"); // l (au, cs)
+selectCodeEditor("ScoreCounter.vhd", 611, 471); // bP (w, cs)
+// Elapsed time: 32 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 5); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 4); // m (l, cs)
+// Elapsed time: 72 seconds
+selectCodeEditor("ScoreCounter.vhd", 838, 308); // bP (w, cs)
+typeControlKey((HResource) null, "ScoreCounter.vhd", 'c'); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 5); // m (l, cs)
+selectCodeEditor("ScoreDisplay.vhd", 194, 637); // bP (w, cs)
+typeControlKey((HResource) null, "ScoreDisplay.vhd", 'v'); // bP (w, cs)
+// Elapsed time: 20 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 4); // m (l, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, GuitarSep_Top(Structural) (GuitarSep_Top.vhd), u_SongSelector : Song_Selector(Behavioral) (Song_Selector.vhd)]", 5, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, GuitarSep_Top(Structural) (GuitarSep_Top.vhd), u_SongSelector : Song_Selector(Behavioral) (Song_Selector.vhd)]", 5, false, false, false, false, false, true); // B (F, cs) - Double Click
+// Elapsed time: 11 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 4); // m (l, cs)
+// Elapsed time: 16 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+// Elapsed time: 12 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Song_Selector.vhd", 6); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 5); // m (l, cs)
+// Elapsed time: 48 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Song_Selector.vhd", 6); // m (l, cs)
+selectCodeEditor("Song_Selector.vhd", 161, 219); // bP (w, cs)
+selectCodeEditor("Song_Selector.vhd", 281, 223); // bP (w, cs)
+selectCodeEditor("Song_Selector.vhd", 363, 222); // bP (w, cs)
+selectCodeEditor("Song_Selector.vhd", 432, 211); // bP (w, cs)
+selectCodeEditor("Song_Selector.vhd", 520, 210); // bP (w, cs)
+selectCodeEditor("Song_Selector.vhd", 643, 208); // bP (w, cs)
+selectCodeEditor("Song_Selector.vhd", 739, 201); // bP (w, cs)
+selectCodeEditor("Song_Selector.vhd", 847, 200); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 5); // m (l, cs)
+// Elapsed time: 14 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 4); // m (l, cs)
+selectCodeEditor("ScoreCounter.vhd", 386, 493); // bP (w, cs)
+// Elapsed time: 13 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 5); // m (l, cs)
+// Elapsed time: 68 seconds
+selectCodeEditor("ScoreDisplay.vhd", 751, 594); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 733, 603); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 747, 591); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 120, 555); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 120, 555, false, false, false, false, true); // bP (w, cs) - Double Click
+selectCodeEditor("ScoreDisplay.vhd", 24, 798); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 730, 558); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 4); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 2); // m (l, cs)
+// Elapsed time: 104 seconds
+selectCodeEditor("Game_SM.vhd", 404, 559); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 384, 484); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 354, 431); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 35, 447); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 39, 470); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 579, 768); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 2); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 5); // m (l, cs)
+// Elapsed time: 31 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Project Summary", 0); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+selectCodeEditor("GuitarSep_Top.vhd", 499, 441); // bP (w, cs)
+typeControlKey((HResource) null, "GuitarSep_Top.vhd", 'c'); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 5); // m (l, cs)
+selectCodeEditor("ScoreDisplay.vhd", 141, 575); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 4, 598); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 145, 580); // bP (w, cs)
+typeControlKey((HResource) null, "ScoreDisplay.vhd", 'v'); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 782, 497); // bP (w, cs)
+// Elapsed time: 18 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 4); // m (l, cs)
+// Elapsed time: 10 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 5); // m (l, cs)
+// Elapsed time: 20 seconds
+selectCodeEditor("ScoreDisplay.vhd", 271, 693); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 250, 814); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 305, 784); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 83, 705); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 4); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ClockDivider.vhd", 3); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 5); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 4); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 5); // m (l, cs)
+selectCodeEditor("ScoreDisplay.vhd", 1, 698); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 140, 707); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 4); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 5); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 4); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ClockDivider.vhd", 3); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 5); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ClockDivider.vhd", 3); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 5); // m (l, cs)
+selectCodeEditor("ScoreDisplay.vhd", 397, 722); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 397, 722, false, false, false, false, true); // bP (w, cs) - Double Click
+selectCodeEditor("ScoreDisplay.vhd", 582, 729); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 553, 711); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 4); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 5); // m (l, cs)
+// Elapsed time: 16 seconds
+selectCodeEditor("ScoreDisplay.vhd", 631, 705); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 218, 751); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 640, 706); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 757, 539); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 343, 756); // bP (w, cs)
+// HMemoryUtils.trashcanNow. Engine heap size: 1,035 MB. GUI used memory: 86 MB. Current time: 9/7/25, 9:06:28 PM CLST
+// Elapsed time: 31 seconds
+selectCodeEditor("ScoreDisplay.vhd", 581, 874); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 501, 769); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 602, 452); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 198, 786); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 4); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Project Summary", 0); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 5); // m (l, cs)
+// Elapsed time: 13 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 5); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ClockDivider.vhd", 4); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 5); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 2); // m (l, cs)
+selectCodeEditor("ScoreDisplay.vhd", 319, 782); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 541, 793); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 2); // m (l, cs)
+selectCodeEditor("ScoreDisplay.vhd", 155, 779); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 2); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 2); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 2); // m (l, cs)
+selectCodeEditor("ScoreDisplay.vhd", 117, 807); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 213, 809); // bP (w, cs)
+// Elapsed time: 14 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+// Elapsed time: 26 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 5); // m (l, cs)
+// Elapsed time: 11 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ClockDivider.vhd", 4); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 3); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 2); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 5); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 2); // m (l, cs)
+// Elapsed time: 10 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+selectCodeEditor("GuitarSep_Top.vhd", 704, 522); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 2); // m (l, cs)
+selectCodeEditor("ScoreDisplay.vhd", 260, 825); // bP (w, cs)
+// Elapsed time: 10 seconds
+selectCodeEditor("ScoreDisplay.vhd", 214, 771); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 407, 768); // bP (w, cs)
+// Elapsed time: 12 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 5); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ClockDivider.vhd", 4); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 3); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 2); // m (l, cs)
+selectCodeEditor("ScoreDisplay.vhd", 271, 702); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 411, 426); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 296, 765); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 296, 736); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 246, 758); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 413, 876); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 377, 807); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 438, 748); // bP (w, cs)
+// Elapsed time: 35 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 5); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 2); // m (l, cs)
+selectCodeEditor("ScoreDisplay.vhd", 235, 594); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 220, 583); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 281, 887); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 43, 780); // bP (w, cs)
+// Elapsed time: 12 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ClockDivider.vhd", 4); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 2); // m (l, cs)
+// Elapsed time: 13 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+// Elapsed time: 34 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ClockDivider.vhd", 4); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 3); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 2); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Project Summary", 0); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 2); // m (l, cs)
+selectCodeEditor("ScoreDisplay.vhd", 93, 540); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 93, 540, false, false, false, false, true); // bP (w, cs) - Double Click
+selectCodeEditor("ScoreDisplay.vhd", 62, 548); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 70, 549); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 248, 555); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 259, 555); // bP (w, cs)
+typeControlKey((HResource) null, "ScoreDisplay.vhd", 'v'); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 504, 717); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 152, 514); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 136, 781); // bP (w, cs)
+// Elapsed time: 51 seconds
+selectCodeEditor("ScoreDisplay.vhd", 158, 485); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 549, 430); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 304, 791); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 241, 847); // bP (w, cs)
+// Elapsed time: 62 seconds
+selectCodeEditor("ScoreDisplay.vhd", 159, 812); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 560, 811); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 508, 405); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 103, 790); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 101, 807); // bP (w, cs)
+// Elapsed time: 15 seconds
+selectCodeEditor("ScoreDisplay.vhd", 147, 740); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 2); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 3); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 5); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ClockDivider.vhd", 4); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 2); // m (l, cs)
+selectCodeEditor("ScoreDisplay.vhd", 59, 762); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 427, 668); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 412, 787); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 412, 787, false, false, false, false, true); // bP (w, cs) - Double Click
+selectCodeEditor("ScoreDisplay.vhd", 714, 280); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 94, 781); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 94, 781, false, false, false, false, true); // bP (w, cs) - Double Click
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+selectCodeEditor("GuitarSep_Top.vhd", 752, 408); // bP (w, cs)
+selectCodeEditor("GuitarSep_Top.vhd", 738, 375); // bP (w, cs)
+// Elapsed time: 16 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Project Summary", 0); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 2); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 3); // m (l, cs)
+// Elapsed time: 13 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 2); // m (l, cs)
+selectCodeEditor("ScoreDisplay.vhd", 447, 760); // bP (w, cs)
+// Elapsed time: 87 seconds
+selectCodeEditor("ScoreDisplay.vhd", 705, 888); // bP (w, cs)
+// Elapsed time: 15 seconds
+selectCodeEditor("ScoreDisplay.vhd", 807, 426); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 790, 797); // bP (w, cs)
+// Elapsed time: 18 seconds
+selectCodeEditor("ScoreDisplay.vhd", 117, 801); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 578, 814); // bP (w, cs)
+// Elapsed time: 23 seconds
+selectCodeEditor("ScoreDisplay.vhd", 103, 578); // bP (w, cs)
+typeControlKey((HResource) null, "ScoreDisplay.vhd", 'c'); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 222, 861); // bP (w, cs)
+typeControlKey((HResource) null, "ScoreDisplay.vhd", 'v'); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 307, 873); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 370, 890); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 864, 632); // bP (w, cs)
+typeControlKey((HResource) null, "ScoreDisplay.vhd", 'c'); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 482, 809); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 91, 852); // bP (w, cs)
+typeControlKey((HResource) null, "ScoreDisplay.vhd", 'v'); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 292, 747); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 275, 720); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 659, 818); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 659, 818, false, false, false, false, true); // bP (w, cs) - Double Click
+selectCodeEditor("ScoreDisplay.vhd", 531, 683); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 989, 804); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 270, 856); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 8, 890); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 8, 890); // bP (w, cs)
+typeControlKey((HResource) null, "ScoreDisplay.vhd", 'v'); // bP (w, cs)
+// Elapsed time: 11 seconds
+selectCodeEditor("ScoreDisplay.vhd", 837, 799); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 423, 849); // bP (w, cs)
+typeControlKey((HResource) null, "ScoreDisplay.vhd", 'c'); // bP (w, cs)
+// Elapsed time: 157 seconds
+selectCodeEditor("ScoreDisplay.vhd", 1067, 427); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 539, 864); // bP (w, cs)
+typeControlKey((HResource) null, "ScoreDisplay.vhd", 'v'); // bP (w, cs)
+// Elapsed time: 26 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+selectCodeEditor("GuitarSep_Top.vhd", 812, 765); // bP (w, cs)
+// Elapsed time: 12 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 2); // m (l, cs)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed time: 329 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+selectCodeEditor("GuitarSep_Top.vhd", 391, 878); // bP (w, cs)
+typeControlKey((HResource) null, "GuitarSep_Top.vhd", 'c'); // bP (w, cs)
+// Elapsed time: 29 seconds
+selectCodeEditor("GuitarSep_Top.vhd", 530, 413); // bP (w, cs)
+// Elapsed time: 23 seconds
+selectCodeEditor("GuitarSep_Top.vhd", 445, 889); // bP (w, cs)
+typeControlKey((HResource) null, "GuitarSep_Top.vhd", 'v'); // bP (w, cs)
+selectCodeEditor("GuitarSep_Top.vhd", 584, 505); // bP (w, cs)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+selectCodeEditor("GuitarSep_Top.vhd", 951, 340); // bP (w, cs)
+selectCodeEditor("GuitarSep_Top.vhd", 756, 432); // bP (w, cs)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed time: 31 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 3); // m (l, cs)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Program and Debug, Generate Bitstream]", 20, false); // u (J, cs)
+// Run Command: PAResourceCommand.PACommandNames_RUN_BITGEN
+// bz (cs):  Resetting Runs : addNotify
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// Tcl Message: reset_run synth_1 
+// f (cs): Launch Runs: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (f)
+dismissDialog("Launch Runs"); // f (cs)
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_STATUS_CHANGE
+// Tcl Message: launch_runs impl_1 -to_step write_bitstream -jobs 16 
+// Tcl Message: [Sun Sep  7 21:30:46 2025] Launched synth_1... Run output will be captured here: C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/runme.log [Sun Sep  7 21:30:46 2025] Launched impl_1... Run output will be captured here: C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/runme.log 
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_FAILED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// ag (cs): Synthesis Failed: addNotify
+// TclEventType: RUN_STATUS_CHANGE
+// Elapsed time: 22 seconds
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (ag)
+// Run Command: PAResourceCommand.PACommandNames_MESSAGE_WINDOW
+dismissDialog("Synthesis Failed"); // ag (cs)
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, [Synth 8-426] missing choice(s) 5 in case statement [C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/new/Game_SM.vhd:99]. ]", 1, false); // ah (J, cs)
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;C:\Users\tomas\OneDrive\Escritorio\Universidad\SEP\Proyecto\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\new\Game_SM.vhd;-;;-;16;-;line;-;99;-;;-;16;-;"); // ah (J, cs)
+// Elapsed time: 16 seconds
+selectCodeEditor("Game_SM.vhd", 366, 802); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 305, 343); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 400, 832); // bP (w, cs)
+typeControlKey((HResource) null, "Game_SM.vhd", 'c'); // bP (w, cs)
+// Elapsed time: 51 seconds
+selectCodeEditor("Game_SM.vhd", 1151, 456); // bP (w, cs)
+// Elapsed time: 27 seconds
+selectCodeEditor("Game_SM.vhd", 579, 653); // bP (w, cs)
+// Elapsed time: 11 seconds
+selectCodeEditor("Game_SM.vhd", 1077, 661); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 1077, 661, false, false, false, false, true); // bP (w, cs) - Double Click
+selectCodeEditor("Game_SM.vhd", 1079, 645); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 1079, 645, false, false, false, false, true); // bP (w, cs) - Double Click
+typeControlKey((HResource) null, "Game_SM.vhd", 'c'); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 357, 681); // bP (w, cs)
+typeControlKey((HResource) null, "Game_SM.vhd", 'v'); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 554, 659); // bP (w, cs)
+typeControlKey((HResource) null, "Game_SM.vhd", 'c'); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 11, 695); // bP (w, cs)
+typeControlKey((HResource) null, "Game_SM.vhd", 'v'); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 241, 704); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 391, 702); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 583, 777); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 482, 748); // bP (w, cs)
+typeControlKey((HResource) null, "Game_SM.vhd", 'v'); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 509, 727); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 509, 727, false, false, false, false, true); // bP (w, cs) - Double Click
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed time: 15 seconds
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Constraints]", 7); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Constraints, constrs_1, Zybo-Z7-Master.xdc]", 9, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Constraints, constrs_1, Zybo-Z7-Master.xdc]", 9, false, false, false, false, false, true); // B (F, cs) - Double Click
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 3); // m (l, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, GuitarSep_Top(Structural) (GuitarSep_Top.vhd)]", 1, true); // B (F, cs) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, GuitarSep_Top(Structural) (GuitarSep_Top.vhd)]", 1, true, false, false, false, false, true); // B (F, cs) - Double Click - Node
+// Elapsed time: 11 seconds
+selectCodeEditor("GuitarSep_Top.vhd", 229, 350); // bP (w, cs)
+// Elapsed time: 11 seconds
+selectCodeEditor("GuitarSep_Top.vhd", 446, 417); // bP (w, cs)
+selectCodeEditor("GuitarSep_Top.vhd", 500, 695); // bP (w, cs)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Program and Debug, Generate Bitstream]", 20, false); // u (J, cs)
+// Run Command: PAResourceCommand.PACommandNames_RUN_BITGEN
+// bz (cs):  Resetting Runs : addNotify
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// Tcl Message: reset_run synth_1 
+// f (cs): Launch Runs: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (f)
+// TclEventType: RUN_LAUNCH
+dismissDialog("Launch Runs"); // f (cs)
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs impl_1 -to_step write_bitstream -jobs 16 
+// Tcl Message: [Sun Sep  7 21:34:39 2025] Launched synth_1... Run output will be captured here: C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/runme.log [Sun Sep  7 21:34:39 2025] Launched impl_1... Run output will be captured here: C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/runme.log 
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_FAILED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// ag (cs): Implementation Failed: addNotify
+// Elapsed time: 88 seconds
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (ag)
+// Run Command: PAResourceCommand.PACommandNames_MESSAGE_WINDOW
+dismissDialog("Implementation Failed"); // ag (cs)
+// Elapsed time: 12 seconds
+expandTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Implementation, Opt Design, DRC, Netlist, Net, [DRC MDRV-1] Multiple Driver Nets: Net u_ScoreDisplay/led6_g_OBUF has multiple drivers: u_GameSM/led6_g_OBUF_inst_i_1/O, and u_ScoreDisplay/state0/O.. ]", 8); // ah (J, cs)
+// HMemoryUtils.trashcanNow. Engine heap size: 1,035 MB. GUI used memory: 88 MB. Current time: 9/7/25, 9:36:29 PM CLST
+// Elapsed time: 12 seconds
+expandTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, [Synth 8-6859] multi-driven net on pin led6_b with 1st driver pin 'u_GameSM//led6_b'. ]", 1); // ah (J, cs)
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, [Synth 8-6859] multi-driven net on pin led6_b with 1st driver pin 'u_GameSM//led6_b'. , [Synth 8-6859] multi-driven net on pin led6_g_OBUF with 1st driver pin 'led6_g_OBUF_inst_i_1/O' [C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/new/ClockDivider.vhd:26]. ]", 3, false); // ah (J, cs)
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;C:\Users\tomas\OneDrive\Escritorio\Universidad\SEP\Proyecto\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\new\ClockDivider.vhd;-;;-;16;-;line;-;26;-;;-;16;-;"); // ah (J, cs)
+// Elapsed time: 21 seconds
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, [Synth 8-6859] multi-driven net on pin led6_b with 1st driver pin 'u_GameSM//led6_b'. , [Synth 8-6859] multi-driven net on pin led6_g_OBUF with 2nd driver pin 'u_ScoreDisplay/state0/O' [C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/new/ScoreDisplay.vhd:42]. ]", 4, false); // ah (J, cs)
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;C:\Users\tomas\OneDrive\Escritorio\Universidad\SEP\Proyecto\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\new\ScoreDisplay.vhd;-;;-;16;-;line;-;42;-;;-;16;-;"); // ah (J, cs)
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, [Synth 8-6859] multi-driven net on pin led6_b with 1st driver pin 'u_GameSM//led6_b'. , [Synth 8-6859] multi-driven net on pin led6_r_OBUF with 2nd driver pin 'u_ScoreDisplay/state_reg/Q' [C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/new/ScoreDisplay.vhd:39]. ]", 6, false); // ah (J, cs)
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;C:\Users\tomas\OneDrive\Escritorio\Universidad\SEP\Proyecto\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\new\ScoreDisplay.vhd;-;;-;16;-;line;-;39;-;;-;16;-;"); // ah (J, cs)
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, [Synth 8-6859] multi-driven net on pin led6_b with 1st driver pin 'u_GameSM//led6_b'. , [Synth 8-6859] multi-driven net on pin led6_r_OBUF with 2nd driver pin 'u_ScoreDisplay/state_reg/Q' [C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/new/ScoreDisplay.vhd:39]. ]", 6, false); // ah (J, cs)
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;C:\Users\tomas\OneDrive\Escritorio\Universidad\SEP\Proyecto\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\new\ScoreDisplay.vhd;-;;-;16;-;line;-;39;-;;-;16;-;"); // ah (J, cs)
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, [Synth 8-6859] multi-driven net on pin led6_b with 1st driver pin 'u_GameSM//led6_b'. , [Synth 8-6859] multi-driven net on pin led6_r_OBUF with 2nd driver pin 'u_ScoreDisplay/state_reg/Q' [C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/new/ScoreDisplay.vhd:39]. ]", 6, false); // ah (J, cs)
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;C:\Users\tomas\OneDrive\Escritorio\Universidad\SEP\Proyecto\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\new\ScoreDisplay.vhd;-;;-;16;-;line;-;39;-;;-;16;-;"); // ah (J, cs)
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, [Synth 8-6859] multi-driven net on pin led6_b with 1st driver pin 'u_GameSM//led6_b'. , [Synth 8-6859] multi-driven net on pin led6_g_OBUF with 1st driver pin 'led6_g_OBUF_inst_i_1/O' [C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/new/ClockDivider.vhd:26]. ]", 3, false); // ah (J, cs)
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;C:\Users\tomas\OneDrive\Escritorio\Universidad\SEP\Proyecto\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\new\ClockDivider.vhd;-;;-;16;-;line;-;26;-;;-;16;-;"); // ah (J, cs)
+// Elapsed time: 100 seconds
+selectCodeEditor("ClockDivider.vhd", 1108, 261); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+// Elapsed time: 13 seconds
+selectCodeEditor("GuitarSep_Top.vhd", 454, 270); // bP (w, cs)
+typeControlKey((HResource) null, "GuitarSep_Top.vhd", 'v'); // bP (w, cs)
+selectCodeEditor("GuitarSep_Top.vhd", 420, 236); // bP (w, cs)
+selectCodeEditor("GuitarSep_Top.vhd", 414, 303); // bP (w, cs)
+typeControlKey(null, null, 'z');
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 2); // m (l, cs)
+selectCodeEditor("ScoreDisplay.vhd", 19, 282); // bP (w, cs)
+typeControlKey((HResource) null, "ScoreDisplay.vhd", 'v'); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 386, 176); // bP (w, cs)
+typeControlKey(null, null, 'z');
+// Elapsed time: 11 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+selectCodeEditor("GuitarSep_Top.vhd", 773, 422); // bP (w, cs)
+// Elapsed time: 30 seconds
+selectCodeEditor("GuitarSep_Top.vhd", 1093, 394); // bP (w, cs)
+selectCodeEditor("GuitarSep_Top.vhd", 257, 661); // bP (w, cs)
+typeControlKey((HResource) null, "GuitarSep_Top.vhd", 'c'); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 2); // m (l, cs)
+selectCodeEditor("ScoreDisplay.vhd", 320, 736); // bP (w, cs)
+typeControlKey((HResource) null, "ScoreDisplay.vhd", 'c'); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 3); // m (l, cs)
+selectCodeEditor("Game_SM.vhd", 448, 623); // bP (w, cs)
+typeControlKey((HResource) null, "Game_SM.vhd", 'c'); // bP (w, cs)
+// Elapsed time: 76 seconds
+selectCodeEditor("Game_SM.vhd", 290, 470); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 350, 633); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Zybo-Z7-Master.xdc", 7); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Song_Selector.vhd", 6); // m (l, cs)
+selectCodeEditor("Song_Selector.vhd", 679, 670); // bP (w, cs)
+typeControlKey((HResource) null, "Song_Selector.vhd", 'c'); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 5); // m (l, cs)
+selectCodeEditor("ScoreCounter.vhd", 419, 720); // bP (w, cs)
+typeControlKey((HResource) null, "ScoreCounter.vhd", 'c'); // bP (w, cs)
+// Elapsed time: 10 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ClockDivider.vhd", 4); // m (l, cs)
+selectCodeEditor("ClockDivider.vhd", 404, 629); // bP (w, cs)
+typeControlKey((HResource) null, "ClockDivider.vhd", 'c'); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 3); // m (l, cs)
+selectCodeEditor("Game_SM.vhd", 315, 565); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 369, 654); // bP (w, cs)
+typeControlKey((HResource) null, "Game_SM.vhd", 'c'); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 2); // m (l, cs)
+selectCodeEditor("ScoreDisplay.vhd", 401, 702); // bP (w, cs)
+selectCodeEditor("ScoreDisplay.vhd", 401, 702, false, false, false, false, true); // bP (w, cs) - Double Click
+typeControlKey((HResource) null, "ScoreDisplay.vhd", 'c'); // bP (w, cs)
+// Elapsed time: 236 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 5); // m (l, cs)
+selectCodeEditor("ScoreCounter.vhd", 473, 437); // bP (w, cs)
+// Elapsed time: 32 seconds
+selectCodeEditor("ScoreCounter.vhd", 152, 190); // bP (w, cs)
+selectCodeEditor("ScoreCounter.vhd", 152, 190, false, false, false, false, true); // bP (w, cs) - Double Click
+selectCodeEditor("ScoreCounter.vhd", 140, 435); // bP (w, cs)
+// Elapsed time: 10 seconds
+selectCodeEditor("ScoreCounter.vhd", 145, 186); // bP (w, cs)
+selectCodeEditor("ScoreCounter.vhd", 145, 186, false, false, false, false, true); // bP (w, cs) - Double Click
+selectCodeEditor("ScoreCounter.vhd", 146, 186); // bP (w, cs)
+selectCodeEditor("ScoreCounter.vhd", 146, 186, false, false, false, false, true); // bP (w, cs) - Double Click
+selectCodeEditor("ScoreCounter.vhd", 148, 195); // bP (w, cs)
+selectCodeEditor("ScoreCounter.vhd", 148, 195, false, false, false, false, true); // bP (w, cs) - Double Click
+selectCodeEditor("ScoreCounter.vhd", 161, 217); // bP (w, cs)
+selectCodeEditor("ScoreCounter.vhd", 161, 217, false, false, false, false, true); // bP (w, cs) - Double Click
+selectCodeEditor("ScoreCounter.vhd", 171, 253); // bP (w, cs)
+selectCodeEditor("ScoreCounter.vhd", 171, 254, false, false, false, false, true); // bP (w, cs) - Double Click
+selectCodeEditor("ScoreCounter.vhd", 170, 255); // bP (w, cs)
+selectCodeEditor("ScoreCounter.vhd", 170, 255, false, false, false, false, true); // bP (w, cs) - Double Click
+selectCodeEditor("ScoreCounter.vhd", 180, 374); // bP (w, cs)
+selectCodeEditor("ScoreCounter.vhd", 180, 374, false, false, false, false, true); // bP (w, cs) - Double Click
+// Elapsed time: 63 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 3); // m (l, cs)
+selectCodeEditor("Game_SM.vhd", 506, 408); // bP (w, cs)
+// Elapsed time: 22 seconds
+selectCodeEditor("Game_SM.vhd", 1057, 519); // bP (w, cs)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed time: 26 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 5); // m (l, cs)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Program and Debug, Generate Bitstream]", 20, false); // u (J, cs)
+// Run Command: PAResourceCommand.PACommandNames_RUN_BITGEN
+// bz (cs):  Resetting Runs : addNotify
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// Tcl Message: reset_run synth_1 
+// f (cs): Launch Runs: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (f)
+// TclEventType: RUN_LAUNCH
+dismissDialog("Launch Runs"); // f (cs)
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs impl_1 -to_step write_bitstream -jobs 16 
+// Tcl Message: [Sun Sep  7 21:49:54 2025] Launched synth_1... Run output will be captured here: C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/runme.log [Sun Sep  7 21:49:54 2025] Launched impl_1... Run output will be captured here: C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/runme.log 
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_FAILED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// ag (cs): Synthesis Failed: addNotify
+// Elapsed time: 111 seconds
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (ag)
+// Run Command: PAResourceCommand.PACommandNames_MESSAGE_WINDOW
+dismissDialog("Synthesis Failed"); // ag (cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 3); // m (l, cs)
+selectCodeEditor("Game_SM.vhd", 515, 492); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 481, 483); // bP (w, cs)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Program and Debug, Generate Bitstream]", 20, false); // u (J, cs)
+// Run Command: PAResourceCommand.PACommandNames_RUN_BITGEN
+// bz (cs):  Resetting Runs : addNotify
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// Tcl Message: reset_run synth_1 
+// f (cs): Launch Runs: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (f)
+// TclEventType: RUN_LAUNCH
+dismissDialog("Launch Runs"); // f (cs)
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_STATUS_CHANGE
+// Tcl Message: launch_runs impl_1 -to_step write_bitstream -jobs 16 
+// Tcl Message: [Sun Sep  7 21:52:02 2025] Launched synth_1... Run output will be captured here: C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/runme.log [Sun Sep  7 21:52:02 2025] Launched impl_1... Run output will be captured here: C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/runme.log 
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: RUN_FAILED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// ag (cs): Implementation Failed: addNotify
+// Elapsed time: 47 seconds
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (ag)
+// Run Command: PAResourceCommand.PACommandNames_MESSAGE_WINDOW
+dismissDialog("Implementation Failed"); // ag (cs)
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, [Synth 8-614] signal 'reset' is read in the process but is not in the sensitivity list [C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/new/Game_SM.vhd:43]. ]", 1, false); // ah (J, cs)
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;C:\Users\tomas\OneDrive\Escritorio\Universidad\SEP\Proyecto\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\new\Game_SM.vhd;-;;-;16;-;line;-;43;-;;-;16;-;"); // ah (J, cs)
+// Elapsed time: 16 seconds
+selectCodeEditor("Game_SM.vhd", 361, 342); // bP (w, cs)
+// Elapsed time: 14 seconds
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, [Synth 8-7043] port width mismatch for port 'score': port width = 32, actual width = 5 (integer) [C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/new/ScoreDisplay.vhd:31]. ]", 2, true); // ah (J, cs) - Node
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;C:\Users\tomas\OneDrive\Escritorio\Universidad\SEP\Proyecto\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\new\ScoreDisplay.vhd;-;;-;16;-;line;-;31;-;;-;16;-;"); // ah (J, cs)
+// Elapsed time: 11 seconds
+expandTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, [Synth 8-7043] port width mismatch for port 'score': port width = 32, actual width = 5 (integer) [C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/new/ScoreDisplay.vhd:31]. ]", 2); // ah (J, cs)
+// Elapsed time: 27 seconds
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, [Synth 8-7043] port width mismatch for port 'score': port width = 32, actual width = 5 (integer) [C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/new/ScoreDisplay.vhd:31]. , [Synth 8-7043] port width mismatch for port 'errors': port width = 32, actual width = 5 (integer) [C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/new/ScoreDisplay.vhd:32]. ]", 3, false); // ah (J, cs)
+messagesViewCrossProbe(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "src;-;C:\Users\tomas\OneDrive\Escritorio\Universidad\SEP\Proyecto\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\new\ScoreDisplay.vhd;-;;-;16;-;line;-;32;-;;-;16;-;"); // ah (J, cs)
+// Elapsed time: 21 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 5); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 3); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreDisplay.vhd", 2); // m (l, cs)
+selectCodeEditor("ScoreDisplay.vhd", 251, 214); // bP (w, cs)
+typeControlKey((HResource) null, "ScoreDisplay.vhd", 'c'); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ClockDivider.vhd", 4); // m (l, cs)
+selectCodeEditor("ClockDivider.vhd", 435, 157); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 3); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 5); // m (l, cs)
+selectCodeEditor("ScoreCounter.vhd", 420, 237); // bP (w, cs)
+typeControlKey((HResource) null, "ScoreCounter.vhd", 'v'); // bP (w, cs)
+selectCodeEditor("ScoreCounter.vhd", 475, 255); // bP (w, cs)
+selectCodeEditor("ScoreCounter.vhd", 472, 255, false, false, false, false, true); // bP (w, cs) - Double Click
+selectCodeEditor("ScoreCounter.vhd", 472, 255); // bP (w, cs)
+selectCodeEditor("ScoreCounter.vhd", 506, 256); // bP (w, cs)
+selectCodeEditor("ScoreCounter.vhd", 522, 255); // bP (w, cs)
+selectCodeEditor("ScoreCounter.vhd", 448, 281); // bP (w, cs)
+selectCodeEditor("ScoreCounter.vhd", 452, 257); // bP (w, cs)
+selectCodeEditor("ScoreCounter.vhd", 430, 298); // bP (w, cs)
+selectCodeEditor("ScoreCounter.vhd", 439, 282); // bP (w, cs)
+typeControlKey((HResource) null, "ScoreCounter.vhd", 'v'); // bP (w, cs)
+selectCodeEditor("ScoreCounter.vhd", 517, 286); // bP (w, cs)
+selectCodeEditor("ScoreCounter.vhd", 578, 447); // bP (w, cs)
+selectCodeEditor("ScoreCounter.vhd", 693, 338); // bP (w, cs)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectTree(PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, "[, Synthesis, [Synth 8-6858] multi-driven net led6_b is connected to at least one constant driver which has been preserved, other driver is ignored. ]", 5, false); // ah (J, cs)
+// Elapsed time: 217 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, GuitarSep_Top(Structural) (GuitarSep_Top.vhd)]", 1, true); // B (F, cs) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, GuitarSep_Top(Structural) (GuitarSep_Top.vhd)]", 1, true, false, false, false, false, true); // B (F, cs) - Double Click - Node
+selectCodeEditor("GuitarSep_Top.vhd", 136, 661); // bP (w, cs)
+selectCodeEditor("GuitarSep_Top.vhd", 41, 645); // bP (w, cs)
+typeControlKey((HResource) null, "GuitarSep_Top.vhd", 'v'); // bP (w, cs)
+typeControlKey(null, null, 'z');
+// Elapsed time: 21 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 3); // m (l, cs)
+// Elapsed time: 35 seconds
+selectCodeEditor("Game_SM.vhd", 277, 580); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 375, 509); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 276, 540); // bP (w, cs)
+selectButton(RDIResourceCommand.RDICommands_LINE_COMMENT, (String) null); // E (g, cs)
+selectCodeEditor("Game_SM.vhd", 337, 247); // bP (w, cs)
+// Elapsed time: 13 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+selectCodeEditor("GuitarSep_Top.vhd", 326, 681); // bP (w, cs)
+selectCodeEditor("GuitarSep_Top.vhd", 329, 701); // bP (w, cs)
+typeControlKey((HResource) null, "GuitarSep_Top.vhd", 'c'); // bP (w, cs)
+// Elapsed time: 104 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ScoreCounter.vhd", 5); // m (l, cs)
+// Elapsed time: 40 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 3); // m (l, cs)
+selectCodeEditor("Game_SM.vhd", 293, 518); // bP (w, cs)
+selectButton(RDIResourceCommand.RDICommands_LINE_COMMENT, (String) null); // E (g, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "GuitarSep_Top.vhd", 1); // m (l, cs)
+selectCodeEditor("GuitarSep_Top.vhd", 317, 696); // bP (w, cs)
+selectCodeEditor("GuitarSep_Top.vhd", 317, 696, false, false, false, false, true); // bP (w, cs) - Double Click
+typeControlKey((HResource) null, "GuitarSep_Top.vhd", 'v'); // bP (w, cs)
+selectCodeEditor("GuitarSep_Top.vhd", 1000, 441); // bP (w, cs)
+selectCodeEditor("GuitarSep_Top.vhd", 1018, 384); // bP (w, cs)
+selectCodeEditor("GuitarSep_Top.vhd", 613, 292); // bP (w, cs)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Program and Debug, Generate Bitstream]", 20, false); // u (J, cs)
+// Run Command: PAResourceCommand.PACommandNames_RUN_BITGEN
+// am (cs): Save Project: addNotify
+// 'cD' command handler elapsed time: 6 seconds
+dismissDialog("Save Project"); // am (cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Game_SM.vhd", 3); // m (l, cs)
+selectCodeEditor("Game_SM.vhd", 350, 507); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 827, 341); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 124, 362); // bP (w, cs)
+selectCodeEditor("Game_SM.vhd", 828, 354); // bP (w, cs)
+selectButton(RDIResourceCommand.RDICommands_LINE_COMMENT, (String) null); // E (g, cs)
+selectCodeEditor("Game_SM.vhd", 303, 493); // bP (w, cs)
+selectButton(RDIResourceCommand.RDICommands_SAVE_FILE, (String) null); // E (g, cs)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Program and Debug, Generate Bitstream]", 20, false); // u (J, cs)
+// Run Command: PAResourceCommand.PACommandNames_RUN_BITGEN
+// bz (cs):  Resetting Runs : addNotify
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// Tcl Message: reset_run synth_1 
+// f (cs): Launch Runs: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (f)
+dismissDialog("Launch Runs"); // f (cs)
+// Tcl Message: launch_runs impl_1 -to_step write_bitstream -jobs 16 
+// bz (cs):  Generate Bitstream : addNotify
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// Tcl Message: [Sun Sep  7 22:03:45 2025] Launched synth_1... Run output will be captured here: C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/runme.log [Sun Sep  7 22:03:45 2025] Launched impl_1... Run output will be captured here: C:/Users/tomas/OneDrive/Escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/runme.log 
+dismissDialog("Generate Bitstream"); // bz (cs)
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// TclEventType: RUN_STEP_COMPLETED
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_STATUS_CHANGE
+// ag (cs): Bitstream Generation Completed: addNotify
+// Elapsed time: 106 seconds
+dismissDialog("Bitstream Generation Completed"); // ag (cs)

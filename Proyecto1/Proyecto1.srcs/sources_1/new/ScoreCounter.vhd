@@ -8,8 +8,8 @@ entity ScoreCounter is
         reset    : in  std_logic;
         note_out : in  std_logic_vector(3 downto 0);
         btn_push : in  std_logic_vector(3 downto 0);
-        score    : out integer;
-        errors   : out integer
+        score    : out integer range 0 to 31;
+        errors   : out integer range 0 to 31
     );
 end ScoreCounter;
 
@@ -33,10 +33,10 @@ architecture Behavioral of ScoreCounter is
     -- Procedure: actualiza score y errores
     ----------------------------------------------------------------
     procedure update_score(
-        signal note_out  : in  std_logic_vector(3 downto 0);
-        signal btn_push  : in  std_logic_vector(3 downto 0);
-        variable score   : inout integer;
-        variable errors  : inout integer
+         note_out  : in  std_logic_vector(3 downto 0);
+         btn_push  : in  std_logic_vector(3 downto 0);
+         score   : inout integer;
+         errors  : inout integer
     ) is
         variable ones : integer;
     begin
