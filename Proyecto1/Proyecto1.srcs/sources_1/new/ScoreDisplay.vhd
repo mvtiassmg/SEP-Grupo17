@@ -16,14 +16,9 @@ entity ScoreDisplay is
 end ScoreDisplay;
 
 architecture Behavioral of ScoreDisplay is
-  signal score       : integer range 0 to 32 := 0;
-  signal errors      : integer range 0 to 3 := 0;
-  signal stopped     : std_logic := '0';  -- '1' cuando se alcanzan 3 errores
-  signal bcd_unidades, bcd_decenas : unsigned(3 downto 0);
-
-  -- Señal del divisor de reloj para multiplexado
-  signal clk_mux : std_logic := '0';
-  signal mux_sel : std_logic := '0';
+  signal score   : integer range 0 to 15 := 0;
+  signal errors  : integer range 0 to 3 := 0;
+  signal stopped : std_logic := '0';  -- '1' cuando se alcanzan 3 errores
 begin
 
   ----------------------------------------------------------------------
@@ -40,22 +35,7 @@ begin
     );
 
   ----------------------------------------------------------------------
-  -- Instancia del divisor de reloj (para 2 s por dígito)
-  -- FREQ_IN = 125 MHz
-  -- Queremos FREQ_OUT = 0.25 Hz ? periodo 4s ? semiciclo = 2s
-  ----------------------------------------------------------------------
-  clk_div_inst: entity work.ClockDivider
-    generic map (
-      FREQ_IN => 125_000_000
-    )
-    port map (
-      clk_in   => clk,
-      FREQ_OUT => 1,         -- generamos 1 Hz y luego usamos un FF para dividir a 0.5 Hz
-      clk_out  => clk_mux
-    );
-
-  ----------------------------------------------------------------------
-  -- Contador de errores ? detener al llegar a 3
+  -- Contador de errores -> detener al llegar a 3
   ----------------------------------------------------------------------
   process(clk, reset)
   begin
@@ -69,52 +49,23 @@ begin
   end process;
 
   ----------------------------------------------------------------------
-  -- División del puntaje en decenas y unidades BCD
+  -- Salidas de LEDs y puntaje
   ----------------------------------------------------------------------
-  bcd_unidades <= to_unsigned(score mod 10, 4);
-  bcd_decenas  <= to_unsigned(score / 10, 4);
-
-  ----------------------------------------------------------------------
-  -- Selección de dígito según clk_mux
-  -- (mux_sel alterna cada flanco del reloj lento)
-  ----------------------------------------------------------------------
-  process(clk_mux, reset)
+  process(score, errors, stopped)
   begin
-    if reset = '1' then
-      mux_sel <= '0';
-    elsif rising_edge(clk_mux) then
-      mux_sel <= not mux_sel;
-    end if;
-  end process;
-
-  ----------------------------------------------------------------------
-  -- Salidas según estado
-  ----------------------------------------------------------------------
-  process(score, errors, stopped, mux_sel, bcd_unidades, bcd_decenas)
-  begin
+    -- LEDs de estado
     if stopped = '1' then
-      -- Juego detenido: LED rojo fijo y mostrar puntaje final
-      led6_r <= '1';
+      led6_r <= '1';  -- juego detenido: rojo
       led6_g <= '0';
       led6_b <= '0';
-      if mux_sel = '0' then
-        led_s <= std_logic_vector(bcd_unidades);
-      else
-        led_s <= std_logic_vector(bcd_decenas);
-      end if;
     else
-      -- Mientras no haya terminado: LED verde y mostrar puntaje en secuencia
       led6_r <= '0';
-      led6_g <= '1';
+      led6_g <= '1';  -- juego activo: verde
       led6_b <= '0';
-      if mux_sel = '0' then
-        led_s <= std_logic_vector(bcd_unidades);
-      else
-        led_s <= std_logic_vector(bcd_decenas);
-      end if;
     end if;
+
+    -- Muestreo del puntaje en binario (4 bits, máximo 15)
+    led_s <= std_logic_vector(to_unsigned(score, 4));
   end process;
 
 end Behavioral;
-
-

@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
-| Date         : Mon Sep  8 00:32:26 2025
+| Date         : Mon Sep  8 05:09:29 2025
 | Host         : LAPTOP-PPEH9OE5 running 64-bit major release  (build 9200)
 | Command      : report_methodology -file GuitarSep_Top_methodology_drc_routed.rpt -pb GuitarSep_Top_methodology_drc_routed.pb -rpx GuitarSep_Top_methodology_drc_routed.rpx
 | Design       : GuitarSep_Top
@@ -23,11 +23,11 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max violations: <unlimited>
-             Violations found: 139
+             Violations found: 115
 +-----------+------------------+-----------------------------+------------+
 | Rule      | Severity         | Description                 | Violations |
 +-----------+------------------+-----------------------------+------------+
-| TIMING-17 | Critical Warning | Non-clocked sequential cell | 139        |
+| TIMING-17 | Critical Warning | Non-clocked sequential cell | 115        |
 +-----------+------------------+-----------------------------+------------+
 
 2. REPORT DETAILS
@@ -544,185 +544,65 @@ Related violations: <none>
 
 TIMING-17#103 Critical Warning
 Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/clk_reg_reg/C is not reached by a timing clock
+The clock pin u_ScoreDisplay/score_counter/error_counted_reg/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#104 Critical Warning
 Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[0]/C is not reached by a timing clock
+The clock pin u_ScoreDisplay/score_counter/error_reg_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#105 Critical Warning
 Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[10]/C is not reached by a timing clock
+The clock pin u_ScoreDisplay/score_counter/error_reg_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#106 Critical Warning
 Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[11]/C is not reached by a timing clock
+The clock pin u_ScoreDisplay/score_counter/matched_reg/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#107 Critical Warning
 Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[12]/C is not reached by a timing clock
+The clock pin u_ScoreDisplay/score_counter/prev_note_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#108 Critical Warning
 Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[13]/C is not reached by a timing clock
+The clock pin u_ScoreDisplay/score_counter/prev_note_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#109 Critical Warning
 Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[14]/C is not reached by a timing clock
+The clock pin u_ScoreDisplay/score_counter/prev_note_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#110 Critical Warning
 Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[15]/C is not reached by a timing clock
+The clock pin u_ScoreDisplay/score_counter/prev_note_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#111 Critical Warning
 Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[16]/C is not reached by a timing clock
+The clock pin u_ScoreDisplay/score_counter/score_reg_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#112 Critical Warning
 Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[17]/C is not reached by a timing clock
+The clock pin u_ScoreDisplay/score_counter/score_reg_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#113 Critical Warning
 Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[18]/C is not reached by a timing clock
+The clock pin u_ScoreDisplay/score_counter/score_reg_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#114 Critical Warning
 Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[19]/C is not reached by a timing clock
+The clock pin u_ScoreDisplay/score_counter/score_reg_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#115 Critical Warning
-Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[1]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#116 Critical Warning
-Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[20]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#117 Critical Warning
-Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[21]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#118 Critical Warning
-Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[22]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#119 Critical Warning
-Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[23]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#120 Critical Warning
-Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[24]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#121 Critical Warning
-Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[25]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#122 Critical Warning
-Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[26]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#123 Critical Warning
-Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[2]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#124 Critical Warning
-Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[3]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#125 Critical Warning
-Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[4]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#126 Critical Warning
-Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[5]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#127 Critical Warning
-Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[6]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#128 Critical Warning
-Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[7]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#129 Critical Warning
-Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[8]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#130 Critical Warning
-Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/clk_div_inst/counter_reg[9]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#131 Critical Warning
-Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/mux_sel_reg/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#132 Critical Warning
-Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/score_counter/v_error_reg[0]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#133 Critical Warning
-Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/score_counter/v_error_reg[1]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#134 Critical Warning
-Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/score_counter/v_score_reg[0]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#135 Critical Warning
-Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/score_counter/v_score_reg[1]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#136 Critical Warning
-Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/score_counter/v_score_reg[2]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#137 Critical Warning
-Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/score_counter/v_score_reg[3]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#138 Critical Warning
-Non-clocked sequential cell  
-The clock pin u_ScoreDisplay/score_counter/v_score_reg[4]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#139 Critical Warning
 Non-clocked sequential cell  
 The clock pin u_ScoreDisplay/stopped_reg/C is not reached by a timing clock
 Related violations: <none>
