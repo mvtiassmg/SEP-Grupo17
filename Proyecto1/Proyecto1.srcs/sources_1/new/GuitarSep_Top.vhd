@@ -93,22 +93,23 @@ begin
       reset    => reset,
       note_out => note_out,
       btn_push => btn,
-      led      => score_led,
+      led_s    => score_led,
       led6_r   => sd_r,
       led6_g   => sd_g,
       led6_b   => sd_b
     );
 
-  ---------------------------------------------------------------------------
-  -- MUX de RGB para evitar multi-drive:
-  --  - Durante PLAYING muestra colores de Game_SM (estado del juego)
-  --  - Fuera de PLAYING muestra los de ScoreDisplay (p.ej. rojo/verde score)
-  ---------------------------------------------------------------------------
-  led6_r <= sm_r when playing='1' else sd_r;
-  led6_g <= sm_g when playing='1' else sd_g;
-  led6_b <= sm_b when playing='1' else sd_b;
+--  ---------------------------------------------------------------------------
+--  -- MUX de RGB para evitar multi-drive:
+--  --  - Durante PLAYING muestra colores de Game_SM (estado del juego)
+--  --  - Fuera de PLAYING muestra los de ScoreDisplay (p.ej. rojo/verde score)
+--  ---------------------------------------------------------------------------
+    led6_r <= sm_r when playing='1' else sd_r;
+    led6_g <= sm_g when playing='1' else sd_g;
+    led6_b <= sm_b when playing='1' else sd_b;
 
-  -- LED[3:0] salen del ScoreDisplay
-  led <= score_led;
+--  -- LED[3:0] salen del ScoreDisplay
+--  led <= score_led;
+    led <= note_out when playing = '1' else score_led;
 
 end Structural;
