@@ -1,0 +1,1 @@
+-wto "000fb6f5bc5c405d9afacc9d019e4b7b" --incr --debug "typical" --relax --mt "2" -L "xil_defaultlib" -L "secureip" --snapshot "tb_ScoreCounter_behav" "xil_defaultlib.tb_ScoreCounter" -log "elaborate.log" 
