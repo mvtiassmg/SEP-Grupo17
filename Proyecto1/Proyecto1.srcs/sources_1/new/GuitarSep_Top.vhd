@@ -109,7 +109,6 @@ begin
     led6_b <= sm_b when playing='1' else sd_b;
 
 --  -- LED[3:0] salen del ScoreDisplay
---  led <= score_led;
     led <= note_out when playing = '1' else score_led;
 
 end Structural;
