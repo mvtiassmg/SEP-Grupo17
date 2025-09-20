@@ -1,0 +1,28 @@
+{
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"0.814843",
+   "Default View_TopLeft":"-92,-56",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.7.1 2023-07-26 3bc4126617 VDI=43 GEI=38 GUI=JA:21.0
+#  -string -flagsOSRD
+preplace port port-id_sys_clk -pg 1 -lvl 0 -x 0 -y 170 -defaultsOSRD
+preplace port port-id_rst -pg 1 -lvl 0 -x 0 -y 140 -defaultsOSRD
+preplace inst clk_wiz_0 -pg 1 -lvl 1 -x 110 -y 170 -defaultsOSRD
+preplace inst vio_0 -pg 1 -lvl 2 -x 350 -y 80 -defaultsOSRD
+preplace inst ila_0 -pg 1 -lvl 5 -x 1100 -y 180 -defaultsOSRD
+preplace inst util_vector_logic_0 -pg 1 -lvl 3 -x 630 -y 280 -defaultsOSRD
+preplace inst wave_gen_0 -pg 1 -lvl 4 -x 880 -y 270 -defaultsOSRD
+preplace netloc sys_clk_1 1 0 1 20J 170n
+preplace netloc reset_0_1 1 0 1 20J 140n
+preplace netloc clk_wiz_0_clk_out1 1 1 4 200 160 NJ 160 770 150 NJ
+preplace netloc vio_0_probe_out0 1 2 1 480 80n
+preplace netloc wave_gen_0_sin 1 1 4 210 190 NJ 190 NJ 190 1000
+preplace netloc wave_gen_0_cos 1 1 4 220 170 NJ 170 NJ 170 990
+preplace netloc clk_wiz_0_locked 1 1 2 200J 290 N
+preplace netloc util_vector_logic_0_Res 1 3 1 N 280
+preplace netloc wave_gen_0_triang 1 4 1 1010 170n
+levelinfo -pg 1 0 110 350 630 880 1100 1190
+pagesize -pg 1 -db -bbox -sgen -100 0 1190 350
+"
+}
+
