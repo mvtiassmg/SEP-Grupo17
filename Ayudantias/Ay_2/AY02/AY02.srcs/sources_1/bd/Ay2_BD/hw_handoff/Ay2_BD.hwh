@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Sun Sep 21 22:40:54 2025" VIVADOVERSION="2020.1">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Mon Sep 22 02:05:17 2025" VIVADOVERSION="2020.1">
 
   <SYSTEMINFO ARCH="zynq" DEVICE="7z010" NAME="Ay2_BD" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -7,7 +7,7 @@
     <PORT DIR="I" LEFT="3" NAME="sws" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_sws">
       <CONNECTIONS>
         <CONNECTION INSTANCE="SM_0" PORT="sw"/>
-        <CONNECTION INSTANCE="ALU_1" PORT="sws"/>
+        <CONNECTION INSTANCE="ALU_0" PORT="sws"/>
       </CONNECTIONS>
     </PORT>
     <PORT DIR="I" NAME="nxt" SIGIS="undef" SIGNAME="External_Ports_nxt">
@@ -19,12 +19,12 @@
       <CONNECTIONS>
         <CONNECTION INSTANCE="SM_0" PORT="clk"/>
         <CONNECTION INSTANCE="RAM_0" PORT="clk"/>
-        <CONNECTION INSTANCE="ALU_1" PORT="clk"/>
+        <CONNECTION INSTANCE="ALU_0" PORT="clk"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="O" LEFT="3" NAME="leds" RIGHT="0" SIGIS="undef" SIGNAME="ALU_1_y">
+    <PORT DIR="O" LEFT="3" NAME="leds" RIGHT="0" SIGIS="undef" SIGNAME="ALU_0_y">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="ALU_1" PORT="y"/>
+        <CONNECTION INSTANCE="ALU_0" PORT="y"/>
       </CONNECTIONS>
     </PORT>
   </EXTERNALPORTS>
@@ -32,10 +32,10 @@
   <EXTERNALINTERFACES/>
 
   <MODULES>
-    <MODULE COREREVISION="5" FULLNAME="/ALU_1" HWVERSION="1.0" INSTANCE="ALU_1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="ALU" VLNV="xilinx.com:user:ALU:1.0">
+    <MODULE COREREVISION="5" FULLNAME="/ALU_0" HWVERSION="1.0" INSTANCE="ALU_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="ALU" VLNV="xilinx.com:user:ALU:1.0">
       <DOCUMENTS/>
       <PARAMETERS>
-        <PARAMETER NAME="Component_Name" VALUE="Ay2_BD_ALU_1_1"/>
+        <PARAMETER NAME="Component_Name" VALUE="Ay2_BD_ALU_0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
@@ -69,7 +69,7 @@
             <CONNECTION INSTANCE="External_Ports" PORT="sws"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="3" NAME="y" RIGHT="0" SIGIS="undef" SIGNAME="ALU_1_y">
+        <PORT DIR="O" LEFT="3" NAME="y" RIGHT="0" SIGIS="undef" SIGNAME="ALU_0_y">
           <CONNECTIONS>
             <CONNECTION INSTANCE="External_Ports" PORT="leds"/>
           </CONNECTIONS>
@@ -96,7 +96,7 @@
         </PORT>
         <PORT DIR="O" LEFT="3" NAME="data_out" RIGHT="0" SIGIS="undef" SIGNAME="RAM_0_data_out">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="ALU_1" PORT="a"/>
+            <CONNECTION INSTANCE="ALU_0" PORT="a"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
@@ -131,17 +131,17 @@
         </PORT>
         <PORT DIR="O" LEFT="3" NAME="b" RIGHT="0" SIGIS="undef" SIGNAME="SM_0_b">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="ALU_1" PORT="b"/>
+            <CONNECTION INSTANCE="ALU_0" PORT="b"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" LEFT="3" NAME="instr" RIGHT="0" SIGIS="undef" SIGNAME="SM_0_instr">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="ALU_1" PORT="instr"/>
+            <CONNECTION INSTANCE="ALU_0" PORT="instr"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="ledEn" SIGIS="undef" SIGNAME="SM_0_ledEn">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="ALU_1" PORT="ledEn"/>
+            <CONNECTION INSTANCE="ALU_0" PORT="ledEn"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>

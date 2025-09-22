@@ -1,7 +1,7 @@
 --Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
---Date        : Sun Sep 21 22:40:54 2025
+--Date        : Mon Sep 22 02:05:17 2025
 --Host        : LAPTOP-PPEH9OE5 running 64-bit major release  (build 9200)
 --Command     : generate_target Ay2_BD.bd
 --Design      : Ay2_BD
@@ -43,7 +43,7 @@ architecture STRUCTURE of Ay2_BD is
     data_out : out STD_LOGIC_VECTOR ( 3 downto 0 )
   );
   end component Ay2_BD_RAM_0_0;
-  component Ay2_BD_ALU_1_1 is
+  component Ay2_BD_ALU_0_0 is
   port (
     clk : in STD_LOGIC;
     a : in STD_LOGIC_VECTOR ( 3 downto 0 );
@@ -53,8 +53,8 @@ architecture STRUCTURE of Ay2_BD is
     sws : in STD_LOGIC_VECTOR ( 3 downto 0 );
     y : out STD_LOGIC_VECTOR ( 3 downto 0 )
   );
-  end component Ay2_BD_ALU_1_1;
-  signal ALU_1_y : STD_LOGIC_VECTOR ( 3 downto 0 );
+  end component Ay2_BD_ALU_0_0;
+  signal ALU_0_y : STD_LOGIC_VECTOR ( 3 downto 0 );
   signal RAM_0_data_out : STD_LOGIC_VECTOR ( 3 downto 0 );
   signal SM_0_addr : STD_LOGIC_VECTOR ( 3 downto 0 );
   signal SM_0_b : STD_LOGIC_VECTOR ( 3 downto 0 );
@@ -69,10 +69,10 @@ architecture STRUCTURE of Ay2_BD is
   attribute X_INTERFACE_PARAMETER of clk : signal is "XIL_INTERFACENAME CLK.CLK, CLK_DOMAIN Ay2_BD_clk_0, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.000";
 begin
   clk_0_1 <= clk;
-  leds(3 downto 0) <= ALU_1_y(3 downto 0);
+  leds(3 downto 0) <= ALU_0_y(3 downto 0);
   nxt_0_1 <= nxt;
   sw_0_1(3 downto 0) <= sws(3 downto 0);
-ALU_1: component Ay2_BD_ALU_1_1
+ALU_0: component Ay2_BD_ALU_0_0
      port map (
       a(3 downto 0) => RAM_0_data_out(3 downto 0),
       b(3 downto 0) => SM_0_b(3 downto 0),
@@ -80,7 +80,7 @@ ALU_1: component Ay2_BD_ALU_1_1
       instr(3 downto 0) => SM_0_instr(3 downto 0),
       ledEn => SM_0_ledEn,
       sws(3 downto 0) => sw_0_1(3 downto 0),
-      y(3 downto 0) => ALU_1_y(3 downto 0)
+      y(3 downto 0) => ALU_0_y(3 downto 0)
     );
 RAM_0: component Ay2_BD_RAM_0_0
      port map (

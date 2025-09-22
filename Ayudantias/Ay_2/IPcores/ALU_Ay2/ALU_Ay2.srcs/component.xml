@@ -36,7 +36,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>33c72ec6</spirit:value>
+            <spirit:value>c0d2f158</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -52,7 +52,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>33c72ec6</spirit:value>
+            <spirit:value>c0d2f158</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -67,7 +67,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>343db89d</spirit:value>
+            <spirit:value>d6f178fc</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -218,7 +218,7 @@
       <spirit:file>
         <spirit:name>sources_1/new/ALU.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_33c72ec6</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_c0d2f158</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -286,20 +286,32 @@
       </xilinx:taxonomies>
       <xilinx:displayName>ALU_v1_0</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
-      <xilinx:coreRevision>2</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2025-09-22T01:35:38Z</xilinx:coreCreationDateTime>
+      <xilinx:coreRevision>4</xilinx:coreRevision>
+      <xilinx:coreCreationDateTime>2025-09-22T04:27:49Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@674ee500_ARCHIVE_LOCATION">e:/2025-2/iee2463 - sistemas electronicos programables/sep-grupo17/ayudantias/ay_2/ipcores/alu_ay2/alu_ay2.srcs</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@17e4b599_ARCHIVE_LOCATION">e:/2025-2/iee2463 - sistemas electronicos programables/sep-grupo17/ayudantias/ay_2/ipcores/alu_ay2/alu_ay2.srcs</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@493d2502_ARCHIVE_LOCATION">e:/2025-2/iee2463 - sistemas electronicos programables/sep-grupo17/ayudantias/ay_2/ipcores/alu_ay2/alu_ay2.srcs</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@4b04c2b3_ARCHIVE_LOCATION">e:/2025-2/iee2463 - sistemas electronicos programables/sep-grupo17/ayudantias/ay_2/ipcores/alu_ay2/alu_ay2.srcs</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@13f15822_ARCHIVE_LOCATION">e:/2025-2/iee2463 - sistemas electronicos programables/sep-grupo17/ayudantias/ay_2/ipcores/alu_ay2/alu_ay2.srcs</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3c2a2e38_ARCHIVE_LOCATION">e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Ayudantias/Ay_2/IPcores/ALU_Ay2/ALU_Ay2.srcs</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@570f3e87_ARCHIVE_LOCATION">e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Ayudantias/Ay_2/IPcores/ALU_Ay2/ALU_Ay2.srcs</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@72068940_ARCHIVE_LOCATION">e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Ayudantias/Ay_2/IPcores/ALU_Ay2/ALU_Ay2.srcs</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@78d01261_ARCHIVE_LOCATION">e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Ayudantias/Ay_2/IPcores/ALU_Ay2/ALU_Ay2.srcs</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7150cc47_ARCHIVE_LOCATION">e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Ayudantias/Ay_2/IPcores/ALU_Ay2/ALU_Ay2.srcs</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@13cdfe7a_ARCHIVE_LOCATION">e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Ayudantias/Ay_2/IPcores/ALU_Ay2/ALU_Ay2.srcs</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@454acfc_ARCHIVE_LOCATION">e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Ayudantias/Ay_2/IPcores/ALU_Ay2/ALU_Ay2.srcs</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@353e74e5_ARCHIVE_LOCATION">e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Ayudantias/Ay_2/IPcores/ALU_Ay2/ALU_Ay2.srcs</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1194b301_ARCHIVE_LOCATION">e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Ayudantias/Ay_2/IPcores/ALU_Ay2/ALU_Ay2.srcs</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4e637a0d_ARCHIVE_LOCATION">e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Ayudantias/Ay_2/IPcores/ALU_Ay2/ALU_Ay2.srcs</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2b933343_ARCHIVE_LOCATION">e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Ayudantias/Ay_2/IPcores/ALU_Ay2/ALU_Ay2.srcs</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6483be8f_ARCHIVE_LOCATION">e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Ayudantias/Ay_2/IPcores/ALU_Ay2/ALU_Ay2.srcs</xilinx:tag>
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2020.1</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="a88d4390"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="6f9f0486"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="e3ba6575"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="5df87e46"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="dae4712f"/>
     </xilinx:packagingInfo>

@@ -162,8 +162,8 @@ proc create_root_design { parentCell } {
   set nxt [ create_bd_port -dir I nxt ]
   set sws [ create_bd_port -dir I -from 3 -to 0 sws ]
 
-  # Create instance: ALU_1, and set properties
-  set ALU_1 [ create_bd_cell -type ip -vlnv xilinx.com:user:ALU:1.0 ALU_1 ]
+  # Create instance: ALU_0, and set properties
+  set ALU_0 [ create_bd_cell -type ip -vlnv xilinx.com:user:ALU:1.0 ALU_0 ]
 
   # Create instance: RAM_0, and set properties
   set RAM_0 [ create_bd_cell -type ip -vlnv xilinx.com:user:RAM:1.0 RAM_0 ]
@@ -172,15 +172,15 @@ proc create_root_design { parentCell } {
   set SM_0 [ create_bd_cell -type ip -vlnv xilinx.com:user:SM:1.0 SM_0 ]
 
   # Create port connections
-  connect_bd_net -net ALU_1_y [get_bd_ports leds] [get_bd_pins ALU_1/y]
-  connect_bd_net -net RAM_0_data_out [get_bd_pins ALU_1/a] [get_bd_pins RAM_0/data_out]
+  connect_bd_net -net ALU_0_y [get_bd_ports leds] [get_bd_pins ALU_0/y]
+  connect_bd_net -net RAM_0_data_out [get_bd_pins ALU_0/a] [get_bd_pins RAM_0/data_out]
   connect_bd_net -net SM_0_addr [get_bd_pins RAM_0/address] [get_bd_pins SM_0/addr]
-  connect_bd_net -net SM_0_b [get_bd_pins ALU_1/b] [get_bd_pins SM_0/b]
-  connect_bd_net -net SM_0_instr [get_bd_pins ALU_1/instr] [get_bd_pins SM_0/instr]
-  connect_bd_net -net SM_0_ledEn [get_bd_pins ALU_1/ledEn] [get_bd_pins SM_0/ledEn]
-  connect_bd_net -net clk_0_1 [get_bd_ports clk] [get_bd_pins ALU_1/clk] [get_bd_pins RAM_0/clk] [get_bd_pins SM_0/clk]
+  connect_bd_net -net SM_0_b [get_bd_pins ALU_0/b] [get_bd_pins SM_0/b]
+  connect_bd_net -net SM_0_instr [get_bd_pins ALU_0/instr] [get_bd_pins SM_0/instr]
+  connect_bd_net -net SM_0_ledEn [get_bd_pins ALU_0/ledEn] [get_bd_pins SM_0/ledEn]
+  connect_bd_net -net clk_0_1 [get_bd_ports clk] [get_bd_pins ALU_0/clk] [get_bd_pins RAM_0/clk] [get_bd_pins SM_0/clk]
   connect_bd_net -net nxt_0_1 [get_bd_ports nxt] [get_bd_pins SM_0/nxt]
-  connect_bd_net -net sw_0_1 [get_bd_ports sws] [get_bd_pins ALU_1/sws] [get_bd_pins SM_0/sw]
+  connect_bd_net -net sw_0_1 [get_bd_ports sws] [get_bd_pins ALU_0/sws] [get_bd_pins SM_0/sw]
 
   # Create address segments
 

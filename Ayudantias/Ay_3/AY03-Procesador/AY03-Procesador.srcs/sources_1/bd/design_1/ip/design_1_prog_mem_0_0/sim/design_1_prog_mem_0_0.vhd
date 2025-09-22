@@ -1,4 +1,4 @@
--- (c) Copyright 1995-2023 Xilinx, Inc. All rights reserved.
+-- (c) Copyright 1995-2025 Xilinx, Inc. All rights reserved.
 -- 
 -- This file contains confidential and proprietary information
 -- of Xilinx, Inc. and is protected under U.S. and
@@ -47,7 +47,7 @@
 -- DO NOT MODIFY THIS FILE.
 
 -- IP VLNV: xilinx.com:user:prog_mem:1.0
--- IP Revision: 2
+-- IP Revision: 3
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
@@ -55,7 +55,7 @@ USE ieee.numeric_std.ALL;
 
 ENTITY design_1_prog_mem_0_0 IS
   PORT (
-    PC : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
+    PC : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
     address : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
   );
 END design_1_prog_mem_0_0;
@@ -65,7 +65,7 @@ ARCHITECTURE design_1_prog_mem_0_0_arch OF design_1_prog_mem_0_0 IS
   ATTRIBUTE DowngradeIPIdentifiedWarnings OF design_1_prog_mem_0_0_arch: ARCHITECTURE IS "yes";
   COMPONENT prog_mem IS
     PORT (
-      PC : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
+      PC : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
       address : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
     );
   END COMPONENT prog_mem;

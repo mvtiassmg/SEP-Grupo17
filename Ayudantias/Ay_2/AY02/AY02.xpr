@@ -76,14 +76,14 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
-        <CompFileExtendedInfo CompFileName="Ay2_BD.bd" FileRelPathName="ip/Ay2_BD_ALU_1_1/Ay2_BD_ALU_1_1.xci">
-          <Proxy FileSetName="Ay2_BD_ALU_1_1"/>
+        <CompFileExtendedInfo CompFileName="Ay2_BD.bd" FileRelPathName="ip/Ay2_BD_SM_0_0_1/Ay2_BD_SM_0_0.xci">
+          <Proxy FileSetName="Ay2_BD_SM_0_0"/>
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="Ay2_BD.bd" FileRelPathName="ip/Ay2_BD_RAM_0_0_1/Ay2_BD_RAM_0_0.xci">
           <Proxy FileSetName="Ay2_BD_RAM_0_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="Ay2_BD.bd" FileRelPathName="ip/Ay2_BD_SM_0_0_1/Ay2_BD_SM_0_0.xci">
-          <Proxy FileSetName="Ay2_BD_SM_0_0"/>
+        <CompFileExtendedInfo CompFileName="Ay2_BD.bd" FileRelPathName="ip/Ay2_BD_ALU_0_0_1/Ay2_BD_ALU_0_0.xci">
+          <Proxy FileSetName="Ay2_BD_ALU_0_0"/>
         </CompFileExtendedInfo>
       </File>
       <File Path="$PPRDIR/../AYU02-ALU/AYU02-ALU.gen/sources_1/bd/Ay2_BD/hdl/Ay2_BD_wrapper.vhd">
@@ -149,9 +149,9 @@
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
-    <FileSet Name="Ay2_BD_ALU_1_1" Type="BlockSrcs" RelSrcDir="$PSRCDIR/Ay2_BD_ALU_1_1">
+    <FileSet Name="Ay2_BD_ALU_0_0" Type="BlockSrcs" RelSrcDir="$PSRCDIR/Ay2_BD_ALU_0_0">
       <Config>
-        <Option Name="TopModule" Val="Ay2_BD_ALU_1_1"/>
+        <Option Name="TopModule" Val="Ay2_BD_ALU_0_0"/>
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
@@ -205,7 +205,7 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="Ay2_BD_ALU_1_1_synth_1" Type="Ft3:Synth" SrcSet="Ay2_BD_ALU_1_1" Part="xc7z010clg400-1" ConstrsSet="Ay2_BD_ALU_1_1" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/Ay2_BD_ALU_1_1_synth_1" IncludeInArchive="true">
+    <Run Id="Ay2_BD_ALU_0_0_synth_1" Type="Ft3:Synth" SrcSet="Ay2_BD_ALU_0_0" Part="xc7z010clg400-1" ConstrsSet="Ay2_BD_ALU_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/Ay2_BD_ALU_0_0_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2020">
           <Desc>Vivado Synthesis Defaults</Desc>
@@ -269,7 +269,7 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="Ay2_BD_ALU_1_1_impl_1" Type="Ft2:EntireDesign" Part="xc7z010clg400-1" ConstrsSet="Ay2_BD_ALU_1_1" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="Ay2_BD_ALU_1_1_synth_1" IncludeInArchive="false" GenFullBitstream="true">
+    <Run Id="Ay2_BD_ALU_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z010clg400-1" ConstrsSet="Ay2_BD_ALU_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="Ay2_BD_ALU_0_0_synth_1" IncludeInArchive="false" GenFullBitstream="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2020">
           <Desc>Default settings for Implementation.</Desc>
