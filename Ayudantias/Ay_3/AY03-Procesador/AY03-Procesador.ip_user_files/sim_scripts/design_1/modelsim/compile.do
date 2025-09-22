@@ -1,0 +1,28 @@
+vlib modelsim_lib/work
+vlib modelsim_lib/msim
+
+vlib modelsim_lib/msim/xil_defaultlib
+
+vmap xil_defaultlib modelsim_lib/msim/xil_defaultlib
+
+vcom -work xil_defaultlib  -93 \
+"../../../bd/design_1/ipshared/d6aa/sources_1/new/ALU.vhd" \
+"../../../bd/design_1/ip/design_1_ALU_0_0/sim/design_1_ALU_0_0.vhd" \
+"../../../bd/design_1/ipshared/5e1a/sources_1/new/RAM2.vhd" \
+"../../../bd/design_1/ip/design_1_RAM2_0_0/sim/design_1_RAM2_0_0.vhd" \
+"../../../bd/design_1/ipshared/78d6/sources_1/new/instr_mem.vhd" \
+"../../../bd/design_1/ip/design_1_instr_mem_0_0/sim/design_1_instr_mem_0_0.vhd" \
+"../../../bd/design_1/ipshared/e992/SM.vhd" \
+"../../../bd/design_1/ip/design_1_SM_0_0/sim/design_1_SM_0_0.vhd" \
+"../../../bd/design_1/ipshared/df4e/BTNS_debouncer.vhd" \
+"../../../bd/design_1/ip/design_1_Debouncing_Button_VH_0_0/sim/design_1_Debouncing_Button_VH_0_0.vhd" \
+"../../../bd/design_1/ipshared/e8f5/control_unit_ay/control_unit_ay.srcs/sources_1/new/control_unit.vhd" \
+"../../../bd/design_1/ip/design_1_control_unit_0_1/sim/design_1_control_unit_0_1.vhd" \
+"../../../bd/design_1/ip/design_1_Debouncing_Button_VH_1_3/sim/design_1_Debouncing_Button_VH_1_3.vhd" \
+"../../../bd/design_1/ip/design_1_Debouncing_Button_VH_2_0/sim/design_1_Debouncing_Button_VH_2_0.vhd" \
+"../../../bd/design_1/ip/design_1_Debouncing_Button_VH_3_0/sim/design_1_Debouncing_Button_VH_3_0.vhd" \
+"../../../bd/design_1/ipshared/9638/prog_mem.vhd" \
+"../../../bd/design_1/ip/design_1_prog_mem_0_0/sim/design_1_prog_mem_0_0.vhd" \
+"../../../bd/design_1/sim/design_1.vhd" \
+
+

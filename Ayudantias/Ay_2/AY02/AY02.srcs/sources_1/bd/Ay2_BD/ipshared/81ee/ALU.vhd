@@ -15,16 +15,18 @@ entity ALU is
 end ALU;
 
 architecture Behavioral of ALU is
-    signal num_a : integer; 
-    signal num_b : integer; 
-    signal prod  : integer;
-    signal divi  : integer;
+    signal num_a : integer;
+    signal num_b : integer;
+    signal prod_int : integer;
+
+    signal prod_unsigned : unsigned(7 downto 0);
 begin
     num_a <= to_integer(unsigned(a));
     num_b <= to_integer(unsigned(b));
 
-    prod  <= num_a * num_b;
-    divi  <= 0 when num_b = 0 else num_a / num_b;
+    prod_int <= num_a * num_b;
+
+    prod_unsigned <= unsigned(a) * unsigned(b);
 
     y <= a WHEN instr="0000" and ledEn='0' ELSE
          b WHEN instr="0001" and ledEn='0' ELSE
@@ -32,8 +34,10 @@ begin
          std_logic_vector(to_unsigned(num_b - 1, 4)) WHEN instr="0011" and ledEn='0' ELSE
          std_logic_vector(to_unsigned(num_a + num_b, 4)) WHEN instr="0100" and ledEn='0' ELSE
          std_logic_vector(to_unsigned(num_a - num_b, 4)) WHEN instr="0101" and ledEn='0' ELSE
-         std_logic_vector(to_unsigned(prod, 4)) WHEN instr="0110" and ledEn='0' ELSE
-         std_logic_vector(to_unsigned(divi, 4)) WHEN instr="0111" and ledEn='0' ELSE
+         -- Multiplicación con enteros
+         std_logic_vector(to_unsigned(prod_int, 4)) WHEN instr="0110" and ledEn='0' ELSE
+         -- Multiplicación con unsigned
+         std_logic_vector(prod_unsigned(3 downto 0)) WHEN instr="0111" and ledEn='0' ELSE
          NOT(a) WHEN instr="1000" and ledEn='0' ELSE
          a AND b WHEN instr="1001" and ledEn='0' ELSE
          a OR b WHEN instr="1010" and ledEn='0' ELSE

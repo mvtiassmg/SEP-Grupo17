@@ -1,15 +1,18 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed Aug 30 01:31:47 2023" VIVADOVERSION="2020.1">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Mon Sep 22 04:00:27 2025" VIVADOVERSION="2020.1">
 
-  <SYSTEMINFO ARCH="zynq" BOARD="digilentinc.com:zybo-z7-10:part0:1.1" DEVICE="7z010" NAME="design_1" PACKAGE="clg400" SPEEDGRADE="-1"/>
+  <SYSTEMINFO ARCH="zynq" DEVICE="7z010" NAME="design_1" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
   <EXTERNALPORTS>
     <PORT CLKFREQUENCY="100000000" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="External_Ports_clk">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="control_unit_0" PORT="clk"/>
         <CONNECTION INSTANCE="SM_0" PORT="clk"/>
         <CONNECTION INSTANCE="Debouncing_Button_VH_0" PORT="clk"/>
         <CONNECTION INSTANCE="ALU_0" PORT="clk"/>
+        <CONNECTION INSTANCE="Debouncing_Button_VH_1" PORT="clk"/>
+        <CONNECTION INSTANCE="Debouncing_Button_VH_2" PORT="clk"/>
+        <CONNECTION INSTANCE="Debouncing_Button_VH_3" PORT="clk"/>
+        <CONNECTION INSTANCE="control_unit_0" PORT="clk"/>
       </CONNECTIONS>
     </PORT>
     <PORT DIR="O" LEFT="3" NAME="leds" RIGHT="0" SIGIS="undef" SIGNAME="ALU_0_y">
@@ -25,6 +28,21 @@
     <PORT DIR="I" LEFT="3" NAME="sw" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_sw">
       <CONNECTIONS>
         <CONNECTION INSTANCE="SM_0" PORT="sw"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="btn1" SIGIS="undef" SIGNAME="External_Ports_btn1">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="Debouncing_Button_VH_1" PORT="button"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="btn2" SIGIS="undef" SIGNAME="External_Ports_btn2">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="Debouncing_Button_VH_2" PORT="button"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="I" NAME="btn3" SIGIS="undef" SIGNAME="External_Ports_btn3">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="Debouncing_Button_VH_3" PORT="button"/>
       </CONNECTIONS>
     </PORT>
   </EXTERNALPORTS>
@@ -102,6 +120,81 @@
       </PORTS>
       <BUSINTERFACES/>
     </MODULE>
+    <MODULE COREREVISION="2" FULLNAME="/Debouncing_Button_VH_1" HWVERSION="1.0" INSTANCE="Debouncing_Button_VH_1" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Debouncing_Button_VHDL" VLNV="xilinx.com:user:Debouncing_Button_VHDL:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_Debouncing_Button_VH_1_3"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="button" SIGIS="undef" SIGNAME="External_Ports_btn1">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="btn1"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="External_Ports_clk">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="clk"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="debounced_button" SIGIS="undef" SIGNAME="Debouncing_Button_VH_1_debounced_button">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="control_unit_0" PORT="btn_1"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE COREREVISION="2" FULLNAME="/Debouncing_Button_VH_2" HWVERSION="1.0" INSTANCE="Debouncing_Button_VH_2" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Debouncing_Button_VHDL" VLNV="xilinx.com:user:Debouncing_Button_VHDL:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_Debouncing_Button_VH_2_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="button" SIGIS="undef" SIGNAME="External_Ports_btn2">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="btn2"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="External_Ports_clk">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="clk"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="debounced_button" SIGIS="undef" SIGNAME="Debouncing_Button_VH_2_debounced_button">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="control_unit_0" PORT="btn_2"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE COREREVISION="2" FULLNAME="/Debouncing_Button_VH_3" HWVERSION="1.0" INSTANCE="Debouncing_Button_VH_3" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Debouncing_Button_VHDL" VLNV="xilinx.com:user:Debouncing_Button_VHDL:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_Debouncing_Button_VH_3_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT DIR="I" NAME="button" SIGIS="undef" SIGNAME="External_Ports_btn3">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="btn3"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="External_Ports_clk">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="clk"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="debounced_button" SIGIS="undef" SIGNAME="Debouncing_Button_VH_3_debounced_button">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="control_unit_0" PORT="btn_3"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
     <MODULE COREREVISION="3" FULLNAME="/RAM2_0" HWVERSION="1.0" INSTANCE="RAM2_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="RAM2" VLNV="xilinx.com:user:RAM2:1.0">
       <DOCUMENTS/>
       <PARAMETERS>
@@ -162,10 +255,10 @@
       </PORTS>
       <BUSINTERFACES/>
     </MODULE>
-    <MODULE COREREVISION="2" FULLNAME="/control_unit_0" HWVERSION="1.0" INSTANCE="control_unit_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="control_unit" VLNV="xilinx.com:user:control_unit:1.0">
+    <MODULE COREREVISION="1" FULLNAME="/control_unit_0" HWVERSION="1.0" INSTANCE="control_unit_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="control_unit" VLNV="xilinx.com:user:control_unit:1.0">
       <DOCUMENTS/>
       <PARAMETERS>
-        <PARAMETER NAME="Component_Name" VALUE="design_1_control_unit_0_0"/>
+        <PARAMETER NAME="Component_Name" VALUE="design_1_control_unit_0_1"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
@@ -179,7 +272,22 @@
             <CONNECTION INSTANCE="ALU_0" PORT="finish"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="1" NAME="pc" RIGHT="0" SIGIS="undef" SIGNAME="control_unit_0_pc">
+        <PORT DIR="I" NAME="btn_1" SIGIS="undef" SIGNAME="Debouncing_Button_VH_1_debounced_button">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Debouncing_Button_VH_1" PORT="debounced_button"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="btn_2" SIGIS="undef" SIGNAME="Debouncing_Button_VH_2_debounced_button">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Debouncing_Button_VH_2" PORT="debounced_button"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="btn_3" SIGIS="undef" SIGNAME="Debouncing_Button_VH_3_debounced_button">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Debouncing_Button_VH_3" PORT="debounced_button"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="3" NAME="pc" RIGHT="0" SIGIS="undef" SIGNAME="control_unit_0_pc">
           <CONNECTIONS>
             <CONNECTION INSTANCE="prog_mem_0" PORT="PC"/>
           </CONNECTIONS>
@@ -207,14 +315,14 @@
       </PORTS>
       <BUSINTERFACES/>
     </MODULE>
-    <MODULE COREREVISION="2" FULLNAME="/prog_mem_0" HWVERSION="1.0" INSTANCE="prog_mem_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="prog_mem" VLNV="xilinx.com:user:prog_mem:1.0">
+    <MODULE COREREVISION="3" FULLNAME="/prog_mem_0" HWVERSION="1.0" INSTANCE="prog_mem_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="prog_mem" VLNV="xilinx.com:user:prog_mem:1.0">
       <DOCUMENTS/>
       <PARAMETERS>
         <PARAMETER NAME="Component_Name" VALUE="design_1_prog_mem_0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
-        <PORT DIR="I" LEFT="1" NAME="PC" RIGHT="0" SIGIS="undef" SIGNAME="control_unit_0_pc">
+        <PORT DIR="I" LEFT="3" NAME="PC" RIGHT="0" SIGIS="undef" SIGNAME="control_unit_0_pc">
           <CONNECTIONS>
             <CONNECTION INSTANCE="control_unit_0" PORT="pc"/>
           </CONNECTIONS>

@@ -2,10 +2,10 @@
 <Root MajorVersion="0" MinorVersion="39">
   <CompositeFile CompositeFileTopName="design_1" CanBeSetAsTop="false" CanDisplayChildGraph="true">
     <Description>Composite Fileset</Description>
-    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1693373507"/>
-    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1693373507"/>
-    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1693373507"/>
-    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1693373507"/>
+    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1758524427"/>
+    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1758524427"/>
+    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1758524427"/>
+    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1758524427"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
       <File Name="ip\design_1_ALU_0_0\design_1_ALU_0_0.xci" Type="IP">
         <Instance HierarchyPath="ALU_0"/>
@@ -23,24 +23,8 @@
         <UsedIn Val="IMPLEMENTATION"/>
         <UsedIn Val="SIMULATION"/>
       </File>
-      <File Name="ip\design_1_prog_mem_0_0\design_1_prog_mem_0_0.xci" Type="IP">
-        <Instance HierarchyPath="prog_mem_0"/>
-        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
-        <Library Name="xil_defaultlib"/>
-        <UsedIn Val="SYNTHESIS"/>
-        <UsedIn Val="IMPLEMENTATION"/>
-        <UsedIn Val="SIMULATION"/>
-      </File>
       <File Name="ip\design_1_instr_mem_0_0\design_1_instr_mem_0_0.xci" Type="IP">
         <Instance HierarchyPath="instr_mem_0"/>
-        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
-        <Library Name="xil_defaultlib"/>
-        <UsedIn Val="SYNTHESIS"/>
-        <UsedIn Val="IMPLEMENTATION"/>
-        <UsedIn Val="SIMULATION"/>
-      </File>
-      <File Name="ip\design_1_control_unit_0_0\design_1_control_unit_0_0.xci" Type="IP">
-        <Instance HierarchyPath="control_unit_0"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>
@@ -57,6 +41,46 @@
       </File>
       <File Name="ip\design_1_Debouncing_Button_VH_0_0\design_1_Debouncing_Button_VH_0_0.xci" Type="IP">
         <Instance HierarchyPath="Debouncing_Button_VH_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\design_1_control_unit_0_1\design_1_control_unit_0_1.xci" Type="IP">
+        <Instance HierarchyPath="control_unit_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\design_1_Debouncing_Button_VH_1_3\design_1_Debouncing_Button_VH_1_3.xci" Type="IP">
+        <Instance HierarchyPath="Debouncing_Button_VH_1"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\design_1_Debouncing_Button_VH_2_0\design_1_Debouncing_Button_VH_2_0.xci" Type="IP">
+        <Instance HierarchyPath="Debouncing_Button_VH_2"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\design_1_Debouncing_Button_VH_3_0\design_1_Debouncing_Button_VH_3_0.xci" Type="IP">
+        <Instance HierarchyPath="Debouncing_Button_VH_3"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\design_1_prog_mem_0_0\design_1_prog_mem_0_0.xci" Type="IP">
+        <Instance HierarchyPath="prog_mem_0"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>

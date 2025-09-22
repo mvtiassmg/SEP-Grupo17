@@ -44,7 +44,6 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 set list_projs [get_projects -quiet]
 if { $list_projs eq "" } {
    create_project project_1 myproj -part xc7z010clg400-1
-   set_property BOARD_PART digilentinc.com:zybo-z7-10:part0:1.1 [current_project]
 }
 
 
@@ -159,6 +158,9 @@ proc create_root_design { parentCell } {
 
   # Create ports
   set btn [ create_bd_port -dir I btn ]
+  set btn1 [ create_bd_port -dir I btn1 ]
+  set btn2 [ create_bd_port -dir I btn2 ]
+  set btn3 [ create_bd_port -dir I btn3 ]
   set clk [ create_bd_port -dir I -type clk clk ]
   set leds [ create_bd_port -dir O -from 3 -to 0 leds ]
   set sw [ create_bd_port -dir I -from 3 -to 0 sw ]
@@ -168,6 +170,15 @@ proc create_root_design { parentCell } {
 
   # Create instance: Debouncing_Button_VH_0, and set properties
   set Debouncing_Button_VH_0 [ create_bd_cell -type ip -vlnv xilinx.com:user:Debouncing_Button_VHDL:1.0 Debouncing_Button_VH_0 ]
+
+  # Create instance: Debouncing_Button_VH_1, and set properties
+  set Debouncing_Button_VH_1 [ create_bd_cell -type ip -vlnv xilinx.com:user:Debouncing_Button_VHDL:1.0 Debouncing_Button_VH_1 ]
+
+  # Create instance: Debouncing_Button_VH_2, and set properties
+  set Debouncing_Button_VH_2 [ create_bd_cell -type ip -vlnv xilinx.com:user:Debouncing_Button_VHDL:1.0 Debouncing_Button_VH_2 ]
+
+  # Create instance: Debouncing_Button_VH_3, and set properties
+  set Debouncing_Button_VH_3 [ create_bd_cell -type ip -vlnv xilinx.com:user:Debouncing_Button_VHDL:1.0 Debouncing_Button_VH_3 ]
 
   # Create instance: RAM2_0, and set properties
   set RAM2_0 [ create_bd_cell -type ip -vlnv xilinx.com:user:RAM2:1.0 RAM2_0 ]
@@ -188,12 +199,18 @@ proc create_root_design { parentCell } {
   connect_bd_net -net ALU_0_finish [get_bd_pins ALU_0/finish] [get_bd_pins control_unit_0/alu_flag]
   connect_bd_net -net ALU_0_y [get_bd_ports leds] [get_bd_pins ALU_0/y]
   connect_bd_net -net Debouncing_Button_VH_0_debounced_button [get_bd_pins Debouncing_Button_VH_0/debounced_button] [get_bd_pins SM_0/nxt]
+  connect_bd_net -net Debouncing_Button_VH_1_debounced_button [get_bd_pins Debouncing_Button_VH_1/debounced_button] [get_bd_pins control_unit_0/btn_1]
+  connect_bd_net -net Debouncing_Button_VH_2_debounced_button [get_bd_pins Debouncing_Button_VH_2/debounced_button] [get_bd_pins control_unit_0/btn_2]
+  connect_bd_net -net Debouncing_Button_VH_3_debounced_button [get_bd_pins Debouncing_Button_VH_3/debounced_button] [get_bd_pins control_unit_0/btn_3]
   connect_bd_net -net RAM2_0_data_out [get_bd_pins ALU_0/a] [get_bd_pins RAM2_0/data_out]
   connect_bd_net -net SM_0_addr [get_bd_pins RAM2_0/address] [get_bd_pins SM_0/addr]
   connect_bd_net -net SM_0_b [get_bd_pins ALU_0/b] [get_bd_pins SM_0/b]
   connect_bd_net -net SM_0_enable [get_bd_pins ALU_0/enable] [get_bd_pins SM_0/enable]
+  connect_bd_net -net btn1_1 [get_bd_ports btn1] [get_bd_pins Debouncing_Button_VH_1/button]
+  connect_bd_net -net btn2_1 [get_bd_ports btn2] [get_bd_pins Debouncing_Button_VH_2/button]
+  connect_bd_net -net btn3_1 [get_bd_ports btn3] [get_bd_pins Debouncing_Button_VH_3/button]
   connect_bd_net -net btn_1 [get_bd_ports btn] [get_bd_pins Debouncing_Button_VH_0/button]
-  connect_bd_net -net clk_0_1 [get_bd_ports clk] [get_bd_pins ALU_0/clk] [get_bd_pins Debouncing_Button_VH_0/clk] [get_bd_pins SM_0/clk] [get_bd_pins control_unit_0/clk]
+  connect_bd_net -net clk_0_1 [get_bd_ports clk] [get_bd_pins ALU_0/clk] [get_bd_pins Debouncing_Button_VH_0/clk] [get_bd_pins Debouncing_Button_VH_1/clk] [get_bd_pins Debouncing_Button_VH_2/clk] [get_bd_pins Debouncing_Button_VH_3/clk] [get_bd_pins SM_0/clk] [get_bd_pins control_unit_0/clk]
   connect_bd_net -net control_unit_0_pc [get_bd_pins control_unit_0/pc] [get_bd_pins prog_mem_0/PC]
   connect_bd_net -net instr_mem_0_data_out [get_bd_pins ALU_0/instr] [get_bd_pins instr_mem_0/data_out]
   connect_bd_net -net prog_mem_0_address [get_bd_pins instr_mem_0/address] [get_bd_pins prog_mem_0/address]
