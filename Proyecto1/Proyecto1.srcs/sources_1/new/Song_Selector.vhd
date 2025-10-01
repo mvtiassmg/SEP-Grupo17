@@ -5,13 +5,13 @@ use IEEE.NUMERIC_STD.ALL;
 entity Song_Selector is
     Port (
         song_sel : in  std_logic_vector(1 downto 0); 
-        addr     : in  integer;
+        add     : in  std_logic_vector(1 downto 0) ;
         dout     : out std_logic_vector(3 downto 0)
     );
 end Song_Selector;
 
 architecture Behavioral of Song_Selector is
-
+    signal addr: integer := to_integer(unsigned(add)); 
     subtype note_t is std_logic_vector(3 downto 0);
     type song_array is array (0 to 31) of note_t;
 

@@ -1,5 +1,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 entity ClockDivider is
     generic (
@@ -7,7 +8,7 @@ entity ClockDivider is
     );
     Port (
         clk_in   : in  std_logic;
-        FREQ_OUT : in  integer; 
+        fr_out : in  std_logic_vector(1 downto 0); 
         clk_out  : out std_logic
     );
 end ClockDivider;
@@ -15,6 +16,7 @@ end ClockDivider;
 architecture Behavioral of ClockDivider is
     signal counter : integer range 0 to FREQ_IN := 0;  -- rango amplio
     signal clk_reg : std_logic := '0';
+    signal FREQ_OUT: integer := to_integer(UNSIGNED(fr_out)); 
 begin
     clk_out <= clk_reg;
 

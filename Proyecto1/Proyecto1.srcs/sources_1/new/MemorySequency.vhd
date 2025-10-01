@@ -16,7 +16,9 @@ architecture Behavioral of MemorySequency is
     signal counter     : integer range 0 to 31 := 0;
     signal freq_reg    : integer := 1;
     signal counter_clk : integer := 0;
+   
 begin
+
     process(clk_game, reset)
     begin
         if reset = '1' then
