@@ -7,8 +7,8 @@ entity MemorySequency is
         clk_game  : in  std_logic;                    -- Reloj dividido
         reset     : in  std_logic;
         playing   : in  std_logic;
-        addr      : out integer range 0 to 31;
-        freq_game : out integer
+        addr      : out std_logic_vector(1 downto 0) ;
+        freq_game : out std_logic_vector(3 downto 0) 
     );
 end MemorySequency;
 
@@ -25,9 +25,12 @@ begin
             counter     <= 0;
             freq_reg    <= 1;
             counter_clk <= 0;
+            
+            
+            
         elsif rising_edge(clk_game) then
             if playing = '1' then
-                if counter = 31 then
+                if counter = 3 then
                     counter <= 0;
                     if counter_clk = 10 then
                         if freq_reg < 10 then
@@ -40,6 +43,8 @@ begin
                 else
                     counter <= counter + 1;
                 end if;
+                
+                
             else
                 counter     <= 0;
                 freq_reg    <= 1;
@@ -48,7 +53,7 @@ begin
         end if;
     end process;
 
-    addr      <= counter;
-    freq_game <= freq_reg;
+    addr      <= std_logic_vector(to_unsigned(counter, 2));
+    freq_game <= std_logic_vector(to_unsigned(counter, 4));
 end Behavioral;
 

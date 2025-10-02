@@ -9,10 +9,7 @@ entity Game_SM is
         game_on   : in  std_logic;                     -- start/restart
         song_sel  : in  std_logic_vector(1 downto 0);  -- switches para elegir canción
         song_selected : out std_logic_vector(1 downto 0); -- canción fijada
-        playing   : out std_logic;                     -- '1' si estamos jugando
-        led6_r    : out std_logic;                     -- LED rojo
-        led6_g    : out std_logic;                     -- LED verde
-        led6_b    : out std_logic                      -- LED azul
+        playing   : out std_logic                     -- '1' si estamos jugando
     
     );
 end Game_SM;
@@ -92,36 +89,7 @@ begin
     song_selected <= sel_reg;
     playing       <= '1' when state = S_PLAYING else '0';
 
---     Mapear LEDs RGB a colores intuitivos según el estado
-    process(state)
-    begin
-        case state is
-            when S_RESET =>
-                led6_r <= '0';
-                led6_g <= '0';
-                led6_b <= '1'; -- Azul
-            when S_IDLE =>
-                led6_r <= '0';
-                led6_g <= '1';
-                led6_b <= '1'; -- Cyan
-            when S_LOAD_SONG =>
-                led6_r <= '1';
-                led6_g <= '1';
-                led6_b <= '0'; -- Amarillo
-            when S_PLAYING =>
-                led6_r <= '0';
-                led6_g <= '1';
-                led6_b <= '0'; -- Verde
-            when S_GAME_OVER =>
-                led6_r <= '1';
-                led6_g <= '0';
-                led6_b <= '0'; -- Rojo
-            when S_SCORE => 
-                led6_r <= '0';
-                led6_g <= '1'; -- Verde    
-                led6_b <= '0';       
-        end case;
-    end process;
+
 
 end Behavioral;
 

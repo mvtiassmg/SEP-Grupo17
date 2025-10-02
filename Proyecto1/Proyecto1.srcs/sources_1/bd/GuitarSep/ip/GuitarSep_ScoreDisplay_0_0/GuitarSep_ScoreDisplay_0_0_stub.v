@@ -1,0 +1,28 @@
+// Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+// --------------------------------------------------------------------------------
+// Tool Version: Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
+// Date        : Thu Oct  2 00:12:28 2025
+// Host        : Macbook running 64-bit major release  (build 9200)
+// Command     : write_verilog -force -mode synth_stub
+//               c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_ScoreDisplay_0_0/GuitarSep_ScoreDisplay_0_0_stub.v
+// Design      : GuitarSep_ScoreDisplay_0_0
+// Purpose     : Stub declaration of top-level module interface
+// Device      : xc7z010clg400-1
+// --------------------------------------------------------------------------------
+
+// This empty module with port declaration file causes synthesis tools to infer a black box for IP.
+// The synthesis directives are for Synopsys Synplify support to prevent IO buffer insertion.
+// Please paste the declaration into a Verilog source file or add the file as an additional source.
+(* x_core_info = "ScoreDisplay,Vivado 2020.1" *)
+module GuitarSep_ScoreDisplay_0_0(clk, reset, note_out, btn_push, led, led6_r, led6_g, 
+  led6_b)
+/* synthesis syn_black_box black_box_pad_pin="clk,reset,note_out[3:0],btn_push[3:0],led[3:0],led6_r,led6_g,led6_b" */;
+  input clk;
+  input reset;
+  input [3:0]note_out;
+  input [3:0]btn_push;
+  output [3:0]led;
+  output led6_r;
+  output led6_g;
+  output led6_b;
+endmodule

@@ -1,17 +1,44 @@
 {
    "ActiveEmotionalView":"Default View",
-   "Default View_ScaleFactor":"1.5",
-   "Default View_TopLeft":"-535,-139",
+   "Default View_ScaleFactor":"1.09936",
+   "Default View_TopLeft":"-146,-105",
    "ExpandedHierarchyInLayout":"",
    "guistr":"# # String gsaved with Nlview 7.0r6  2020-01-29 bk=1.5227 VDI=41 GEI=36 GUI=JA:9.0 non-TLS
 #  -string -flagsOSRD
-preplace inst Game_SM_0 -pg 1 -lvl 2 -x 160 -y 100 -defaultsOSRD
-preplace inst ClockDivider_0 -pg 1 -lvl 1 -x -190 -y 90 -defaultsOSRD
-preplace inst ScoreDisplay_0 -pg 1 -lvl 1 -x -190 -y 230 -defaultsOSRD
-preplace inst Song_Selector_0 -pg 1 -lvl 2 -x 160 -y -50 -defaultsOSRD
-preplace inst MemorySequency_0 -pg 1 -lvl 1 -x -190 -y -40 -defaultsOSRD
-levelinfo -pg 1 -330 -190 160 320
-pagesize -pg 1 -db -bbox -sgen -330 -120 320 320
+preplace port clk -pg 1 -lvl 0 -x 0 -y 70 -defaultsOSRD
+preplace port game_on -pg 1 -lvl 0 -x 0 -y 300 -defaultsOSRD
+preplace port reset -pg 1 -lvl 0 -x 0 -y 200 -defaultsOSRD
+preplace port led6_b -pg 1 -lvl 5 -x 1160 -y 250 -defaultsOSRD
+preplace port led6_g -pg 1 -lvl 5 -x 1160 -y 220 -defaultsOSRD
+preplace port led6_r -pg 1 -lvl 5 -x 1160 -y 190 -defaultsOSRD
+preplace portBus led -pg 1 -lvl 5 -x 1160 -y 160 -defaultsOSRD
+preplace portBus btn -pg 1 -lvl 0 -x 0 -y 380 -defaultsOSRD
+preplace portBus song_sel -pg 1 -lvl 0 -x 0 -y 330 -defaultsOSRD
+preplace inst Song_Selector_0 -pg 1 -lvl 3 -x 760 -y 80 -defaultsOSRD
+preplace inst MemorySequency_0 -pg 1 -lvl 2 -x 490 -y 100 -defaultsOSRD
+preplace inst ClockDivider_0 -pg 1 -lvl 1 -x 190 -y 80 -defaultsOSRD
+preplace inst Game_SM_0 -pg 1 -lvl 1 -x 190 -y 290 -defaultsOSRD
+preplace inst ScoreDisplay_0 -pg 1 -lvl 4 -x 1020 -y 210 -defaultsOSRD
+preplace inst ila_0 -pg 1 -lvl 4 -x 1020 -y 70 -defaultsOSRD
+preplace inst debouncer_0 -pg 1 -lvl 3 -x 760 -y 370 -defaultsOSRD
+preplace netloc clk_0_1 1 0 4 30 390 350J 370 630 210 890
+preplace netloc btn_0_1 1 0 3 NJ 380 NJ 380 NJ
+preplace netloc debouncer_0_btn_out 1 3 1 890 240n
+preplace netloc MemorySequency_0_freq_game 1 0 3 40 10 NJ 10 620
+preplace netloc ClockDivider_0_clk_out 1 1 1 N 80
+preplace netloc Game_SM_0_playing 1 1 1 350 120n
+preplace netloc MemorySequency_0_addr 1 2 1 N 90
+preplace netloc game_on_0_1 1 0 1 NJ 300
+preplace netloc song_sel_0_1 1 0 1 40J 320n
+preplace netloc reset_0_1 1 0 4 20 200 360 200 NJ 200 NJ
+preplace netloc ScoreDisplay_0_led 1 4 1 1140J 160n
+preplace netloc Song_Selector_0_dout 1 3 1 900 80n
+preplace netloc Game_SM_0_song_selected 1 1 2 340J 20 630
+preplace netloc ScoreDisplay_0_led6_b 1 4 1 1140J 240n
+preplace netloc ScoreDisplay_0_led6_g 1 4 1 NJ 220
+preplace netloc ScoreDisplay_0_led6_r 1 4 1 1140J 190n
+levelinfo -pg 1 0 190 490 760 1020 1160
+pagesize -pg 1 -db -bbox -sgen -150 0 1260 440
 "
 }
-
+0
