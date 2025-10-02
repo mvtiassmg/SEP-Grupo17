@@ -1,130 +1,96 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0x0",
+      "boundary_crc": "0x46A5A0DE6034D1C8",
       "device": "xc7z010clg400-1",
       "name": "GuitarSep",
       "rev_ctrl_bd_flag": "RevCtrlBdOff",
       "synth_flow_mode": "Hierarchical",
-      "tool_version": "2020.1"
+      "tool_version": "2020.1",
+      "validated": "true"
     },
     "design_tree": {
-      "Game_SM_0": "",
-      "ClockDivider_0": "",
-      "ScoreDisplay_0": "",
       "Song_Selector_0": "",
-      "MemorySequency_0": ""
+      "MemorySequency_0": "",
+      "ClockDivider_0": "",
+      "Game_SM_0": "",
+      "ScoreDisplay_0": "",
+      "ila_0": "",
+      "debouncer_0": ""
+    },
+    "ports": {
+      "clk": {
+        "type": "clk",
+        "direction": "I",
+        "parameters": {
+          "ASSOCIATED_RESET": {
+            "value": "reset"
+          },
+          "CLK_DOMAIN": {
+            "value": "GuitarSep_clk_0",
+            "value_src": "default"
+          },
+          "FREQ_HZ": {
+            "value": "100000000",
+            "value_src": "default"
+          },
+          "FREQ_TOLERANCE_HZ": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "PHASE": {
+            "value": "0.000",
+            "value_src": "default"
+          }
+        }
+      },
+      "btn": {
+        "direction": "I",
+        "left": "3",
+        "right": "0"
+      },
+      "game_on": {
+        "direction": "I"
+      },
+      "song_sel": {
+        "direction": "I",
+        "left": "1",
+        "right": "0"
+      },
+      "reset": {
+        "type": "rst",
+        "direction": "I",
+        "parameters": {
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "POLARITY": {
+            "value": "ACTIVE_LOW",
+            "value_src": "default"
+          }
+        }
+      },
+      "led": {
+        "direction": "O",
+        "left": "3",
+        "right": "0"
+      },
+      "led6_b": {
+        "direction": "O"
+      },
+      "led6_g": {
+        "direction": "O"
+      },
+      "led6_r": {
+        "direction": "O"
+      }
     },
     "components": {
-      "Game_SM_0": {
-        "vlnv": "xilinx.com:module_ref:Game_SM:1.0",
-        "xci_name": "GuitarSep_Game_SM_0_0",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "Game_SM",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "clk": {
-            "type": "clk",
-            "direction": "I"
-          },
-          "reset": {
-            "type": "rst",
-            "direction": "I"
-          },
-          "game_on": {
-            "direction": "I"
-          },
-          "song_sel": {
-            "direction": "I",
-            "left": "1",
-            "right": "0"
-          },
-          "song_selected": {
-            "direction": "O",
-            "left": "1",
-            "right": "0"
-          },
-          "playing": {
-            "direction": "O"
-          },
-          "led6_r": {
-            "direction": "O"
-          },
-          "led6_g": {
-            "direction": "O"
-          },
-          "led6_b": {
-            "direction": "O"
-          }
-        }
-      },
-      "ClockDivider_0": {
-        "vlnv": "xilinx.com:module_ref:ClockDivider:1.0",
-        "xci_name": "GuitarSep_ClockDivider_0_0",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "ClockDivider",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "clk_in": {
-            "direction": "I"
-          },
-          "fr_out": {
-            "direction": "I",
-            "left": "1",
-            "right": "0"
-          },
-          "clk_out": {
-            "direction": "O"
-          }
-        }
-      },
-      "ScoreDisplay_0": {
-        "vlnv": "xilinx.com:module_ref:ScoreDisplay:1.0",
-        "xci_name": "GuitarSep_ScoreDisplay_0_0",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "ScoreDisplay",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "clk": {
-            "type": "clk",
-            "direction": "I"
-          },
-          "reset": {
-            "type": "rst",
-            "direction": "I"
-          },
-          "note_out": {
-            "direction": "I",
-            "left": "3",
-            "right": "0"
-          },
-          "btn_push": {
-            "direction": "I",
-            "left": "3",
-            "right": "0"
-          },
-          "led_s": {
-            "direction": "O",
-            "left": "3",
-            "right": "0"
-          },
-          "led6_r": {
-            "direction": "O"
-          },
-          "led6_g": {
-            "direction": "O"
-          },
-          "led6_b": {
-            "direction": "O"
-          }
-        }
-      },
       "Song_Selector_0": {
         "vlnv": "xilinx.com:module_ref:Song_Selector:1.0",
         "xci_name": "GuitarSep_Song_Selector_0_0",
@@ -172,15 +138,303 @@
           },
           "addr": {
             "direction": "O",
-            "left": "31",
+            "left": "1",
             "right": "0"
           },
           "freq_game": {
             "direction": "O",
-            "left": "31",
+            "left": "3",
             "right": "0"
           }
         }
+      },
+      "ClockDivider_0": {
+        "vlnv": "xilinx.com:module_ref:ClockDivider:1.0",
+        "xci_name": "GuitarSep_ClockDivider_0_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "ClockDivider",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk_in": {
+            "direction": "I",
+            "parameters": {
+              "CLK_DOMAIN": {
+                "value": "GuitarSep_clk_0",
+                "value_src": "default_prop"
+              },
+              "FREQ_HZ": {
+                "value": "100000000",
+                "value_src": "default_prop"
+              },
+              "PHASE": {
+                "value": "0.000",
+                "value_src": "default_prop"
+              }
+            }
+          },
+          "fr_out": {
+            "direction": "I",
+            "left": "3",
+            "right": "0"
+          },
+          "clk_out": {
+            "direction": "O"
+          }
+        }
+      },
+      "Game_SM_0": {
+        "vlnv": "xilinx.com:module_ref:Game_SM:1.0",
+        "xci_name": "GuitarSep_Game_SM_0_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "Game_SM",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_RESET": {
+                "value": "reset",
+                "value_src": "constant"
+              },
+              "CLK_DOMAIN": {
+                "value": "GuitarSep_clk_0",
+                "value_src": "default_prop"
+              }
+            }
+          },
+          "reset": {
+            "type": "rst",
+            "direction": "I"
+          },
+          "game_on": {
+            "direction": "I"
+          },
+          "song_sel": {
+            "direction": "I",
+            "left": "1",
+            "right": "0"
+          },
+          "song_selected": {
+            "direction": "O",
+            "left": "1",
+            "right": "0"
+          },
+          "playing": {
+            "direction": "O"
+          }
+        }
+      },
+      "ScoreDisplay_0": {
+        "vlnv": "xilinx.com:module_ref:ScoreDisplay:1.0",
+        "xci_name": "GuitarSep_ScoreDisplay_0_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "ScoreDisplay",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_RESET": {
+                "value": "reset",
+                "value_src": "constant"
+              },
+              "CLK_DOMAIN": {
+                "value": "GuitarSep_clk_0",
+                "value_src": "default_prop"
+              }
+            }
+          },
+          "reset": {
+            "type": "rst",
+            "direction": "I"
+          },
+          "note_out": {
+            "direction": "I",
+            "left": "3",
+            "right": "0"
+          },
+          "btn_push": {
+            "direction": "I",
+            "left": "3",
+            "right": "0"
+          },
+          "led": {
+            "direction": "O",
+            "left": "3",
+            "right": "0"
+          },
+          "led6_r": {
+            "direction": "O"
+          },
+          "led6_g": {
+            "direction": "O"
+          },
+          "led6_b": {
+            "direction": "O"
+          }
+        }
+      },
+      "ila_0": {
+        "vlnv": "xilinx.com:ip:ila:6.2",
+        "xci_name": "GuitarSep_ila_0_0",
+        "parameters": {
+          "C_ENABLE_ILA_AXI_MON": {
+            "value": "false"
+          },
+          "C_MONITOR_TYPE": {
+            "value": "Native"
+          },
+          "C_NUM_OF_PROBES": {
+            "value": "1"
+          },
+          "C_PROBE0_WIDTH": {
+            "value": "4"
+          }
+        }
+      },
+      "debouncer_0": {
+        "vlnv": "xilinx.com:module_ref:debouncer:1.0",
+        "xci_name": "GuitarSep_debouncer_0_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "debouncer",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "CLK_DOMAIN": {
+                "value": "GuitarSep_clk_0",
+                "value_src": "default_prop"
+              }
+            }
+          },
+          "btn": {
+            "direction": "I",
+            "left": "3",
+            "right": "0"
+          },
+          "btn_out": {
+            "direction": "O",
+            "left": "3",
+            "right": "0"
+          }
+        }
+      }
+    },
+    "nets": {
+      "clk_0_1": {
+        "ports": [
+          "clk",
+          "ClockDivider_0/clk_in",
+          "Game_SM_0/clk",
+          "ScoreDisplay_0/clk",
+          "ila_0/clk",
+          "debouncer_0/clk"
+        ]
+      },
+      "btn_0_1": {
+        "ports": [
+          "btn",
+          "debouncer_0/btn"
+        ]
+      },
+      "debouncer_0_btn_out": {
+        "ports": [
+          "debouncer_0/btn_out",
+          "ScoreDisplay_0/btn_push"
+        ]
+      },
+      "MemorySequency_0_freq_game": {
+        "ports": [
+          "MemorySequency_0/freq_game",
+          "ClockDivider_0/fr_out"
+        ]
+      },
+      "ClockDivider_0_clk_out": {
+        "ports": [
+          "ClockDivider_0/clk_out",
+          "MemorySequency_0/clk_game"
+        ]
+      },
+      "Game_SM_0_playing": {
+        "ports": [
+          "Game_SM_0/playing",
+          "MemorySequency_0/playing"
+        ]
+      },
+      "MemorySequency_0_addr": {
+        "ports": [
+          "MemorySequency_0/addr",
+          "Song_Selector_0/add"
+        ]
+      },
+      "game_on_0_1": {
+        "ports": [
+          "game_on",
+          "Game_SM_0/game_on"
+        ]
+      },
+      "song_sel_0_1": {
+        "ports": [
+          "song_sel",
+          "Game_SM_0/song_sel"
+        ]
+      },
+      "reset_0_1": {
+        "ports": [
+          "reset",
+          "MemorySequency_0/reset",
+          "Game_SM_0/reset",
+          "ScoreDisplay_0/reset"
+        ]
+      },
+      "ScoreDisplay_0_led": {
+        "ports": [
+          "ScoreDisplay_0/led",
+          "led"
+        ]
+      },
+      "Song_Selector_0_dout": {
+        "ports": [
+          "Song_Selector_0/dout",
+          "ScoreDisplay_0/note_out",
+          "ila_0/probe0"
+        ]
+      },
+      "Game_SM_0_song_selected": {
+        "ports": [
+          "Game_SM_0/song_selected",
+          "Song_Selector_0/song_sel"
+        ]
+      },
+      "ScoreDisplay_0_led6_b": {
+        "ports": [
+          "ScoreDisplay_0/led6_b",
+          "led6_b"
+        ]
+      },
+      "ScoreDisplay_0_led6_g": {
+        "ports": [
+          "ScoreDisplay_0/led6_g",
+          "led6_g"
+        ]
+      },
+      "ScoreDisplay_0_led6_r": {
+        "ports": [
+          "ScoreDisplay_0/led6_r",
+          "led6_r"
+        ]
       }
     }
   }

@@ -24,7 +24,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1'
+HD_PWD='C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log
@@ -42,6 +42,6 @@ EAStep()
 
 # pre-commands:
 /bin/touch .init_design.begin.rst
-EAStep vivado -log GuitarSep_Top.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source GuitarSep_Top.tcl -notrace
+EAStep vivado -log GuitarSep_wrapper.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source GuitarSep_wrapper.tcl -notrace
 
 

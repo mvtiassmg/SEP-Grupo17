@@ -1,79 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7z010clg400-1" LaunchTime="1757332337">
-  <File Type="BITSTR-BMM" Name="GuitarSep_Top_bd.bmm"/>
-  <File Type="OPT-METHODOLOGY-DRC" Name="GuitarSep_Top_methodology_drc_opted.rpt"/>
-  <File Type="INIT-TIMING" Name="GuitarSep_Top_timing_summary_init.rpt"/>
-  <File Type="ROUTE-PWR" Name="GuitarSep_Top_power_routed.rpt"/>
-  <File Type="PA-TCL" Name="GuitarSep_Top.tcl"/>
-  <File Type="OPT-TIMING" Name="GuitarSep_Top_timing_summary_opted.rpt"/>
-  <File Type="OPT-DCP" Name="GuitarSep_Top_opt.dcp"/>
-  <File Type="ROUTE-PWR-SUM" Name="GuitarSep_Top_power_summary_routed.pb"/>
-  <File Type="REPORTS-TCL" Name="GuitarSep_Top_reports.tcl"/>
-  <File Type="OPT-DRC" Name="GuitarSep_Top_drc_opted.rpt"/>
-  <File Type="OPT-HWDEF" Name="GuitarSep_Top.hwdef"/>
-  <File Type="PWROPT-DCP" Name="GuitarSep_Top_pwropt.dcp"/>
-  <File Type="PWROPT-DRC" Name="GuitarSep_Top_drc_pwropted.rpt"/>
-  <File Type="PWROPT-TIMING" Name="GuitarSep_Top_timing_summary_pwropted.rpt"/>
-  <File Type="PLACE-DCP" Name="GuitarSep_Top_placed.dcp"/>
-  <File Type="PLACE-IO" Name="GuitarSep_Top_io_placed.rpt"/>
-  <File Type="PLACE-CLK" Name="GuitarSep_Top_clock_utilization_placed.rpt"/>
-  <File Type="PLACE-UTIL" Name="GuitarSep_Top_utilization_placed.rpt"/>
-  <File Type="PLACE-UTIL-PB" Name="GuitarSep_Top_utilization_placed.pb"/>
-  <File Type="PLACE-CTRL" Name="GuitarSep_Top_control_sets_placed.rpt"/>
-  <File Type="PLACE-SIMILARITY" Name="GuitarSep_Top_incremental_reuse_placed.rpt"/>
-  <File Type="PLACE-PRE-SIMILARITY" Name="GuitarSep_Top_incremental_reuse_pre_placed.rpt"/>
-  <File Type="PLACE-TIMING" Name="GuitarSep_Top_timing_summary_placed.rpt"/>
-  <File Type="POSTPLACE-PWROPT-DCP" Name="GuitarSep_Top_postplace_pwropt.dcp"/>
-  <File Type="BG-BIN" Name="GuitarSep_Top.bin"/>
-  <File Type="POSTPLACE-PWROPT-TIMING" Name="GuitarSep_Top_timing_summary_postplace_pwropted.rpt"/>
-  <File Type="PHYSOPT-DCP" Name="GuitarSep_Top_physopt.dcp"/>
-  <File Type="PHYSOPT-DRC" Name="GuitarSep_Top_drc_physopted.rpt"/>
-  <File Type="BITSTR-MSK" Name="GuitarSep_Top.msk"/>
-  <File Type="PHYSOPT-TIMING" Name="GuitarSep_Top_timing_summary_physopted.rpt"/>
-  <File Type="ROUTE-ERROR-DCP" Name="GuitarSep_Top_routed_error.dcp"/>
-  <File Type="ROUTE-DCP" Name="GuitarSep_Top_routed.dcp"/>
-  <File Type="ROUTE-BLACKBOX-DCP" Name="GuitarSep_Top_routed_bb.dcp"/>
-  <File Type="ROUTE-DRC" Name="GuitarSep_Top_drc_routed.rpt"/>
-  <File Type="ROUTE-DRC-PB" Name="GuitarSep_Top_drc_routed.pb"/>
-  <File Type="ROUTE-DRC-RPX" Name="GuitarSep_Top_drc_routed.rpx"/>
-  <File Type="BITSTR-MMI" Name="GuitarSep_Top.mmi"/>
-  <File Type="ROUTE-METHODOLOGY-DRC" Name="GuitarSep_Top_methodology_drc_routed.rpt"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="GuitarSep_Top_methodology_drc_routed.rpx"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="GuitarSep_Top_methodology_drc_routed.pb"/>
-  <File Type="ROUTE-PWR-RPX" Name="GuitarSep_Top_power_routed.rpx"/>
-  <File Type="ROUTE-STATUS" Name="GuitarSep_Top_route_status.rpt"/>
-  <File Type="ROUTE-STATUS-PB" Name="GuitarSep_Top_route_status.pb"/>
-  <File Type="ROUTE-TIMINGSUMMARY" Name="GuitarSep_Top_timing_summary_routed.rpt"/>
-  <File Type="ROUTE-TIMING-PB" Name="GuitarSep_Top_timing_summary_routed.pb"/>
-  <File Type="ROUTE-TIMING-RPX" Name="GuitarSep_Top_timing_summary_routed.rpx"/>
-  <File Type="ROUTE-SIMILARITY" Name="GuitarSep_Top_incremental_reuse_routed.rpt"/>
-  <File Type="ROUTE-CLK" Name="GuitarSep_Top_clock_utilization_routed.rpt"/>
-  <File Type="ROUTE-BUS-SKEW" Name="GuitarSep_Top_bus_skew_routed.rpt"/>
-  <File Type="ROUTE-BUS-SKEW-PB" Name="GuitarSep_Top_bus_skew_routed.pb"/>
-  <File Type="ROUTE-BUS-SKEW-RPX" Name="GuitarSep_Top_bus_skew_routed.rpx"/>
-  <File Type="POSTROUTE-PHYSOPT-DCP" Name="GuitarSep_Top_postroute_physopt.dcp"/>
-  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="GuitarSep_Top_postroute_physopt_bb.dcp"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="GuitarSep_Top_timing_summary_postroute_physopted.rpt"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="GuitarSep_Top_timing_summary_postroute_physopted.pb"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="GuitarSep_Top_timing_summary_postroute_physopted.rpx"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW" Name="GuitarSep_Top_bus_skew_postroute_physopted.rpt"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-PB" Name="GuitarSep_Top_bus_skew_postroute_physopted.pb"/>
-  <File Type="BG-BIT" Name="GuitarSep_Top.bit"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-RPX" Name="GuitarSep_Top_bus_skew_postroute_physopted.rpx"/>
-  <File Type="BITSTR-RBT" Name="GuitarSep_Top.rbt"/>
-  <File Type="BITSTR-NKY" Name="GuitarSep_Top.nky"/>
-  <File Type="PDI-FILE" Name="GuitarSep_Top.pdi"/>
-  <File Type="RCFI_FILE" Name="GuitarSep_Top.rcfi"/>
-  <File Type="CFI_FILE" Name="GuitarSep_Top.cfi"/>
-  <File Type="RNPI_FILE" Name="GuitarSep_Top.rnpi"/>
-  <File Type="NPI_FILE" Name="GuitarSep_Top.npi"/>
-  <File Type="RBD_FILE" Name="GuitarSep_Top.rbd"/>
+<GenRun Id="impl_1" LaunchPart="xc7z010clg400-1" LaunchTime="1759375077">
+  <File Type="BITSTR-BMM" Name="GuitarSep_wrapper_bd.bmm"/>
+  <File Type="OPT-METHODOLOGY-DRC" Name="GuitarSep_wrapper_methodology_drc_opted.rpt"/>
+  <File Type="INIT-TIMING" Name="GuitarSep_wrapper_timing_summary_init.rpt"/>
+  <File Type="ROUTE-PWR" Name="GuitarSep_wrapper_power_routed.rpt"/>
+  <File Type="PA-TCL" Name="GuitarSep_wrapper.tcl"/>
+  <File Type="OPT-TIMING" Name="GuitarSep_wrapper_timing_summary_opted.rpt"/>
+  <File Type="OPT-DCP" Name="GuitarSep_wrapper_opt.dcp"/>
+  <File Type="ROUTE-PWR-SUM" Name="GuitarSep_wrapper_power_summary_routed.pb"/>
+  <File Type="REPORTS-TCL" Name="GuitarSep_wrapper_reports.tcl"/>
+  <File Type="OPT-DRC" Name="GuitarSep_wrapper_drc_opted.rpt"/>
+  <File Type="OPT-HWDEF" Name="GuitarSep_wrapper.hwdef"/>
+  <File Type="PWROPT-DCP" Name="GuitarSep_wrapper_pwropt.dcp"/>
+  <File Type="PWROPT-DRC" Name="GuitarSep_wrapper_drc_pwropted.rpt"/>
+  <File Type="PWROPT-TIMING" Name="GuitarSep_wrapper_timing_summary_pwropted.rpt"/>
+  <File Type="PLACE-DCP" Name="GuitarSep_wrapper_placed.dcp"/>
+  <File Type="PLACE-IO" Name="GuitarSep_wrapper_io_placed.rpt"/>
+  <File Type="PLACE-CLK" Name="GuitarSep_wrapper_clock_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL" Name="GuitarSep_wrapper_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL-PB" Name="GuitarSep_wrapper_utilization_placed.pb"/>
+  <File Type="PLACE-CTRL" Name="GuitarSep_wrapper_control_sets_placed.rpt"/>
+  <File Type="PLACE-SIMILARITY" Name="GuitarSep_wrapper_incremental_reuse_placed.rpt"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="GuitarSep_wrapper_incremental_reuse_pre_placed.rpt"/>
+  <File Type="PLACE-TIMING" Name="GuitarSep_wrapper_timing_summary_placed.rpt"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="GuitarSep_wrapper_postplace_pwropt.dcp"/>
+  <File Type="BG-BIN" Name="GuitarSep_wrapper.bin"/>
+  <File Type="POSTPLACE-PWROPT-TIMING" Name="GuitarSep_wrapper_timing_summary_postplace_pwropted.rpt"/>
+  <File Type="PHYSOPT-DCP" Name="GuitarSep_wrapper_physopt.dcp"/>
+  <File Type="PHYSOPT-DRC" Name="GuitarSep_wrapper_drc_physopted.rpt"/>
+  <File Type="BITSTR-MSK" Name="GuitarSep_wrapper.msk"/>
+  <File Type="PHYSOPT-TIMING" Name="GuitarSep_wrapper_timing_summary_physopted.rpt"/>
+  <File Type="ROUTE-ERROR-DCP" Name="GuitarSep_wrapper_routed_error.dcp"/>
+  <File Type="ROUTE-DCP" Name="GuitarSep_wrapper_routed.dcp"/>
+  <File Type="ROUTE-BLACKBOX-DCP" Name="GuitarSep_wrapper_routed_bb.dcp"/>
+  <File Type="ROUTE-DRC" Name="GuitarSep_wrapper_drc_routed.rpt"/>
+  <File Type="ROUTE-DRC-PB" Name="GuitarSep_wrapper_drc_routed.pb"/>
+  <File Type="ROUTE-DRC-RPX" Name="GuitarSep_wrapper_drc_routed.rpx"/>
+  <File Type="BITSTR-MMI" Name="GuitarSep_wrapper.mmi"/>
+  <File Type="ROUTE-METHODOLOGY-DRC" Name="GuitarSep_wrapper_methodology_drc_routed.rpt"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="GuitarSep_wrapper_methodology_drc_routed.rpx"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="GuitarSep_wrapper_methodology_drc_routed.pb"/>
+  <File Type="ROUTE-PWR-RPX" Name="GuitarSep_wrapper_power_routed.rpx"/>
+  <File Type="ROUTE-STATUS" Name="GuitarSep_wrapper_route_status.rpt"/>
+  <File Type="ROUTE-STATUS-PB" Name="GuitarSep_wrapper_route_status.pb"/>
+  <File Type="ROUTE-TIMINGSUMMARY" Name="GuitarSep_wrapper_timing_summary_routed.rpt"/>
+  <File Type="ROUTE-TIMING-PB" Name="GuitarSep_wrapper_timing_summary_routed.pb"/>
+  <File Type="ROUTE-TIMING-RPX" Name="GuitarSep_wrapper_timing_summary_routed.rpx"/>
+  <File Type="ROUTE-SIMILARITY" Name="GuitarSep_wrapper_incremental_reuse_routed.rpt"/>
+  <File Type="ROUTE-CLK" Name="GuitarSep_wrapper_clock_utilization_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW" Name="GuitarSep_wrapper_bus_skew_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW-PB" Name="GuitarSep_wrapper_bus_skew_routed.pb"/>
+  <File Type="ROUTE-BUS-SKEW-RPX" Name="GuitarSep_wrapper_bus_skew_routed.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="GuitarSep_wrapper_postroute_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="GuitarSep_wrapper_postroute_physopt_bb.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="GuitarSep_wrapper_timing_summary_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="GuitarSep_wrapper_timing_summary_postroute_physopted.pb"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="GuitarSep_wrapper_timing_summary_postroute_physopted.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW" Name="GuitarSep_wrapper_bus_skew_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-PB" Name="GuitarSep_wrapper_bus_skew_postroute_physopted.pb"/>
+  <File Type="BG-BIT" Name="GuitarSep_wrapper.bit"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-RPX" Name="GuitarSep_wrapper_bus_skew_postroute_physopted.rpx"/>
+  <File Type="BITSTR-RBT" Name="GuitarSep_wrapper.rbt"/>
+  <File Type="BITSTR-NKY" Name="GuitarSep_wrapper.nky"/>
+  <File Type="PDI-FILE" Name="GuitarSep_wrapper.pdi"/>
+  <File Type="RCFI_FILE" Name="GuitarSep_wrapper.rcfi"/>
+  <File Type="CFI_FILE" Name="GuitarSep_wrapper.cfi"/>
+  <File Type="RNPI_FILE" Name="GuitarSep_wrapper.rnpi"/>
+  <File Type="NPI_FILE" Name="GuitarSep_wrapper.npi"/>
+  <File Type="RBD_FILE" Name="GuitarSep_wrapper.rbd"/>
   <File Type="BITSTR-LTX" Name="debug_nets.ltx"/>
-  <File Type="BITSTR-LTX" Name="GuitarSep_Top.ltx"/>
-  <File Type="BITSTR-SYSDEF" Name="GuitarSep_Top.sysdef"/>
-  <File Type="BG-BGN" Name="GuitarSep_Top.bgn"/>
-  <File Type="BG-DRC" Name="GuitarSep_Top.drc"/>
-  <File Type="RDI-RDI" Name="GuitarSep_Top.vdi"/>
+  <File Type="BITSTR-LTX" Name="GuitarSep_wrapper.ltx"/>
+  <File Type="BITSTR-SYSDEF" Name="GuitarSep_wrapper.sysdef"/>
+  <File Type="BG-BGN" Name="GuitarSep_wrapper.bgn"/>
+  <File Type="BG-DRC" Name="GuitarSep_wrapper.drc"/>
+  <File Type="RDI-RDI" Name="GuitarSep_wrapper.vdi"/>
   <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
@@ -89,13 +89,13 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/new/MemorySequency.vhd">
+    <File Path="$PSRCDIR/sources_1/new/Song_Selector.vhd">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/new/Song_Selector.vhd">
+    <File Path="$PSRCDIR/sources_1/new/MemorySequency.vhd">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -107,13 +107,46 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PSRCDIR/sources_1/new/leds_game.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/miss_counter.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PSRCDIR/sources_1/new/ScoreDisplay.vhd">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/new/GuitarSep_Top.vhd">
+    <File Path="$PSRCDIR/sources_1/imports/new/BTNS_debouncer.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../Ayudantias/Ay_3/IPCores/BTNS_debouncer/BTNS_debouncer.srcs/sources_1/new/BTNS_debouncer.vhd"/>
+        <Attr Name="ImportTime" Val="1693189240"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/debouncer.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/bd/GuitarSep/GuitarSep.bd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/bd/GuitarSep/hdl/GuitarSep_wrapper.vhd">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -121,7 +154,7 @@
     </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="GuitarSep_Top"/>
+      <Option Name="TopModule" Val="GuitarSep_wrapper"/>
     </Config>
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
@@ -156,4 +189,11 @@
     <Step Id="post_route_phys_opt_design"/>
     <Step Id="write_bitstream"/>
   </Strategy>
+  <BlockFileSet Type="BlockSrcs" Name="GuitarSep_ScoreDisplay_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="GuitarSep_ila_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="GuitarSep_debouncer_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="GuitarSep_Song_Selector_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="GuitarSep_ClockDivider_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="GuitarSep_Game_SM_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="GuitarSep_MemorySequency_0_0"/>
 </GenRun>

@@ -8,7 +8,7 @@ entity ClockDivider is
     );
     Port (
         clk_in   : in  std_logic;
-        fr_out : in  std_logic_vector(1 downto 0); 
+        fr_out : in  std_logic_vector(3 downto 0); 
         clk_out  : out std_logic
     );
 end ClockDivider;

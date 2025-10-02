@@ -9,7 +9,9 @@ entity ScoreCounter is
         note_out : in  std_logic_vector(3 downto 0);
         btn_push : in  std_logic_vector(3 downto 0);
         score    : out integer range 0 to 31;
-        errors   : out integer range 0 to 31
+        errors   : out integer range 0 to 31;
+        nail     : out std_logic; 
+        miss     : out std_logic
     );
 end ScoreCounter;
 
@@ -61,7 +63,8 @@ architecture Behavioral of ScoreCounter is
                 error_counted <= '1';
                 matched <= '0'; -- Reinicia flag de acierto al fallar
             end if;
-        end if;
+        end if;  
+        
     end procedure;
 
     -- Registros internos
@@ -94,5 +97,7 @@ begin
     -- Salidas
     score  <= score_reg;
     errors <= error_reg;
+    nail <= matched;
+    
 
 end Behavioral;

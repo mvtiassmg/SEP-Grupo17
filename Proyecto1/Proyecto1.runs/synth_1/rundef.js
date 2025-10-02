@@ -23,7 +23,7 @@ eval( EAInclude(ISEJScriptLib) );
 
 
 ISEStep( "vivado",
-         "-log GuitarSep_Top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source GuitarSep_Top.tcl" );
+         "-log GuitarSep_wrapper.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source GuitarSep_wrapper.tcl" );
 
 
 

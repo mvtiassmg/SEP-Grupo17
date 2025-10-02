@@ -8,7 +8,7 @@ entity ScoreDisplay is
     reset    : in  std_logic;
     note_out : in  std_logic_vector(3 downto 0);
     btn_push : in  std_logic_vector(3 downto 0);
-    led_s    : out std_logic_vector(3 downto 0);
+    led      : out std_logic_vector(3 downto 0);
     led6_r   : out std_logic;
     led6_g   : out std_logic;
     led6_b   : out std_logic
@@ -19,53 +19,86 @@ architecture Behavioral of ScoreDisplay is
   signal score   : integer range 0 to 15 := 0;
   signal errors  : integer range 0 to 3 := 0;
   signal stopped : std_logic := '0';  -- '1' cuando se alcanzan 3 errores
-begin
+  signal nail     : std_logic := '0'; 
+  signal miss     : std_logic := '0'; 
+   
+  component ScoreCounter -- Contador de puntaje
+    port(
+        clk      : in  std_logic;
+        reset    : in  std_logic;
+        note_out : in  std_logic_vector(3 downto 0);
+        btn_push : in  std_logic_vector(3 downto 0);
+        score    : out integer range 0 to 31;
+        errors   : out integer range 0 to 31;
+        nail     : out std_logic; 
+        miss     : out std_logic       
+        );
+   end component;
+   
+   component miss_counter is -- Contador de errores
+    generic (max_miss : natural := 3
+    ); 
+    Port( 
+           reset : in STD_LOGIC;
+           clk : in STD_LOGIC;
+           error_counter: in integer; 
+           stopped : out STD_LOGIC);
+    end component;
+    
+    component leds_game is 
+    port(
+        stop: in std_logic;  
+        miss : in std_logic;
+        nail : in std_logic;
+        score: in integer range 0 to 15; 
+        led6_r: out std_logic;  -- juego detenido: rojo
+        led6_g: out std_logic;
+        led6_b: out std_logic;
+        led_s: out std_logic_vector(3 downto 0));
+    end component; 
+    begin
 
   ----------------------------------------------------------------------
   -- Instancia del contador de puntaje
   ----------------------------------------------------------------------
-  score_counter: entity work.ScoreCounter
+  score_counter: ScoreCounter
     port map (
       clk       => clk,
       reset     => reset,
       note_out  => note_out,
       btn_push  => btn_push,
       score     => score,
-      errors    => errors
+      errors    => errors,
+      nail      => nail,
+      miss      => miss
     );
 
   ----------------------------------------------------------------------
-  -- Contador de errores -> detener al llegar a 3
+  -- Instancia contador de errores -> detener al llegar a 3
   ----------------------------------------------------------------------
-  process(clk, reset)
-  begin
-    if reset = '1' then
-      stopped <= '0';
-    elsif rising_edge(clk) then
-      if errors >= 3 then
-        stopped <= '1';
-      end if;
-    end if;
-  end process;
-
+    missed_counter: miss_counter
+        generic map(
+            max_miss => 3
+        )
+        port map(
+            reset => reset,
+            clk => clk,
+            error_counter => errors, 
+            stopped => stopped
+        );
   ----------------------------------------------------------------------
   -- Salidas de LEDs y puntaje
   ----------------------------------------------------------------------
-  process(score, errors, stopped)
-  begin
-    -- LEDs de estado
-    if stopped = '1' then
-      led6_r <= '1';  -- juego detenido: rojo
-      led6_g <= '0';
-      led6_b <= '0';
-    else
-      led6_r <= '0';
-      led6_g <= '1';  -- juego activo: verde
-      led6_b <= '0';
-    end if;
-
-    -- Muestreo del puntaje en binario (4 bits, máximo 15)
-    led_s <= std_logic_vector(to_unsigned(score, 4));
-  end process;
-
+    leds: leds_game
+        port map(
+        stop => stopped,  
+        miss => miss, 
+        nail => nail,
+        score => score,  
+        led6_r => led6_r,
+        led6_g => led6_g,
+        led6_b => led6_b,
+        led_s =>  led);
+        
+        
 end Behavioral;
