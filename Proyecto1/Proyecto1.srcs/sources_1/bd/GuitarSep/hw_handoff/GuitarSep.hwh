@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu Oct  2 20:55:19 2025" VIVADOVERSION="2020.1">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Fri Oct  3 08:11:05 2025" VIVADOVERSION="2020.1">
 
   <SYSTEMINFO ARCH="zynq" BOARD="digilentinc.com:zybo-z7-10:part0:1.2" DEVICE="7z010" NAME="GuitarSep" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
   <EXTERNALPORTS>
     <PORT CLKFREQUENCY="100000000" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="External_Ports_clk">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="ClockDivider_0" PORT="clk_in"/>
-        <CONNECTION INSTANCE="Game_SM_0" PORT="clk"/>
-        <CONNECTION INSTANCE="ScoreDisplay_0" PORT="clk"/>
         <CONNECTION INSTANCE="ila_0" PORT="clk"/>
+        <CONNECTION INSTANCE="ClockDivider_0" PORT="clk_in"/>
         <CONNECTION INSTANCE="debouncer_0" PORT="clk"/>
+        <CONNECTION INSTANCE="LedDisplay_0" PORT="clk"/>
+        <CONNECTION INSTANCE="Game_SM_0" PORT="clk"/>
       </CONNECTIONS>
     </PORT>
     <PORT DIR="I" LEFT="3" NAME="btn" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_btn">
@@ -30,29 +30,29 @@
     </PORT>
     <PORT DIR="I" NAME="reset" POLARITY="ACTIVE_LOW" SIGIS="rst" SIGNAME="External_Ports_reset">
       <CONNECTIONS>
+        <CONNECTION INSTANCE="LedDisplay_0" PORT="reset"/>
         <CONNECTION INSTANCE="Game_SM_0" PORT="reset"/>
-        <CONNECTION INSTANCE="ScoreDisplay_0" PORT="reset"/>
         <CONNECTION INSTANCE="MemorySequency_0" PORT="reset"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="O" LEFT="3" NAME="led" RIGHT="0" SIGIS="undef" SIGNAME="ScoreDisplay_0_led">
+    <PORT DIR="O" LEFT="3" NAME="led" RIGHT="0" SIGIS="undef" SIGNAME="LedDisplay_0_led">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="ScoreDisplay_0" PORT="led"/>
+        <CONNECTION INSTANCE="LedDisplay_0" PORT="led"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="O" NAME="led6_b" SIGIS="undef" SIGNAME="ScoreDisplay_0_led6_b">
+    <PORT DIR="O" NAME="led6_b" SIGIS="undef" SIGNAME="LedDisplay_0_led6_b">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="ScoreDisplay_0" PORT="led6_b"/>
+        <CONNECTION INSTANCE="LedDisplay_0" PORT="led6_b"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="O" NAME="led6_g" SIGIS="undef" SIGNAME="ScoreDisplay_0_led6_g">
+    <PORT DIR="O" NAME="led6_g" SIGIS="undef" SIGNAME="LedDisplay_0_led6_g">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="ScoreDisplay_0" PORT="led6_g"/>
+        <CONNECTION INSTANCE="LedDisplay_0" PORT="led6_g"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="O" NAME="led6_r" SIGIS="undef" SIGNAME="ScoreDisplay_0_led6_r">
+    <PORT DIR="O" NAME="led6_r" SIGIS="undef" SIGNAME="LedDisplay_0_led6_r">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="ScoreDisplay_0" PORT="led6_r"/>
+        <CONNECTION INSTANCE="LedDisplay_0" PORT="led6_r"/>
       </CONNECTIONS>
     </PORT>
   </EXTERNALPORTS>
@@ -120,7 +120,63 @@
         </PORT>
         <PORT DIR="O" NAME="playing" SIGIS="undef" SIGNAME="Game_SM_0_playing">
           <CONNECTIONS>
+            <CONNECTION INSTANCE="LedDisplay_0" PORT="playing"/>
             <CONNECTION INSTANCE="MemorySequency_0" PORT="playing"/>
+          </CONNECTIONS>
+        </PORT>
+      </PORTS>
+      <BUSINTERFACES/>
+    </MODULE>
+    <MODULE COREREVISION="1" FULLNAME="/LedDisplay_0" HWVERSION="1.0" INSTANCE="LedDisplay_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="LedDisplay" VLNV="xilinx.com:module_ref:LedDisplay:1.0">
+      <DOCUMENTS/>
+      <PARAMETERS>
+        <PARAMETER NAME="Component_Name" VALUE="GuitarSep_LedDisplay_0_0"/>
+        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
+      </PARAMETERS>
+      <PORTS>
+        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="External_Ports_clk">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="clk"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="reset" POLARITY="ACTIVE_LOW" SIGIS="rst" SIGNAME="External_Ports_reset">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="reset"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="playing" SIGIS="undef" SIGNAME="Game_SM_0_playing">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Game_SM_0" PORT="playing"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="3" NAME="note_out" RIGHT="0" SIGIS="undef" SIGNAME="Song_Selector_0_dout">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="Song_Selector_0" PORT="dout"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="3" NAME="btn_push" RIGHT="0" SIGIS="undef" SIGNAME="debouncer_0_btn_out">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="debouncer_0" PORT="btn_out"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="3" NAME="led" RIGHT="0" SIGIS="undef" SIGNAME="LedDisplay_0_led">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="led"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="led6_r" SIGIS="undef" SIGNAME="LedDisplay_0_led6_r">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="led6_r"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="led6_g" SIGIS="undef" SIGNAME="LedDisplay_0_led6_g">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="led6_g"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="led6_b" SIGIS="undef" SIGNAME="LedDisplay_0_led6_b">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="External_Ports" PORT="led6_b"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
@@ -130,7 +186,7 @@
       <DOCUMENTS/>
       <PARAMETERS>
         <PARAMETER NAME="max_freq" VALUE="10"/>
-        <PARAMETER NAME="Component_Name" VALUE="GuitarSep_MemorySequency_0_0"/>
+        <PARAMETER NAME="Component_Name" VALUE="GuitarSep_MemorySequency_0_1"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
@@ -149,7 +205,7 @@
             <CONNECTION INSTANCE="Game_SM_0" PORT="playing"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="1" NAME="addr" RIGHT="0" SIGIS="undef" SIGNAME="MemorySequency_0_addr">
+        <PORT DIR="O" LEFT="4" NAME="addr" RIGHT="0" SIGIS="undef" SIGNAME="MemorySequency_0_addr">
           <CONNECTIONS>
             <CONNECTION INSTANCE="Song_Selector_0" PORT="add"/>
           </CONNECTIONS>
@@ -162,60 +218,10 @@
       </PORTS>
       <BUSINTERFACES/>
     </MODULE>
-    <MODULE COREREVISION="1" FULLNAME="/ScoreDisplay_0" HWVERSION="1.0" INSTANCE="ScoreDisplay_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="ScoreDisplay" VLNV="xilinx.com:module_ref:ScoreDisplay:1.0">
-      <DOCUMENTS/>
-      <PARAMETERS>
-        <PARAMETER NAME="Component_Name" VALUE="GuitarSep_ScoreDisplay_0_0"/>
-        <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
-      </PARAMETERS>
-      <PORTS>
-        <PORT CLKFREQUENCY="100000000" DIR="I" NAME="clk" SIGIS="clk" SIGNAME="External_Ports_clk">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="External_Ports" PORT="clk"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="I" NAME="reset" POLARITY="ACTIVE_LOW" SIGIS="rst" SIGNAME="External_Ports_reset">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="External_Ports" PORT="reset"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="I" LEFT="3" NAME="note_out" RIGHT="0" SIGIS="undef" SIGNAME="Song_Selector_0_dout">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="Song_Selector_0" PORT="dout"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="I" LEFT="3" NAME="btn_push" RIGHT="0" SIGIS="undef" SIGNAME="debouncer_0_btn_out">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="debouncer_0" PORT="btn_out"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" LEFT="3" NAME="led" RIGHT="0" SIGIS="undef" SIGNAME="ScoreDisplay_0_led">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="External_Ports" PORT="led"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="led6_r" SIGIS="undef" SIGNAME="ScoreDisplay_0_led6_r">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="External_Ports" PORT="led6_r"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="led6_g" SIGIS="undef" SIGNAME="ScoreDisplay_0_led6_g">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="External_Ports" PORT="led6_g"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="led6_b" SIGIS="undef" SIGNAME="ScoreDisplay_0_led6_b">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="External_Ports" PORT="led6_b"/>
-          </CONNECTIONS>
-        </PORT>
-      </PORTS>
-      <BUSINTERFACES/>
-    </MODULE>
     <MODULE COREREVISION="1" FULLNAME="/Song_Selector_0" HWVERSION="1.0" INSTANCE="Song_Selector_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="Song_Selector" VLNV="xilinx.com:module_ref:Song_Selector:1.0">
       <DOCUMENTS/>
       <PARAMETERS>
-        <PARAMETER NAME="Component_Name" VALUE="GuitarSep_Song_Selector_0_0"/>
+        <PARAMETER NAME="Component_Name" VALUE="GuitarSep_Song_Selector_0_1"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
       <PORTS>
@@ -224,15 +230,15 @@
             <CONNECTION INSTANCE="Game_SM_0" PORT="song_selected"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="1" NAME="add" RIGHT="0" SIGIS="undef" SIGNAME="MemorySequency_0_addr">
+        <PORT DIR="I" LEFT="4" NAME="add" RIGHT="0" SIGIS="undef" SIGNAME="MemorySequency_0_addr">
           <CONNECTIONS>
             <CONNECTION INSTANCE="MemorySequency_0" PORT="addr"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" LEFT="3" NAME="dout" RIGHT="0" SIGIS="undef" SIGNAME="Song_Selector_0_dout">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="ScoreDisplay_0" PORT="note_out"/>
             <CONNECTION INSTANCE="ila_0" PORT="probe0"/>
+            <CONNECTION INSTANCE="LedDisplay_0" PORT="note_out"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
@@ -257,7 +263,7 @@
         </PORT>
         <PORT DIR="O" LEFT="3" NAME="btn_out" RIGHT="0" SIGIS="undef" SIGNAME="debouncer_0_btn_out">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="ScoreDisplay_0" PORT="btn_push"/>
+            <CONNECTION INSTANCE="LedDisplay_0" PORT="btn_push"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
