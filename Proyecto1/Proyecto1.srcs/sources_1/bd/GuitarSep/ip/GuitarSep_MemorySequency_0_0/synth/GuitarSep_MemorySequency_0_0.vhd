@@ -67,6 +67,9 @@ ARCHITECTURE GuitarSep_MemorySequency_0_0_arch OF GuitarSep_MemorySequency_0_0 I
   ATTRIBUTE DowngradeIPIdentifiedWarnings : STRING;
   ATTRIBUTE DowngradeIPIdentifiedWarnings OF GuitarSep_MemorySequency_0_0_arch: ARCHITECTURE IS "yes";
   COMPONENT MemorySequency IS
+    GENERIC (
+      max_freq : INTEGER
+    );
     PORT (
       clk_game : IN STD_LOGIC;
       reset : IN STD_LOGIC;
@@ -80,7 +83,7 @@ ARCHITECTURE GuitarSep_MemorySequency_0_0_arch OF GuitarSep_MemorySequency_0_0 I
   ATTRIBUTE CHECK_LICENSE_TYPE : STRING;
   ATTRIBUTE CHECK_LICENSE_TYPE OF GuitarSep_MemorySequency_0_0_arch : ARCHITECTURE IS "GuitarSep_MemorySequency_0_0,MemorySequency,{}";
   ATTRIBUTE CORE_GENERATION_INFO : STRING;
-  ATTRIBUTE CORE_GENERATION_INFO OF GuitarSep_MemorySequency_0_0_arch: ARCHITECTURE IS "GuitarSep_MemorySequency_0_0,MemorySequency,{x_ipProduct=Vivado 2020.1,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=MemorySequency,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VHDL,x_ipSimLanguage=MIXED}";
+  ATTRIBUTE CORE_GENERATION_INFO OF GuitarSep_MemorySequency_0_0_arch: ARCHITECTURE IS "GuitarSep_MemorySequency_0_0,MemorySequency,{x_ipProduct=Vivado 2020.1,x_ipVendor=xilinx.com,x_ipLibrary=module_ref,x_ipName=MemorySequency,x_ipVersion=1.0,x_ipCoreRevision=1,x_ipLanguage=VHDL,x_ipSimLanguage=MIXED,max_freq=10}";
   ATTRIBUTE IP_DEFINITION_SOURCE : STRING;
   ATTRIBUTE IP_DEFINITION_SOURCE OF GuitarSep_MemorySequency_0_0_arch: ARCHITECTURE IS "module_ref";
   ATTRIBUTE X_INTERFACE_INFO : STRING;
@@ -89,6 +92,9 @@ ARCHITECTURE GuitarSep_MemorySequency_0_0_arch OF GuitarSep_MemorySequency_0_0 I
   ATTRIBUTE X_INTERFACE_INFO OF reset: SIGNAL IS "xilinx.com:signal:reset:1.0 reset RST";
 BEGIN
   U0 : MemorySequency
+    GENERIC MAP (
+      max_freq => 10
+    )
     PORT MAP (
       clk_game => clk_game,
       reset => reset,

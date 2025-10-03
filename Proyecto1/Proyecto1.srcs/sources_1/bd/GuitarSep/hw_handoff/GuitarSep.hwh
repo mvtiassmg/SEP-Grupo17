@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu Oct  2 00:17:52 2025" VIVADOVERSION="2020.1">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu Oct  2 20:55:19 2025" VIVADOVERSION="2020.1">
 
   <SYSTEMINFO ARCH="zynq" BOARD="digilentinc.com:zybo-z7-10:part0:1.2" DEVICE="7z010" NAME="GuitarSep" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -30,9 +30,9 @@
     </PORT>
     <PORT DIR="I" NAME="reset" POLARITY="ACTIVE_LOW" SIGIS="rst" SIGNAME="External_Ports_reset">
       <CONNECTIONS>
-        <CONNECTION INSTANCE="MemorySequency_0" PORT="reset"/>
         <CONNECTION INSTANCE="Game_SM_0" PORT="reset"/>
         <CONNECTION INSTANCE="ScoreDisplay_0" PORT="reset"/>
+        <CONNECTION INSTANCE="MemorySequency_0" PORT="reset"/>
       </CONNECTIONS>
     </PORT>
     <PORT DIR="O" LEFT="3" NAME="led" RIGHT="0" SIGIS="undef" SIGNAME="ScoreDisplay_0_led">
@@ -129,6 +129,7 @@
     <MODULE COREREVISION="1" FULLNAME="/MemorySequency_0" HWVERSION="1.0" INSTANCE="MemorySequency_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="MemorySequency" VLNV="xilinx.com:module_ref:MemorySequency:1.0">
       <DOCUMENTS/>
       <PARAMETERS>
+        <PARAMETER NAME="max_freq" VALUE="10"/>
         <PARAMETER NAME="Component_Name" VALUE="GuitarSep_MemorySequency_0_0"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
       </PARAMETERS>
