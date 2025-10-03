@@ -1,7 +1,7 @@
 --Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
---Date        : Thu Oct  2 00:17:52 2025
+--Date        : Thu Oct  2 20:55:18 2025
 --Host        : Macbook running 64-bit major release  (build 9200)
 --Command     : generate_target GuitarSep.bd
 --Design      : GuitarSep
@@ -37,15 +37,6 @@ architecture STRUCTURE of GuitarSep is
     dout : out STD_LOGIC_VECTOR ( 3 downto 0 )
   );
   end component GuitarSep_Song_Selector_0_0;
-  component GuitarSep_MemorySequency_0_0 is
-  port (
-    clk_game : in STD_LOGIC;
-    reset : in STD_LOGIC;
-    playing : in STD_LOGIC;
-    addr : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    freq_game : out STD_LOGIC_VECTOR ( 3 downto 0 )
-  );
-  end component GuitarSep_MemorySequency_0_0;
   component GuitarSep_ClockDivider_0_0 is
   port (
     clk_in : in STD_LOGIC;
@@ -88,6 +79,15 @@ architecture STRUCTURE of GuitarSep is
     btn_out : out STD_LOGIC_VECTOR ( 3 downto 0 )
   );
   end component GuitarSep_debouncer_0_0;
+  component GuitarSep_MemorySequency_0_0 is
+  port (
+    clk_game : in STD_LOGIC;
+    reset : in STD_LOGIC;
+    playing : in STD_LOGIC;
+    addr : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    freq_game : out STD_LOGIC_VECTOR ( 3 downto 0 )
+  );
+  end component GuitarSep_MemorySequency_0_0;
   signal ClockDivider_0_clk_out : STD_LOGIC;
   signal Game_SM_0_playing : STD_LOGIC;
   signal Game_SM_0_song_selected : STD_LOGIC_VECTOR ( 1 downto 0 );

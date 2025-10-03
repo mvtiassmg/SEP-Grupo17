@@ -3,6 +3,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 entity MemorySequency is
+    generic (max_freq : natural := 10
+    ); 
     Port (
         clk_game  : in  std_logic;                    -- Reloj dividido
         reset     : in  std_logic;
@@ -25,15 +27,13 @@ begin
             counter     <= 0;
             freq_reg    <= 1;
             counter_clk <= 0;
-            
-            
-            
+                     
         elsif rising_edge(clk_game) then
             if playing = '1' then
                 if counter = 3 then
                     counter <= 0;
                     if counter_clk = 10 then
-                        if freq_reg < 10 then
+                        if freq_reg < max_freq then
                             freq_reg <= freq_reg + 1;
                         end if;
                         counter_clk <= 0;
@@ -43,8 +43,7 @@ begin
                 else
                     counter <= counter + 1;
                 end if;
-                
-                
+           
             else
                 counter     <= 0;
                 freq_reg    <= 1;
@@ -52,8 +51,7 @@ begin
             end if;
         end if;
     end process;
-
     addr      <= std_logic_vector(to_unsigned(counter, 2));
-    freq_game <= std_logic_vector(to_unsigned(counter, 4));
+    freq_game <= std_logic_vector(to_unsigned(freq_reg, 4));
 end Behavioral;
 

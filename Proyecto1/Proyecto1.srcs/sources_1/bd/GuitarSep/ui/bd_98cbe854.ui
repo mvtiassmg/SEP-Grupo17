@@ -11,16 +11,16 @@ preplace port reset -pg 1 -lvl 0 -x 0 -y 200 -defaultsOSRD
 preplace port led6_b -pg 1 -lvl 5 -x 1160 -y 250 -defaultsOSRD
 preplace port led6_g -pg 1 -lvl 5 -x 1160 -y 220 -defaultsOSRD
 preplace port led6_r -pg 1 -lvl 5 -x 1160 -y 190 -defaultsOSRD
-preplace portBus led -pg 1 -lvl 5 -x 1160 -y 160 -defaultsOSRD
 preplace portBus btn -pg 1 -lvl 0 -x 0 -y 380 -defaultsOSRD
 preplace portBus song_sel -pg 1 -lvl 0 -x 0 -y 330 -defaultsOSRD
+preplace portBus led -pg 1 -lvl 5 -x 1160 -y 160 -defaultsOSRD
 preplace inst Song_Selector_0 -pg 1 -lvl 3 -x 760 -y 80 -defaultsOSRD
-preplace inst MemorySequency_0 -pg 1 -lvl 2 -x 490 -y 100 -defaultsOSRD
 preplace inst ClockDivider_0 -pg 1 -lvl 1 -x 190 -y 80 -defaultsOSRD
 preplace inst Game_SM_0 -pg 1 -lvl 1 -x 190 -y 290 -defaultsOSRD
 preplace inst ScoreDisplay_0 -pg 1 -lvl 4 -x 1020 -y 210 -defaultsOSRD
 preplace inst ila_0 -pg 1 -lvl 4 -x 1020 -y 70 -defaultsOSRD
 preplace inst debouncer_0 -pg 1 -lvl 3 -x 760 -y 370 -defaultsOSRD
+preplace inst MemorySequency_0 -pg 1 -lvl 2 -x 490 -y 100 -defaultsOSRD
 preplace netloc clk_0_1 1 0 4 30 390 350J 370 630 210 890
 preplace netloc btn_0_1 1 0 3 NJ 380 NJ 380 NJ
 preplace netloc debouncer_0_btn_out 1 3 1 890 240n
@@ -38,7 +38,7 @@ preplace netloc ScoreDisplay_0_led6_b 1 4 1 1140J 240n
 preplace netloc ScoreDisplay_0_led6_g 1 4 1 NJ 220
 preplace netloc ScoreDisplay_0_led6_r 1 4 1 1140J 190n
 levelinfo -pg 1 0 190 490 760 1020 1160
-pagesize -pg 1 -db -bbox -sgen -150 0 1260 440
+pagesize -pg 1 -db -bbox -sgen -130 0 1260 440
 "
 }
 0

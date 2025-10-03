@@ -67,6 +67,9 @@ ARCHITECTURE GuitarSep_MemorySequency_0_0_arch OF GuitarSep_MemorySequency_0_0 I
   ATTRIBUTE DowngradeIPIdentifiedWarnings : STRING;
   ATTRIBUTE DowngradeIPIdentifiedWarnings OF GuitarSep_MemorySequency_0_0_arch: ARCHITECTURE IS "yes";
   COMPONENT MemorySequency IS
+    GENERIC (
+      max_freq : INTEGER
+    );
     PORT (
       clk_game : IN STD_LOGIC;
       reset : IN STD_LOGIC;
@@ -83,6 +86,9 @@ ARCHITECTURE GuitarSep_MemorySequency_0_0_arch OF GuitarSep_MemorySequency_0_0 I
   ATTRIBUTE X_INTERFACE_INFO OF reset: SIGNAL IS "xilinx.com:signal:reset:1.0 reset RST";
 BEGIN
   U0 : MemorySequency
+    GENERIC MAP (
+      max_freq => 10
+    )
     PORT MAP (
       clk_game => clk_game,
       reset => reset,

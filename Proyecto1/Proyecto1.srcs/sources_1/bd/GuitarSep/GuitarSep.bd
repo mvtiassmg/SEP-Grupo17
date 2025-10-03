@@ -11,12 +11,12 @@
     },
     "design_tree": {
       "Song_Selector_0": "",
-      "MemorySequency_0": "",
       "ClockDivider_0": "",
       "Game_SM_0": "",
       "ScoreDisplay_0": "",
       "ila_0": "",
-      "debouncer_0": ""
+      "debouncer_0": "",
+      "MemorySequency_0": ""
     },
     "ports": {
       "clk": {
@@ -111,37 +111,6 @@
             "right": "0"
           },
           "dout": {
-            "direction": "O",
-            "left": "3",
-            "right": "0"
-          }
-        }
-      },
-      "MemorySequency_0": {
-        "vlnv": "xilinx.com:module_ref:MemorySequency:1.0",
-        "xci_name": "GuitarSep_MemorySequency_0_0",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "MemorySequency",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "clk_game": {
-            "direction": "I"
-          },
-          "reset": {
-            "type": "rst",
-            "direction": "I"
-          },
-          "playing": {
-            "direction": "I"
-          },
-          "addr": {
-            "direction": "O",
-            "left": "1",
-            "right": "0"
-          },
-          "freq_game": {
             "direction": "O",
             "left": "3",
             "right": "0"
@@ -330,6 +299,37 @@
             "right": "0"
           }
         }
+      },
+      "MemorySequency_0": {
+        "vlnv": "xilinx.com:module_ref:MemorySequency:1.0",
+        "xci_name": "GuitarSep_MemorySequency_0_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "MemorySequency",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk_game": {
+            "direction": "I"
+          },
+          "reset": {
+            "type": "rst",
+            "direction": "I"
+          },
+          "playing": {
+            "direction": "I"
+          },
+          "addr": {
+            "direction": "O",
+            "left": "1",
+            "right": "0"
+          },
+          "freq_game": {
+            "direction": "O",
+            "left": "3",
+            "right": "0"
+          }
+        }
       }
     },
     "nets": {
@@ -394,9 +394,9 @@
       "reset_0_1": {
         "ports": [
           "reset",
-          "MemorySequency_0/reset",
           "Game_SM_0/reset",
-          "ScoreDisplay_0/reset"
+          "ScoreDisplay_0/reset",
+          "MemorySequency_0/reset"
         ]
       },
       "ScoreDisplay_0_led": {
