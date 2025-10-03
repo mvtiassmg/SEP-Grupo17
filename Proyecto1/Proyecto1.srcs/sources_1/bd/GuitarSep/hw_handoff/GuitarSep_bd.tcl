@@ -40,7 +40,7 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 
 # The design that will be created by this Tcl script contains the following 
 # module references:
-# ClockDivider, Game_SM, MemorySequency, ScoreDisplay, Song_Selector, debouncer
+# ClockDivider, Game_SM, LedDisplay, MemorySequency, Song_Selector, debouncer
 
 # Please add the sources of those modules before sourcing this Tcl script.
 
@@ -200,6 +200,17 @@ proc create_root_design { parentCell } {
      return 1
    }
   
+  # Create instance: LedDisplay_0, and set properties
+  set block_name LedDisplay
+  set block_cell_name LedDisplay_0
+  if { [catch {set LedDisplay_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_gid_msg -ssname BD::TCL -id 2095 -severity "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $LedDisplay_0 eq "" } {
+     catch {common::send_gid_msg -ssname BD::TCL -id 2096 -severity "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
   # Create instance: MemorySequency_0, and set properties
   set block_name MemorySequency
   set block_cell_name MemorySequency_0
@@ -207,17 +218,6 @@ proc create_root_design { parentCell } {
      catch {common::send_gid_msg -ssname BD::TCL -id 2095 -severity "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
    } elseif { $MemorySequency_0 eq "" } {
-     catch {common::send_gid_msg -ssname BD::TCL -id 2096 -severity "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
-     return 1
-   }
-  
-  # Create instance: ScoreDisplay_0, and set properties
-  set block_name ScoreDisplay
-  set block_cell_name ScoreDisplay_0
-  if { [catch {set ScoreDisplay_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
-     catch {common::send_gid_msg -ssname BD::TCL -id 2095 -severity "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
-     return 1
-   } elseif { $ScoreDisplay_0 eq "" } {
      catch {common::send_gid_msg -ssname BD::TCL -id 2096 -severity "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
    }
@@ -255,20 +255,20 @@ proc create_root_design { parentCell } {
 
   # Create port connections
   connect_bd_net -net ClockDivider_0_clk_out [get_bd_pins ClockDivider_0/clk_out] [get_bd_pins MemorySequency_0/clk_game]
-  connect_bd_net -net Game_SM_0_playing [get_bd_pins Game_SM_0/playing] [get_bd_pins MemorySequency_0/playing]
+  connect_bd_net -net Game_SM_0_playing [get_bd_pins Game_SM_0/playing] [get_bd_pins LedDisplay_0/playing] [get_bd_pins MemorySequency_0/playing]
   connect_bd_net -net Game_SM_0_song_selected [get_bd_pins Game_SM_0/song_selected] [get_bd_pins Song_Selector_0/song_sel]
+  connect_bd_net -net LedDisplay_0_led [get_bd_ports led] [get_bd_pins LedDisplay_0/led]
+  connect_bd_net -net LedDisplay_0_led6_b [get_bd_ports led6_b] [get_bd_pins LedDisplay_0/led6_b]
+  connect_bd_net -net LedDisplay_0_led6_g [get_bd_ports led6_g] [get_bd_pins LedDisplay_0/led6_g]
+  connect_bd_net -net LedDisplay_0_led6_r [get_bd_ports led6_r] [get_bd_pins LedDisplay_0/led6_r]
   connect_bd_net -net MemorySequency_0_addr [get_bd_pins MemorySequency_0/addr] [get_bd_pins Song_Selector_0/add]
   connect_bd_net -net MemorySequency_0_freq_game [get_bd_pins ClockDivider_0/fr_out] [get_bd_pins MemorySequency_0/freq_game]
-  connect_bd_net -net ScoreDisplay_0_led [get_bd_ports led] [get_bd_pins ScoreDisplay_0/led]
-  connect_bd_net -net ScoreDisplay_0_led6_b [get_bd_ports led6_b] [get_bd_pins ScoreDisplay_0/led6_b]
-  connect_bd_net -net ScoreDisplay_0_led6_g [get_bd_ports led6_g] [get_bd_pins ScoreDisplay_0/led6_g]
-  connect_bd_net -net ScoreDisplay_0_led6_r [get_bd_ports led6_r] [get_bd_pins ScoreDisplay_0/led6_r]
-  connect_bd_net -net Song_Selector_0_dout [get_bd_pins ScoreDisplay_0/note_out] [get_bd_pins Song_Selector_0/dout] [get_bd_pins ila_0/probe0]
+  connect_bd_net -net Song_Selector_0_dout [get_bd_pins LedDisplay_0/note_out] [get_bd_pins Song_Selector_0/dout] [get_bd_pins ila_0/probe0]
   connect_bd_net -net btn_0_1 [get_bd_ports btn] [get_bd_pins debouncer_0/btn]
-  connect_bd_net -net clk_0_1 [get_bd_ports clk] [get_bd_pins ClockDivider_0/clk_in] [get_bd_pins Game_SM_0/clk] [get_bd_pins ScoreDisplay_0/clk] [get_bd_pins debouncer_0/clk] [get_bd_pins ila_0/clk]
-  connect_bd_net -net debouncer_0_btn_out [get_bd_pins ScoreDisplay_0/btn_push] [get_bd_pins debouncer_0/btn_out]
+  connect_bd_net -net clk_0_1 [get_bd_ports clk] [get_bd_pins ClockDivider_0/clk_in] [get_bd_pins Game_SM_0/clk] [get_bd_pins LedDisplay_0/clk] [get_bd_pins debouncer_0/clk] [get_bd_pins ila_0/clk]
+  connect_bd_net -net debouncer_0_btn_out [get_bd_pins LedDisplay_0/btn_push] [get_bd_pins debouncer_0/btn_out]
   connect_bd_net -net game_on_0_1 [get_bd_ports game_on] [get_bd_pins Game_SM_0/game_on]
-  connect_bd_net -net reset_0_1 [get_bd_ports reset] [get_bd_pins Game_SM_0/reset] [get_bd_pins MemorySequency_0/reset] [get_bd_pins ScoreDisplay_0/reset]
+  connect_bd_net -net reset_0_1 [get_bd_ports reset] [get_bd_pins Game_SM_0/reset] [get_bd_pins LedDisplay_0/reset] [get_bd_pins MemorySequency_0/reset]
   connect_bd_net -net song_sel_0_1 [get_bd_ports song_sel] [get_bd_pins Game_SM_0/song_sel]
 
   # Create address segments

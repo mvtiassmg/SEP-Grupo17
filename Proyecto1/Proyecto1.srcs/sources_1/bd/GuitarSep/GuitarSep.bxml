@@ -2,10 +2,10 @@
 <Root MajorVersion="0" MinorVersion="39">
   <CompositeFile CompositeFileTopName="GuitarSep" CanBeSetAsTop="false" CanDisplayChildGraph="true">
     <Description>Composite Fileset</Description>
-    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1759449319"/>
-    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1759449319"/>
-    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1759449319"/>
-    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1759449319"/>
+    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1759489865"/>
+    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1759489865"/>
+    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1759489865"/>
+    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1759489865"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
       <File Name="ip\GuitarSep_ClockDivider_0_0\GuitarSep_ClockDivider_0_0.xci" Type="IP">
         <Instance HierarchyPath="ClockDivider_0"/>
@@ -23,30 +23,6 @@
         <UsedIn Val="IMPLEMENTATION"/>
         <UsedIn Val="SIMULATION"/>
       </File>
-      <File Name="ip\GuitarSep_Song_Selector_0_0\GuitarSep_Song_Selector_0_0.xci" Type="IP">
-        <Instance HierarchyPath="Song_Selector_0"/>
-        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
-        <Library Name="xil_defaultlib"/>
-        <UsedIn Val="SYNTHESIS"/>
-        <UsedIn Val="IMPLEMENTATION"/>
-        <UsedIn Val="SIMULATION"/>
-      </File>
-      <File Name="ip\GuitarSep_MemorySequency_0_0\GuitarSep_MemorySequency_0_0.xci" Type="IP">
-        <Instance HierarchyPath="MemorySequency_0"/>
-        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
-        <Library Name="xil_defaultlib"/>
-        <UsedIn Val="SYNTHESIS"/>
-        <UsedIn Val="IMPLEMENTATION"/>
-        <UsedIn Val="SIMULATION"/>
-      </File>
-      <File Name="ip\GuitarSep_ScoreDisplay_0_0\GuitarSep_ScoreDisplay_0_0.xci" Type="IP">
-        <Instance HierarchyPath="ScoreDisplay_0"/>
-        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
-        <Library Name="xil_defaultlib"/>
-        <UsedIn Val="SYNTHESIS"/>
-        <UsedIn Val="IMPLEMENTATION"/>
-        <UsedIn Val="SIMULATION"/>
-      </File>
       <File Name="ip\GuitarSep_debouncer_0_0\GuitarSep_debouncer_0_0.xci" Type="IP">
         <Instance HierarchyPath="debouncer_0"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
@@ -57,6 +33,30 @@
       </File>
       <File Name="ip\GuitarSep_ila_0_0\GuitarSep_ila_0_0.xci" Type="IP">
         <Instance HierarchyPath="ila_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\GuitarSep_LedDisplay_0_0\GuitarSep_LedDisplay_0_0.xci" Type="IP">
+        <Instance HierarchyPath="LedDisplay_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\GuitarSep_Song_Selector_0_1\GuitarSep_Song_Selector_0_1.xci" Type="IP">
+        <Instance HierarchyPath="Song_Selector_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip\GuitarSep_MemorySequency_0_1\GuitarSep_MemorySequency_0_1.xci" Type="IP">
+        <Instance HierarchyPath="MemorySequency_0"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>

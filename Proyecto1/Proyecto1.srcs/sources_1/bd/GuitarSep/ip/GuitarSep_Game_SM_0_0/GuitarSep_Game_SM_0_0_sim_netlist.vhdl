@@ -1,10 +1,10 @@
 -- Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
--- Date        : Thu Oct  2 00:12:28 2025
--- Host        : Macbook running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode funcsim
---               c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_Game_SM_0_0/GuitarSep_Game_SM_0_0_sim_netlist.vhdl
+-- Date        : Fri Oct  3 08:12:14 2025
+-- Host        : LAPTOP-PPEH9OE5 running 64-bit major release  (build 9200)
+-- Command     : write_vhdl -force -mode funcsim {e:/2025-2/IEE2463 - Sistemas Electronicos
+--               Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_Game_SM_0_0/GuitarSep_Game_SM_0_0_sim_netlist.vhdl}
 -- Design      : GuitarSep_Game_SM_0_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -17,7 +17,6 @@ use UNISIM.VCOMPONENTS.ALL;
 entity GuitarSep_Game_SM_0_0_Game_SM is
   port (
     song_selected : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    playing : out STD_LOGIC;
     game_on : in STD_LOGIC;
     reset : in STD_LOGIC;
     clk : in STD_LOGIC;
@@ -36,14 +35,12 @@ architecture STRUCTURE of GuitarSep_Game_SM_0_0_Game_SM is
   signal \^song_selected\ : STD_LOGIC_VECTOR ( 1 downto 0 );
   signal state : STD_LOGIC_VECTOR ( 2 downto 0 );
   attribute SOFT_HLUTNM : string;
-  attribute SOFT_HLUTNM of \FSM_sequential_state[0]_i_1\ : label is "soft_lutpair1";
   attribute SOFT_HLUTNM of \FSM_sequential_state[1]_i_1\ : label is "soft_lutpair0";
   attribute SOFT_HLUTNM of \FSM_sequential_state[2]_i_1\ : label is "soft_lutpair0";
   attribute FSM_ENCODED_STATES : string;
   attribute FSM_ENCODED_STATES of \FSM_sequential_state_reg[0]\ : label is "s_idle:001,s_playing:011,s_score:100,s_game_over:101,s_load_song:010,s_reset:000";
   attribute FSM_ENCODED_STATES of \FSM_sequential_state_reg[1]\ : label is "s_idle:001,s_playing:011,s_score:100,s_game_over:101,s_load_song:010,s_reset:000";
   attribute FSM_ENCODED_STATES of \FSM_sequential_state_reg[2]\ : label is "s_idle:001,s_playing:011,s_score:100,s_game_over:101,s_load_song:010,s_reset:000";
-  attribute SOFT_HLUTNM of \playing__0\ : label is "soft_lutpair1";
 begin
   song_selected(1 downto 0) <= \^song_selected\(1 downto 0);
 \FSM_sequential_state[0]_i_1\: unisim.vcomponents.LUT5
@@ -105,16 +102,6 @@ begin
       D => \FSM_sequential_state[2]_i_1_n_0\,
       Q => state(2),
       R => '0'
-    );
-\playing__0\: unisim.vcomponents.LUT3
-    generic map(
-      INIT => X"40"
-    )
-        port map (
-      I0 => state(2),
-      I1 => state(0),
-      I2 => state(1),
-      O => playing
     );
 \sel_reg[0]_i_1\: unisim.vcomponents.LUT5
     generic map(
@@ -189,6 +176,7 @@ entity GuitarSep_Game_SM_0_0 is
 end GuitarSep_Game_SM_0_0;
 
 architecture STRUCTURE of GuitarSep_Game_SM_0_0 is
+  signal \^game_on\ : STD_LOGIC;
   attribute x_interface_info : string;
   attribute x_interface_info of clk : signal is "xilinx.com:signal:clock:1.0 clk CLK";
   attribute x_interface_parameter : string;
@@ -196,11 +184,12 @@ architecture STRUCTURE of GuitarSep_Game_SM_0_0 is
   attribute x_interface_info of reset : signal is "xilinx.com:signal:reset:1.0 reset RST";
   attribute x_interface_parameter of reset : signal is "XIL_INTERFACENAME reset, POLARITY ACTIVE_LOW, INSERT_VIP 0";
 begin
+  \^game_on\ <= game_on;
+  playing <= \^game_on\;
 U0: entity work.GuitarSep_Game_SM_0_0_Game_SM
      port map (
       clk => clk,
-      game_on => game_on,
-      playing => playing,
+      game_on => \^game_on\,
       reset => reset,
       song_sel(1 downto 0) => song_sel(1 downto 0),
       song_selected(1 downto 0) => song_selected(1 downto 0)

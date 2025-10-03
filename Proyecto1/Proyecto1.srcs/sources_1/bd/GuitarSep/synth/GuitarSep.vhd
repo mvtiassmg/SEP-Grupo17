@@ -1,8 +1,8 @@
 --Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
---Date        : Thu Oct  2 20:55:18 2025
---Host        : Macbook running 64-bit major release  (build 9200)
+--Date        : Fri Oct  3 08:11:04 2025
+--Host        : LAPTOP-PPEH9OE5 running 64-bit major release  (build 9200)
 --Command     : generate_target GuitarSep.bd
 --Design      : GuitarSep
 --Purpose     : IP block netlist
@@ -30,13 +30,12 @@ entity GuitarSep is
 end GuitarSep;
 
 architecture STRUCTURE of GuitarSep is
-  component GuitarSep_Song_Selector_0_0 is
+  component GuitarSep_ila_0_0 is
   port (
-    song_sel : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    add : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    dout : out STD_LOGIC_VECTOR ( 3 downto 0 )
+    clk : in STD_LOGIC;
+    probe0 : in STD_LOGIC_VECTOR ( 3 downto 0 )
   );
-  end component GuitarSep_Song_Selector_0_0;
+  end component GuitarSep_ila_0_0;
   component GuitarSep_ClockDivider_0_0 is
   port (
     clk_in : in STD_LOGIC;
@@ -44,6 +43,26 @@ architecture STRUCTURE of GuitarSep is
     clk_out : out STD_LOGIC
   );
   end component GuitarSep_ClockDivider_0_0;
+  component GuitarSep_debouncer_0_0 is
+  port (
+    clk : in STD_LOGIC;
+    btn : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    btn_out : out STD_LOGIC_VECTOR ( 3 downto 0 )
+  );
+  end component GuitarSep_debouncer_0_0;
+  component GuitarSep_LedDisplay_0_0 is
+  port (
+    clk : in STD_LOGIC;
+    reset : in STD_LOGIC;
+    playing : in STD_LOGIC;
+    note_out : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    btn_push : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    led : out STD_LOGIC_VECTOR ( 3 downto 0 );
+    led6_r : out STD_LOGIC;
+    led6_g : out STD_LOGIC;
+    led6_b : out STD_LOGIC
+  );
+  end component GuitarSep_LedDisplay_0_0;
   component GuitarSep_Game_SM_0_0 is
   port (
     clk : in STD_LOGIC;
@@ -54,49 +73,31 @@ architecture STRUCTURE of GuitarSep is
     playing : out STD_LOGIC
   );
   end component GuitarSep_Game_SM_0_0;
-  component GuitarSep_ScoreDisplay_0_0 is
+  component GuitarSep_Song_Selector_0_1 is
   port (
-    clk : in STD_LOGIC;
-    reset : in STD_LOGIC;
-    note_out : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    btn_push : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    led : out STD_LOGIC_VECTOR ( 3 downto 0 );
-    led6_r : out STD_LOGIC;
-    led6_g : out STD_LOGIC;
-    led6_b : out STD_LOGIC
+    song_sel : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    add : in STD_LOGIC_VECTOR ( 4 downto 0 );
+    dout : out STD_LOGIC_VECTOR ( 3 downto 0 )
   );
-  end component GuitarSep_ScoreDisplay_0_0;
-  component GuitarSep_ila_0_0 is
-  port (
-    clk : in STD_LOGIC;
-    probe0 : in STD_LOGIC_VECTOR ( 3 downto 0 )
-  );
-  end component GuitarSep_ila_0_0;
-  component GuitarSep_debouncer_0_0 is
-  port (
-    clk : in STD_LOGIC;
-    btn : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    btn_out : out STD_LOGIC_VECTOR ( 3 downto 0 )
-  );
-  end component GuitarSep_debouncer_0_0;
-  component GuitarSep_MemorySequency_0_0 is
+  end component GuitarSep_Song_Selector_0_1;
+  component GuitarSep_MemorySequency_0_1 is
   port (
     clk_game : in STD_LOGIC;
     reset : in STD_LOGIC;
     playing : in STD_LOGIC;
-    addr : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    addr : out STD_LOGIC_VECTOR ( 4 downto 0 );
     freq_game : out STD_LOGIC_VECTOR ( 3 downto 0 )
   );
-  end component GuitarSep_MemorySequency_0_0;
+  end component GuitarSep_MemorySequency_0_1;
   signal ClockDivider_0_clk_out : STD_LOGIC;
   signal Game_SM_0_playing : STD_LOGIC;
   signal Game_SM_0_song_selected : STD_LOGIC_VECTOR ( 1 downto 0 );
-  signal MemorySequency_0_addr : STD_LOGIC_VECTOR ( 1 downto 0 );
+  signal LedDisplay_0_led : STD_LOGIC_VECTOR ( 3 downto 0 );
+  signal LedDisplay_0_led6_b : STD_LOGIC;
+  signal LedDisplay_0_led6_g : STD_LOGIC;
+  signal LedDisplay_0_led6_r : STD_LOGIC;
+  signal MemorySequency_0_addr : STD_LOGIC_VECTOR ( 4 downto 0 );
   signal MemorySequency_0_freq_game : STD_LOGIC_VECTOR ( 3 downto 0 );
-  signal ScoreDisplay_0_led : STD_LOGIC_VECTOR ( 3 downto 0 );
-  signal ScoreDisplay_0_led6_b : STD_LOGIC;
-  signal ScoreDisplay_0_led6_g : STD_LOGIC;
-  signal ScoreDisplay_0_led6_r : STD_LOGIC;
   signal Song_Selector_0_dout : STD_LOGIC_VECTOR ( 3 downto 0 );
   signal btn_0_1 : STD_LOGIC_VECTOR ( 3 downto 0 );
   signal clk_0_1 : STD_LOGIC;
@@ -114,10 +115,10 @@ begin
   btn_0_1(3 downto 0) <= btn(3 downto 0);
   clk_0_1 <= clk;
   game_on_0_1 <= game_on;
-  led(3 downto 0) <= ScoreDisplay_0_led(3 downto 0);
-  led6_b <= ScoreDisplay_0_led6_b;
-  led6_g <= ScoreDisplay_0_led6_g;
-  led6_r <= ScoreDisplay_0_led6_r;
+  led(3 downto 0) <= LedDisplay_0_led(3 downto 0);
+  led6_b <= LedDisplay_0_led6_b;
+  led6_g <= LedDisplay_0_led6_g;
+  led6_r <= LedDisplay_0_led6_r;
   reset_0_1 <= reset;
   song_sel_0_1(1 downto 0) <= song_sel(1 downto 0);
 ClockDivider_0: component GuitarSep_ClockDivider_0_0
@@ -135,28 +136,29 @@ Game_SM_0: component GuitarSep_Game_SM_0_0
       song_sel(1 downto 0) => song_sel_0_1(1 downto 0),
       song_selected(1 downto 0) => Game_SM_0_song_selected(1 downto 0)
     );
-MemorySequency_0: component GuitarSep_MemorySequency_0_0
+LedDisplay_0: component GuitarSep_LedDisplay_0_0
      port map (
-      addr(1 downto 0) => MemorySequency_0_addr(1 downto 0),
+      btn_push(3 downto 0) => debouncer_0_btn_out(3 downto 0),
+      clk => clk_0_1,
+      led(3 downto 0) => LedDisplay_0_led(3 downto 0),
+      led6_b => LedDisplay_0_led6_b,
+      led6_g => LedDisplay_0_led6_g,
+      led6_r => LedDisplay_0_led6_r,
+      note_out(3 downto 0) => Song_Selector_0_dout(3 downto 0),
+      playing => Game_SM_0_playing,
+      reset => reset_0_1
+    );
+MemorySequency_0: component GuitarSep_MemorySequency_0_1
+     port map (
+      addr(4 downto 0) => MemorySequency_0_addr(4 downto 0),
       clk_game => ClockDivider_0_clk_out,
       freq_game(3 downto 0) => MemorySequency_0_freq_game(3 downto 0),
       playing => Game_SM_0_playing,
       reset => reset_0_1
     );
-ScoreDisplay_0: component GuitarSep_ScoreDisplay_0_0
+Song_Selector_0: component GuitarSep_Song_Selector_0_1
      port map (
-      btn_push(3 downto 0) => debouncer_0_btn_out(3 downto 0),
-      clk => clk_0_1,
-      led(3 downto 0) => ScoreDisplay_0_led(3 downto 0),
-      led6_b => ScoreDisplay_0_led6_b,
-      led6_g => ScoreDisplay_0_led6_g,
-      led6_r => ScoreDisplay_0_led6_r,
-      note_out(3 downto 0) => Song_Selector_0_dout(3 downto 0),
-      reset => reset_0_1
-    );
-Song_Selector_0: component GuitarSep_Song_Selector_0_0
-     port map (
-      add(1 downto 0) => MemorySequency_0_addr(1 downto 0),
+      add(4 downto 0) => MemorySequency_0_addr(4 downto 0),
       dout(3 downto 0) => Song_Selector_0_dout(3 downto 0),
       song_sel(1 downto 0) => Game_SM_0_song_selected(1 downto 0)
     );
