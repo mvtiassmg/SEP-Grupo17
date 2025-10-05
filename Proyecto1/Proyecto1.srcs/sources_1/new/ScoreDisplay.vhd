@@ -2,10 +2,11 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
-entity ScoreDisplay is
+entity LedDisplay is
   Port (
     clk      : in  std_logic;
     reset    : in  std_logic;
+    playing  : in  std_logic;
     note_out : in  std_logic_vector(3 downto 0);
     btn_push : in  std_logic_vector(3 downto 0);
     led      : out std_logic_vector(3 downto 0);
@@ -13,14 +14,15 @@ entity ScoreDisplay is
     led6_g   : out std_logic;
     led6_b   : out std_logic
   );
-end ScoreDisplay;
+end LedDisplay;
 
-architecture Behavioral of ScoreDisplay is
+architecture Behavioral of LedDisplay is
   signal score   : integer range 0 to 15 := 0;
   signal errors  : integer range 0 to 3 := 0;
   signal stopped : std_logic := '0';  -- '1' cuando se alcanzan 3 errores
-  signal nail     : std_logic := '0'; 
-  signal miss     : std_logic := '0'; 
+  signal nail    : std_logic := '0'; 
+  signal miss    : std_logic := '0'; 
+  signal led_s   : std_logic_vector(3 downto 0);
    
   component ScoreCounter -- Contador de puntaje
     port(
@@ -58,9 +60,7 @@ architecture Behavioral of ScoreDisplay is
     end component; 
     begin
 
-  ----------------------------------------------------------------------
   -- Instancia del contador de puntaje
-  ----------------------------------------------------------------------
   score_counter: ScoreCounter
     port map (
       clk       => clk,
@@ -73,9 +73,7 @@ architecture Behavioral of ScoreDisplay is
       miss      => miss
     );
 
-  ----------------------------------------------------------------------
   -- Instancia contador de errores -> detener al llegar a 3
-  ----------------------------------------------------------------------
     missed_counter: miss_counter
         generic map(
             max_miss => 3
@@ -86,9 +84,7 @@ architecture Behavioral of ScoreDisplay is
             error_counter => errors, 
             stopped => stopped
         );
-  ----------------------------------------------------------------------
   -- Salidas de LEDs y puntaje
-  ----------------------------------------------------------------------
     leds: leds_game
         port map(
         stop => stopped,  
@@ -98,7 +94,10 @@ architecture Behavioral of ScoreDisplay is
         led6_r => led6_r,
         led6_g => led6_g,
         led6_b => led6_b,
-        led_s =>  led);
+        led_s =>  led_s);
         
-        
+    with playing select
+        led <= note_out when '1',
+               led_s    when '0';
+
 end Behavioral;

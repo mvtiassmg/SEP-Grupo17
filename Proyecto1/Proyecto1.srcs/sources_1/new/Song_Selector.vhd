@@ -5,7 +5,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity Song_Selector is
     Port (
         song_sel : in  std_logic_vector(1 downto 0); 
-        add     : in  std_logic_vector(1 downto 0) ;
+        add     : in  std_logic_vector(4 downto 0) ;
         dout     : out std_logic_vector(3 downto 0)
     );
 end Song_Selector;
