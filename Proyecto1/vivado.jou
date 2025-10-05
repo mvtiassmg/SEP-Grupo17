@@ -2,26 +2,109 @@
 # Vivado v2020.1 (64-bit)
 # SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
 # IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
-# Start of session at: Wed Oct  1 09:04:46 2025
-# Process ID: 21000
-# Current directory: C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent17572 C:\Users\tomas\escritorio\Universidad\SEP\Proyecto\SEP-Grupo17\Proyecto1\Proyecto1.xpr
-# Log file: C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/vivado.log
-# Journal file: C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1\vivado.jou
+# Start of session at: Fri Oct  3 07:05:48 2025
+# Process ID: 27076
+# Current directory: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent24796 E:\2025-2\IEE2463 - Sistemas Electronicos Programables\SEP-Grupo17\Proyecto1\Proyecto1.xpr
+# Log file: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/vivado.log
+# Journal file: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1\vivado.jou
 #-----------------------------------------------------------
 start_gui
-open_project C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.xpr
+open_project {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.xpr}
 update_compile_order -fileset sources_1
-create_bd_design "GuitarSep"
-update_compile_order -fileset sources_1
-create_bd_cell -type module -reference Game_SM Game_SM_0
-create_bd_cell -type module -reference ClockDivider ClockDivider_0
 update_module_reference GuitarSep_ClockDivider_0_0
-set_property location {0.5 -194 93} [get_bd_cells ClockDivider_0]
-connect_bd_net [get_bd_pins Game_SM_0/clk] [get_bd_pins ClockDivider_0/clk_out]
-undo
-create_bd_cell -type module -reference MemorySequency MemorySequency_0
-create_bd_cell -type module -reference Song_Selector Song_Selector_0
-create_bd_cell -type module -reference ScoreDisplay ScoreDisplay_0
+update_module_reference GuitarSep_Game_SM_0_0
 update_module_reference GuitarSep_Song_Selector_0_0
 update_module_reference GuitarSep_MemorySequency_0_0
+update_module_reference GuitarSep_ScoreDisplay_0_0
+update_module_reference GuitarSep_debouncer_0_0
+delete_bd_objs [get_bd_nets debouncer_0_btn_out] [get_bd_nets ScoreDisplay_0_led] [get_bd_nets ScoreDisplay_0_led6_r] [get_bd_nets ScoreDisplay_0_led6_g] [get_bd_nets ScoreDisplay_0_led6_b] [get_bd_cells ScoreDisplay_0]
+update_compile_order -fileset sources_1
+update_module_reference GuitarSep_ScoreDisplay_0_0
+create_bd_cell -type module -reference LedDisplay LedDisplay_0
+connect_bd_net [get_bd_ports led] [get_bd_pins LedDisplay_0/led]
+connect_bd_net [get_bd_ports led6_r] [get_bd_pins LedDisplay_0/led6_r]
+connect_bd_net [get_bd_ports led6_g] [get_bd_pins LedDisplay_0/led6_g]
+connect_bd_net [get_bd_ports led6_b] [get_bd_pins LedDisplay_0/led6_b]
+connect_bd_net [get_bd_ports clk] [get_bd_pins LedDisplay_0/clk]
+connect_bd_net [get_bd_ports reset] [get_bd_pins LedDisplay_0/reset]
+connect_bd_net [get_bd_pins LedDisplay_0/playing] [get_bd_pins Game_SM_0/playing]
+connect_bd_net [get_bd_pins LedDisplay_0/note_out] [get_bd_pins Song_Selector_0/dout]
+connect_bd_net [get_bd_pins LedDisplay_0/btn_push] [get_bd_pins debouncer_0/btn_out]
+update_module_reference GuitarSep_Game_SM_0_0
+update_compile_order -fileset sources_1
+delete_bd_objs [get_bd_nets Game_SM_0_song_selected] [get_bd_nets MemorySequency_0_addr] [get_bd_cells Song_Selector_0]
+delete_bd_objs [get_bd_nets ClockDivider_0_clk_out] [get_bd_nets MemorySequency_0_freq_game] [get_bd_cells MemorySequency_0]
+update_compile_order -fileset sources_1
+update_module_reference GuitarSep_MemorySequency_0_0
+update_module_reference GuitarSep_Song_Selector_0_0
+create_bd_cell -type module -reference Song_Selector Song_Selector_0
+create_bd_cell -type module -reference MemorySequency MemorySequency_0
+set_property location {2 547 -145} [get_bd_cells Song_Selector_0]
+set_property location {2 508 84} [get_bd_cells MemorySequency_0]
+set_property location {3 788 83} [get_bd_cells Song_Selector_0]
+set_property location {2 421 77} [get_bd_cells MemorySequency_0]
+connect_bd_net [get_bd_pins ClockDivider_0/clk_out] [get_bd_pins MemorySequency_0/clk_game]
+connect_bd_net [get_bd_ports reset] [get_bd_pins MemorySequency_0/reset]
+connect_bd_net [get_bd_pins MemorySequency_0/playing] [get_bd_pins Game_SM_0/playing]
+connect_bd_net [get_bd_pins Game_SM_0/song_selected] [get_bd_pins Song_Selector_0/song_sel]
+connect_bd_net [get_bd_pins Song_Selector_0/add] [get_bd_pins MemorySequency_0/addr]
+connect_bd_net [get_bd_pins MemorySequency_0/freq_game] [get_bd_pins ClockDivider_0/fr_out]
+save_bd_design
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 11
+wait_on_run impl_1
+reset_run synth_1
+reset_run GuitarSep_debouncer_0_0_synth_1
+reset_run GuitarSep_ila_0_0_synth_1
+reset_run GuitarSep_LedDisplay_0_0_synth_1
+reset_run GuitarSep_Song_Selector_0_1_synth_1
+reset_run GuitarSep_MemorySequency_0_1_synth_1
+reset_run GuitarSep_ClockDivider_0_0_synth_1
+reset_run GuitarSep_Game_SM_0_0_synth_1
+connect_bd_net [get_bd_pins Song_Selector_0/dout] [get_bd_pins ila_0/probe0]
+save_bd_design
+launch_runs impl_1 -to_step write_bitstream -jobs 11
+wait_on_run impl_1
+open_hw_manager
+connect_hw_server -allow_non_jtag
+open_hw_target
+set_property PROGRAM.FILE {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.bit} [get_hw_devices xc7z010_1]
+set_property PROBES.FILE {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.ltx} [get_hw_devices xc7z010_1]
+set_property FULL_PROBES.FILE {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.ltx} [get_hw_devices xc7z010_1]
+current_hw_device [get_hw_devices xc7z010_1]
+refresh_hw_device [lindex [get_hw_devices xc7z010_1] 0]
+set_property PROBES.FILE {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.ltx} [get_hw_devices xc7z010_1]
+set_property FULL_PROBES.FILE {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.ltx} [get_hw_devices xc7z010_1]
+set_property PROGRAM.FILE {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.bit} [get_hw_devices xc7z010_1]
+program_hw_devices [get_hw_devices xc7z010_1]
+refresh_hw_device [lindex [get_hw_devices xc7z010_1] 0]
+display_hw_ila_data [ get_hw_ila_data hw_ila_data_1 -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_0"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_0"}]
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_0"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_0"}]]
+set_property PROBES.FILE {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.ltx} [get_hw_devices xc7z010_1]
+set_property FULL_PROBES.FILE {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.ltx} [get_hw_devices xc7z010_1]
+set_property PROGRAM.FILE {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.bit} [get_hw_devices xc7z010_1]
+program_hw_devices [get_hw_devices xc7z010_1]
+refresh_hw_device [lindex [get_hw_devices xc7z010_1] 0]
+display_hw_ila_data [ get_hw_ila_data hw_ila_data_1 -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_0"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_0"}]
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_0"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_0"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_0"}] -trigger_now
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_0"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_0"}]]
+update_module_reference GuitarSep_MemorySequency_0_1
+update_module_reference GuitarSep_MemorySequency_0_1
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 11
+wait_on_run impl_1
+set_property PROBES.FILE {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.ltx} [get_hw_devices xc7z010_1]
+set_property FULL_PROBES.FILE {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.ltx} [get_hw_devices xc7z010_1]
+set_property PROGRAM.FILE {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.bit} [get_hw_devices xc7z010_1]
+program_hw_devices [get_hw_devices xc7z010_1]
+refresh_hw_device [lindex [get_hw_devices xc7z010_1] 0]
+display_hw_ila_data [ get_hw_ila_data hw_ila_data_1 -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_0"}]]
+save_wave_config {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.hw/hw_1/wave/hw_ila_data_1/hw_ila_data_1.wcfg}
+close_hw_manager

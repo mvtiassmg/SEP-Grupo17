@@ -1,10 +1,10 @@
 // Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
-// Date        : Thu Oct  2 00:12:28 2025
-// Host        : Macbook running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode funcsim
-//               c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_Game_SM_0_0/GuitarSep_Game_SM_0_0_sim_netlist.v
+// Date        : Fri Oct  3 08:12:14 2025
+// Host        : LAPTOP-PPEH9OE5 running 64-bit major release  (build 9200)
+// Command     : write_verilog -force -mode funcsim {e:/2025-2/IEE2463 - Sistemas Electronicos
+//               Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_Game_SM_0_0/GuitarSep_Game_SM_0_0_sim_netlist.v}
 // Design      : GuitarSep_Game_SM_0_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -31,15 +31,14 @@ module GuitarSep_Game_SM_0_0
 
   wire clk;
   wire game_on;
-  wire playing;
   wire reset;
   wire [1:0]song_sel;
   wire [1:0]song_selected;
 
+  assign playing = game_on;
   GuitarSep_Game_SM_0_0_Game_SM U0
        (.clk(clk),
         .game_on(game_on),
-        .playing(playing),
         .reset(reset),
         .song_sel(song_sel),
         .song_selected(song_selected));
@@ -48,13 +47,11 @@ endmodule
 (* ORIG_REF_NAME = "Game_SM" *) 
 module GuitarSep_Game_SM_0_0_Game_SM
    (song_selected,
-    playing,
     game_on,
     reset,
     clk,
     song_sel);
   output [1:0]song_selected;
-  output playing;
   input game_on;
   input reset;
   input clk;
@@ -65,7 +62,6 @@ module GuitarSep_Game_SM_0_0_Game_SM
   wire \FSM_sequential_state[2]_i_1_n_0 ;
   wire clk;
   wire game_on;
-  wire playing;
   wire reset;
   wire \sel_reg[0]_i_1_n_0 ;
   wire \sel_reg[1]_i_1_n_0 ;
@@ -73,7 +69,6 @@ module GuitarSep_Game_SM_0_0_Game_SM
   wire [1:0]song_selected;
   wire [2:0]state;
 
-  (* SOFT_HLUTNM = "soft_lutpair1" *) 
   LUT5 #(
     .INIT(32'h0000C7B5)) 
     \FSM_sequential_state[0]_i_1 
@@ -124,14 +119,6 @@ module GuitarSep_Game_SM_0_0_Game_SM
         .D(\FSM_sequential_state[2]_i_1_n_0 ),
         .Q(state[2]),
         .R(1'b0));
-  (* SOFT_HLUTNM = "soft_lutpair1" *) 
-  LUT3 #(
-    .INIT(8'h40)) 
-    playing__0
-       (.I0(state[2]),
-        .I1(state[0]),
-        .I2(state[1]),
-        .O(playing));
   LUT5 #(
     .INIT(32'hFFEB0028)) 
     \sel_reg[0]_i_1 

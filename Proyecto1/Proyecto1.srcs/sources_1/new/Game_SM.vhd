@@ -9,8 +9,7 @@ entity Game_SM is
         game_on   : in  std_logic;                     -- start/restart
         song_sel  : in  std_logic_vector(1 downto 0);  -- switches para elegir canción
         song_selected : out std_logic_vector(1 downto 0); -- canción fijada
-        playing   : out std_logic                     -- '1' si estamos jugando
-    
+        playing   : out std_logic                      -- '1' mientras game_on = '1'
     );
 end Game_SM;
 
@@ -20,11 +19,12 @@ architecture Behavioral of Game_SM is
     signal state, next_state : state_t;
 
     signal sel_reg : std_logic_vector(1 downto 0) := "00";
-    signal sel_score: std_logic := '0'; 
     
 begin
 
-    -- FSM state register
+    ----------------------------------------------------------------
+    -- Registro de estado
+    ----------------------------------------------------------------
     process(clk)
     begin
         if rising_edge(clk) then
@@ -36,7 +36,9 @@ begin
         end if;
     end process;
 
-    -- FSM next state logic
+    ----------------------------------------------------------------
+    -- Lógica de transición de estados
+    ----------------------------------------------------------------
     process(state, game_on, reset)
     begin
         next_state <= state;
@@ -73,25 +75,29 @@ begin
         end case;
     end process;
 
-    -- Song selection register
+    ----------------------------------------------------------------
+    -- Registro de selección de canción
+    ----------------------------------------------------------------
     process(clk)
     begin
         if rising_edge(clk) then
             case state is
                 when S_IDLE | S_LOAD_SONG =>
-                    sel_reg <= song_sel;
+                    sel_reg <= song_sel;  -- fijar canción solo al inicio
                 when others =>
                     null;
             end case;
         end if;
     end process;
 
+    ----------------------------------------------------------------
+    -- Salidas
+    ----------------------------------------------------------------
     song_selected <= sel_reg;
-    playing       <= '1' when state = S_PLAYING else '0';
-
-
+    playing       <= game_on;  -- playing sigue directamente a game_on
 
 end Behavioral;
+
 
 
 
