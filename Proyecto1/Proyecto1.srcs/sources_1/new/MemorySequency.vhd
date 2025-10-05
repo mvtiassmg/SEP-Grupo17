@@ -28,28 +28,49 @@ begin
             freq_reg    <= 1;
             counter_clk <= 0;
                      
-        elsif rising_edge(clk_game) then
+--        elsif rising_edge(clk_game) then
+--            if playing = '1' then
+--                if counter = 32 then
+--                    counter <= 0;
+--                    if counter_clk = 10 then
+--                        if freq_reg < max_freq then
+--                            freq_reg <= freq_reg + 1;
+--                        end if;
+--                            counter_clk <= 0;
+--                    else
+--                        counter_clk <= counter_clk + 1;
+--                    end if;
+--                else
+--                    counter <= counter + 1;
+--                end if;
+           
+--            else
+--                counter     <= 0;
+--                freq_reg    <= 1;
+--                counter_clk <= 0;
+--            end if;
+--        end if;
+
+        elsif rising_edge(clk_game) then 
             if playing = '1' then
                 if counter = 32 then
                     counter <= 0;
-                    if counter_clk = 10 then
-                        if freq_reg < max_freq then
-                            freq_reg <= freq_reg + 1;
-                        end if;
-                        counter_clk <= 0;
-                    else
-                        counter_clk <= counter_clk + 1;
-                    end if;
                 else
                     counter <= counter + 1;
+                end if; 
+                
+                if counter_clk = 10 then
+                    if freq_reg < max_freq then
+                        freq_reg <= freq_reg + 1;
+                        
+                    end if;
+                    counter_clk <= 0;
+                else
+                    counter_clk <= counter_clk + 1;
                 end if;
-           
-            else
-                counter     <= 0;
-                freq_reg    <= 1;
-                counter_clk <= 0;
             end if;
-        end if;
+        end if;  
+         
     end process;
     addr      <= std_logic_vector(to_unsigned(counter, 5));
     freq_game <= std_logic_vector(to_unsigned(freq_reg, 4));

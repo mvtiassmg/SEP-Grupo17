@@ -1,0 +1,399 @@
+#-----------------------------------------------------------
+# Vivado v2020.1 (64-bit)
+# SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
+# IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+# Start of session at: Fri Oct  3 07:05:48 2025
+# Process ID: 27076
+# Current directory: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent24796 E:\2025-2\IEE2463 - Sistemas Electronicos Programables\SEP-Grupo17\Proyecto1\Proyecto1.xpr
+# Log file: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/vivado.log
+# Journal file: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.xpr}
+INFO: [Project 1-313] Project file moved from 'C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1' since last save.
+Scanning sources...
+Finished scanning sources
+WARNING: [Project 1-509] GeneratedRun file for 'GuitarSep_ila_0_0_synth_1' not found
+WARNING: [Project 1-509] GeneratedRun file for 'GuitarSep_ScoreDisplay_0_0_synth_1' not found
+WARNING: [Project 1-509] GeneratedRun file for 'GuitarSep_ClockDivider_0_0_synth_1' not found
+WARNING: [Project 1-509] GeneratedRun file for 'GuitarSep_Game_SM_0_0_synth_1' not found
+WARNING: [Project 1-509] GeneratedRun file for 'GuitarSep_Song_Selector_0_0_synth_1' not found
+WARNING: [Project 1-509] GeneratedRun file for 'GuitarSep_debouncer_0_0_synth_1' not found
+WARNING: [Project 1-509] GeneratedRun file for 'GuitarSep_MemorySequency_0_0_synth_1' not found
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2020.1/data/ip'.
+WARNING: [IP_Flow 19-3664] IP 'GuitarSep_ClockDivider_0_0' generated file not found 'e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_ClockDivider_0_0/GuitarSep_ClockDivider_0_0.dcp'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'GuitarSep_Game_SM_0_0' generated file not found 'e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_Game_SM_0_0/GuitarSep_Game_SM_0_0.dcp'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'GuitarSep_Song_Selector_0_0' generated file not found 'e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_Song_Selector_0_0/GuitarSep_Song_Selector_0_0.dcp'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'GuitarSep_MemorySequency_0_0' generated file not found 'e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_MemorySequency_0_0/GuitarSep_MemorySequency_0_0.dcp'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'GuitarSep_ScoreDisplay_0_0' generated file not found 'e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_ScoreDisplay_0_0/GuitarSep_ScoreDisplay_0_0.dcp'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'GuitarSep_debouncer_0_0' generated file not found 'e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_debouncer_0_0/GuitarSep_debouncer_0_0.dcp'. Please regenerate to continue.
+WARNING: [IP_Flow 19-3664] IP 'GuitarSep_ila_0_0' generated file not found 'e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_ila_0_0/GuitarSep_ila_0_0.dcp'. Please regenerate to continue.
+open_project: Time (s): cpu = 00:00:20 ; elapsed = 00:00:13 . Memory (MB): peak = 1096.281 ; gain = 0.000
+update_compile_order -fileset sources_1
+update_module_reference GuitarSep_ClockDivider_0_0
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+Adding component instance block -- xilinx.com:module_ref:Song_Selector:1.0 - Song_Selector_0
+Adding component instance block -- xilinx.com:module_ref:ClockDivider:1.0 - ClockDivider_0
+Adding component instance block -- xilinx.com:module_ref:Game_SM:1.0 - Game_SM_0
+Adding component instance block -- xilinx.com:module_ref:ScoreDisplay:1.0 - ScoreDisplay_0
+Adding component instance block -- xilinx.com:ip:ila:6.2 - ila_0
+INFO: [xilinx.com:ip:ila:6.2-6] /ila_0: Xilinx recommends using the System ILA IP in IP Integrator. The System ILA IP is functionally equivalent to an ILA and offers additional benefits in debugging interfaces both within IP Integrator and the Hardware Manager. Consult the Programming and Debug User Guide UG908 for further details.
+Adding component instance block -- xilinx.com:module_ref:debouncer:1.0 - debouncer_0
+Adding component instance block -- xilinx.com:module_ref:MemorySequency:1.0 - MemorySequency_0
+WARNING: [BD 41-1731] Type mismatch between connected pins: /clk(clk) and /ClockDivider_0/clk_in(undef)
+Successfully read diagram <GuitarSep> from BD file <E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/GuitarSep.bd>
+Upgrading 'E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/GuitarSep.bd'
+INFO: [IP_Flow 19-1972] Upgraded GuitarSep_ClockDivider_0_0 from ClockDivider_v1_0 1.0 to ClockDivider_v1_0 1.0
+WARNING: [BD 41-1731] Type mismatch between connected pins: /clk(clk) and /ClockDivider_0_upgraded_ipi/clk_in(undef)
+Wrote  : <E:\2025-2\IEE2463 - Sistemas Electronicos Programables\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\bd\GuitarSep\GuitarSep.bd> 
+Wrote  : <E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ui/bd_98cbe854.ui> 
+upgrade_ip: Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1313.613 ; gain = 90.609
+update_module_reference: Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1313.613 ; gain = 90.609
+update_module_reference GuitarSep_Game_SM_0_0
+INFO: [IP_Flow 19-5107] Inferred bus interface 'reset' of definition 'xilinx.com:signal:reset:1.0' (from Xilinx Repository).
+INFO: [IP_Flow 19-5107] Inferred bus interface 'clk' of definition 'xilinx.com:signal:clock:1.0' (from Xilinx Repository).
+INFO: [IP_Flow 19-4728] Bus Interface 'clk': Added interface parameter 'ASSOCIATED_RESET' with value 'reset'.
+WARNING: [IP_Flow 19-5661] Bus Interface 'clk' does not have any bus interfaces associated with it.
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+Upgrading 'E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/GuitarSep.bd'
+INFO: [IP_Flow 19-1972] Upgraded GuitarSep_Game_SM_0_0 from Game_SM_v1_0 1.0 to Game_SM_v1_0 1.0
+Wrote  : <E:\2025-2\IEE2463 - Sistemas Electronicos Programables\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\bd\GuitarSep\GuitarSep.bd> 
+Wrote  : <E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ui/bd_98cbe854.ui> 
+update_module_reference GuitarSep_Song_Selector_0_0
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+Upgrading 'E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/GuitarSep.bd'
+INFO: [IP_Flow 19-1972] Upgraded GuitarSep_Song_Selector_0_0 from Song_Selector_v1_0 1.0 to Song_Selector_v1_0 1.0
+Wrote  : <E:\2025-2\IEE2463 - Sistemas Electronicos Programables\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\bd\GuitarSep\GuitarSep.bd> 
+Wrote  : <E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ui/bd_98cbe854.ui> 
+update_module_reference GuitarSep_MemorySequency_0_0
+INFO: [IP_Flow 19-5107] Inferred bus interface 'reset' of definition 'xilinx.com:signal:reset:1.0' (from Xilinx Repository).
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+Upgrading 'E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/GuitarSep.bd'
+INFO: [IP_Flow 19-1972] Upgraded GuitarSep_MemorySequency_0_0 from MemorySequency_v1_0 1.0 to MemorySequency_v1_0 1.0
+Wrote  : <E:\2025-2\IEE2463 - Sistemas Electronicos Programables\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\bd\GuitarSep\GuitarSep.bd> 
+Wrote  : <E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ui/bd_98cbe854.ui> 
+update_module_reference GuitarSep_ScoreDisplay_0_0
+INFO: [IP_Flow 19-5107] Inferred bus interface 'reset' of definition 'xilinx.com:signal:reset:1.0' (from Xilinx Repository).
+INFO: [IP_Flow 19-5107] Inferred bus interface 'clk' of definition 'xilinx.com:signal:clock:1.0' (from Xilinx Repository).
+INFO: [IP_Flow 19-4728] Bus Interface 'clk': Added interface parameter 'ASSOCIATED_RESET' with value 'reset'.
+WARNING: [IP_Flow 19-5661] Bus Interface 'clk' does not have any bus interfaces associated with it.
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+Upgrading 'E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/GuitarSep.bd'
+INFO: [IP_Flow 19-1972] Upgraded GuitarSep_ScoreDisplay_0_0 from ScoreDisplay_v1_0 1.0 to ScoreDisplay_v1_0 1.0
+Wrote  : <E:\2025-2\IEE2463 - Sistemas Electronicos Programables\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\bd\GuitarSep\GuitarSep.bd> 
+Wrote  : <E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ui/bd_98cbe854.ui> 
+update_module_reference GuitarSep_debouncer_0_0
+INFO: [IP_Flow 19-5107] Inferred bus interface 'clk' of definition 'xilinx.com:signal:clock:1.0' (from Xilinx Repository).
+WARNING: [IP_Flow 19-5661] Bus Interface 'clk' does not have any bus interfaces associated with it.
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+Upgrading 'E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/GuitarSep.bd'
+INFO: [IP_Flow 19-1972] Upgraded GuitarSep_debouncer_0_0 from debouncer_v1_0 1.0 to debouncer_v1_0 1.0
+Wrote  : <E:\2025-2\IEE2463 - Sistemas Electronicos Programables\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\bd\GuitarSep\GuitarSep.bd> 
+Wrote  : <E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ui/bd_98cbe854.ui> 
+delete_bd_objs [get_bd_nets debouncer_0_btn_out] [get_bd_nets ScoreDisplay_0_led] [get_bd_nets ScoreDisplay_0_led6_r] [get_bd_nets ScoreDisplay_0_led6_g] [get_bd_nets ScoreDisplay_0_led6_b] [get_bd_cells ScoreDisplay_0]
+update_compile_order -fileset sources_1
+update_module_reference GuitarSep_ScoreDisplay_0_0
+ERROR: [filemgmt 56-189] Failed to resolve reference. Nothing was found in the project to match the name 'ScoreDisplay'.
+ERROR: [Common 17-39] 'update_module_reference' failed due to earlier errors.
+create_bd_cell -type module -reference LedDisplay LedDisplay_0
+INFO: [IP_Flow 19-5107] Inferred bus interface 'reset' of definition 'xilinx.com:signal:reset:1.0' (from Xilinx Repository).
+INFO: [IP_Flow 19-5107] Inferred bus interface 'clk' of definition 'xilinx.com:signal:clock:1.0' (from Xilinx Repository).
+INFO: [IP_Flow 19-4728] Bus Interface 'clk': Added interface parameter 'ASSOCIATED_RESET' with value 'reset'.
+WARNING: [IP_Flow 19-5661] Bus Interface 'clk' does not have any bus interfaces associated with it.
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+connect_bd_net [get_bd_ports led] [get_bd_pins LedDisplay_0/led]
+connect_bd_net [get_bd_ports led6_r] [get_bd_pins LedDisplay_0/led6_r]
+connect_bd_net [get_bd_ports led6_g] [get_bd_pins LedDisplay_0/led6_g]
+connect_bd_net [get_bd_ports led6_b] [get_bd_pins LedDisplay_0/led6_b]
+connect_bd_net [get_bd_ports clk] [get_bd_pins LedDisplay_0/clk]
+connect_bd_net [get_bd_ports reset] [get_bd_pins LedDisplay_0/reset]
+connect_bd_net [get_bd_pins LedDisplay_0/playing] [get_bd_pins Game_SM_0/playing]
+connect_bd_net [get_bd_pins LedDisplay_0/note_out] [get_bd_pins Song_Selector_0/dout]
+connect_bd_net [get_bd_pins LedDisplay_0/btn_push] [get_bd_pins debouncer_0/btn_out]
+update_module_reference GuitarSep_Game_SM_0_0
+INFO: [IP_Flow 19-5107] Inferred bus interface 'reset' of definition 'xilinx.com:signal:reset:1.0' (from Xilinx Repository).
+INFO: [IP_Flow 19-5107] Inferred bus interface 'clk' of definition 'xilinx.com:signal:clock:1.0' (from Xilinx Repository).
+INFO: [IP_Flow 19-4728] Bus Interface 'clk': Added interface parameter 'ASSOCIATED_RESET' with value 'reset'.
+WARNING: [IP_Flow 19-5661] Bus Interface 'clk' does not have any bus interfaces associated with it.
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+Upgrading 'E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/GuitarSep.bd'
+INFO: [IP_Flow 19-1972] Upgraded GuitarSep_Game_SM_0_0 from Game_SM_v1_0 1.0 to Game_SM_v1_0 1.0
+Wrote  : <E:\2025-2\IEE2463 - Sistemas Electronicos Programables\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\bd\GuitarSep\GuitarSep.bd> 
+Wrote  : <E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ui/bd_98cbe854.ui> 
+update_compile_order -fileset sources_1
+delete_bd_objs [get_bd_nets Game_SM_0_song_selected] [get_bd_nets MemorySequency_0_addr] [get_bd_cells Song_Selector_0]
+delete_bd_objs [get_bd_nets ClockDivider_0_clk_out] [get_bd_nets MemorySequency_0_freq_game] [get_bd_cells MemorySequency_0]
+update_compile_order -fileset sources_1
+update_module_reference GuitarSep_MemorySequency_0_0
+INFO: [IP_Flow 19-5107] Inferred bus interface 'reset' of definition 'xilinx.com:signal:reset:1.0' (from Xilinx Repository).
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+WARNING: [Coretcl 2-176] No IPs found
+ERROR: [Common 17-69] Command failed: No IP specified.  Please specify IP with 'objects'
+update_module_reference GuitarSep_Song_Selector_0_0
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+WARNING: [Coretcl 2-176] No IPs found
+ERROR: [Common 17-69] Command failed: No IP specified.  Please specify IP with 'objects'
+create_bd_cell -type module -reference Song_Selector Song_Selector_0
+create_bd_cell -type module -reference MemorySequency MemorySequency_0
+set_property location {2 547 -145} [get_bd_cells Song_Selector_0]
+set_property location {2 508 84} [get_bd_cells MemorySequency_0]
+set_property location {3 788 83} [get_bd_cells Song_Selector_0]
+set_property location {2 421 77} [get_bd_cells MemorySequency_0]
+connect_bd_net [get_bd_pins ClockDivider_0/clk_out] [get_bd_pins MemorySequency_0/clk_game]
+connect_bd_net [get_bd_ports reset] [get_bd_pins MemorySequency_0/reset]
+connect_bd_net [get_bd_pins MemorySequency_0/playing] [get_bd_pins Game_SM_0/playing]
+connect_bd_net [get_bd_pins Game_SM_0/song_selected] [get_bd_pins Song_Selector_0/song_sel]
+connect_bd_net [get_bd_pins Song_Selector_0/add] [get_bd_pins MemorySequency_0/addr]
+connect_bd_net [get_bd_pins MemorySequency_0/freq_game] [get_bd_pins ClockDivider_0/fr_out]
+save_bd_design
+WARNING: [BD 41-597] NET <Song_Selector_0_dout> has no source
+Wrote  : <E:\2025-2\IEE2463 - Sistemas Electronicos Programables\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\bd\GuitarSep\GuitarSep.bd> 
+Wrote  : <E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ui/bd_98cbe854.ui> 
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 11
+CRITICAL WARNING: [BD 41-759] The input pins (listed below) are either not connected or do not have a source port, and they don't have a tie-off specified. These pins are tied-off to all 0's to avoid error in Implementation flow.
+Please check your design and connect them as needed: 
+/ila_0/probe0
+/LedDisplay_0/note_out
+
+WARNING: [BD 41-597] NET <Song_Selector_0_dout> has no source
+Wrote  : <E:\2025-2\IEE2463 - Sistemas Electronicos Programables\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\bd\GuitarSep\GuitarSep.bd> 
+WARNING: [BD 41-166] Source port for the net:Song_Selector_0_dout is NULL! Connection will be grounded!
+VHDL Output written to : E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd
+WARNING: [BD 41-166] Source port for the net:Song_Selector_0_dout is NULL! Connection will be grounded!
+VHDL Output written to : E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/sim/GuitarSep.vhd
+VHDL Output written to : E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hdl/GuitarSep_wrapper.vhd
+INFO: [BD 41-1029] Generation completed for the IP Integrator block ClockDivider_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block Game_SM_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block debouncer_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block LedDisplay_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block Song_Selector_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block MemorySequency_0 .
+Exporting to file E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hw_handoff/GuitarSep.hwh
+Generated Block Design Tcl file E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hw_handoff/GuitarSep_bd.tcl
+Generated Hardware Definition File E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.hwdef
+[Fri Oct  3 08:10:20 2025] Launched GuitarSep_ila_0_0_synth_1, GuitarSep_LedDisplay_0_0_synth_1, GuitarSep_Song_Selector_0_1_synth_1, GuitarSep_MemorySequency_0_1_synth_1, GuitarSep_ClockDivider_0_0_synth_1, GuitarSep_Game_SM_0_0_synth_1, GuitarSep_debouncer_0_0_synth_1, synth_1...
+Run output will be captured here:
+GuitarSep_ila_0_0_synth_1: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/GuitarSep_ila_0_0_synth_1/runme.log
+GuitarSep_LedDisplay_0_0_synth_1: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/GuitarSep_LedDisplay_0_0_synth_1/runme.log
+GuitarSep_Song_Selector_0_1_synth_1: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/GuitarSep_Song_Selector_0_1_synth_1/runme.log
+GuitarSep_MemorySequency_0_1_synth_1: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/GuitarSep_MemorySequency_0_1_synth_1/runme.log
+GuitarSep_ClockDivider_0_0_synth_1: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/GuitarSep_ClockDivider_0_0_synth_1/runme.log
+GuitarSep_Game_SM_0_0_synth_1: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/GuitarSep_Game_SM_0_0_synth_1/runme.log
+GuitarSep_debouncer_0_0_synth_1: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/GuitarSep_debouncer_0_0_synth_1/runme.log
+synth_1: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/runme.log
+[Fri Oct  3 08:10:20 2025] Launched impl_1...
+Run output will be captured here: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/runme.log
+launch_runs: Time (s): cpu = 00:00:08 ; elapsed = 00:00:21 . Memory (MB): peak = 1498.891 ; gain = 139.910
+reset_run synth_1
+reset_run GuitarSep_debouncer_0_0_synth_1
+WARNING: [Vivado 12-1017] Problems encountered:
+1. Failed to delete one or more files in run directory E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/GuitarSep_debouncer_0_0_synth_1
+
+reset_run GuitarSep_ila_0_0_synth_1
+WARNING: [Vivado 12-1017] Problems encountered:
+1. PID not specified
+
+reset_run GuitarSep_LedDisplay_0_0_synth_1
+WARNING: [Vivado 12-1017] Problems encountered:
+1. PID not specified
+
+reset_run GuitarSep_Song_Selector_0_1_synth_1
+WARNING: [Vivado 12-1017] Problems encountered:
+1. PID not specified
+
+reset_run GuitarSep_MemorySequency_0_1_synth_1
+WARNING: [Vivado 12-1017] Problems encountered:
+1. PID not specified
+
+reset_run GuitarSep_ClockDivider_0_0_synth_1
+WARNING: [Vivado 12-1017] Problems encountered:
+1. PID not specified
+
+reset_run GuitarSep_Game_SM_0_0_synth_1
+WARNING: [Vivado 12-1017] Problems encountered:
+1. PID not specified
+
+connect_bd_net [get_bd_pins Song_Selector_0/dout] [get_bd_pins ila_0/probe0]
+save_bd_design
+Wrote  : <E:\2025-2\IEE2463 - Sistemas Electronicos Programables\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\bd\GuitarSep\GuitarSep.bd> 
+Wrote  : <E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ui/bd_98cbe854.ui> 
+launch_runs impl_1 -to_step write_bitstream -jobs 11
+Wrote  : <E:\2025-2\IEE2463 - Sistemas Electronicos Programables\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\bd\GuitarSep\GuitarSep.bd> 
+VHDL Output written to : E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd
+VHDL Output written to : E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/sim/GuitarSep.vhd
+VHDL Output written to : E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hdl/GuitarSep_wrapper.vhd
+Exporting to file E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hw_handoff/GuitarSep.hwh
+Generated Block Design Tcl file E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hw_handoff/GuitarSep_bd.tcl
+Generated Hardware Definition File E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.hwdef
+[Fri Oct  3 08:11:10 2025] Launched GuitarSep_ila_0_0_synth_1, GuitarSep_LedDisplay_0_0_synth_1, GuitarSep_Song_Selector_0_1_synth_1, GuitarSep_MemorySequency_0_1_synth_1, GuitarSep_ClockDivider_0_0_synth_1, GuitarSep_Game_SM_0_0_synth_1, GuitarSep_debouncer_0_0_synth_1, synth_1...
+Run output will be captured here:
+GuitarSep_ila_0_0_synth_1: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/GuitarSep_ila_0_0_synth_1/runme.log
+GuitarSep_LedDisplay_0_0_synth_1: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/GuitarSep_LedDisplay_0_0_synth_1/runme.log
+GuitarSep_Song_Selector_0_1_synth_1: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/GuitarSep_Song_Selector_0_1_synth_1/runme.log
+GuitarSep_MemorySequency_0_1_synth_1: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/GuitarSep_MemorySequency_0_1_synth_1/runme.log
+GuitarSep_ClockDivider_0_0_synth_1: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/GuitarSep_ClockDivider_0_0_synth_1/runme.log
+GuitarSep_Game_SM_0_0_synth_1: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/GuitarSep_Game_SM_0_0_synth_1/runme.log
+GuitarSep_debouncer_0_0_synth_1: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/GuitarSep_debouncer_0_0_synth_1/runme.log
+synth_1: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/runme.log
+[Fri Oct  3 08:11:11 2025] Launched impl_1...
+Run output will be captured here: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/runme.log
+launch_runs: Time (s): cpu = 00:00:02 ; elapsed = 00:00:07 . Memory (MB): peak = 1521.449 ; gain = 5.137
+open_hw_manager
+connect_hw_server -allow_non_jtag
+INFO: [Labtools 27-2285] Connecting to hw_server url TCP:localhost:3121
+INFO: [Labtools 27-2222] Launching hw_server...
+INFO: [Labtools 27-2221] Launch Output:
+
+****** Xilinx hw_server v2020.1
+  **** Build date : May 27 2020 at 20:24:38
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+
+INFO: [Labtools 27-3415] Connecting to cs_server url TCP:localhost:3042
+INFO: [Labtools 27-3417] Launching cs_server...
+INFO: [Labtools 27-2221] Launch Output:
+
+
+****** Xilinx cs_server v2020.1.0
+  **** Build date : May 13 2020-21:10:29
+    ** Copyright 2017-2020 Xilinx, Inc. All Rights Reserved.
+
+
+
+connect_hw_server: Time (s): cpu = 00:00:01 ; elapsed = 00:00:11 . Memory (MB): peak = 1560.105 ; gain = 3.492
+open_hw_target
+INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Digilent/210351B3FC05A
+open_hw_target: Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2862.090 ; gain = 1301.984
+set_property PROGRAM.FILE {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.bit} [get_hw_devices xc7z010_1]
+set_property PROBES.FILE {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.ltx} [get_hw_devices xc7z010_1]
+set_property FULL_PROBES.FILE {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.ltx} [get_hw_devices xc7z010_1]
+current_hw_device [get_hw_devices xc7z010_1]
+refresh_hw_device [lindex [get_hw_devices xc7z010_1] 0]
+INFO: [Labtools 27-1434] Device xc7z010 (JTAG device index = 1) is programmed with a design that has no supported debug core(s) in it.
+WARNING: [Labtools 27-3361] The debug hub core was not detected.
+Resolution: 
+1. Make sure the clock connected to the debug hub (dbg_hub) core is a free running clock and is active.
+2. Make sure the BSCAN_SWITCH_USER_MASK device property in Vivado Hardware Manager reflects the user scan chain setting in the design and refresh the device.  To determine the user scan chain setting in the design, open the implemented design and use 'get_property C_USER_SCAN_CHAIN [get_debug_cores dbg_hub]'.
+For more details on setting the scan chain property, consult the Vivado Debug and Programming User Guide (UG908).
+WARNING: [Labtools 27-3413] Dropping logic core with cellname:'GuitarSep_i/ila_0' at location 'uuid_6AAAA6E4B2105DD6900846BA5BB7D8FF' from probes file, since it cannot be found on the programmed device.
+set_property PROBES.FILE {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.ltx} [get_hw_devices xc7z010_1]
+set_property FULL_PROBES.FILE {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.ltx} [get_hw_devices xc7z010_1]
+set_property PROGRAM.FILE {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.bit} [get_hw_devices xc7z010_1]
+program_hw_devices [get_hw_devices xc7z010_1]
+INFO: [Labtools 27-3164] End of startup status: HIGH
+refresh_hw_device [lindex [get_hw_devices xc7z010_1] 0]
+INFO: [Labtools 27-2302] Device xc7z010 (JTAG device index = 1) is programmed with a design that has 1 ILA core(s).
+display_hw_ila_data [ get_hw_ila_data hw_ila_data_1 -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_0"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_0"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2025-Oct-03 08:18:33
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_0"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_0"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_1' triggered at 2025-Oct-03 08:18:33
+INFO: [Labtools 27-3304] ILA Waveform data saved to file E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_1.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+ERROR: [Labtoolstcl 44-513] HW Target shutdown. Closing target: localhost:3121/xilinx_tcf/Digilent/210351B3FC05A
+INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Digilent/210351B3FC05A
+WARNING: [Labtoolstcl 44-129] No matching hw_ila_data was found.
+INFO: [Labtools 27-1434] Device xc7z010 (JTAG device index = 1) is programmed with a design that has no supported debug core(s) in it.
+WARNING: [Labtools 27-3361] The debug hub core was not detected.
+Resolution: 
+1. Make sure the clock connected to the debug hub (dbg_hub) core is a free running clock and is active.
+2. Make sure the BSCAN_SWITCH_USER_MASK device property in Vivado Hardware Manager reflects the user scan chain setting in the design and refresh the device.  To determine the user scan chain setting in the design, open the implemented design and use 'get_property C_USER_SCAN_CHAIN [get_debug_cores dbg_hub]'.
+For more details on setting the scan chain property, consult the Vivado Debug and Programming User Guide (UG908).
+WARNING: [Labtools 27-3413] Dropping logic core with cellname:'GuitarSep_i/ila_0' at location 'uuid_6AAAA6E4B2105DD6900846BA5BB7D8FF' from probes file, since it cannot be found on the programmed device.
+WARNING: [Labtoolstcl 44-129] No matching hw_ila_data was found.
+set_property PROBES.FILE {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.ltx} [get_hw_devices xc7z010_1]
+set_property FULL_PROBES.FILE {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.ltx} [get_hw_devices xc7z010_1]
+set_property PROGRAM.FILE {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.bit} [get_hw_devices xc7z010_1]
+program_hw_devices [get_hw_devices xc7z010_1]
+INFO: [Labtools 27-3164] End of startup status: HIGH
+refresh_hw_device [lindex [get_hw_devices xc7z010_1] 0]
+INFO: [Labtools 27-2302] Device xc7z010 (JTAG device index = 1) is programmed with a design that has 1 ILA core(s).
+display_hw_ila_data [ get_hw_ila_data hw_ila_data_1 -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_0"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_0"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2025-Oct-03 08:38:57
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_0"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_0"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_1' triggered at 2025-Oct-03 08:38:57
+INFO: [Labtools 27-3304] ILA Waveform data saved to file E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_1.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_0"}] -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2025-Oct-03 08:39:00
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_0"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_0"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_1' triggered at 2025-Oct-03 08:39:00
+INFO: [Labtools 27-3304] ILA Waveform data saved to file E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_1.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+update_module_reference GuitarSep_MemorySequency_0_1
+INFO: [IP_Flow 19-5107] Inferred bus interface 'reset' of definition 'xilinx.com:signal:reset:1.0' (from Xilinx Repository).
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+Upgrading 'E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/GuitarSep.bd'
+WARNING: [Vivado 12-1017] Problems encountered:
+1. Failed to delete one or more files in run directory E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/GuitarSep_MemorySequency_0_1_synth_1
+
+INFO: [IP_Flow 19-1972] Upgraded GuitarSep_MemorySequency_0_1 from MemorySequency_v1_0 1.0 to MemorySequency_v1_0 1.0
+Wrote  : <E:\2025-2\IEE2463 - Sistemas Electronicos Programables\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\bd\GuitarSep\GuitarSep.bd> 
+update_module_reference: Time (s): cpu = 00:00:04 ; elapsed = 00:00:10 . Memory (MB): peak = 2952.410 ; gain = 5.320
+update_module_reference GuitarSep_MemorySequency_0_1
+INFO: [IP_Flow 19-5107] Inferred bus interface 'reset' of definition 'xilinx.com:signal:reset:1.0' (from Xilinx Repository).
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+Upgrading 'E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/GuitarSep.bd'
+INFO: [IP_Flow 19-1972] Upgraded GuitarSep_MemorySequency_0_1 from MemorySequency_v1_0 1.0 to MemorySequency_v1_0 1.0
+Wrote  : <E:\2025-2\IEE2463 - Sistemas Electronicos Programables\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\bd\GuitarSep\GuitarSep.bd> 
+Wrote  : <E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ui/bd_98cbe854.ui> 
+reset_run synth_1
+WARNING: [Vivado 12-1017] Problems encountered:
+1. Failed to delete one or more files in run directory E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1
+
+launch_runs impl_1 -to_step write_bitstream -jobs 11
+Wrote  : <E:\2025-2\IEE2463 - Sistemas Electronicos Programables\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\bd\GuitarSep\GuitarSep.bd> 
+VHDL Output written to : E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd
+VHDL Output written to : E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/sim/GuitarSep.vhd
+VHDL Output written to : E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hdl/GuitarSep_wrapper.vhd
+INFO: [BD 41-1029] Generation completed for the IP Integrator block MemorySequency_0 .
+Exporting to file E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hw_handoff/GuitarSep.hwh
+Generated Block Design Tcl file E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hw_handoff/GuitarSep_bd.tcl
+Generated Hardware Definition File E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.hwdef
+[Fri Oct  3 08:53:42 2025] Launched GuitarSep_MemorySequency_0_1_synth_1, synth_1...
+Run output will be captured here:
+GuitarSep_MemorySequency_0_1_synth_1: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/GuitarSep_MemorySequency_0_1_synth_1/runme.log
+synth_1: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/runme.log
+[Fri Oct  3 08:53:42 2025] Launched impl_1...
+Run output will be captured here: E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/runme.log
+launch_runs: Time (s): cpu = 00:00:01 ; elapsed = 00:00:05 . Memory (MB): peak = 3022.441 ; gain = 0.000
+ERROR: [Labtoolstcl 44-513] HW Target shutdown. Closing target: localhost:3121/xilinx_tcf/Digilent/210351B3FC05A
+INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Digilent/210351B3FC05A
+WARNING: [Labtoolstcl 44-129] No matching hw_ila_data was found.
+INFO: [Labtools 27-1434] Device xc7z010 (JTAG device index = 1) is programmed with a design that has no supported debug core(s) in it.
+WARNING: [Labtools 27-3361] The debug hub core was not detected.
+Resolution: 
+1. Make sure the clock connected to the debug hub (dbg_hub) core is a free running clock and is active.
+2. Make sure the BSCAN_SWITCH_USER_MASK device property in Vivado Hardware Manager reflects the user scan chain setting in the design and refresh the device.  To determine the user scan chain setting in the design, open the implemented design and use 'get_property C_USER_SCAN_CHAIN [get_debug_cores dbg_hub]'.
+For more details on setting the scan chain property, consult the Vivado Debug and Programming User Guide (UG908).
+WARNING: [Labtools 27-3413] Dropping logic core with cellname:'GuitarSep_i/ila_0' at location 'uuid_6AAAA6E4B2105DD6900846BA5BB7D8FF' from probes file, since it cannot be found on the programmed device.
+WARNING: [Labtoolstcl 44-129] No matching hw_ila_data was found.
+set_property PROBES.FILE {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.ltx} [get_hw_devices xc7z010_1]
+set_property FULL_PROBES.FILE {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.ltx} [get_hw_devices xc7z010_1]
+set_property PROGRAM.FILE {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.bit} [get_hw_devices xc7z010_1]
+program_hw_devices [get_hw_devices xc7z010_1]
+INFO: [Labtools 27-3164] End of startup status: HIGH
+refresh_hw_device [lindex [get_hw_devices xc7z010_1] 0]
+INFO: [Labtools 27-2302] Device xc7z010 (JTAG device index = 1) is programmed with a design that has 1 ILA core(s).
+display_hw_ila_data [ get_hw_ila_data hw_ila_data_1 -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_0"}]]
+save_wave_config {E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.hw/hw_1/wave/hw_ila_data_1/hw_ila_data_1.wcfg}
+close_hw_manager
+exit
+INFO: [Common 17-206] Exiting Vivado at Fri Oct  3 23:05:31 2025...
