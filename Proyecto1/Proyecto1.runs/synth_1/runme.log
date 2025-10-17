@@ -11,8 +11,13 @@
 
 source GuitarSep_wrapper.tcl -notrace
 INFO: [IP_Flow 19-234] Refreshing IP repositories
-INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/ip_repo/Song_Memory_1.0'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1'.
+WARNING: [IP_Flow 19-3656] If you move the project, the path for repository 'c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1' may become invalid. A better location for the repository would be in a path adjacent to the project. (Current project location is 'c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1'.)
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2020.1/data/ip'.
+WARNING: [IP_Flow 19-4995] The host OS only allows 260 characters in a normal path. The IP cache path is more than 80 characters. If you experience issues with IP caching, please consider changing the IP cache to a location with a shorter path. Alternately consider using the OS subst command to map part of the path to a drive letter. 
+Current IP cache path is c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.cache/ip 
+add_files: Time (s): cpu = 00:00:04 ; elapsed = 00:00:07 . Memory (MB): peak = 1062.762 ; gain = 0.000
 Command: synth_design -top GuitarSep_wrapper -part xc7z010clg400-1
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7z010'
@@ -20,99 +25,134 @@ INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z010
 INFO: [Device 21-403] Loading part xc7z010clg400-1
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 15112
+INFO: [Synth 8-7075] Helper process launched with PID 17824
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 1125.730 ; gain = 13.520
+Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 1062.762 ; gain = 0.000
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-638] synthesizing module 'GuitarSep_wrapper' [E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hdl/GuitarSep_wrapper.vhd:28]
-INFO: [Synth 8-3491] module 'GuitarSep' declared at 'E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:14' bound to instance 'GuitarSep_i' of component 'GuitarSep' [E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hdl/GuitarSep_wrapper.vhd:43]
-INFO: [Synth 8-638] synthesizing module 'GuitarSep' [E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:32]
-INFO: [Synth 8-3491] module 'GuitarSep_ClockDivider_0_0' declared at 'E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23472-LAPTOP-PPEH9OE5/realtime/GuitarSep_ClockDivider_0_0_stub.vhdl:5' bound to instance 'ClockDivider_0' of component 'GuitarSep_ClockDivider_0_0' [E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:124]
-INFO: [Synth 8-638] synthesizing module 'GuitarSep_ClockDivider_0_0' [E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23472-LAPTOP-PPEH9OE5/realtime/GuitarSep_ClockDivider_0_0_stub.vhdl:14]
-INFO: [Synth 8-3491] module 'GuitarSep_Game_SM_0_0' declared at 'E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23472-LAPTOP-PPEH9OE5/realtime/GuitarSep_Game_SM_0_0_stub.vhdl:5' bound to instance 'Game_SM_0' of component 'GuitarSep_Game_SM_0_0' [E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:130]
-INFO: [Synth 8-638] synthesizing module 'GuitarSep_Game_SM_0_0' [E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23472-LAPTOP-PPEH9OE5/realtime/GuitarSep_Game_SM_0_0_stub.vhdl:17]
-INFO: [Synth 8-3491] module 'GuitarSep_LedDisplay_0_0' declared at 'E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23472-LAPTOP-PPEH9OE5/realtime/GuitarSep_LedDisplay_0_0_stub.vhdl:5' bound to instance 'LedDisplay_0' of component 'GuitarSep_LedDisplay_0_0' [E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:139]
-INFO: [Synth 8-638] synthesizing module 'GuitarSep_LedDisplay_0_0' [E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23472-LAPTOP-PPEH9OE5/realtime/GuitarSep_LedDisplay_0_0_stub.vhdl:20]
-INFO: [Synth 8-3491] module 'GuitarSep_MemorySequency_0_1' declared at 'E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23472-LAPTOP-PPEH9OE5/realtime/GuitarSep_MemorySequency_0_1_stub.vhdl:5' bound to instance 'MemorySequency_0' of component 'GuitarSep_MemorySequency_0_1' [E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:151]
-INFO: [Synth 8-638] synthesizing module 'GuitarSep_MemorySequency_0_1' [E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23472-LAPTOP-PPEH9OE5/realtime/GuitarSep_MemorySequency_0_1_stub.vhdl:16]
-INFO: [Synth 8-3491] module 'GuitarSep_Song_Selector_0_1' declared at 'E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23472-LAPTOP-PPEH9OE5/realtime/GuitarSep_Song_Selector_0_1_stub.vhdl:5' bound to instance 'Song_Selector_0' of component 'GuitarSep_Song_Selector_0_1' [E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:159]
-INFO: [Synth 8-638] synthesizing module 'GuitarSep_Song_Selector_0_1' [E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23472-LAPTOP-PPEH9OE5/realtime/GuitarSep_Song_Selector_0_1_stub.vhdl:14]
-INFO: [Synth 8-3491] module 'GuitarSep_debouncer_0_0' declared at 'E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23472-LAPTOP-PPEH9OE5/realtime/GuitarSep_debouncer_0_0_stub.vhdl:5' bound to instance 'debouncer_0' of component 'GuitarSep_debouncer_0_0' [E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:165]
-INFO: [Synth 8-638] synthesizing module 'GuitarSep_debouncer_0_0' [E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23472-LAPTOP-PPEH9OE5/realtime/GuitarSep_debouncer_0_0_stub.vhdl:14]
-INFO: [Synth 8-3491] module 'GuitarSep_ila_0_0' declared at 'E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23472-LAPTOP-PPEH9OE5/realtime/GuitarSep_ila_0_0_stub.vhdl:5' bound to instance 'ila_0' of component 'GuitarSep_ila_0_0' [E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:171]
-INFO: [Synth 8-638] synthesizing module 'GuitarSep_ila_0_0' [E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23472-LAPTOP-PPEH9OE5/realtime/GuitarSep_ila_0_0_stub.vhdl:13]
-INFO: [Synth 8-256] done synthesizing module 'GuitarSep' (1#1) [E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:32]
-INFO: [Synth 8-256] done synthesizing module 'GuitarSep_wrapper' (2#1) [E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hdl/GuitarSep_wrapper.vhd:28]
+INFO: [Synth 8-638] synthesizing module 'GuitarSep_wrapper' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hdl/GuitarSep_wrapper.vhd:28]
+INFO: [Synth 8-3491] module 'GuitarSep' declared at 'C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:14' bound to instance 'GuitarSep_i' of component 'GuitarSep' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hdl/GuitarSep_wrapper.vhd:43]
+INFO: [Synth 8-638] synthesizing module 'GuitarSep' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:32]
+INFO: [Synth 8-3491] module 'GuitarSep_ClockDivider_1_0' declared at 'C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_ClockDivider_1_0_stub.vhdl:5' bound to instance 'ClockDivider_1' of component 'GuitarSep_ClockDivider_1_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:596]
+INFO: [Synth 8-638] synthesizing module 'GuitarSep_ClockDivider_1_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_ClockDivider_1_0_stub.vhdl:14]
+INFO: [Synth 8-3491] module 'GuitarSep_Game_SM_0_0' declared at 'C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_Game_SM_0_0_stub.vhdl:5' bound to instance 'Game_SM_0' of component 'GuitarSep_Game_SM_0_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:602]
+INFO: [Synth 8-638] synthesizing module 'GuitarSep_Game_SM_0_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_Game_SM_0_0_stub.vhdl:17]
+INFO: [Synth 8-3491] module 'GuitarSep_MemorySequency_1_0' declared at 'C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_MemorySequency_1_0_stub.vhdl:5' bound to instance 'MemorySequency_1' of component 'GuitarSep_MemorySequency_1_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:611]
+INFO: [Synth 8-638] synthesizing module 'GuitarSep_MemorySequency_1_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_MemorySequency_1_0_stub.vhdl:16]
+INFO: [Synth 8-3491] module 'GuitarSep_Score_display_0_0' declared at 'C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_Score_display_0_0_stub.vhdl:5' bound to instance 'Score_display_0' of component 'GuitarSep_Score_display_0_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:619]
+INFO: [Synth 8-638] synthesizing module 'GuitarSep_Score_display_0_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_Score_display_0_0_stub.vhdl:18]
+INFO: [Synth 8-3491] module 'GuitarSep_Song_Memory_0_0' declared at 'C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_Song_Memory_0_0_stub.vhdl:5' bound to instance 'Song_Memory_0' of component 'GuitarSep_Song_Memory_0_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:629]
+INFO: [Synth 8-638] synthesizing module 'GuitarSep_Song_Memory_0_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_Song_Memory_0_0_stub.vhdl:51]
+INFO: [Synth 8-3491] module 'GuitarSep_axi_led_0_0' declared at 'C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_axi_led_0_0_stub.vhdl:5' bound to instance 'axi_led_0' of component 'GuitarSep_axi_led_0_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:672]
+INFO: [Synth 8-638] synthesizing module 'GuitarSep_axi_led_0_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_axi_led_0_0_stub.vhdl:53]
+INFO: [Synth 8-3491] module 'GuitarSep_axi_smc_0' declared at 'C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_axi_smc_0_stub.vhdl:5' bound to instance 'axi_smc' of component 'GuitarSep_axi_smc_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:717]
+INFO: [Synth 8-638] synthesizing module 'GuitarSep_axi_smc_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_axi_smc_0_stub.vhdl:117]
+INFO: [Synth 8-3491] module 'GuitarSep_axi_traffic_gen_0_0' declared at 'C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_axi_traffic_gen_0_0_stub.vhdl:5' bound to instance 'axi_traffic_gen_0' of component 'GuitarSep_axi_traffic_gen_0_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:826]
+INFO: [Synth 8-638] synthesizing module 'GuitarSep_axi_traffic_gen_0_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_axi_traffic_gen_0_0_stub.vhdl:33]
+INFO: [Synth 8-3491] module 'GuitarSep_axi_traffic_gen_2_0' declared at 'C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_axi_traffic_gen_2_0_stub.vhdl:5' bound to instance 'axi_traffic_gen_2' of component 'GuitarSep_axi_traffic_gen_2_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:851]
+INFO: [Synth 8-638] synthesizing module 'GuitarSep_axi_traffic_gen_2_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_axi_traffic_gen_2_0_stub.vhdl:33]
+INFO: [Synth 8-3491] module 'GuitarSep_debouncer_0_0' declared at 'C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_debouncer_0_0_stub.vhdl:5' bound to instance 'debouncer_0' of component 'GuitarSep_debouncer_0_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:876]
+INFO: [Synth 8-638] synthesizing module 'GuitarSep_debouncer_0_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_debouncer_0_0_stub.vhdl:14]
+INFO: [Synth 8-3491] module 'GuitarSep_ila_0_0' declared at 'C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_ila_0_0_stub.vhdl:5' bound to instance 'ila_0' of component 'GuitarSep_ila_0_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:882]
+INFO: [Synth 8-638] synthesizing module 'GuitarSep_ila_0_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_ila_0_0_stub.vhdl:13]
+INFO: [Synth 8-3491] module 'GuitarSep_ila_1_0' declared at 'C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_ila_1_0_stub.vhdl:5' bound to instance 'ila_1' of component 'GuitarSep_ila_1_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:887]
+INFO: [Synth 8-638] synthesizing module 'GuitarSep_ila_1_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_ila_1_0_stub.vhdl:31]
+INFO: [Synth 8-3491] module 'GuitarSep_ila_2_0' declared at 'C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_ila_2_0_stub.vhdl:5' bound to instance 'ila_2' of component 'GuitarSep_ila_2_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:910]
+INFO: [Synth 8-638] synthesizing module 'GuitarSep_ila_2_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_ila_2_0_stub.vhdl:56]
+INFO: [Synth 8-3491] module 'GuitarSep_ila_3_0' declared at 'C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_ila_3_0_stub.vhdl:5' bound to instance 'ila_3' of component 'GuitarSep_ila_3_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:958]
+INFO: [Synth 8-638] synthesizing module 'GuitarSep_ila_3_0' [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/.Xil/Vivado-23848-Macbook/realtime/GuitarSep_ila_3_0_stub.vhdl:56]
+INFO: [Synth 8-256] done synthesizing module 'GuitarSep' (1#1) [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd:32]
+INFO: [Synth 8-256] done synthesizing module 'GuitarSep_wrapper' (2#1) [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hdl/GuitarSep_wrapper.vhd:28]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1179.566 ; gain = 67.355
+Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1107.840 ; gain = 45.078
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1179.566 ; gain = 67.355
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1124.707 ; gain = 61.945
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1179.566 ; gain = 67.355
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1124.707 ; gain = 61.945
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1179.566 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 1124.707 ; gain = 0.000
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
-Parsing XDC File [e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_ClockDivider_0_0/GuitarSep_ClockDivider_0_0/GuitarSep_ClockDivider_0_0_in_context.xdc] for cell 'GuitarSep_i/ClockDivider_0'
-Finished Parsing XDC File [e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_ClockDivider_0_0/GuitarSep_ClockDivider_0_0/GuitarSep_ClockDivider_0_0_in_context.xdc] for cell 'GuitarSep_i/ClockDivider_0'
-Parsing XDC File [e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_Game_SM_0_0/GuitarSep_Game_SM_0_0/GuitarSep_Game_SM_0_0_in_context.xdc] for cell 'GuitarSep_i/Game_SM_0'
-Finished Parsing XDC File [e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_Game_SM_0_0/GuitarSep_Game_SM_0_0/GuitarSep_Game_SM_0_0_in_context.xdc] for cell 'GuitarSep_i/Game_SM_0'
-Parsing XDC File [e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_debouncer_0_0/GuitarSep_debouncer_0_0/GuitarSep_debouncer_0_0_in_context.xdc] for cell 'GuitarSep_i/debouncer_0'
-Finished Parsing XDC File [e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_debouncer_0_0/GuitarSep_debouncer_0_0/GuitarSep_debouncer_0_0_in_context.xdc] for cell 'GuitarSep_i/debouncer_0'
-Parsing XDC File [e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_ila_0_0/GuitarSep_ila_0_0/GuitarSep_ila_0_0_in_context.xdc] for cell 'GuitarSep_i/ila_0'
-Finished Parsing XDC File [e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_ila_0_0/GuitarSep_ila_0_0/GuitarSep_ila_0_0_in_context.xdc] for cell 'GuitarSep_i/ila_0'
-Parsing XDC File [e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_LedDisplay_0_0/GuitarSep_LedDisplay_0_0/GuitarSep_LedDisplay_0_0_in_context.xdc] for cell 'GuitarSep_i/LedDisplay_0'
-Finished Parsing XDC File [e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_LedDisplay_0_0/GuitarSep_LedDisplay_0_0/GuitarSep_LedDisplay_0_0_in_context.xdc] for cell 'GuitarSep_i/LedDisplay_0'
-Parsing XDC File [e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_Song_Selector_0_1/GuitarSep_Song_Selector_0_1/GuitarSep_Song_Selector_0_1_in_context.xdc] for cell 'GuitarSep_i/Song_Selector_0'
-Finished Parsing XDC File [e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_Song_Selector_0_1/GuitarSep_Song_Selector_0_1/GuitarSep_Song_Selector_0_1_in_context.xdc] for cell 'GuitarSep_i/Song_Selector_0'
-Parsing XDC File [e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_MemorySequency_0_1/GuitarSep_MemorySequency_0_1/GuitarSep_MemorySequency_0_1_in_context.xdc] for cell 'GuitarSep_i/MemorySequency_0'
-Finished Parsing XDC File [e:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_MemorySequency_0_1/GuitarSep_MemorySequency_0_1/GuitarSep_MemorySequency_0_1_in_context.xdc] for cell 'GuitarSep_i/MemorySequency_0'
-Parsing XDC File [E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/constrs_1/imports/Downloads/Zybo-Z7-Master.xdc]
-Finished Parsing XDC File [E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/constrs_1/imports/Downloads/Zybo-Z7-Master.xdc]
-INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.srcs/constrs_1/imports/Downloads/Zybo-Z7-Master.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/GuitarSep_wrapper_propImpl.xdc].
+Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_Game_SM_0_0/GuitarSep_Game_SM_0_0/GuitarSep_Game_SM_0_0_in_context.xdc] for cell 'GuitarSep_i/Game_SM_0'
+Finished Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_Game_SM_0_0/GuitarSep_Game_SM_0_0/GuitarSep_Game_SM_0_0_in_context.xdc] for cell 'GuitarSep_i/Game_SM_0'
+Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_debouncer_0_0/GuitarSep_debouncer_0_0/GuitarSep_debouncer_0_0_in_context.xdc] for cell 'GuitarSep_i/debouncer_0'
+Finished Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_debouncer_0_0/GuitarSep_debouncer_0_0/GuitarSep_debouncer_0_0_in_context.xdc] for cell 'GuitarSep_i/debouncer_0'
+Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_ila_0_0/GuitarSep_ila_0_0/GuitarSep_ila_0_0_in_context.xdc] for cell 'GuitarSep_i/ila_0'
+Finished Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_ila_0_0/GuitarSep_ila_0_0/GuitarSep_ila_0_0_in_context.xdc] for cell 'GuitarSep_i/ila_0'
+Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_MemorySequency_1_0/GuitarSep_MemorySequency_1_0/GuitarSep_MemorySequency_1_0_in_context.xdc] for cell 'GuitarSep_i/MemorySequency_1'
+Finished Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_MemorySequency_1_0/GuitarSep_MemorySequency_1_0/GuitarSep_MemorySequency_1_0_in_context.xdc] for cell 'GuitarSep_i/MemorySequency_1'
+Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_ClockDivider_1_0/GuitarSep_ClockDivider_1_0/GuitarSep_ClockDivider_1_0_in_context.xdc] for cell 'GuitarSep_i/ClockDivider_1'
+Finished Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_ClockDivider_1_0/GuitarSep_ClockDivider_1_0/GuitarSep_ClockDivider_1_0_in_context.xdc] for cell 'GuitarSep_i/ClockDivider_1'
+Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_Score_display_0_0/GuitarSep_Score_display_0_0/GuitarSep_Score_display_0_0_in_context.xdc] for cell 'GuitarSep_i/Score_display_0'
+Finished Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_Score_display_0_0/GuitarSep_Score_display_0_0/GuitarSep_Score_display_0_0_in_context.xdc] for cell 'GuitarSep_i/Score_display_0'
+Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_Song_Memory_0_0/GuitarSep_Song_Memory_0_0/GuitarSep_Song_Memory_0_0_in_context.xdc] for cell 'GuitarSep_i/Song_Memory_0'
+Finished Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_Song_Memory_0_0/GuitarSep_Song_Memory_0_0/GuitarSep_Song_Memory_0_0_in_context.xdc] for cell 'GuitarSep_i/Song_Memory_0'
+Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_axi_led_0_0/GuitarSep_axi_led_0_0/GuitarSep_axi_led_0_0_in_context.xdc] for cell 'GuitarSep_i/axi_led_0'
+Finished Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_axi_led_0_0/GuitarSep_axi_led_0_0/GuitarSep_axi_led_0_0_in_context.xdc] for cell 'GuitarSep_i/axi_led_0'
+Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_axi_traffic_gen_0_0/GuitarSep_axi_traffic_gen_0_0/GuitarSep_axi_traffic_gen_0_0_in_context.xdc] for cell 'GuitarSep_i/axi_traffic_gen_0'
+Finished Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_axi_traffic_gen_0_0/GuitarSep_axi_traffic_gen_0_0/GuitarSep_axi_traffic_gen_0_0_in_context.xdc] for cell 'GuitarSep_i/axi_traffic_gen_0'
+Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_axi_smc_0/GuitarSep_axi_smc_0/GuitarSep_axi_smc_0_in_context.xdc] for cell 'GuitarSep_i/axi_smc'
+Finished Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_axi_smc_0/GuitarSep_axi_smc_0/GuitarSep_axi_smc_0_in_context.xdc] for cell 'GuitarSep_i/axi_smc'
+Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_axi_traffic_gen_2_0/GuitarSep_axi_traffic_gen_2_0/GuitarSep_axi_traffic_gen_2_0_in_context.xdc] for cell 'GuitarSep_i/axi_traffic_gen_2'
+Finished Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_axi_traffic_gen_2_0/GuitarSep_axi_traffic_gen_2_0/GuitarSep_axi_traffic_gen_2_0_in_context.xdc] for cell 'GuitarSep_i/axi_traffic_gen_2'
+Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_ila_1_0/GuitarSep_ila_1_0/GuitarSep_ila_1_0_in_context.xdc] for cell 'GuitarSep_i/ila_1'
+Finished Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_ila_1_0/GuitarSep_ila_1_0/GuitarSep_ila_1_0_in_context.xdc] for cell 'GuitarSep_i/ila_1'
+Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_ila_2_0/GuitarSep_ila_2_0/GuitarSep_ila_2_0_in_context.xdc] for cell 'GuitarSep_i/ila_2'
+Finished Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_ila_2_0/GuitarSep_ila_2_0/GuitarSep_ila_2_0_in_context.xdc] for cell 'GuitarSep_i/ila_2'
+Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_ila_3_0/GuitarSep_ila_3_0/GuitarSep_ila_3_0_in_context.xdc] for cell 'GuitarSep_i/ila_3'
+Finished Parsing XDC File [c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_ila_3_0/GuitarSep_ila_3_0/GuitarSep_ila_3_0_in_context.xdc] for cell 'GuitarSep_i/ila_3'
+Parsing XDC File [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/constrs_1/imports/Downloads/Zybo-Z7-Master.xdc]
+Finished Parsing XDC File [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/constrs_1/imports/Downloads/Zybo-Z7-Master.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/constrs_1/imports/Downloads/Zybo-Z7-Master.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/GuitarSep_wrapper_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/GuitarSep_wrapper_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
-Parsing XDC File [E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/dont_touch.xdc]
-Finished Parsing XDC File [E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/dont_touch.xdc]
+Parsing XDC File [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/dont_touch.xdc]
+Finished Parsing XDC File [C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/dont_touch.xdc]
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1242.445 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1167.609 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1242.445 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 1167.609 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1242.445 ; gain = 130.234
+Finished Constraint Validation : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1167.609 ; gain = 104.848
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7z010clg400-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1242.445 ; gain = 130.234
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1167.609 ; gain = 104.848
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 Applied set_property DONT_TOUCH = true for GuitarSep_i. (constraint file  auto generated constraint, line ).
-Applied set_property DONT_TOUCH = true for GuitarSep_i/ClockDivider_0. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for GuitarSep_i/Game_SM_0. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for GuitarSep_i/debouncer_0. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for GuitarSep_i/ila_0. (constraint file  auto generated constraint, line ).
-Applied set_property DONT_TOUCH = true for GuitarSep_i/LedDisplay_0. (constraint file  auto generated constraint, line ).
-Applied set_property DONT_TOUCH = true for GuitarSep_i/Song_Selector_0. (constraint file  auto generated constraint, line ).
-Applied set_property DONT_TOUCH = true for GuitarSep_i/MemorySequency_0. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for GuitarSep_i/MemorySequency_1. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for GuitarSep_i/ClockDivider_1. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for GuitarSep_i/Score_display_0. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for GuitarSep_i/Song_Memory_0. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for GuitarSep_i/axi_led_0. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for GuitarSep_i/axi_traffic_gen_0. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for GuitarSep_i/axi_smc. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for GuitarSep_i/axi_traffic_gen_2. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for GuitarSep_i/ila_1. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for GuitarSep_i/ila_2. (constraint file  auto generated constraint, line ).
+Applied set_property DONT_TOUCH = true for GuitarSep_i/ila_3. (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1242.445 ; gain = 130.234
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1167.609 ; gain = 104.848
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1242.445 ; gain = 130.234
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1167.609 ; gain = 104.848
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -134,25 +174,25 @@ Finished Part Resource Summary
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1242.445 ; gain = 130.234
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1167.609 ; gain = 104.848
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 1260.945 ; gain = 148.734
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1183.965 ; gain = 121.203
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 1261.020 ; gain = 148.809
+Finished Timing Optimization : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1184.113 ; gain = 121.352
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 1280.117 ; gain = 167.906
+Finished Technology Mapping : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1203.742 ; gain = 140.980
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -170,89 +210,102 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1285.918 ; gain = 173.707
+Finished IO Insertion : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1210.516 ; gain = 147.754
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1285.918 ; gain = 173.707
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1210.516 ; gain = 147.754
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1285.918 ; gain = 173.707
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1210.516 ; gain = 147.754
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1285.918 ; gain = 173.707
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1210.516 ; gain = 147.754
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1285.918 ; gain = 173.707
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1210.516 ; gain = 147.754
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 1285.918 ; gain = 173.707
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1210.516 ; gain = 147.754
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
 ---------------------------------------------------------------------------------
 
 Report BlackBoxes: 
-+------+-----------------------------+----------+
-|      |BlackBox name                |Instances |
-+------+-----------------------------+----------+
-|1     |GuitarSep_ClockDivider_0_0   |         1|
-|2     |GuitarSep_Game_SM_0_0        |         1|
-|3     |GuitarSep_LedDisplay_0_0     |         1|
-|4     |GuitarSep_MemorySequency_0_1 |         1|
-|5     |GuitarSep_Song_Selector_0_1  |         1|
-|6     |GuitarSep_debouncer_0_0      |         1|
-|7     |GuitarSep_ila_0_0            |         1|
-+------+-----------------------------+----------+
++------+------------------------------+----------+
+|      |BlackBox name                 |Instances |
++------+------------------------------+----------+
+|1     |GuitarSep_ClockDivider_1_0    |         1|
+|2     |GuitarSep_Game_SM_0_0         |         1|
+|3     |GuitarSep_MemorySequency_1_0  |         1|
+|4     |GuitarSep_Score_display_0_0   |         1|
+|5     |GuitarSep_Song_Memory_0_0     |         1|
+|6     |GuitarSep_axi_led_0_0         |         1|
+|7     |GuitarSep_axi_smc_0           |         1|
+|8     |GuitarSep_axi_traffic_gen_0_0 |         1|
+|9     |GuitarSep_axi_traffic_gen_2_0 |         1|
+|10    |GuitarSep_debouncer_0_0       |         1|
+|11    |GuitarSep_ila_0_0             |         1|
+|12    |GuitarSep_ila_1_0             |         1|
+|13    |GuitarSep_ila_2_0             |         1|
+|14    |GuitarSep_ila_3_0             |         1|
++------+------------------------------+----------+
 
 Report Cell Usage: 
-+------+----------------------------------+------+
-|      |Cell                              |Count |
-+------+----------------------------------+------+
-|1     |GuitarSep_ClockDivider_0_0_bbox   |     1|
-|2     |GuitarSep_Game_SM_0_0_bbox        |     1|
-|3     |GuitarSep_LedDisplay_0_0_bbox     |     1|
-|4     |GuitarSep_MemorySequency_0_1_bbox |     1|
-|5     |GuitarSep_Song_Selector_0_1_bbox  |     1|
-|6     |GuitarSep_debouncer_0_0_bbox      |     1|
-|7     |GuitarSep_ila_0_0_bbox            |     1|
-|8     |IBUF                              |     9|
-|9     |OBUF                              |     7|
-+------+----------------------------------+------+
++------+-----------------------------------+------+
+|      |Cell                               |Count |
++------+-----------------------------------+------+
+|1     |GuitarSep_ClockDivider_1_0_bbox    |     1|
+|2     |GuitarSep_Game_SM_0_0_bbox         |     1|
+|3     |GuitarSep_MemorySequency_1_0_bbox  |     1|
+|4     |GuitarSep_Score_display_0_0_bbox   |     1|
+|5     |GuitarSep_Song_Memory_0_0_bbox     |     1|
+|6     |GuitarSep_axi_led_0_0_bbox         |     1|
+|7     |GuitarSep_axi_smc_0_bbox           |     1|
+|8     |GuitarSep_axi_traffic_gen_0_0_bbox |     1|
+|9     |GuitarSep_axi_traffic_gen_2_0_bbox |     1|
+|10    |GuitarSep_debouncer_0_0_bbox       |     1|
+|11    |GuitarSep_ila_0_0_bbox             |     1|
+|12    |GuitarSep_ila_1_0_bbox             |     1|
+|13    |GuitarSep_ila_2_0_bbox             |     1|
+|14    |GuitarSep_ila_3_0_bbox             |     1|
+|15    |LUT1                               |    37|
+|16    |IBUF                               |     9|
+|17    |OBUF                               |     7|
++------+-----------------------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 1285.918 ; gain = 173.707
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1210.516 ; gain = 147.754
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:09 ; elapsed = 00:00:13 . Memory (MB): peak = 1285.918 ; gain = 110.828
-Synthesis Optimization Complete : Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 1285.918 ; gain = 173.707
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:10 ; elapsed = 00:00:14 . Memory (MB): peak = 1210.516 ; gain = 104.852
+Synthesis Optimization Complete : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1210.516 ; gain = 147.754
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1292.473 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 1210.516 ; gain = 0.000
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1303.117 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1221.512 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
 INFO: [Common 17-83] Releasing license: Synthesis
-35 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+50 Infos, 2 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:16 ; elapsed = 00:00:18 . Memory (MB): peak = 1303.117 ; gain = 190.906
-INFO: [Common 17-600] The following parameters have non-default value.
-tcl.collectionResultDisplayLimit
-INFO: [Common 17-1381] The checkpoint 'E:/2025-2/IEE2463 - Sistemas Electronicos Programables/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/GuitarSep_wrapper.dcp' has been generated.
+synth_design: Time (s): cpu = 00:00:17 ; elapsed = 00:00:20 . Memory (MB): peak = 1221.512 ; gain = 158.750
+INFO: [Common 17-1381] The checkpoint 'C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/GuitarSep_wrapper.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file GuitarSep_wrapper_utilization_synth.rpt -pb GuitarSep_wrapper_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Fri Oct  3 08:54:38 2025...
+INFO: [Common 17-206] Exiting Vivado at Fri Oct 17 18:57:21 2025...

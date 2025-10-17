@@ -6,17 +6,26 @@
       "name": "GuitarSep",
       "rev_ctrl_bd_flag": "RevCtrlBdOff",
       "synth_flow_mode": "Hierarchical",
-      "tool_version": "2020.1",
-      "validated": "true"
+      "tool_version": "2020.1"
     },
     "design_tree": {
       "ila_0": "",
-      "ClockDivider_0": "",
-      "debouncer_0": "",
-      "LedDisplay_0": "",
       "Game_SM_0": "",
+      "debouncer_0": "",
+      "MemorySequency_1": "",
+      "ClockDivider_1": "",
+      "axi_led_0": "",
+      "axi_traffic_gen_0": "",
+      "axi_smc": "",
+      "axi_traffic_gen_2": "",
+      "ila_1": "",
+      "ila_2": "",
+      "ila_3": "",
+      "vio_0": "",
+      "axi_traffic_gen_1": "",
       "Song_Selector_0": "",
-      "MemorySequency_0": ""
+      "dist_mem_gen_0": "",
+      "Score_display_0": ""
     },
     "ports": {
       "clk": {
@@ -25,26 +34,6 @@
         "parameters": {
           "ASSOCIATED_RESET": {
             "value": "reset"
-          },
-          "CLK_DOMAIN": {
-            "value": "GuitarSep_clk_0",
-            "value_src": "default"
-          },
-          "FREQ_HZ": {
-            "value": "100000000",
-            "value_src": "default"
-          },
-          "FREQ_TOLERANCE_HZ": {
-            "value": "0",
-            "value_src": "default"
-          },
-          "INSERT_VIP": {
-            "value": "0",
-            "value_src": "default"
-          },
-          "PHASE": {
-            "value": "0.000",
-            "value_src": "default"
           }
         }
       },
@@ -53,9 +42,6 @@
         "left": "3",
         "right": "0"
       },
-      "game_on": {
-        "direction": "I"
-      },
       "song_sel": {
         "direction": "I",
         "left": "1",
@@ -63,17 +49,7 @@
       },
       "reset": {
         "type": "rst",
-        "direction": "I",
-        "parameters": {
-          "INSERT_VIP": {
-            "value": "0",
-            "value_src": "default"
-          },
-          "POLARITY": {
-            "value": "ACTIVE_LOW",
-            "value_src": "default"
-          }
-        }
+        "direction": "I"
       },
       "led": {
         "direction": "O",
@@ -109,129 +85,6 @@
           }
         }
       },
-      "ClockDivider_0": {
-        "vlnv": "xilinx.com:module_ref:ClockDivider:1.0",
-        "xci_name": "GuitarSep_ClockDivider_0_0",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "ClockDivider",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "clk_in": {
-            "direction": "I",
-            "parameters": {
-              "CLK_DOMAIN": {
-                "value": "GuitarSep_clk_0",
-                "value_src": "default_prop"
-              },
-              "FREQ_HZ": {
-                "value": "100000000",
-                "value_src": "default_prop"
-              },
-              "PHASE": {
-                "value": "0.000",
-                "value_src": "default_prop"
-              }
-            }
-          },
-          "fr_out": {
-            "direction": "I",
-            "left": "3",
-            "right": "0"
-          },
-          "clk_out": {
-            "direction": "O"
-          }
-        }
-      },
-      "debouncer_0": {
-        "vlnv": "xilinx.com:module_ref:debouncer:1.0",
-        "xci_name": "GuitarSep_debouncer_0_0",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "debouncer",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "clk": {
-            "type": "clk",
-            "direction": "I",
-            "parameters": {
-              "CLK_DOMAIN": {
-                "value": "GuitarSep_clk_0",
-                "value_src": "default_prop"
-              }
-            }
-          },
-          "btn": {
-            "direction": "I",
-            "left": "3",
-            "right": "0"
-          },
-          "btn_out": {
-            "direction": "O",
-            "left": "3",
-            "right": "0"
-          }
-        }
-      },
-      "LedDisplay_0": {
-        "vlnv": "xilinx.com:module_ref:LedDisplay:1.0",
-        "xci_name": "GuitarSep_LedDisplay_0_0",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "LedDisplay",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "clk": {
-            "type": "clk",
-            "direction": "I",
-            "parameters": {
-              "ASSOCIATED_RESET": {
-                "value": "reset",
-                "value_src": "constant"
-              },
-              "CLK_DOMAIN": {
-                "value": "GuitarSep_clk_0",
-                "value_src": "default_prop"
-              }
-            }
-          },
-          "reset": {
-            "type": "rst",
-            "direction": "I"
-          },
-          "playing": {
-            "direction": "I"
-          },
-          "note_out": {
-            "direction": "I",
-            "left": "3",
-            "right": "0"
-          },
-          "btn_push": {
-            "direction": "I",
-            "left": "3",
-            "right": "0"
-          },
-          "led": {
-            "direction": "O",
-            "left": "3",
-            "right": "0"
-          },
-          "led6_r": {
-            "direction": "O"
-          },
-          "led6_g": {
-            "direction": "O"
-          },
-          "led6_b": {
-            "direction": "O"
-          }
-        }
-      },
       "Game_SM_0": {
         "vlnv": "xilinx.com:module_ref:Game_SM:1.0",
         "xci_name": "GuitarSep_Game_SM_0_0",
@@ -243,17 +96,7 @@
         "ports": {
           "clk": {
             "type": "clk",
-            "direction": "I",
-            "parameters": {
-              "ASSOCIATED_RESET": {
-                "value": "reset",
-                "value_src": "constant"
-              },
-              "CLK_DOMAIN": {
-                "value": "GuitarSep_clk_0",
-                "value_src": "default_prop"
-              }
-            }
+            "direction": "I"
           },
           "reset": {
             "type": "rst",
@@ -277,9 +120,312 @@
           }
         }
       },
+      "debouncer_0": {
+        "vlnv": "xilinx.com:module_ref:debouncer:1.0",
+        "xci_name": "GuitarSep_debouncer_0_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "debouncer",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I"
+          },
+          "btn": {
+            "direction": "I",
+            "left": "3",
+            "right": "0"
+          },
+          "btn_out": {
+            "direction": "O",
+            "left": "3",
+            "right": "0"
+          }
+        }
+      },
+      "MemorySequency_1": {
+        "vlnv": "xilinx.com:user:MemorySequency:1.0",
+        "xci_name": "GuitarSep_MemorySequency_1_0"
+      },
+      "ClockDivider_1": {
+        "vlnv": "xilinx.com:user:ClockDivider:1.0",
+        "xci_name": "GuitarSep_ClockDivider_1_0"
+      },
+      "axi_led_0": {
+        "vlnv": "xilinx.com:user:axi_led:1.0",
+        "xci_name": "GuitarSep_axi_led_0_0"
+      },
+      "axi_traffic_gen_0": {
+        "vlnv": "xilinx.com:ip:axi_traffic_gen:3.0",
+        "xci_name": "GuitarSep_axi_traffic_gen_0_0",
+        "parameters": {
+          "C_ATG_MODE": {
+            "value": "AXI4-Lite"
+          },
+          "C_ATG_SYSINIT_MODES": {
+            "value": "System_Test"
+          },
+          "C_ATG_SYSTEM_CMD_MAX_RETRY": {
+            "value": "2147483647"
+          },
+          "C_ATG_SYSTEM_INIT_ADDR_MIF": {
+            "value": "../../../../../../../../../addr.coe"
+          },
+          "C_ATG_SYSTEM_INIT_CTRL_MIF": {
+            "value": "../../../../../../../../../ctrl.coe"
+          },
+          "C_ATG_SYSTEM_INIT_DATA_MIF": {
+            "value": "../../../../../../../../../data.coe"
+          },
+          "C_ATG_SYSTEM_INIT_MASK_MIF": {
+            "value": "../../../../../../../../../mask.coe"
+          }
+        },
+        "addressing": {
+          "address_spaces": {
+            "Reg1": {
+              "range": "4G",
+              "width": "32"
+            }
+          },
+          "interface_ports": {
+            "M_AXI_LITE_CH1": {
+              "mode": "Master",
+              "address_space_ref": "Reg1",
+              "base_address": {
+                "minimum": "0x00000000",
+                "maximum": "0xFFFFFFFF"
+              },
+              "master_id": "0",
+              "parameters": {
+                "master_id": {
+                  "value": "0"
+                }
+              }
+            }
+          }
+        }
+      },
+      "axi_smc": {
+        "vlnv": "xilinx.com:ip:smartconnect:1.0",
+        "xci_name": "GuitarSep_axi_smc_0",
+        "parameters": {
+          "NUM_MI": {
+            "value": "2"
+          },
+          "NUM_SI": {
+            "value": "2"
+          }
+        },
+        "interface_ports": {
+          "S00_AXI": {
+            "mode": "Slave",
+            "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
+            "bridges": [
+              "M00_AXI",
+              "M01_AXI"
+            ],
+            "parameters": {
+              "NUM_READ_OUTSTANDING": {
+                "value": "1"
+              },
+              "NUM_WRITE_OUTSTANDING": {
+                "value": "1"
+              }
+            }
+          },
+          "S01_AXI": {
+            "mode": "Slave",
+            "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
+            "bridges": [
+              "M00_AXI",
+              "M01_AXI"
+            ],
+            "parameters": {
+              "NUM_READ_OUTSTANDING": {
+                "value": "1"
+              },
+              "NUM_WRITE_OUTSTANDING": {
+                "value": "1"
+              }
+            }
+          },
+          "M00_AXI": {
+            "mode": "Master",
+            "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
+            "parameters": {
+              "MAX_BURST_LENGTH": {
+                "value": "1"
+              },
+              "NUM_READ_OUTSTANDING": {
+                "value": "1"
+              },
+              "NUM_WRITE_OUTSTANDING": {
+                "value": "1"
+              },
+              "RUSER_BITS_PER_BYTE": {
+                "value": "0"
+              },
+              "SUPPORTS_NARROW_BURST": {
+                "value": "0"
+              },
+              "WUSER_BITS_PER_BYTE": {
+                "value": "0"
+              }
+            }
+          },
+          "M01_AXI": {
+            "mode": "Master",
+            "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
+            "parameters": {
+              "MAX_BURST_LENGTH": {
+                "value": "1"
+              },
+              "NUM_READ_OUTSTANDING": {
+                "value": "1"
+              },
+              "NUM_WRITE_OUTSTANDING": {
+                "value": "1"
+              },
+              "RUSER_BITS_PER_BYTE": {
+                "value": "0"
+              },
+              "SUPPORTS_NARROW_BURST": {
+                "value": "0"
+              },
+              "WUSER_BITS_PER_BYTE": {
+                "value": "0"
+              }
+            }
+          }
+        },
+        "addressing": {
+          "interface_ports": {
+            "S00_AXI": {
+              "mode": "Slave",
+              "bridges": [
+                "M00_AXI",
+                "M01_AXI"
+              ]
+            },
+            "S01_AXI": {
+              "mode": "Slave",
+              "bridges": [
+                "M00_AXI",
+                "M01_AXI"
+              ]
+            }
+          }
+        }
+      },
+      "axi_traffic_gen_2": {
+        "vlnv": "xilinx.com:ip:axi_traffic_gen:3.0",
+        "xci_name": "GuitarSep_axi_traffic_gen_2_0",
+        "parameters": {
+          "C_ATG_MODE": {
+            "value": "AXI4-Lite"
+          },
+          "C_ATG_SYSINIT_MODES": {
+            "value": "System_Test"
+          },
+          "C_ATG_SYSTEM_CMD_MAX_RETRY": {
+            "value": "2147483647"
+          },
+          "C_ATG_SYSTEM_INIT_ADDR_MIF": {
+            "value": "../../../../../../../../../addr - copia.coe"
+          },
+          "C_ATG_SYSTEM_INIT_CTRL_MIF": {
+            "value": "../../../../../../../../../ctrl - copia.coe"
+          },
+          "C_ATG_SYSTEM_INIT_DATA_MIF": {
+            "value": "../../../../../../../../../data - copia.coe"
+          },
+          "C_ATG_SYSTEM_INIT_MASK_MIF": {
+            "value": "../../../../../../../../../mask - copia.coe"
+          }
+        },
+        "addressing": {
+          "address_spaces": {
+            "Reg1": {
+              "range": "4G",
+              "width": "32"
+            }
+          },
+          "interface_ports": {
+            "M_AXI_LITE_CH1": {
+              "mode": "Master",
+              "address_space_ref": "Reg1",
+              "base_address": {
+                "minimum": "0x00000000",
+                "maximum": "0xFFFFFFFF"
+              },
+              "master_id": "1",
+              "parameters": {
+                "master_id": {
+                  "value": "1"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ila_1": {
+        "vlnv": "xilinx.com:ip:ila:6.2",
+        "xci_name": "GuitarSep_ila_1_0"
+      },
+      "ila_2": {
+        "vlnv": "xilinx.com:ip:ila:6.2",
+        "xci_name": "GuitarSep_ila_2_0"
+      },
+      "ila_3": {
+        "vlnv": "xilinx.com:ip:ila:6.2",
+        "xci_name": "GuitarSep_ila_3_0"
+      },
+      "vio_0": {
+        "vlnv": "xilinx.com:ip:vio:3.0",
+        "xci_name": "GuitarSep_vio_0_0",
+        "parameters": {
+          "C_NUM_PROBE_IN": {
+            "value": "0"
+          }
+        }
+      },
+      "axi_traffic_gen_1": {
+        "vlnv": "xilinx.com:ip:axi_traffic_gen:3.0",
+        "xci_name": "GuitarSep_axi_traffic_gen_1_0",
+        "parameters": {
+          "C_ATG_MODE": {
+            "value": "AXI4"
+          }
+        },
+        "addressing": {
+          "address_spaces": {
+            "Data": {
+              "range": "4G",
+              "width": "32"
+            }
+          },
+          "interface_ports": {
+            "S_AXI": {
+              "mode": "Slave",
+              "memory_map_ref": "S_AXI"
+            },
+            "M_AXI": {
+              "mode": "Master",
+              "address_space_ref": "Data",
+              "base_address": {
+                "minimum": "0x00000000",
+                "maximum": "0xFFFFFFFF"
+              }
+            }
+          }
+        }
+      },
       "Song_Selector_0": {
         "vlnv": "xilinx.com:module_ref:Song_Selector:1.0",
-        "xci_name": "GuitarSep_Song_Selector_0_1",
+        "xci_name": "GuitarSep_Song_Selector_0_0",
         "reference_info": {
           "ref_type": "hdl",
           "ref_name": "Song_Selector",
@@ -303,49 +449,52 @@
           }
         }
       },
-      "MemorySequency_0": {
-        "vlnv": "xilinx.com:module_ref:MemorySequency:1.0",
-        "xci_name": "GuitarSep_MemorySequency_0_1",
-        "reference_info": {
-          "ref_type": "hdl",
-          "ref_name": "MemorySequency",
-          "boundary_crc": "0x0"
-        },
-        "ports": {
-          "clk_game": {
-            "direction": "I"
+      "dist_mem_gen_0": {
+        "vlnv": "xilinx.com:ip:dist_mem_gen:8.0",
+        "xci_name": "GuitarSep_dist_mem_gen_0_0",
+        "parameters": {
+          "data_width": {
+            "value": "4"
           },
-          "reset": {
-            "type": "rst",
-            "direction": "I"
-          },
-          "playing": {
-            "direction": "I"
-          },
-          "addr": {
-            "direction": "O",
-            "left": "4",
-            "right": "0"
-          },
-          "freq_game": {
-            "direction": "O",
-            "left": "3",
-            "right": "0"
+          "output_options": {
+            "value": "non_registered"
           }
         }
+      },
+      "Score_display_0": {
+        "vlnv": "xilinx.com:user:Score_display:1.0",
+        "xci_name": "GuitarSep_Score_display_0_0"
+      }
+    },
+    "interface_nets": {
+      "axi_smc_M00_AXI": {
+        "interface_ports": [
+          "axi_smc/M00_AXI",
+          "axi_led_0/S00_AXI",
+          "ila_3/SLOT_0_AXI"
+        ]
+      },
+      "axi_traffic_gen_2_M_AXI_LITE_CH1": {
+        "interface_ports": [
+          "axi_traffic_gen_2/M_AXI_LITE_CH1",
+          "axi_smc/S01_AXI",
+          "ila_1/SLOT_0_AXI"
+        ]
+      },
+      "axi_traffic_gen_0_M_AXI_LITE_CH1": {
+        "interface_ports": [
+          "axi_traffic_gen_0/M_AXI_LITE_CH1",
+          "axi_smc/S00_AXI"
+        ]
+      },
+      "axi_smc_M01_AXI": {
+        "interface_ports": [
+          "axi_smc/M01_AXI",
+          "ila_2/SLOT_0_AXI"
+        ]
       }
     },
     "nets": {
-      "clk_0_1": {
-        "ports": [
-          "clk",
-          "ila_0/clk",
-          "ClockDivider_0/clk_in",
-          "debouncer_0/clk",
-          "LedDisplay_0/clk",
-          "Game_SM_0/clk"
-        ]
-      },
       "btn_0_1": {
         "ports": [
           "btn",
@@ -355,14 +504,8 @@
       "Game_SM_0_playing": {
         "ports": [
           "Game_SM_0/playing",
-          "LedDisplay_0/playing",
-          "MemorySequency_0/playing"
-        ]
-      },
-      "game_on_0_1": {
-        "ports": [
-          "game_on",
-          "Game_SM_0/game_on"
+          "MemorySequency_1/playing",
+          "Score_display_0/playing"
         ]
       },
       "song_sel_0_1": {
@@ -374,52 +517,99 @@
       "reset_0_1": {
         "ports": [
           "reset",
-          "LedDisplay_0/reset",
           "Game_SM_0/reset",
-          "MemorySequency_0/reset"
+          "MemorySequency_1/reset",
+          "axi_traffic_gen_0/s_axi_aresetn",
+          "axi_led_0/s00_axi_aresetn",
+          "axi_smc/aresetn",
+          "axi_traffic_gen_2/s_axi_aresetn",
+          "Score_display_0/reset"
         ]
       },
       "Song_Selector_0_dout": {
         "ports": [
           "Song_Selector_0/dout",
           "ila_0/probe0",
-          "LedDisplay_0/note_out"
+          "Score_display_0/note_out"
         ]
       },
-      "LedDisplay_0_led": {
+      "MemorySequency_1_freq_game": {
         "ports": [
-          "LedDisplay_0/led",
-          "led"
+          "MemorySequency_1/freq_game",
+          "ClockDivider_1/fr_out"
         ]
       },
-      "LedDisplay_0_led6_r": {
+      "ClockDivider_1_clk_out": {
         "ports": [
-          "LedDisplay_0/led6_r",
-          "led6_r"
-        ]
-      },
-      "LedDisplay_0_led6_g": {
-        "ports": [
-          "LedDisplay_0/led6_g",
-          "led6_g"
-        ]
-      },
-      "LedDisplay_0_led6_b": {
-        "ports": [
-          "LedDisplay_0/led6_b",
-          "led6_b"
+          "ClockDivider_1/clk_out",
+          "MemorySequency_1/clk_game"
         ]
       },
       "debouncer_0_btn_out": {
         "ports": [
           "debouncer_0/btn_out",
-          "LedDisplay_0/btn_push"
+          "Score_display_0/btn_push"
         ]
       },
-      "ClockDivider_0_clk_out": {
+      "clk_1": {
         "ports": [
-          "ClockDivider_0/clk_out",
-          "MemorySequency_0/clk_game"
+          "clk",
+          "axi_led_0/clk",
+          "axi_traffic_gen_0/s_axi_aclk",
+          "axi_smc/aclk",
+          "axi_led_0/s00_axi_aclk",
+          "debouncer_0/clk",
+          "Game_SM_0/clk",
+          "ila_0/clk",
+          "axi_traffic_gen_2/s_axi_aclk",
+          "ClockDivider_1/clk_in",
+          "ila_1/clk",
+          "ila_2/clk",
+          "ila_3/clk",
+          "vio_0/clk",
+          "Score_display_0/clk"
+        ]
+      },
+      "Score_display_0_led_rgb": {
+        "ports": [
+          "Score_display_0/led_rgb",
+          "axi_led_0/sw"
+        ]
+      },
+      "Score_display_0_led": {
+        "ports": [
+          "Score_display_0/led",
+          "led"
+        ]
+      },
+      "axi_led_0_RGB_B": {
+        "ports": [
+          "axi_led_0/RGB_B",
+          "led6_b"
+        ]
+      },
+      "axi_led_0_RGB_G": {
+        "ports": [
+          "axi_led_0/RGB_G",
+          "led6_g"
+        ]
+      },
+      "axi_led_0_RGB_R": {
+        "ports": [
+          "axi_led_0/RGB_R",
+          "led6_r"
+        ]
+      },
+      "vio_0_probe_out0": {
+        "ports": [
+          "vio_0/probe_out0",
+          "Game_SM_0/game_on"
+        ]
+      },
+      "MemorySequency_1_addr": {
+        "ports": [
+          "MemorySequency_1/addr",
+          "Song_Selector_0/add"
         ]
       },
       "Game_SM_0_song_selected": {
@@ -427,18 +617,46 @@
           "Game_SM_0/song_selected",
           "Song_Selector_0/song_sel"
         ]
+      }
+    },
+    "addressing": {
+      "/axi_traffic_gen_0": {
+        "address_spaces": {
+          "Reg1": {
+            "range": "4G",
+            "width": "32",
+            "segments": {
+              "SEG_axi_led_0_S00_AXI_mem": {
+                "address_block": "/axi_led_0/S00_AXI/S00_AXI_mem",
+                "offset": "0x76000000",
+                "range": "64K"
+              }
+            }
+          }
+        }
       },
-      "MemorySequency_0_addr": {
-        "ports": [
-          "MemorySequency_0/addr",
-          "Song_Selector_0/add"
-        ]
+      "/axi_traffic_gen_2": {
+        "address_spaces": {
+          "Reg1": {
+            "range": "4G",
+            "width": "32",
+            "segments": {
+              "SEG_axi_led_0_S00_AXI_mem": {
+                "address_block": "/axi_led_0/S00_AXI/S00_AXI_mem",
+                "offset": "0x76000000",
+                "range": "64K"
+              }
+            }
+          }
+        }
       },
-      "MemorySequency_0_freq_game": {
-        "ports": [
-          "MemorySequency_0/freq_game",
-          "ClockDivider_0/fr_out"
-        ]
+      "/axi_traffic_gen_1": {
+        "address_spaces": {
+          "Data": {
+            "range": "4G",
+            "width": "32"
+          }
+        }
       }
     }
   }
