@@ -1,12 +1,13 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0x46A5A0DE6034D1C8",
+      "boundary_crc": "0x4B31FBB389C92448",
       "device": "xc7z010clg400-1",
       "name": "GuitarSep",
       "rev_ctrl_bd_flag": "RevCtrlBdOff",
       "synth_flow_mode": "Hierarchical",
-      "tool_version": "2020.1"
+      "tool_version": "2020.1",
+      "validated": "true"
     },
     "design_tree": {
       "ila_0": "",
@@ -25,7 +26,12 @@
       "axi_traffic_gen_1": "",
       "Song_Selector_0": "",
       "dist_mem_gen_0": "",
-      "Score_display_0": ""
+      "Score_display_0": "",
+      "Enable_mod_0": "",
+      "axi_traffic_gen_3": "",
+      "ila_5": "",
+      "ila_6": "",
+      "vio_1": ""
     },
     "ports": {
       "clk": {
@@ -33,7 +39,27 @@
         "direction": "I",
         "parameters": {
           "ASSOCIATED_RESET": {
-            "value": "reset"
+            "value": "reset:reset_0"
+          },
+          "CLK_DOMAIN": {
+            "value": "GuitarSep_clk",
+            "value_src": "default"
+          },
+          "FREQ_HZ": {
+            "value": "100000000",
+            "value_src": "default"
+          },
+          "FREQ_TOLERANCE_HZ": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "PHASE": {
+            "value": "0.000",
+            "value_src": "default"
           }
         }
       },
@@ -49,7 +75,17 @@
       },
       "reset": {
         "type": "rst",
-        "direction": "I"
+        "direction": "I",
+        "parameters": {
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "POLARITY": {
+            "value": "ACTIVE_LOW",
+            "value_src": "default"
+          }
+        }
       },
       "led": {
         "direction": "O",
@@ -96,7 +132,17 @@
         "ports": {
           "clk": {
             "type": "clk",
-            "direction": "I"
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_RESET": {
+                "value": "reset",
+                "value_src": "constant"
+              },
+              "CLK_DOMAIN": {
+                "value": "GuitarSep_clk",
+                "value_src": "default_prop"
+              }
+            }
           },
           "reset": {
             "type": "rst",
@@ -131,7 +177,13 @@
         "ports": {
           "clk": {
             "type": "clk",
-            "direction": "I"
+            "direction": "I",
+            "parameters": {
+              "CLK_DOMAIN": {
+                "value": "GuitarSep_clk",
+                "value_src": "default_prop"
+              }
+            }
           },
           "btn": {
             "direction": "I",
@@ -216,7 +268,7 @@
             "value": "2"
           },
           "NUM_SI": {
-            "value": "2"
+            "value": "3"
           }
         },
         "interface_ports": {
@@ -237,6 +289,22 @@
             }
           },
           "S01_AXI": {
+            "mode": "Slave",
+            "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
+            "bridges": [
+              "M00_AXI",
+              "M01_AXI"
+            ],
+            "parameters": {
+              "NUM_READ_OUTSTANDING": {
+                "value": "1"
+              },
+              "NUM_WRITE_OUTSTANDING": {
+                "value": "1"
+              }
+            }
+          },
+          "S02_AXI": {
             "mode": "Slave",
             "vlnv": "xilinx.com:interface:aximm_rtl:1.0",
             "bridges": [
@@ -311,6 +379,13 @@
               ]
             },
             "S01_AXI": {
+              "mode": "Slave",
+              "bridges": [
+                "M00_AXI",
+                "M01_AXI"
+              ]
+            },
+            "S02_AXI": {
               "mode": "Slave",
               "bridges": [
                 "M00_AXI",
@@ -456,6 +531,9 @@
           "data_width": {
             "value": "4"
           },
+          "depth": {
+            "value": "256"
+          },
           "output_options": {
             "value": "non_registered"
           }
@@ -464,6 +542,89 @@
       "Score_display_0": {
         "vlnv": "xilinx.com:user:Score_display:1.0",
         "xci_name": "GuitarSep_Score_display_0_0"
+      },
+      "Enable_mod_0": {
+        "vlnv": "xilinx.com:user:Enable_mod:1.0",
+        "xci_name": "GuitarSep_Enable_mod_0_0"
+      },
+      "axi_traffic_gen_3": {
+        "vlnv": "xilinx.com:ip:axi_traffic_gen:3.0",
+        "xci_name": "GuitarSep_axi_traffic_gen_3_0",
+        "parameters": {
+          "C_ATG_MODE": {
+            "value": "AXI4-Lite"
+          },
+          "C_ATG_SYSINIT_MODES": {
+            "value": "System_Test"
+          },
+          "C_ATG_SYSTEM_CMD_MAX_RETRY": {
+            "value": "2147483647"
+          },
+          "C_ATG_SYSTEM_INIT_ADDR_MIF": {
+            "value": "../../../../../../../../../addr - copia.coe"
+          },
+          "C_ATG_SYSTEM_INIT_CTRL_MIF": {
+            "value": "../../../../../../../../../ctrl - copia.coe"
+          },
+          "C_ATG_SYSTEM_INIT_DATA_MIF": {
+            "value": "../../../../../../../../../data - copia.coe"
+          },
+          "C_ATG_SYSTEM_INIT_MASK_MIF": {
+            "value": "../../../../../../../../../mask.coe"
+          }
+        },
+        "addressing": {
+          "address_spaces": {
+            "Reg1": {
+              "range": "4G",
+              "width": "32"
+            }
+          },
+          "interface_ports": {
+            "M_AXI_LITE_CH1": {
+              "mode": "Master",
+              "address_space_ref": "Reg1",
+              "base_address": {
+                "minimum": "0x00000000",
+                "maximum": "0xFFFFFFFF"
+              },
+              "master_id": "2",
+              "parameters": {
+                "master_id": {
+                  "value": "2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ila_5": {
+        "vlnv": "xilinx.com:ip:ila:6.2",
+        "xci_name": "GuitarSep_ila_5_0",
+        "parameters": {
+          "C_ENABLE_ILA_AXI_MON": {
+            "value": "false"
+          },
+          "C_MONITOR_TYPE": {
+            "value": "Native"
+          },
+          "C_NUM_OF_PROBES": {
+            "value": "1"
+          }
+        }
+      },
+      "ila_6": {
+        "vlnv": "xilinx.com:ip:ila:6.2",
+        "xci_name": "GuitarSep_ila_6_0"
+      },
+      "vio_1": {
+        "vlnv": "xilinx.com:ip:vio:3.0",
+        "xci_name": "GuitarSep_vio_1_0",
+        "parameters": {
+          "C_NUM_PROBE_IN": {
+            "value": "0"
+          }
+        }
       }
     },
     "interface_nets": {
@@ -487,10 +648,23 @@
           "axi_smc/S00_AXI"
         ]
       },
+      "axi_traffic_gen_1_M_AXI": {
+        "interface_ports": [
+          "Enable_mod_0/S00_AXI",
+          "axi_traffic_gen_1/M_AXI",
+          "ila_6/SLOT_0_AXI"
+        ]
+      },
       "axi_smc_M01_AXI": {
         "interface_ports": [
           "axi_smc/M01_AXI",
-          "ila_2/SLOT_0_AXI"
+          "axi_traffic_gen_1/S_AXI"
+        ]
+      },
+      "axi_traffic_gen_3_M_AXI_LITE_CH1": {
+        "interface_ports": [
+          "axi_traffic_gen_3/M_AXI_LITE_CH1",
+          "axi_smc/S02_AXI"
         ]
       }
     },
@@ -512,18 +686,6 @@
         "ports": [
           "song_sel",
           "Game_SM_0/song_sel"
-        ]
-      },
-      "reset_0_1": {
-        "ports": [
-          "reset",
-          "Game_SM_0/reset",
-          "MemorySequency_1/reset",
-          "axi_traffic_gen_0/s_axi_aresetn",
-          "axi_led_0/s00_axi_aresetn",
-          "axi_smc/aresetn",
-          "axi_traffic_gen_2/s_axi_aresetn",
-          "Score_display_0/reset"
         ]
       },
       "Song_Selector_0_dout": {
@@ -567,7 +729,14 @@
           "ila_2/clk",
           "ila_3/clk",
           "vio_0/clk",
-          "Score_display_0/clk"
+          "Score_display_0/clk",
+          "dist_mem_gen_0/clk",
+          "axi_traffic_gen_1/s_axi_aclk",
+          "Enable_mod_0/s00_axi_aclk",
+          "axi_traffic_gen_3/s_axi_aclk",
+          "ila_5/clk",
+          "ila_6/clk",
+          "vio_1/clk"
         ]
       },
       "Score_display_0_led_rgb": {
@@ -617,6 +786,44 @@
           "Game_SM_0/song_selected",
           "Song_Selector_0/song_sel"
         ]
+      },
+      "Score_display_0_ptje": {
+        "ports": [
+          "Score_display_0/ptje",
+          "dist_mem_gen_0/d"
+        ]
+      },
+      "Enable_mod_0_score_addr_out": {
+        "ports": [
+          "Enable_mod_0/score_addr_out",
+          "dist_mem_gen_0/a"
+        ]
+      },
+      "reset_1": {
+        "ports": [
+          "reset",
+          "axi_traffic_gen_1/s_axi_aresetn",
+          "Enable_mod_0/s00_axi_aresetn",
+          "axi_traffic_gen_3/s_axi_aresetn",
+          "Game_SM_0/reset",
+          "Score_display_0/reset",
+          "axi_traffic_gen_0/s_axi_aresetn",
+          "axi_smc/aresetn",
+          "axi_led_0/s00_axi_aresetn",
+          "MemorySequency_1/reset"
+        ]
+      },
+      "dist_mem_gen_0_spo": {
+        "ports": [
+          "dist_mem_gen_0/spo",
+          "ila_5/probe0"
+        ]
+      },
+      "vio_1_probe_out0": {
+        "ports": [
+          "vio_1/probe_out0",
+          "Enable_mod_0/score_addr_ready"
+        ]
       }
     },
     "addressing": {
@@ -629,6 +836,11 @@
               "SEG_axi_led_0_S00_AXI_mem": {
                 "address_block": "/axi_led_0/S00_AXI/S00_AXI_mem",
                 "offset": "0x76000000",
+                "range": "64K"
+              },
+              "SEG_axi_traffic_gen_1_Reg0": {
+                "address_block": "/axi_traffic_gen_1/S_AXI/Reg0",
+                "offset": "0x44A00000",
                 "range": "64K"
               }
             }
@@ -645,6 +857,11 @@
                 "address_block": "/axi_led_0/S00_AXI/S00_AXI_mem",
                 "offset": "0x76000000",
                 "range": "64K"
+              },
+              "SEG_axi_traffic_gen_1_Reg0": {
+                "address_block": "/axi_traffic_gen_1/S_AXI/Reg0",
+                "offset": "0x44A00000",
+                "range": "64K"
               }
             }
           }
@@ -654,7 +871,34 @@
         "address_spaces": {
           "Data": {
             "range": "4G",
-            "width": "32"
+            "width": "32",
+            "segments": {
+              "SEG_Enable_mod_0_S00_AXI_mem": {
+                "address_block": "/Enable_mod_0/S00_AXI/S00_AXI_mem",
+                "offset": "0x76000000",
+                "range": "64K"
+              }
+            }
+          }
+        }
+      },
+      "/axi_traffic_gen_3": {
+        "address_spaces": {
+          "Reg1": {
+            "range": "4G",
+            "width": "32",
+            "segments": {
+              "SEG_axi_led_0_S00_AXI_mem": {
+                "address_block": "/axi_led_0/S00_AXI/S00_AXI_mem",
+                "offset": "0x76000000",
+                "range": "64K"
+              },
+              "SEG_axi_traffic_gen_1_Reg0": {
+                "address_block": "/axi_traffic_gen_1/S_AXI/Reg0",
+                "offset": "0x44A00000",
+                "range": "64K"
+              }
+            }
           }
         }
       }
