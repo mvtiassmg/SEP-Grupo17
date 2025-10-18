@@ -3,8 +3,8 @@
 // Tool Version: Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
 // Date        : Fri Oct 17 21:30:24 2025
 // Host        : Macbook running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode synth_stub
-//               c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_dist_mem_gen_0_0/GuitarSep_dist_mem_gen_0_0_stub.v
+// Command     : write_verilog -force -mode synth_stub -rename_top GuitarSep_dist_mem_gen_0_0 -prefix
+//               GuitarSep_dist_mem_gen_0_0_ GuitarSep_dist_mem_gen_0_0_stub.v
 // Design      : GuitarSep_dist_mem_gen_0_0
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7z010clg400-1

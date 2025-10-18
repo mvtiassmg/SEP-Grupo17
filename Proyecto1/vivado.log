@@ -1310,3 +1310,640 @@ set_property TRIGGER_COMPARE_VALUE eq1'bX [get_hw_probes GuitarSep_i/axi_traffic
 set_property TRIGGER_COMPARE_VALUE eq1'bR [get_hw_probes GuitarSep_i/axi_traffic_gen_2_M_AXI_LITE_CH1_WVALID -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_1"}]]
 set_property TRIGGER_COMPARE_VALUE eq1'bX [get_hw_probes GuitarSep_i/axi_traffic_gen_2_M_AXI_LITE_CH1_WVALID -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_1"}]]
 set_property TRIGGER_COMPARE_VALUE eq1'bR [get_hw_probes GuitarSep_i/axi_traffic_gen_2_M_AXI_LITE_CH1_AWVALID -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_1"}]]
+ERROR: [Labtoolstcl 44-513] HW Target shutdown. Closing target: localhost:3121/xilinx_tcf/Digilent/210351B3FC05A
+INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Digilent/210351B3FC05A
+WARNING: [Labtoolstcl 44-129] No matching hw_ila_data was found.
+INFO: [Labtools 27-1435] Device xc7z010 (JTAG device index = 1) is not programmed (DONE status = 0).
+WARNING: [Labtoolstcl 44-129] No matching hw_ila_data was found.
+open_bd_design {C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/GuitarSep.bd}
+startgroup
+set_property -dict [list CONFIG.C_PROBE_OUT0_INIT_VAL {0x1}] [get_bd_cells vio_1]
+endgroup
+save_bd_design
+Wrote  : <C:\Users\tomas\escritorio\Universidad\SEP\Proyecto\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\bd\GuitarSep\GuitarSep.bd> 
+Wrote  : <C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ui/bd_98cbe854.ui> 
+reset_run synth_1
+WARNING: [Vivado 12-1017] Problems encountered:
+1. Failed to delete one or more files in run directory C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1
+
+reset_run GuitarSep_vio_1_0_synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 16
+WARNING: [BD 41-2121] Port clk associated reset port reset_0 does not exist
+INFO: [Common 17-365] Interrupt caught but 'launch_runs' cannot be canceled. Please wait for command to finish.
+INFO: [Ipptcl 7-1463] No Compatible Board Interface found. Board Tab not created in customize GUI
+CRITICAL WARNING: [BD 41-237] Bus Interface property SUPPORTS_NARROW_BURST does not match between /Enable_mod_0/S00_AXI(0) and /axi_traffic_gen_1/M_AXI(1)
+WARNING: [BD 41-237] Bus Interface property WUSER_WIDTH does not match between /ila_6/SLOT_0_AXI(1) and /axi_traffic_gen_1/M_AXI(0)
+WARNING: [BD 41-237] Bus Interface property RUSER_WIDTH does not match between /ila_6/SLOT_0_AXI(1) and /axi_traffic_gen_1/M_AXI(0)
+WARNING: [BD 41-237] Bus Interface property BUSER_WIDTH does not match between /ila_6/SLOT_0_AXI(1) and /axi_traffic_gen_1/M_AXI(0)
+Wrote  : <C:\Users\tomas\escritorio\Universidad\SEP\Proyecto\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\bd\GuitarSep\GuitarSep.bd> 
+VHDL Output written to : C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd
+VHDL Output written to : C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/sim/GuitarSep.vhd
+VHDL Output written to : C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hdl/GuitarSep_wrapper.vhd
+INFO: [BD 41-1171] User-interrupt detected : Generation halted successfully for IP Integrator design C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/GuitarSep.bd
+INFO: [Common 17-681] Processing pending cancel.
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:ila:6.2 ila_0
+INFO: [xilinx.com:ip:ila:6.2-6] /ila_0: Xilinx recommends using the System ILA IP in IP Integrator. The System ILA IP is functionally equivalent to an ILA and offers additional benefits in debugging interfaces both within IP Integrator and the Hardware Manager. Consult the Programming and Debug User Guide UG908 for further details.
+endgroup
+set_property location {5 1577 696} [get_bd_cells ila_0]
+connect_bd_intf_net [get_bd_intf_pins ila_0/SLOT_0_AXI] [get_bd_intf_pins axi_led_0/S00_AXI]
+connect_bd_net [get_bd_ports clk] [get_bd_pins ila_0/clk]
+set_property name ila_led [get_bd_cells ila_0]
+set_property name ila_atg [get_bd_cells ila_1]
+set_property name ila_mem [get_bd_cells ila_5]
+set_property name ila_full [get_bd_cells ila_6]
+save_bd_design
+Wrote  : <C:\Users\tomas\escritorio\Universidad\SEP\Proyecto\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\bd\GuitarSep\GuitarSep.bd> 
+Wrote  : <C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ui/bd_98cbe854.ui> 
+launch_runs impl_1 -to_step write_bitstream -jobs 16
+WARNING: [BD 41-2121] Port clk associated reset port reset_0 does not exist
+INFO: [Ipptcl 7-1463] No Compatible Board Interface found. Board Tab not created in customize GUI
+WARNING: [BD 41-237] Bus Interface property AWUSER_WIDTH does not match between /ila_led/SLOT_0_AXI(1) and /axi_smc/M00_AXI(0)
+WARNING: [BD 41-237] Bus Interface property ARUSER_WIDTH does not match between /ila_led/SLOT_0_AXI(1) and /axi_smc/M00_AXI(0)
+WARNING: [BD 41-237] Bus Interface property WUSER_WIDTH does not match between /ila_led/SLOT_0_AXI(1) and /axi_smc/M00_AXI(0)
+WARNING: [BD 41-237] Bus Interface property RUSER_WIDTH does not match between /ila_led/SLOT_0_AXI(1) and /axi_smc/M00_AXI(0)
+WARNING: [BD 41-237] Bus Interface property BUSER_WIDTH does not match between /ila_led/SLOT_0_AXI(1) and /axi_smc/M00_AXI(0)
+CRITICAL WARNING: [BD 41-237] Bus Interface property SUPPORTS_NARROW_BURST does not match between /Enable_mod_0/S00_AXI(0) and /axi_traffic_gen_1/M_AXI(1)
+WARNING: [BD 41-237] Bus Interface property WUSER_WIDTH does not match between /ila_full/SLOT_0_AXI(1) and /axi_traffic_gen_1/M_AXI(0)
+WARNING: [BD 41-237] Bus Interface property RUSER_WIDTH does not match between /ila_full/SLOT_0_AXI(1) and /axi_traffic_gen_1/M_AXI(0)
+WARNING: [BD 41-237] Bus Interface property BUSER_WIDTH does not match between /ila_full/SLOT_0_AXI(1) and /axi_traffic_gen_1/M_AXI(0)
+Wrote  : <C:\Users\tomas\escritorio\Universidad\SEP\Proyecto\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\bd\GuitarSep\GuitarSep.bd> 
+VHDL Output written to : C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd
+VHDL Output written to : C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/sim/GuitarSep.vhd
+VHDL Output written to : C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hdl/GuitarSep_wrapper.vhd
+Exporting to file c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_axi_smc_0/bd_0/hw_handoff/GuitarSep_axi_smc_0.hwh
+Generated Block Design Tcl file c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_axi_smc_0/bd_0/hw_handoff/GuitarSep_axi_smc_0_bd.tcl
+Generated Hardware Definition File c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_axi_smc_0/bd_0/synth/GuitarSep_axi_smc_0.hwdef
+INFO: [BD 41-1029] Generation completed for the IP Integrator block axi_smc .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block vio_1 .
+WARNING: [IP_Flow 19-4994] Overwriting existing constraint file 'c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_ila_0_0/GuitarSep_ila_0_0_ooc.xdc'
+INFO: [BD 41-1029] Generation completed for the IP Integrator block ila_led .
+Exporting to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hw_handoff/GuitarSep.hwh
+Generated Block Design Tcl file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hw_handoff/GuitarSep_bd.tcl
+Generated Hardware Definition File C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.hwdef
+INFO: [IP_Flow 19-4993] Using cached IP synthesis design for IP GuitarSep_ClockDivider_1_0, cache-ID = caa072a294a6b5b1; cache size = 183.764 MB.
+INFO: [IP_Flow 19-4993] Using cached IP synthesis design for IP GuitarSep_Enable_mod_0_0, cache-ID = 68a5c16c63d65a6c; cache size = 183.764 MB.
+INFO: [IP_Flow 19-4993] Using cached IP synthesis design for IP GuitarSep_ila_0_0, cache-ID = 8681255095adeecc; cache size = 183.764 MB.
+INFO: [IP_Flow 19-4993] Using cached IP synthesis design for IP GuitarSep_MemorySequency_1_0, cache-ID = 5198694b393e50d4; cache size = 183.764 MB.
+INFO: [IP_Flow 19-4993] Using cached IP synthesis design for IP GuitarSep_ila_6_0, cache-ID = e0b5dab7f658c12b; cache size = 183.765 MB.
+INFO: [IP_Flow 19-4993] Using cached IP synthesis design for IP GuitarSep_Score_display_0_0, cache-ID = 24af54d87ac3a067; cache size = 183.764 MB.
+INFO: [IP_Flow 19-4993] Using cached IP synthesis design for IP GuitarSep_ila_1_0, cache-ID = 8282270abb6c237b; cache size = 183.764 MB.
+INFO: [IP_Flow 19-4993] Using cached IP synthesis design for IP GuitarSep_axi_led_0_0, cache-ID = bc2acc808721d1e3; cache size = 183.764 MB.
+INFO: [IP_Flow 19-4993] Using cached IP synthesis design for IP GuitarSep_axi_smc_0, cache-ID = 532f5f0089f6ff0e; cache size = 183.764 MB.
+INFO: [IP_Flow 19-4993] Using cached IP synthesis design for IP GuitarSep_dist_mem_gen_0_0, cache-ID = 74e771d883b3fcad; cache size = 183.764 MB.
+INFO: [IP_Flow 19-4993] Using cached IP synthesis design for IP GuitarSep_ila_5_0, cache-ID = 51ec7906c0034242; cache size = 183.765 MB.
+INFO: [IP_Flow 19-4993] Using cached IP synthesis design for IP GuitarSep_axi_traffic_gen_1_0, cache-ID = 35ce4576936db6bc; cache size = 183.764 MB.
+INFO: [IP_Flow 19-4993] Using cached IP synthesis design for IP GuitarSep_axi_traffic_gen_2_0, cache-ID = 5642ac33617ac655; cache size = 183.764 MB.
+INFO: [IP_Flow 19-4993] Using cached IP synthesis design for IP GuitarSep_axi_traffic_gen_3_0, cache-ID = e9df7a48deb474e7; cache size = 183.764 MB.
+config_ip_cache: Time (s): cpu = 00:00:18 ; elapsed = 00:00:13 . Memory (MB): peak = 5464.340 ; gain = 0.000
+[Fri Oct 17 22:41:06 2025] Launched GuitarSep_debouncer_0_0_synth_1, GuitarSep_Game_SM_0_0_synth_1, GuitarSep_axi_traffic_gen_0_0_synth_1, GuitarSep_Song_Selector_0_0_synth_1, GuitarSep_vio_1_0_synth_1, synth_1...
+Run output will be captured here:
+GuitarSep_debouncer_0_0_synth_1: C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/GuitarSep_debouncer_0_0_synth_1/runme.log
+GuitarSep_Game_SM_0_0_synth_1: C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/GuitarSep_Game_SM_0_0_synth_1/runme.log
+GuitarSep_axi_traffic_gen_0_0_synth_1: C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/GuitarSep_axi_traffic_gen_0_0_synth_1/runme.log
+GuitarSep_Song_Selector_0_0_synth_1: C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/GuitarSep_Song_Selector_0_0_synth_1/runme.log
+GuitarSep_vio_1_0_synth_1: C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/GuitarSep_vio_1_0_synth_1/runme.log
+synth_1: C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/runme.log
+[Fri Oct 17 22:41:06 2025] Launched impl_1...
+Run output will be captured here: C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/runme.log
+launch_runs: Time (s): cpu = 00:00:46 ; elapsed = 00:00:46 . Memory (MB): peak = 5464.340 ; gain = 0.000
+ERROR: [Labtoolstcl 44-513] HW Target shutdown. Closing target: localhost:3121/xilinx_tcf/Digilent/210351B3FC05A
+INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Digilent/210351B3FC05A
+WARNING: [Labtoolstcl 44-129] No matching hw_ila_data was found.
+INFO: [Labtools 27-1435] Device xc7z010 (JTAG device index = 1) is not programmed (DONE status = 0).
+WARNING: [Labtoolstcl 44-129] No matching hw_ila_data was found.
+WARNING: [Labtoolstcl 44-129] No matching hw_ila_data was found.
+ipx::edit_ip_in_project -upgrade true -name axi_led_v1_0_project -directory C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.tmp/axi_led_v1_0_project c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/ip_repo/axi_led_1_0/component.xml
+INFO: [ProjectBase 1-489] The host OS only allows 260 characters in a normal path. The project is stored in a path with more than 80 characters. If you experience issues with IP, Block Designs, or files not being found, please consider moving the project to a location with a shorter path. Alternately consider using the OS subst command to map part of the path to a drive letter.
+Current project path is 'c:/users/tomas/escritorio/universidad/sep/proyecto/sep-grupo17/proyecto1/proyecto1.tmp/axi_led_v1_0_project'
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2020.1/data/ip'.
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/ip_repo/Enable_mod_1.0'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/ip_repo/Song_Memory_1.0'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1'.
+INFO: [IP_Flow 19-795] Syncing license key meta-data
+ipx::edit_ip_in_project: Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 5464.340 ; gain = 0.000
+update_compile_order -fileset sources_1
+current_project Proyecto1
+delete_bd_objs [get_bd_cells ila_atg]
+save_bd_design
+Wrote  : <C:\Users\tomas\escritorio\Universidad\SEP\Proyecto\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\bd\GuitarSep\GuitarSep.bd> 
+Wrote  : <C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ui/bd_98cbe854.ui> 
+reset_run synth_1
+WARNING: [Vivado 12-1017] Problems encountered:
+1. Failed to delete one or more files in run directory C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1
+
+launch_runs impl_1 -to_step write_bitstream -jobs 16
+WARNING: [BD 41-2121] Port clk associated reset port reset_0 does not exist
+INFO: [Ipptcl 7-1463] No Compatible Board Interface found. Board Tab not created in customize GUI
+WARNING: [BD 41-237] Bus Interface property AWUSER_WIDTH does not match between /ila_led/SLOT_0_AXI(1) and /axi_smc/M00_AXI(0)
+WARNING: [BD 41-237] Bus Interface property ARUSER_WIDTH does not match between /ila_led/SLOT_0_AXI(1) and /axi_smc/M00_AXI(0)
+WARNING: [BD 41-237] Bus Interface property WUSER_WIDTH does not match between /ila_led/SLOT_0_AXI(1) and /axi_smc/M00_AXI(0)
+WARNING: [BD 41-237] Bus Interface property RUSER_WIDTH does not match between /ila_led/SLOT_0_AXI(1) and /axi_smc/M00_AXI(0)
+WARNING: [BD 41-237] Bus Interface property BUSER_WIDTH does not match between /ila_led/SLOT_0_AXI(1) and /axi_smc/M00_AXI(0)
+CRITICAL WARNING: [BD 41-237] Bus Interface property SUPPORTS_NARROW_BURST does not match between /Enable_mod_0/S00_AXI(0) and /axi_traffic_gen_1/M_AXI(1)
+WARNING: [BD 41-237] Bus Interface property WUSER_WIDTH does not match between /ila_full/SLOT_0_AXI(1) and /axi_traffic_gen_1/M_AXI(0)
+WARNING: [BD 41-237] Bus Interface property RUSER_WIDTH does not match between /ila_full/SLOT_0_AXI(1) and /axi_traffic_gen_1/M_AXI(0)
+WARNING: [BD 41-237] Bus Interface property BUSER_WIDTH does not match between /ila_full/SLOT_0_AXI(1) and /axi_traffic_gen_1/M_AXI(0)
+Wrote  : <C:\Users\tomas\escritorio\Universidad\SEP\Proyecto\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\bd\GuitarSep\GuitarSep.bd> 
+VHDL Output written to : C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd
+VHDL Output written to : C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/sim/GuitarSep.vhd
+VHDL Output written to : C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hdl/GuitarSep_wrapper.vhd
+Exporting to file c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_axi_smc_0/bd_0/hw_handoff/GuitarSep_axi_smc_0.hwh
+Generated Block Design Tcl file c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_axi_smc_0/bd_0/hw_handoff/GuitarSep_axi_smc_0_bd.tcl
+Generated Hardware Definition File c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_axi_smc_0/bd_0/synth/GuitarSep_axi_smc_0.hwdef
+INFO: [BD 41-1029] Generation completed for the IP Integrator block axi_smc .
+Exporting to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hw_handoff/GuitarSep.hwh
+Generated Block Design Tcl file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hw_handoff/GuitarSep_bd.tcl
+Generated Hardware Definition File C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.hwdef
+INFO: [IP_Flow 19-4993] Using cached IP synthesis design for IP GuitarSep_axi_smc_0, cache-ID = 532f5f0089f6ff0e; cache size = 186.936 MB.
+[Fri Oct 17 22:46:18 2025] Launched synth_1...
+Run output will be captured here: C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/runme.log
+[Fri Oct 17 22:46:18 2025] Launched impl_1...
+Run output will be captured here: C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/runme.log
+launch_runs: Time (s): cpu = 00:00:41 ; elapsed = 00:00:43 . Memory (MB): peak = 5464.340 ; gain = 0.000
+current_project axi_led_v1_0_project
+ipx::merge_project_changes files [ipx::current_core]
+WARNING: [IP_Flow 19-5226] Project source file 'c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/ip_repo/axi_led_1_0/component.xml' ignored by IP packager.
+set_property core_revision 5 [ipx::current_core]
+ipx::update_source_project_archive -component [ipx::current_core]
+ipx::update_checksums [ipx::current_core]
+ipx::save_core [ipx::current_core]
+ipx::check_integrity -quiet [ipx::current_core]
+ipx::archive_core {c:\Users\tomas\escritorio\Universidad\SEP\Proyecto\SEP-Grupo17\Proyecto1\ip_repo\axi_led_1_0\xilinx.com_user_axi_led_1.0.zip} [ipx::current_core]
+ipx::move_temp_component_back -component [ipx::current_core]
+close_project -delete
+update_ip_catalog -rebuild -repo_path c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1
+INFO: [IP_Flow 19-725] Reloaded user IP repository 'c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1'
+current_project Proyecto1
+regenerate_bd_layout
+report_ip_status -name ip_status 
+reset_run impl_1 -prev_step 
+launch_runs impl_1 -to_step write_bitstream -jobs 16
+[Fri Oct 17 22:52:49 2025] Launched impl_1...
+Run output will be captured here: C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/runme.log
+delete_bd_objs [get_bd_cells ila_led]
+update_ip_catalog -rebuild -scan_changes
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/ip_repo/Enable_mod_1.0'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/ip_repo/Song_Memory_1.0'.
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1'.
+WARNING: [IP_Flow 19-1663] Duplicate IP found for 'xilinx.com:module_ref:ClockDivider:1.0'. The one found in IP location 'c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/mref/ClockDivider' will take precedence over the same IP in location c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/mref/ClockDivider
+WARNING: [IP_Flow 19-1663] Duplicate IP found for 'xilinx.com:module_ref:debouncer:1.0'. The one found in IP location 'c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/mref/debouncer' will take precedence over the same IP in location c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/mref/debouncer
+WARNING: [IP_Flow 19-1663] Duplicate IP found for 'xilinx.com:module_ref:Game_SM:1.0'. The one found in IP location 'c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/mref/Game_SM' will take precedence over the same IP in location c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/mref/Game_SM
+WARNING: [IP_Flow 19-1663] Duplicate IP found for 'xilinx.com:module_ref:LedDisplay:1.0'. The one found in IP location 'c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/mref/LedDisplay' will take precedence over the same IP in location c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/mref/LedDisplay
+WARNING: [IP_Flow 19-1663] Duplicate IP found for 'xilinx.com:module_ref:MemorySequency:1.0'. The one found in IP location 'c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/mref/MemorySequency' will take precedence over the same IP in location c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/mref/MemorySequency
+WARNING: [IP_Flow 19-1663] Duplicate IP found for 'xilinx.com:module_ref:ScoreDisplay:1.0'. The one found in IP location 'c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/mref/ScoreDisplay' will take precedence over the same IP in location c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/mref/ScoreDisplay
+WARNING: [IP_Flow 19-1663] Duplicate IP found for 'xilinx.com:module_ref:Song_Selector:1.0'. The one found in IP location 'c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/mref/Song_Selector' will take precedence over the same IP in location c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/mref/Song_Selector
+report_ip_status -name ip_status
+upgrade_ip -vlnv xilinx.com:user:axi_led:1.0 [get_ips  GuitarSep_axi_led_0_0] -log ip_upgrade.log
+Upgrading 'C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/GuitarSep.bd'
+INFO: [IP_Flow 19-3422] Upgraded GuitarSep_axi_led_0_0 (axi_led_v1.0 1.0) from revision 4 to revision 5
+Wrote  : <C:\Users\tomas\escritorio\Universidad\SEP\Proyecto\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\bd\GuitarSep\GuitarSep.bd> 
+Wrote  : <C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ui/bd_98cbe854.ui> 
+INFO: [Coretcl 2-1525] Wrote upgrade log to 'C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/ip_upgrade.log'.
+export_ip_user_files -of_objects [get_ips GuitarSep_axi_led_0_0] -no_script -sync -force -quiet
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:ila:6.2 ila_0
+INFO: [xilinx.com:ip:ila:6.2-6] /ila_0: Xilinx recommends using the System ILA IP in IP Integrator. The System ILA IP is functionally equivalent to an ILA and offers additional benefits in debugging interfaces both within IP Integrator and the Hardware Manager. Consult the Programming and Debug User Guide UG908 for further details.
+endgroup
+connect_bd_intf_net [get_bd_intf_pins ila_0/SLOT_0_AXI] [get_bd_intf_pins axi_led_0/S00_AXI]
+connect_bd_net [get_bd_ports clk] [get_bd_pins ila_0/clk]
+regenerate_bd_layout
+report_ip_status -name ip_status 
+save_bd_design
+Wrote  : <C:\Users\tomas\escritorio\Universidad\SEP\Proyecto\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\bd\GuitarSep\GuitarSep.bd> 
+Wrote  : <C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ui/bd_98cbe854.ui> 
+reset_run synth_1
+WARNING: [Vivado 12-1017] Problems encountered:
+1. Failed to delete one or more files in run directory C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1
+
+launch_runs impl_1 -to_step write_bitstream -jobs 16
+WARNING: [BD 41-2121] Port clk associated reset port reset_0 does not exist
+INFO: [Ipptcl 7-1463] No Compatible Board Interface found. Board Tab not created in customize GUI
+WARNING: [BD 41-237] Bus Interface property AWUSER_WIDTH does not match between /ila_0/SLOT_0_AXI(1) and /axi_smc/M00_AXI(0)
+WARNING: [BD 41-237] Bus Interface property ARUSER_WIDTH does not match between /ila_0/SLOT_0_AXI(1) and /axi_smc/M00_AXI(0)
+WARNING: [BD 41-237] Bus Interface property WUSER_WIDTH does not match between /ila_0/SLOT_0_AXI(1) and /axi_smc/M00_AXI(0)
+WARNING: [BD 41-237] Bus Interface property RUSER_WIDTH does not match between /ila_0/SLOT_0_AXI(1) and /axi_smc/M00_AXI(0)
+WARNING: [BD 41-237] Bus Interface property BUSER_WIDTH does not match between /ila_0/SLOT_0_AXI(1) and /axi_smc/M00_AXI(0)
+CRITICAL WARNING: [BD 41-237] Bus Interface property SUPPORTS_NARROW_BURST does not match between /Enable_mod_0/S00_AXI(0) and /axi_traffic_gen_1/M_AXI(1)
+WARNING: [BD 41-237] Bus Interface property WUSER_WIDTH does not match between /ila_full/SLOT_0_AXI(1) and /axi_traffic_gen_1/M_AXI(0)
+WARNING: [BD 41-237] Bus Interface property RUSER_WIDTH does not match between /ila_full/SLOT_0_AXI(1) and /axi_traffic_gen_1/M_AXI(0)
+WARNING: [BD 41-237] Bus Interface property BUSER_WIDTH does not match between /ila_full/SLOT_0_AXI(1) and /axi_traffic_gen_1/M_AXI(0)
+Wrote  : <C:\Users\tomas\escritorio\Universidad\SEP\Proyecto\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\bd\GuitarSep\GuitarSep.bd> 
+Wrote  : <C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ui/bd_98cbe854.ui> 
+VHDL Output written to : C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd
+VHDL Output written to : C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/sim/GuitarSep.vhd
+VHDL Output written to : C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hdl/GuitarSep_wrapper.vhd
+INFO: [BD 41-1029] Generation completed for the IP Integrator block axi_led_0 .
+Exporting to file c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_axi_smc_0/bd_0/hw_handoff/GuitarSep_axi_smc_0.hwh
+Generated Block Design Tcl file c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_axi_smc_0/bd_0/hw_handoff/GuitarSep_axi_smc_0_bd.tcl
+Generated Hardware Definition File c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_axi_smc_0/bd_0/synth/GuitarSep_axi_smc_0.hwdef
+INFO: [BD 41-1029] Generation completed for the IP Integrator block axi_smc .
+WARNING: [IP_Flow 19-4994] Overwriting existing constraint file 'c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_ila_0_1/GuitarSep_ila_0_1_ooc.xdc'
+INFO: [BD 41-1029] Generation completed for the IP Integrator block ila_0 .
+Exporting to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hw_handoff/GuitarSep.hwh
+Generated Block Design Tcl file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hw_handoff/GuitarSep_bd.tcl
+Generated Hardware Definition File C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.hwdef
+INFO: [IP_Flow 19-4993] Using cached IP synthesis design for IP GuitarSep_axi_smc_0, cache-ID = 532f5f0089f6ff0e; cache size = 186.936 MB.
+INFO: [IP_Flow 19-4993] Using cached IP synthesis design for IP GuitarSep_ila_0_1, cache-ID = 8681255095adeecc; cache size = 186.936 MB.
+[Fri Oct 17 22:55:37 2025] Launched GuitarSep_axi_led_0_0_synth_1, synth_1...
+Run output will be captured here:
+GuitarSep_axi_led_0_0_synth_1: C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/GuitarSep_axi_led_0_0_synth_1/runme.log
+synth_1: C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/runme.log
+[Fri Oct 17 22:55:37 2025] Launched impl_1...
+Run output will be captured here: C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/runme.log
+launch_runs: Time (s): cpu = 00:00:42 ; elapsed = 00:00:44 . Memory (MB): peak = 5464.340 ; gain = 0.000
+report_control_sets -verbose -file cs.rpt
+ERROR: [Common 17-53] User Exception: No open design. Please open an elaborated, synthesized or implemented design before executing this command.
+delete_bd_objs [get_bd_cells ila_0]
+regenerate_bd_layout
+save_bd_design
+Wrote  : <C:\Users\tomas\escritorio\Universidad\SEP\Proyecto\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\bd\GuitarSep\GuitarSep.bd> 
+Wrote  : <C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ui/bd_98cbe854.ui> 
+reset_run synth_1
+WARNING: [Vivado 12-1017] Problems encountered:
+1. Failed to delete one or more files in run directory C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1
+
+launch_runs impl_1 -to_step write_bitstream -jobs 16
+WARNING: [BD 41-2121] Port clk associated reset port reset_0 does not exist
+INFO: [Ipptcl 7-1463] No Compatible Board Interface found. Board Tab not created in customize GUI
+CRITICAL WARNING: [BD 41-237] Bus Interface property SUPPORTS_NARROW_BURST does not match between /Enable_mod_0/S00_AXI(0) and /axi_traffic_gen_1/M_AXI(1)
+WARNING: [BD 41-237] Bus Interface property WUSER_WIDTH does not match between /ila_full/SLOT_0_AXI(1) and /axi_traffic_gen_1/M_AXI(0)
+WARNING: [BD 41-237] Bus Interface property RUSER_WIDTH does not match between /ila_full/SLOT_0_AXI(1) and /axi_traffic_gen_1/M_AXI(0)
+WARNING: [BD 41-237] Bus Interface property BUSER_WIDTH does not match between /ila_full/SLOT_0_AXI(1) and /axi_traffic_gen_1/M_AXI(0)
+Wrote  : <C:\Users\tomas\escritorio\Universidad\SEP\Proyecto\SEP-Grupo17\Proyecto1\Proyecto1.srcs\sources_1\bd\GuitarSep\GuitarSep.bd> 
+Wrote  : <C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ui/bd_98cbe854.ui> 
+VHDL Output written to : C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.vhd
+VHDL Output written to : C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/sim/GuitarSep.vhd
+VHDL Output written to : C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hdl/GuitarSep_wrapper.vhd
+Exporting to file c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_axi_smc_0/bd_0/hw_handoff/GuitarSep_axi_smc_0.hwh
+Generated Block Design Tcl file c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_axi_smc_0/bd_0/hw_handoff/GuitarSep_axi_smc_0_bd.tcl
+Generated Hardware Definition File c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_axi_smc_0/bd_0/synth/GuitarSep_axi_smc_0.hwdef
+INFO: [BD 41-1029] Generation completed for the IP Integrator block axi_smc .
+Exporting to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hw_handoff/GuitarSep.hwh
+Generated Block Design Tcl file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/hw_handoff/GuitarSep_bd.tcl
+Generated Hardware Definition File C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/synth/GuitarSep.hwdef
+INFO: [IP_Flow 19-4993] Using cached IP synthesis design for IP GuitarSep_axi_smc_0, cache-ID = 532f5f0089f6ff0e; cache size = 187.255 MB.
+[Fri Oct 17 23:01:39 2025] Launched synth_1...
+Run output will be captured here: C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/synth_1/runme.log
+[Fri Oct 17 23:01:39 2025] Launched impl_1...
+Run output will be captured here: C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/runme.log
+launch_runs: Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 5464.340 ; gain = 0.000
+set_property PROBES.FILE {C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.ltx} [get_hw_devices xc7z010_1]
+set_property FULL_PROBES.FILE {C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.ltx} [get_hw_devices xc7z010_1]
+set_property PROGRAM.FILE {C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.bit} [get_hw_devices xc7z010_1]
+program_hw_devices [get_hw_devices xc7z010_1]
+INFO: [Labtools 27-3164] End of startup status: HIGH
+refresh_hw_device [lindex [get_hw_devices xc7z010_1] 0]
+INFO: [Labtools 27-2302] Device xc7z010 (JTAG device index = 1) is programmed with a design that has 2 ILA core(s).
+INFO: [Labtools 27-2302] Device xc7z010 (JTAG device index = 1) is programmed with a design that has 1 VIO core(s).
+WARNING: [Labtools 27-1952] VIO hw_probe OUTPUT_VALUE properties for hw_vio(s) [hw_vio_1] differ from output values in the VIO core(s).
+Resolution: 
+To synchronize the hw_probes properties and the VIO core outputs choose one of the following alternatives:
+  1) Execute the command 'Commit Output Values to VIO Core', to write down the hw_probe values to the core.
+  2) Execute the command 'Refresh Input and Output Values from VIO Core', to update the hw_probe properties with the core values.
+  3) First restore initial values in the core with the command 'Reset VIO Core Outputs', and then execute the command 'Refresh Input and Output Values from VIO Core'.
+display_hw_ila_data [ get_hw_ila_data hw_ila_data_1 -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_full"}]]
+WARNING: Simulation object GuitarSep_i/axi_traffic_gen_2_M_AXI_LITE_CH1_AWVALID was not found in the design.
+WARNING: Simulation object GuitarSep_i/axi_traffic_gen_2_M_AXI_LITE_CH1_WDATA was not found in the design.
+WARNING: Simulation object GuitarSep_i/axi_traffic_gen_2_M_AXI_LITE_CH1_AWADDR was not found in the design.
+display_hw_ila_data [ get_hw_ila_data hw_ila_data_2 -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+save_wave_config {C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/hw_1/wave/hw_ila_data_1/hw_ila_data_1.wcfg}
+save_wave_config {C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/hw_1/wave/hw_ila_data_2/hw_ila_data_2.wcfg}
+close_hw_manager
+open_hw_manager
+connect_hw_server -allow_non_jtag
+INFO: [Labtools 27-2285] Connecting to hw_server url TCP:localhost:3121
+INFO: [Labtools 27-2222] Launching hw_server...
+INFO: [Labtools 27-2221] Launch Output:
+
+****** Xilinx hw_server v2020.1
+  **** Build date : May 27 2020 at 20:24:38
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+
+INFO: [Labtools 27-3415] Connecting to cs_server url TCP:localhost:3042
+INFO: [Labtools 27-3417] Launching cs_server...
+INFO: [Labtools 27-2221] Launch Output:
+
+
+****** Xilinx cs_server v2020.1.0
+  **** Build date : May 13 2020-21:10:29
+    ** Copyright 2017-2020 Xilinx, Inc. All Rights Reserved.
+
+
+
+connect_hw_server: Time (s): cpu = 00:00:01 ; elapsed = 00:00:06 . Memory (MB): peak = 5464.340 ; gain = 0.000
+open_hw_target
+INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Digilent/210351B3FC05A
+set_property PROGRAM.FILE {C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.bit} [get_hw_devices xc7z010_1]
+set_property PROBES.FILE {C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.ltx} [get_hw_devices xc7z010_1]
+set_property FULL_PROBES.FILE {C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.ltx} [get_hw_devices xc7z010_1]
+current_hw_device [get_hw_devices xc7z010_1]
+refresh_hw_device [lindex [get_hw_devices xc7z010_1] 0]
+INFO: [Labtools 27-2302] Device xc7z010 (JTAG device index = 1) is programmed with a design that has 2 ILA core(s).
+INFO: [Labtools 27-2302] Device xc7z010 (JTAG device index = 1) is programmed with a design that has 1 VIO core(s).
+WARNING: [Labtools 27-1952] VIO hw_probe OUTPUT_VALUE properties for hw_vio(s) [hw_vio_1] differ from output values in the VIO core(s).
+Resolution: 
+To synchronize the hw_probes properties and the VIO core outputs choose one of the following alternatives:
+  1) Execute the command 'Commit Output Values to VIO Core', to write down the hw_probe values to the core.
+  2) Execute the command 'Refresh Input and Output Values from VIO Core', to update the hw_probe properties with the core values.
+  3) First restore initial values in the core with the command 'Reset VIO Core Outputs', and then execute the command 'Refresh Input and Output Values from VIO Core'.
+display_hw_ila_data [ get_hw_ila_data hw_ila_data_1 -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_full"}]]
+display_hw_ila_data [ get_hw_ila_data hw_ila_data_2 -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+set_property TRIGGER_COMPARE_VALUE eq4'bXXXX [get_hw_probes GuitarSep_i/dist_mem_gen_0_spo -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+save_wave_config {C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/hw_1/wave/hw_ila_data_1/hw_ila_data_1.wcfg}
+save_wave_config {C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/hw_1/wave/hw_ila_data_2/hw_ila_data_2.wcfg}
+close_hw_manager
+open_hw_manager
+connect_hw_server -allow_non_jtag
+INFO: [Labtools 27-2285] Connecting to hw_server url TCP:localhost:3121
+INFO: [Labtools 27-3415] Connecting to cs_server url TCP:localhost:3042
+INFO: [Labtools 27-3414] Connected to existing cs_server.
+open_hw_target
+INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Digilent/210351B3FC05A
+set_property PROGRAM.FILE {C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.bit} [get_hw_devices xc7z010_1]
+set_property PROBES.FILE {C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.ltx} [get_hw_devices xc7z010_1]
+set_property FULL_PROBES.FILE {C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.ltx} [get_hw_devices xc7z010_1]
+current_hw_device [get_hw_devices xc7z010_1]
+refresh_hw_device [lindex [get_hw_devices xc7z010_1] 0]
+INFO: [Labtools 27-2302] Device xc7z010 (JTAG device index = 1) is programmed with a design that has 2 ILA core(s).
+INFO: [Labtools 27-2302] Device xc7z010 (JTAG device index = 1) is programmed with a design that has 1 VIO core(s).
+WARNING: [Labtools 27-1952] VIO hw_probe OUTPUT_VALUE properties for hw_vio(s) [hw_vio_1] differ from output values in the VIO core(s).
+Resolution: 
+To synchronize the hw_probes properties and the VIO core outputs choose one of the following alternatives:
+  1) Execute the command 'Commit Output Values to VIO Core', to write down the hw_probe values to the core.
+  2) Execute the command 'Refresh Input and Output Values from VIO Core', to update the hw_probe properties with the core values.
+  3) First restore initial values in the core with the command 'Reset VIO Core Outputs', and then execute the command 'Refresh Input and Output Values from VIO Core'.
+display_hw_ila_data [ get_hw_ila_data hw_ila_data_1 -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_full"}]]
+display_hw_ila_data [ get_hw_ila_data hw_ila_data_2 -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+add_wave -into {hw_ila_data_1.wcfg} -radix hex { {GuitarSep_i/axi_traffic_gen_1_M_AXI_ARADDR} }
+add_wave -into {hw_ila_data_1.wcfg} -radix hex { {GuitarSep_i/axi_traffic_gen_1_M_AXI_ARBURST} }
+add_wave -into {hw_ila_data_1.wcfg} -radix hex { {GuitarSep_i/axi_traffic_gen_1_M_AXI_ARUSER} }
+add_wave -into {hw_ila_data_1.wcfg} -radix hex { {GuitarSep_i/axi_traffic_gen_1_M_AXI_WDATA} }
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_full"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2025-Oct-17 23:12:24
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:13:24
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:13:24
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:22:25
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:22:25
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:22:29
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:22:29
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:22:32
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:22:32
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:22:36
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:22:36
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:22:39
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:22:39
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:22:43
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:22:43
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:22:46
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:22:46
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:22:50
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:22:50
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:22:53
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:22:53
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:22:57
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:22:57
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:23:00
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:23:00
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:23:04
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:23:04
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:23:07
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:23:07
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:23:11
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:23:11
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:23:14
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:23:14
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:23:18
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:23:18
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:23:21
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:23:21
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:23:25
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:23:25
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:23:28
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:23:28
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:23:32
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:23:32
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:23:35
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:23:35
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:23:39
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:23:39
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+save_wave_config {C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/hw_1/wave/hw_ila_data_2/hw_ila_data_2.wcfg}
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:23:42
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:23:42
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:23:46
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:23:46
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:23:49
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:23:49
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:23:53
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:23:53
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:23:56
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:23:56
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:24:00
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:24:00
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:24:03
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:24:03
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:24:07
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:24:07
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:24:10
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:24:10
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:24:14
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:24:14
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:24:17
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:24:17
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:24:21
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:24:21
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:24:24
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:24:24
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:24:28
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:24:28
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:24:31
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:24:31
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:24:35
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:24:35
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:24:38
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:24:38
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:24:42
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:24:42
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:24:45
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:24:45
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_2' trigger was armed at 2025-Oct-17 23:24:49
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_mem"}]]
+INFO: [Labtools 27-1966] The ILA core 'hw_ila_2' triggered at 2025-Oct-17 23:24:49
+INFO: [Labtools 27-3304] ILA Waveform data saved to file C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/backup/hw_ila_data_2.ila. Use Tcl command 'read_hw_ila_data' or Vivado File->Import->Import ILA Data menu item to import the previously saved data.
+save_wave_config {C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/hw_1/wave/hw_ila_data_1/hw_ila_data_1.wcfg}
+close_hw_manager

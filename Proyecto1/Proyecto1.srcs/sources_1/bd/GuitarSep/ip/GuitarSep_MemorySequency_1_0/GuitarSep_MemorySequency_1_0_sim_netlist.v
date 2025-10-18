@@ -3,8 +3,8 @@
 // Tool Version: Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
 // Date        : Fri Oct 17 02:17:35 2025
 // Host        : Macbook running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode funcsim
-//               c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_MemorySequency_1_0/GuitarSep_MemorySequency_1_0_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim -rename_top GuitarSep_MemorySequency_1_0 -prefix
+//               GuitarSep_MemorySequency_1_0_ GuitarSep_MemorySequency_1_0_sim_netlist.v
 // Design      : GuitarSep_MemorySequency_1_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -41,7 +41,6 @@ module GuitarSep_MemorySequency_1_0
         .reset(reset));
 endmodule
 
-(* ORIG_REF_NAME = "MemorySequency" *) 
 module GuitarSep_MemorySequency_1_0_MemorySequency
    (Q,
     freq_game,

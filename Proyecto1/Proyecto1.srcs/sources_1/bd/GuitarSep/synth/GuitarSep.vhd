@@ -1,7 +1,7 @@
 --Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
---Date        : Fri Oct 17 21:52:23 2025
+--Date        : Fri Oct 17 23:01:29 2025
 --Host        : Macbook running 64-bit major release  (build 9200)
 --Command     : generate_target GuitarSep.bd
 --Design      : GuitarSep
@@ -24,7 +24,7 @@ entity GuitarSep is
     song_sel : in STD_LOGIC_VECTOR ( 1 downto 0 )
   );
   attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of GuitarSep : entity is "GuitarSep,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=GuitarSep,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=18,numReposBlks=18,numNonXlnxBlks=0,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=3,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=14,da_clkrst_cnt=20,synth_mode=OOC_per_IP}";
+  attribute CORE_GENERATION_INFO of GuitarSep : entity is "GuitarSep,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=GuitarSep,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=17,numReposBlks=17,numNonXlnxBlks=0,numHierBlks=0,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=3,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=14,da_clkrst_cnt=20,synth_mode=OOC_per_IP}";
   attribute HW_HANDOFF : string;
   attribute HW_HANDOFF of GuitarSep : entity is "GuitarSep.hwdef";
 end GuitarSep;
@@ -63,52 +63,6 @@ architecture STRUCTURE of GuitarSep is
     clk_out : out STD_LOGIC
   );
   end component GuitarSep_ClockDivider_1_0;
-  component GuitarSep_axi_led_0_0 is
-  port (
-    clk : in STD_LOGIC;
-    sw : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    RGB_R : out STD_LOGIC;
-    RGB_G : out STD_LOGIC;
-    RGB_B : out STD_LOGIC;
-    s00_axi_aclk : in STD_LOGIC;
-    s00_axi_aresetn : in STD_LOGIC;
-    s00_axi_awaddr : in STD_LOGIC_VECTOR ( 5 downto 0 );
-    s00_axi_awlen : in STD_LOGIC_VECTOR ( 7 downto 0 );
-    s00_axi_awsize : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    s00_axi_awburst : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    s00_axi_awlock : in STD_LOGIC;
-    s00_axi_awcache : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    s00_axi_awprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    s00_axi_awqos : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    s00_axi_awregion : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    s00_axi_awvalid : in STD_LOGIC;
-    s00_axi_awready : out STD_LOGIC;
-    s00_axi_wdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    s00_axi_wstrb : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    s00_axi_wlast : in STD_LOGIC;
-    s00_axi_wvalid : in STD_LOGIC;
-    s00_axi_wready : out STD_LOGIC;
-    s00_axi_bresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    s00_axi_bvalid : out STD_LOGIC;
-    s00_axi_bready : in STD_LOGIC;
-    s00_axi_araddr : in STD_LOGIC_VECTOR ( 5 downto 0 );
-    s00_axi_arlen : in STD_LOGIC_VECTOR ( 7 downto 0 );
-    s00_axi_arsize : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    s00_axi_arburst : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    s00_axi_arlock : in STD_LOGIC;
-    s00_axi_arcache : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    s00_axi_arprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    s00_axi_arqos : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    s00_axi_arregion : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    s00_axi_arvalid : in STD_LOGIC;
-    s00_axi_arready : out STD_LOGIC;
-    s00_axi_rdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    s00_axi_rresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    s00_axi_rlast : out STD_LOGIC;
-    s00_axi_rvalid : out STD_LOGIC;
-    s00_axi_rready : in STD_LOGIC
-  );
-  end component GuitarSep_axi_led_0_0;
   component GuitarSep_axi_traffic_gen_0_0 is
   port (
     s_axi_aclk : in STD_LOGIC;
@@ -290,30 +244,6 @@ architecture STRUCTURE of GuitarSep is
     status : out STD_LOGIC_VECTOR ( 31 downto 0 )
   );
   end component GuitarSep_axi_traffic_gen_2_0;
-  component GuitarSep_ila_1_0 is
-  port (
-    clk : in STD_LOGIC;
-    probe0 : in STD_LOGIC_VECTOR ( 0 to 0 );
-    probe1 : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    probe2 : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    probe3 : in STD_LOGIC_VECTOR ( 0 to 0 );
-    probe4 : in STD_LOGIC_VECTOR ( 0 to 0 );
-    probe5 : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    probe6 : in STD_LOGIC_VECTOR ( 0 to 0 );
-    probe7 : in STD_LOGIC_VECTOR ( 0 to 0 );
-    probe8 : in STD_LOGIC_VECTOR ( 0 to 0 );
-    probe9 : in STD_LOGIC_VECTOR ( 0 to 0 );
-    probe10 : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    probe11 : in STD_LOGIC_VECTOR ( 0 to 0 );
-    probe12 : in STD_LOGIC_VECTOR ( 0 to 0 );
-    probe13 : in STD_LOGIC_VECTOR ( 1 downto 0 );
-    probe14 : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    probe15 : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    probe16 : in STD_LOGIC_VECTOR ( 0 to 0 );
-    probe17 : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    probe18 : in STD_LOGIC_VECTOR ( 2 downto 0 )
-  );
-  end component GuitarSep_ila_1_0;
   component GuitarSep_axi_traffic_gen_1_0 is
   port (
     s_axi_aclk : in STD_LOGIC;
@@ -560,6 +490,52 @@ architecture STRUCTURE of GuitarSep is
     probe_out0 : out STD_LOGIC_VECTOR ( 0 to 0 )
   );
   end component GuitarSep_vio_1_0;
+  component GuitarSep_axi_led_0_0 is
+  port (
+    clk : in STD_LOGIC;
+    sw : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    RGB_R : out STD_LOGIC;
+    RGB_G : out STD_LOGIC;
+    RGB_B : out STD_LOGIC;
+    s00_axi_aclk : in STD_LOGIC;
+    s00_axi_aresetn : in STD_LOGIC;
+    s00_axi_awaddr : in STD_LOGIC_VECTOR ( 5 downto 0 );
+    s00_axi_awlen : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    s00_axi_awsize : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    s00_axi_awburst : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    s00_axi_awlock : in STD_LOGIC;
+    s00_axi_awcache : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    s00_axi_awprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    s00_axi_awqos : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    s00_axi_awregion : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    s00_axi_awvalid : in STD_LOGIC;
+    s00_axi_awready : out STD_LOGIC;
+    s00_axi_wdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    s00_axi_wstrb : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    s00_axi_wlast : in STD_LOGIC;
+    s00_axi_wvalid : in STD_LOGIC;
+    s00_axi_wready : out STD_LOGIC;
+    s00_axi_bresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    s00_axi_bvalid : out STD_LOGIC;
+    s00_axi_bready : in STD_LOGIC;
+    s00_axi_araddr : in STD_LOGIC_VECTOR ( 5 downto 0 );
+    s00_axi_arlen : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    s00_axi_arsize : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    s00_axi_arburst : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    s00_axi_arlock : in STD_LOGIC;
+    s00_axi_arcache : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    s00_axi_arprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    s00_axi_arqos : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    s00_axi_arregion : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    s00_axi_arvalid : in STD_LOGIC;
+    s00_axi_arready : out STD_LOGIC;
+    s00_axi_rdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    s00_axi_rresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    s00_axi_rlast : out STD_LOGIC;
+    s00_axi_rvalid : out STD_LOGIC;
+    s00_axi_rready : in STD_LOGIC
+  );
+  end component GuitarSep_axi_led_0_0;
   signal ClockDivider_1_clk_out : STD_LOGIC;
   signal Enable_mod_0_score_addr_out : STD_LOGIC_VECTOR ( 7 downto 0 );
   signal Game_SM_0_playing : STD_LOGIC;
@@ -1196,35 +1172,7 @@ dist_mem_gen_0: component GuitarSep_dist_mem_gen_0_0
       spo(3 downto 0) => dist_mem_gen_0_spo(3 downto 0),
       we => '0'
     );
-ila_1: component GuitarSep_ila_1_0
-     port map (
-      clk => clk_1,
-      probe0(0) => axi_traffic_gen_2_M_AXI_LITE_CH1_WREADY,
-      probe1(31 downto 0) => axi_traffic_gen_2_M_AXI_LITE_CH1_AWADDR(31 downto 0),
-      probe10(31 downto 0) => axi_traffic_gen_2_M_AXI_LITE_CH1_RDATA(31 downto 0),
-      probe11(0) => axi_traffic_gen_2_M_AXI_LITE_CH1_AWVALID,
-      probe12(0) => axi_traffic_gen_2_M_AXI_LITE_CH1_AWREADY,
-      probe13(1 downto 0) => axi_traffic_gen_2_M_AXI_LITE_CH1_RRESP(1 downto 0),
-      probe14(31 downto 0) => axi_traffic_gen_2_M_AXI_LITE_CH1_WDATA(31 downto 0),
-      probe15(3 downto 0) => axi_traffic_gen_2_M_AXI_LITE_CH1_WSTRB(3 downto 0),
-      probe16(0) => axi_traffic_gen_2_M_AXI_LITE_CH1_RVALID,
-      probe17(2 downto 0) => B"000",
-      probe18(2 downto 0) => axi_traffic_gen_2_M_AXI_LITE_CH1_AWPROT(2 downto 0),
-      probe2(1 downto 0) => axi_traffic_gen_2_M_AXI_LITE_CH1_BRESP(1 downto 0),
-      probe3(0) => axi_traffic_gen_2_M_AXI_LITE_CH1_BVALID,
-      probe4(0) => axi_traffic_gen_2_M_AXI_LITE_CH1_BREADY,
-      probe5(31 downto 0) => axi_traffic_gen_2_M_AXI_LITE_CH1_ARADDR(31 downto 0),
-      probe6(0) => axi_traffic_gen_2_M_AXI_LITE_CH1_RREADY,
-      probe7(0) => axi_traffic_gen_2_M_AXI_LITE_CH1_WVALID,
-      probe8(0) => axi_traffic_gen_2_M_AXI_LITE_CH1_ARVALID,
-      probe9(0) => axi_traffic_gen_2_M_AXI_LITE_CH1_ARREADY
-    );
-ila_5: component GuitarSep_ila_5_0
-     port map (
-      clk => clk_1,
-      probe0(3 downto 0) => dist_mem_gen_0_spo(3 downto 0)
-    );
-ila_6: component GuitarSep_ila_6_0
+ila_full: component GuitarSep_ila_6_0
      port map (
       clk => clk_1,
       probe0(0) => axi_traffic_gen_1_M_AXI_WREADY,
@@ -1271,6 +1219,11 @@ ila_6: component GuitarSep_ila_6_0
       probe7(0) => axi_traffic_gen_1_M_AXI_WVALID,
       probe8(0) => axi_traffic_gen_1_M_AXI_ARVALID,
       probe9(0) => axi_traffic_gen_1_M_AXI_ARREADY
+    );
+ila_mem: component GuitarSep_ila_5_0
+     port map (
+      clk => clk_1,
+      probe0(3 downto 0) => dist_mem_gen_0_spo(3 downto 0)
     );
 vio_1: component GuitarSep_vio_1_0
      port map (

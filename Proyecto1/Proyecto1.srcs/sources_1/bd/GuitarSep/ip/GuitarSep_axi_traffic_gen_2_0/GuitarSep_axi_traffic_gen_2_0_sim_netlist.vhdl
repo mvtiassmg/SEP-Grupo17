@@ -3,8 +3,8 @@
 -- Tool Version: Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
 -- Date        : Fri Oct 17 21:30:33 2025
 -- Host        : Macbook running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode funcsim
---               c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_axi_traffic_gen_2_0/GuitarSep_axi_traffic_gen_2_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top GuitarSep_axi_traffic_gen_2_0 -prefix
+--               GuitarSep_axi_traffic_gen_2_0_ GuitarSep_axi_traffic_gen_2_0_sim_netlist.vhdl
 -- Design      : GuitarSep_axi_traffic_gen_2_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -21,8 +21,6 @@ entity GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_asynch_rst_ff is
     reset : in STD_LOGIC;
     q : out STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_asynch_rst_ff : entity is "axi_traffic_gen_v3_0_7_asynch_rst_ff";
   attribute dont_touch : string;
   attribute dont_touch of GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_asynch_rst_ff : entity is "true";
 end GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_asynch_rst_ff;
@@ -227,8 +225,6 @@ entity GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_mrdwr is
     \wdata_m_reg[31]_0\ : in STD_LOGIC_VECTOR ( 31 downto 0 );
     \ATG_SYSTEST_NXT_PTR.nxt_rom_ptr_reg[7]_0\ : in STD_LOGIC_VECTOR ( 7 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_mrdwr : entity is "axi_traffic_gen_v3_0_7_systeminit_mrdwr";
 end GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_mrdwr;
 
 architecture STRUCTURE of GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_mrdwr is
@@ -5274,8 +5270,6 @@ entity GuitarSep_axi_traffic_gen_2_0_xpm_memory_base is
   attribute MESSAGE_CONTROL of GuitarSep_axi_traffic_gen_2_0_xpm_memory_base : entity is 0;
   attribute NUM_CHAR_LOC : integer;
   attribute NUM_CHAR_LOC of GuitarSep_axi_traffic_gen_2_0_xpm_memory_base : entity is 0;
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of GuitarSep_axi_traffic_gen_2_0_xpm_memory_base : entity is "xpm_memory_base";
   attribute P_ECC_MODE : string;
   attribute P_ECC_MODE of GuitarSep_axi_traffic_gen_2_0_xpm_memory_base : entity is "no_ecc";
   attribute P_ENABLE_BYTE_WRITE_A : integer;
@@ -10233,8 +10227,6 @@ entity GuitarSep_axi_traffic_gen_2_0_xpm_memory_spram is
     cur_trn_status_reg_1 : in STD_LOGIC_VECTOR ( 0 to 0 );
     cur_trn_status_reg_2 : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of GuitarSep_axi_traffic_gen_2_0_xpm_memory_spram : entity is "xpm_memory_spram";
 end GuitarSep_axi_traffic_gen_2_0_xpm_memory_spram;
 
 architecture STRUCTURE of GuitarSep_axi_traffic_gen_2_0_xpm_memory_spram is
@@ -12380,8 +12372,6 @@ entity GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_dmg is
     cur_trn_status_reg_1 : in STD_LOGIC_VECTOR ( 0 to 0 );
     cur_trn_status_reg_2 : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_dmg : entity is "axi_traffic_gen_v3_0_7_systeminit_dmg";
 end GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_dmg;
 
 architecture STRUCTURE of GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_dmg is
@@ -12557,8 +12547,6 @@ entity GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_top is
     m_axi_lite_ch1_rdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
     m_axi_lite_ch1_rresp : in STD_LOGIC_VECTOR ( 1 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_top : entity is "axi_traffic_gen_v3_0_7_systeminit_top";
 end GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_top;
 
 architecture STRUCTURE of GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_top is
@@ -13305,8 +13293,6 @@ entity GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_top is
   attribute C_ZERO_INVALID of GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_top : entity is 1;
   attribute DowngradeIPIdentifiedWarnings : string;
   attribute DowngradeIPIdentifiedWarnings of GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_top : entity is "yes";
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_top : entity is "axi_traffic_gen_v3_0_7_top";
 end GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_top;
 
 architecture STRUCTURE of GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_top is

@@ -3,8 +3,8 @@
 -- Tool Version: Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
 -- Date        : Fri Oct 17 02:17:35 2025
 -- Host        : Macbook running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode funcsim
---               c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_MemorySequency_1_0/GuitarSep_MemorySequency_1_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top GuitarSep_MemorySequency_1_0 -prefix
+--               GuitarSep_MemorySequency_1_0_ GuitarSep_MemorySequency_1_0_sim_netlist.vhdl
 -- Design      : GuitarSep_MemorySequency_1_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -22,8 +22,6 @@ entity GuitarSep_MemorySequency_1_0_MemorySequency is
     clk_game : in STD_LOGIC;
     reset : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of GuitarSep_MemorySequency_1_0_MemorySequency : entity is "MemorySequency";
 end GuitarSep_MemorySequency_1_0_MemorySequency;
 
 architecture STRUCTURE of GuitarSep_MemorySequency_1_0_MemorySequency is

@@ -1,10 +1,10 @@
 -- Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
--- Date        : Fri Oct 17 18:13:04 2025
+-- Date        : Fri Oct 17 21:30:33 2025
 -- Host        : Macbook running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode funcsim
---               c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_axi_traffic_gen_2_0/GuitarSep_axi_traffic_gen_2_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top GuitarSep_axi_traffic_gen_2_0 -prefix
+--               GuitarSep_axi_traffic_gen_2_0_ GuitarSep_axi_traffic_gen_2_0_sim_netlist.vhdl
 -- Design      : GuitarSep_axi_traffic_gen_2_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -21,8 +21,6 @@ entity GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_asynch_rst_ff is
     reset : in STD_LOGIC;
     q : out STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_asynch_rst_ff : entity is "axi_traffic_gen_v3_0_7_asynch_rst_ff";
   attribute dont_touch : string;
   attribute dont_touch of GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_asynch_rst_ff : entity is "true";
 end GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_asynch_rst_ff;
@@ -227,8 +225,6 @@ entity GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_mrdwr is
     \wdata_m_reg[31]_0\ : in STD_LOGIC_VECTOR ( 31 downto 0 );
     \ATG_SYSTEST_NXT_PTR.nxt_rom_ptr_reg[7]_0\ : in STD_LOGIC_VECTOR ( 7 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_mrdwr : entity is "axi_traffic_gen_v3_0_7_systeminit_mrdwr";
 end GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_mrdwr;
 
 architecture STRUCTURE of GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_mrdwr is
@@ -5274,8 +5270,6 @@ entity GuitarSep_axi_traffic_gen_2_0_xpm_memory_base is
   attribute MESSAGE_CONTROL of GuitarSep_axi_traffic_gen_2_0_xpm_memory_base : entity is 0;
   attribute NUM_CHAR_LOC : integer;
   attribute NUM_CHAR_LOC of GuitarSep_axi_traffic_gen_2_0_xpm_memory_base : entity is 0;
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of GuitarSep_axi_traffic_gen_2_0_xpm_memory_base : entity is "xpm_memory_base";
   attribute P_ECC_MODE : string;
   attribute P_ECC_MODE of GuitarSep_axi_traffic_gen_2_0_xpm_memory_base : entity is "no_ecc";
   attribute P_ENABLE_BYTE_WRITE_A : integer;
@@ -6077,7 +6071,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_0_0\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6092,7 +6086,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_10_10\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6107,7 +6101,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_11_11\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6122,7 +6116,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_12_12\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6137,7 +6131,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_13_13\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6152,7 +6146,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_14_14\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6167,7 +6161,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_15_15\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6182,7 +6176,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_16_16\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6197,7 +6191,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_17_17\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6212,7 +6206,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_18_18\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6227,7 +6221,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_19_19\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6242,7 +6236,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_1_1\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6257,7 +6251,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_20_20\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6272,7 +6266,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_21_21\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6287,7 +6281,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_22_22\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6302,7 +6296,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_23_23\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6317,7 +6311,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_24_24\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6332,7 +6326,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_25_25\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6347,7 +6341,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_26_26\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6362,7 +6356,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_27_27\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6377,7 +6371,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_28_28\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6392,7 +6386,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_29_29\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6407,7 +6401,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_2_2\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6422,7 +6416,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_30_30\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6437,7 +6431,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_31_31\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6452,7 +6446,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_3_3\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6467,7 +6461,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_4_4\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6482,7 +6476,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_5_5\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6497,7 +6491,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_6_6\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6512,7 +6506,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_7_7\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6527,7 +6521,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_8_8\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -6542,7 +6536,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_9_9\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000001F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -7200,7 +7194,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_0_0\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000002A"
+      INIT => X"00000355"
     )
         port map (
       A0 => addra(0),
@@ -7215,7 +7209,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_10_10\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000038"
+      INIT => X"00000078"
     )
         port map (
       A0 => addra(0),
@@ -7230,7 +7224,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_11_11\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000380"
     )
         port map (
       A0 => addra(0),
@@ -7245,7 +7239,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_12_12\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -7260,7 +7254,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_13_13\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -7275,7 +7269,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_14_14\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -7290,7 +7284,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_15_15\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -7305,7 +7299,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_16_16\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000003F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -7320,7 +7314,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_17_17\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -7335,7 +7329,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_1_1\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000002C"
+      INIT => X"00000066"
     )
         port map (
       A0 => addra(0),
@@ -7350,7 +7344,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_20_20\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -7365,7 +7359,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_21_21\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -7380,7 +7374,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_2_2\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000030"
+      INIT => X"00000078"
     )
         port map (
       A0 => addra(0),
@@ -7395,7 +7389,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_3_3\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000380"
     )
         port map (
       A0 => addra(0),
@@ -7410,7 +7404,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_4_4\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -7425,7 +7419,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_5_5\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -7440,7 +7434,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_6_6\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -7455,7 +7449,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_7_7\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -7470,7 +7464,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_8_8\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000035"
+      INIT => X"00000355"
     )
         port map (
       A0 => addra(0),
@@ -7485,7 +7479,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_9_9\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000026"
+      INIT => X"00000066"
     )
         port map (
       A0 => addra(0),
@@ -8368,7 +8362,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_0_0\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8383,7 +8377,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_10_10\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8398,7 +8392,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_11_11\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8413,7 +8407,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_12_12\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8428,7 +8422,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_13_13\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8443,7 +8437,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_14_14\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8458,7 +8452,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_15_15\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8473,7 +8467,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_16_16\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000003F"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8488,7 +8482,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_17_17\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8503,7 +8497,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_18_18\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8518,7 +8512,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_19_19\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8533,7 +8527,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_1_1\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8548,7 +8542,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_20_20\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8563,7 +8557,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_21_21\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8578,7 +8572,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_22_22\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8593,7 +8587,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_23_23\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8608,7 +8602,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_24_24\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8623,7 +8617,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_25_25\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000003F"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8638,7 +8632,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_26_26\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000003F"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8653,7 +8647,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_27_27\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8668,7 +8662,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_28_28\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000003F"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8683,7 +8677,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_29_29\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000003F"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8698,7 +8692,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_2_2\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000002A"
+      INIT => X"00000201"
     )
         port map (
       A0 => addra(0),
@@ -8713,7 +8707,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_30_30\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000003F"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -8728,7 +8722,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_31_31\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8743,7 +8737,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_3_3\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000002C"
+      INIT => X"00000201"
     )
         port map (
       A0 => addra(0),
@@ -8758,7 +8752,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_4_4\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"000003FF"
     )
         port map (
       A0 => addra(0),
@@ -8773,7 +8767,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_5_5\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8788,7 +8782,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_6_6\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000030"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8803,7 +8797,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_7_7\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8818,7 +8812,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_8_8\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -8833,7 +8827,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_9_9\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000020"
+      INIT => X"00000200"
     )
         port map (
       A0 => addra(0),
@@ -9716,7 +9710,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_0_0\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000015"
+      INIT => X"00000155"
     )
         port map (
       A0 => addra(0),
@@ -9731,7 +9725,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_10_10\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000001"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -9746,7 +9740,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_11_11\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000000A"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -9761,7 +9755,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_12_12\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000002"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -9776,7 +9770,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_13_13\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000001"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -9791,7 +9785,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_14_14\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000008"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -9806,7 +9800,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_15_15\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000004"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -9821,7 +9815,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_16_16\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000008"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -9836,7 +9830,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_17_17\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000002"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -9851,7 +9845,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_18_18\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000004"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -9866,7 +9860,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_19_19\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000001"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -9881,7 +9875,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_1_1\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000000A"
+      INIT => X"00000198"
     )
         port map (
       A0 => addra(0),
@@ -9911,7 +9905,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_21_21\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000000C"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -9926,7 +9920,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_22_22\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000001"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -9941,7 +9935,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_23_23\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000002"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -9956,7 +9950,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_24_24\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000006"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -9971,7 +9965,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_25_25\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000001"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -9986,7 +9980,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_26_26\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000008"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -10016,7 +10010,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_28_28\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000001"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -10046,7 +10040,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_2_2\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000000"
+      INIT => X"000001E0"
     )
         port map (
       A0 => addra(0),
@@ -10061,7 +10055,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_30_30\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000002"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -10076,7 +10070,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_31_31\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"0000000C"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -10106,7 +10100,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_4_4\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000008"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -10136,7 +10130,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_6_6\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000006"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -10151,7 +10145,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_7_7\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000001"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -10181,7 +10175,7 @@ GND: unisim.vcomponents.GND
     );
 \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_9_9\: unisim.vcomponents.RAM32X1S
     generic map(
-      INIT => X"00000004"
+      INIT => X"00000000"
     )
         port map (
       A0 => addra(0),
@@ -10233,8 +10227,6 @@ entity GuitarSep_axi_traffic_gen_2_0_xpm_memory_spram is
     cur_trn_status_reg_1 : in STD_LOGIC_VECTOR ( 0 to 0 );
     cur_trn_status_reg_2 : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of GuitarSep_axi_traffic_gen_2_0_xpm_memory_spram : entity is "xpm_memory_spram";
 end GuitarSep_axi_traffic_gen_2_0_xpm_memory_spram;
 
 architecture STRUCTURE of GuitarSep_axi_traffic_gen_2_0_xpm_memory_spram is
@@ -12380,8 +12372,6 @@ entity GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_dmg is
     cur_trn_status_reg_1 : in STD_LOGIC_VECTOR ( 0 to 0 );
     cur_trn_status_reg_2 : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_dmg : entity is "axi_traffic_gen_v3_0_7_systeminit_dmg";
 end GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_dmg;
 
 architecture STRUCTURE of GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_dmg is
@@ -12557,8 +12547,6 @@ entity GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_top is
     m_axi_lite_ch1_rdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
     m_axi_lite_ch1_rresp : in STD_LOGIC_VECTOR ( 1 downto 0 )
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_top : entity is "axi_traffic_gen_v3_0_7_systeminit_top";
 end GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_top;
 
 architecture STRUCTURE of GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_top is
@@ -13305,8 +13293,6 @@ entity GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_top is
   attribute C_ZERO_INVALID of GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_top : entity is 1;
   attribute DowngradeIPIdentifiedWarnings : string;
   attribute DowngradeIPIdentifiedWarnings of GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_top : entity is "yes";
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_top : entity is "axi_traffic_gen_v3_0_7_top";
 end GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_top;
 
 architecture STRUCTURE of GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_top is
