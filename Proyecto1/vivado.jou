@@ -322,3 +322,104 @@ regenerate_bd_layout
 validate_bd_design
 save_bd_design
 launch_runs impl_1 -to_step write_bitstream -jobs 16
+launch_runs impl_1 -to_step write_bitstream -jobs 16
+launch_runs impl_1 -to_step write_bitstream -jobs 16
+launch_runs impl_1 -to_step write_bitstream -jobs 16
+wait_on_run impl_1
+delete_bd_objs [get_bd_cells ila_2]
+delete_bd_objs [get_bd_cells ila_0]
+save_bd_design
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 16
+wait_on_run impl_1
+regenerate_bd_layout
+delete_bd_objs [get_bd_nets vio_0_probe_out0] [get_bd_cells vio_0]
+startgroup
+make_bd_pins_external  [get_bd_pins Game_SM_0/game_on]
+endgroup
+set_property name game_on [get_bd_ports game_on_0]
+delete_bd_objs [get_bd_intf_nets axi_smc_M00_AXI]
+undo
+delete_bd_objs [get_bd_cells ila_3]
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:blk_mem_gen:8.4 blk_mem_gen_0
+endgroup
+set_property location {7 2157 639} [get_bd_cells blk_mem_gen_0]
+delete_bd_objs [get_bd_cells blk_mem_gen_0]
+save_bd_design
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 16
+wait_on_run impl_1
+report_utilization -hierarchical -file util_by_hier.rpt
+report_utilization -hierarchical -file util_by_hier.rpt
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 16
+wait_on_run impl_1
+set_property PROBES.FILE {C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.ltx} [get_hw_devices xc7z010_1]
+set_property FULL_PROBES.FILE {C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.ltx} [get_hw_devices xc7z010_1]
+set_property PROGRAM.FILE {C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.runs/impl_1/GuitarSep_wrapper.bit} [get_hw_devices xc7z010_1]
+program_hw_devices [get_hw_devices xc7z010_1]
+refresh_hw_device [lindex [get_hw_devices xc7z010_1] 0]
+add_wave -into {hw_ila_data_2.wcfg} -radix hex { {GuitarSep_i/dist_mem_gen_0_spo} }
+add_wave -into {hw_ila_data_3.wcfg} -radix hex { {GuitarSep_i/axi_traffic_gen_1_M_AXI_ARADDR} {GuitarSep_i/axi_traffic_gen_1_M_AXI_ARBURST} {GuitarSep_i/axi_traffic_gen_1_M_AXI_ARCACHE} {GuitarSep_i/axi_traffic_gen_1_M_AXI_ARID} {GuitarSep_i/axi_traffic_gen_1_M_AXI_ARLEN} {GuitarSep_i/axi_traffic_gen_1_M_AXI_ARLOCK} {GuitarSep_i/axi_traffic_gen_1_M_AXI_ARPROT} {GuitarSep_i/axi_traffic_gen_1_M_AXI_ARQOS} {GuitarSep_i/axi_traffic_gen_1_M_AXI_ARREADY} {GuitarSep_i/axi_traffic_gen_1_M_AXI_ARSIZE} {GuitarSep_i/axi_traffic_gen_1_M_AXI_ARUSER} {GuitarSep_i/axi_traffic_gen_1_M_AXI_ARVALID} {GuitarSep_i/axi_traffic_gen_1_M_AXI_AWADDR} {GuitarSep_i/axi_traffic_gen_1_M_AXI_AWBURST} {GuitarSep_i/axi_traffic_gen_1_M_AXI_AWCACHE} {GuitarSep_i/axi_traffic_gen_1_M_AXI_AWID} {GuitarSep_i/axi_traffic_gen_1_M_AXI_AWLEN} {GuitarSep_i/axi_traffic_gen_1_M_AXI_AWLOCK} {GuitarSep_i/axi_traffic_gen_1_M_AXI_AWPROT} {GuitarSep_i/axi_traffic_gen_1_M_AXI_AWQOS} {GuitarSep_i/axi_traffic_gen_1_M_AXI_AWREADY} {GuitarSep_i/axi_traffic_gen_1_M_AXI_AWSIZE} {GuitarSep_i/axi_traffic_gen_1_M_AXI_AWUSER} {GuitarSep_i/axi_traffic_gen_1_M_AXI_AWVALID} {GuitarSep_i/axi_traffic_gen_1_M_AXI_BID} {GuitarSep_i/axi_traffic_gen_1_M_AXI_BREADY} {GuitarSep_i/axi_traffic_gen_1_M_AXI_BRESP} {GuitarSep_i/axi_traffic_gen_1_M_AXI_BVALID} {GuitarSep_i/axi_traffic_gen_1_M_AXI_RDATA} {GuitarSep_i/axi_traffic_gen_1_M_AXI_RID} {GuitarSep_i/axi_traffic_gen_1_M_AXI_RLAST} {GuitarSep_i/axi_traffic_gen_1_M_AXI_RREADY} {GuitarSep_i/axi_traffic_gen_1_M_AXI_RRESP} {GuitarSep_i/axi_traffic_gen_1_M_AXI_RVALID} {GuitarSep_i/axi_traffic_gen_1_M_AXI_WDATA} {GuitarSep_i/axi_traffic_gen_1_M_AXI_WLAST} {GuitarSep_i/axi_traffic_gen_1_M_AXI_WREADY} {GuitarSep_i/axi_traffic_gen_1_M_AXI_WSTRB} {GuitarSep_i/axi_traffic_gen_1_M_AXI_WVALID} }
+open_bd_design {C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/GuitarSep.bd}
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}] -trigger_now
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}] -trigger_now
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}] -trigger_now
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}] -trigger_now
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}] -trigger_now
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}] -trigger_now
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}] -trigger_now
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}] -trigger_now
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_5"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_6"}] -trigger_now
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_6"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_6"}]]
+set_property TRIGGER_COMPARE_VALUE eq1'bR [get_hw_probes GuitarSep_i/axi_traffic_gen_1_M_AXI_AWVALID -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_6"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_6"}]
+wait_on_hw_ila -timeout 0 [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_6"}]
+upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_6"}]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_6"}] -trigger_now
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_6"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_6"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_6"}]
+save_wave_config {C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.hw/hw_1/wave/hw_ila_data_4/hw_ila_data_4.wcfg}
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_1"}] -trigger_now
+wait_on_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_1"}]
+display_hw_ila_data [upload_hw_ila_data [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_1"}]]
+add_wave -into {hw_ila_data_1.wcfg} -radix hex { {GuitarSep_i/axi_traffic_gen_2_M_AXI_LITE_CH1_AWVALID} }
+add_wave -into {hw_ila_data_1.wcfg} -radix hex { {GuitarSep_i/axi_traffic_gen_2_M_AXI_LITE_CH1_WDATA} }
+add_wave -into {hw_ila_data_1.wcfg} -radix hex { {GuitarSep_i/axi_traffic_gen_2_M_AXI_LITE_CH1_AWADDR} }
+set_property TRIGGER_COMPARE_VALUE eq1'bR [get_hw_probes GuitarSep_i/axi_traffic_gen_2_M_AXI_LITE_CH1_AWVALID -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_1"}]]
+run_hw_ila [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_1"}]
+set_property TRIGGER_COMPARE_VALUE eq1'bX [get_hw_probes GuitarSep_i/axi_traffic_gen_2_M_AXI_LITE_CH1_AWVALID -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_1"}]]
+set_property TRIGGER_COMPARE_VALUE eq1'bR [get_hw_probes GuitarSep_i/axi_traffic_gen_2_M_AXI_LITE_CH1_WVALID -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_1"}]]
+set_property TRIGGER_COMPARE_VALUE eq1'bX [get_hw_probes GuitarSep_i/axi_traffic_gen_2_M_AXI_LITE_CH1_WVALID -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_1"}]]
+set_property TRIGGER_COMPARE_VALUE eq1'bR [get_hw_probes GuitarSep_i/axi_traffic_gen_2_M_AXI_LITE_CH1_AWVALID -of_objects [get_hw_ilas -of_objects [get_hw_devices xc7z010_1] -filter {CELL_NAME=~"GuitarSep_i/ila_1"}]]

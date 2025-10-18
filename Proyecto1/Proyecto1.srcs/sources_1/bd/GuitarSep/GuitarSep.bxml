@@ -2,10 +2,10 @@
 <Root MajorVersion="0" MinorVersion="39">
   <CompositeFile CompositeFileTopName="GuitarSep" CanBeSetAsTop="false" CanDisplayChildGraph="true">
     <Description>Composite Fileset</Description>
-    <Generation Name="SYNTHESIS" State="STALE" Timestamp="1760746870"/>
-    <Generation Name="IMPLEMENTATION" State="STALE" Timestamp="1760746870"/>
-    <Generation Name="SIMULATION" State="STALE" Timestamp="1760746870"/>
-    <Generation Name="HW_HANDOFF" State="STALE" Timestamp="1760746870"/>
+    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1760748750"/>
+    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1760748750"/>
+    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1760748750"/>
+    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1760748750"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
       <File Name="ip\GuitarSep_Game_SM_0_0\GuitarSep_Game_SM_0_0.xci" Type="IP">
         <Instance HierarchyPath="Game_SM_0"/>
@@ -17,14 +17,6 @@
       </File>
       <File Name="ip\GuitarSep_debouncer_0_0\GuitarSep_debouncer_0_0.xci" Type="IP">
         <Instance HierarchyPath="debouncer_0"/>
-        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
-        <Library Name="xil_defaultlib"/>
-        <UsedIn Val="SYNTHESIS"/>
-        <UsedIn Val="IMPLEMENTATION"/>
-        <UsedIn Val="SIMULATION"/>
-      </File>
-      <File Name="ip\GuitarSep_ila_0_0\GuitarSep_ila_0_0.xci" Type="IP">
-        <Instance HierarchyPath="ila_0"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>
@@ -89,30 +81,6 @@
       </File>
       <File Name="ip\GuitarSep_ila_1_0\GuitarSep_ila_1_0.xci" Type="IP">
         <Instance HierarchyPath="ila_1"/>
-        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
-        <Library Name="xil_defaultlib"/>
-        <UsedIn Val="SYNTHESIS"/>
-        <UsedIn Val="IMPLEMENTATION"/>
-        <UsedIn Val="SIMULATION"/>
-      </File>
-      <File Name="ip\GuitarSep_ila_2_0\GuitarSep_ila_2_0.xci" Type="IP">
-        <Instance HierarchyPath="ila_2"/>
-        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
-        <Library Name="xil_defaultlib"/>
-        <UsedIn Val="SYNTHESIS"/>
-        <UsedIn Val="IMPLEMENTATION"/>
-        <UsedIn Val="SIMULATION"/>
-      </File>
-      <File Name="ip\GuitarSep_ila_3_0\GuitarSep_ila_3_0.xci" Type="IP">
-        <Instance HierarchyPath="ila_3"/>
-        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
-        <Library Name="xil_defaultlib"/>
-        <UsedIn Val="SYNTHESIS"/>
-        <UsedIn Val="IMPLEMENTATION"/>
-        <UsedIn Val="SIMULATION"/>
-      </File>
-      <File Name="ip\GuitarSep_vio_0_0\GuitarSep_vio_0_0.xci" Type="IP">
-        <Instance HierarchyPath="vio_0"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>

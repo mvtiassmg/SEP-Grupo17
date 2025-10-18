@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0x4B31FBB389C92448",
+      "boundary_crc": "0x46A5A0DE8C6AF8F0",
       "device": "xc7z010clg400-1",
       "name": "GuitarSep",
       "rev_ctrl_bd_flag": "RevCtrlBdOff",
@@ -10,7 +10,6 @@
       "validated": "true"
     },
     "design_tree": {
-      "ila_0": "",
       "Game_SM_0": "",
       "debouncer_0": "",
       "MemorySequency_1": "",
@@ -20,9 +19,6 @@
       "axi_smc": "",
       "axi_traffic_gen_2": "",
       "ila_1": "",
-      "ila_2": "",
-      "ila_3": "",
-      "vio_0": "",
       "axi_traffic_gen_1": "",
       "Song_Selector_0": "",
       "dist_mem_gen_0": "",
@@ -100,27 +96,12 @@
       },
       "led6_r": {
         "direction": "O"
+      },
+      "game_on": {
+        "direction": "I"
       }
     },
     "components": {
-      "ila_0": {
-        "vlnv": "xilinx.com:ip:ila:6.2",
-        "xci_name": "GuitarSep_ila_0_0",
-        "parameters": {
-          "C_ENABLE_ILA_AXI_MON": {
-            "value": "false"
-          },
-          "C_MONITOR_TYPE": {
-            "value": "Native"
-          },
-          "C_NUM_OF_PROBES": {
-            "value": "1"
-          },
-          "C_PROBE0_WIDTH": {
-            "value": "4"
-          }
-        }
-      },
       "Game_SM_0": {
         "vlnv": "xilinx.com:module_ref:Game_SM:1.0",
         "xci_name": "GuitarSep_Game_SM_0_0",
@@ -450,23 +431,6 @@
         "vlnv": "xilinx.com:ip:ila:6.2",
         "xci_name": "GuitarSep_ila_1_0"
       },
-      "ila_2": {
-        "vlnv": "xilinx.com:ip:ila:6.2",
-        "xci_name": "GuitarSep_ila_2_0"
-      },
-      "ila_3": {
-        "vlnv": "xilinx.com:ip:ila:6.2",
-        "xci_name": "GuitarSep_ila_3_0"
-      },
-      "vio_0": {
-        "vlnv": "xilinx.com:ip:vio:3.0",
-        "xci_name": "GuitarSep_vio_0_0",
-        "parameters": {
-          "C_NUM_PROBE_IN": {
-            "value": "0"
-          }
-        }
-      },
       "axi_traffic_gen_1": {
         "vlnv": "xilinx.com:ip:axi_traffic_gen:3.0",
         "xci_name": "GuitarSep_axi_traffic_gen_1_0",
@@ -631,8 +595,7 @@
       "axi_smc_M00_AXI": {
         "interface_ports": [
           "axi_smc/M00_AXI",
-          "axi_led_0/S00_AXI",
-          "ila_3/SLOT_0_AXI"
+          "axi_led_0/S00_AXI"
         ]
       },
       "axi_traffic_gen_2_M_AXI_LITE_CH1": {
@@ -691,7 +654,6 @@
       "Song_Selector_0_dout": {
         "ports": [
           "Song_Selector_0/dout",
-          "ila_0/probe0",
           "Score_display_0/note_out"
         ]
       },
@@ -722,13 +684,9 @@
           "axi_led_0/s00_axi_aclk",
           "debouncer_0/clk",
           "Game_SM_0/clk",
-          "ila_0/clk",
           "axi_traffic_gen_2/s_axi_aclk",
           "ClockDivider_1/clk_in",
           "ila_1/clk",
-          "ila_2/clk",
-          "ila_3/clk",
-          "vio_0/clk",
           "Score_display_0/clk",
           "dist_mem_gen_0/clk",
           "axi_traffic_gen_1/s_axi_aclk",
@@ -767,12 +725,6 @@
         "ports": [
           "axi_led_0/RGB_R",
           "led6_r"
-        ]
-      },
-      "vio_0_probe_out0": {
-        "ports": [
-          "vio_0/probe_out0",
-          "Game_SM_0/game_on"
         ]
       },
       "MemorySequency_1_addr": {
@@ -823,6 +775,12 @@
         "ports": [
           "vio_1/probe_out0",
           "Enable_mod_0/score_addr_ready"
+        ]
+      },
+      "game_on_0_1": {
+        "ports": [
+          "game_on",
+          "Game_SM_0/game_on"
         ]
       }
     },

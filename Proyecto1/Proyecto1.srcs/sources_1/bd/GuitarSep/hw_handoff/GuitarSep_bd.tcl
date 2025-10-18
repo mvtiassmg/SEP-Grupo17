@@ -170,6 +170,7 @@ proc create_root_design { parentCell } {
   set_property -dict [ list \
    CONFIG.ASSOCIATED_RESET {reset:reset_0} \
  ] $clk
+  set game_on [ create_bd_port -dir I game_on ]
   set led [ create_bd_port -dir O -from 3 -to 0 led ]
   set led6_b [ create_bd_port -dir O led6_b ]
   set led6_g [ create_bd_port -dir O led6_g ]
@@ -282,23 +283,8 @@ proc create_root_design { parentCell } {
    CONFIG.output_options {non_registered} \
  ] $dist_mem_gen_0
 
-  # Create instance: ila_0, and set properties
-  set ila_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:ila:6.2 ila_0 ]
-  set_property -dict [ list \
-   CONFIG.C_ENABLE_ILA_AXI_MON {false} \
-   CONFIG.C_MONITOR_TYPE {Native} \
-   CONFIG.C_NUM_OF_PROBES {1} \
-   CONFIG.C_PROBE0_WIDTH {4} \
- ] $ila_0
-
   # Create instance: ila_1, and set properties
   set ila_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:ila:6.2 ila_1 ]
-
-  # Create instance: ila_2, and set properties
-  set ila_2 [ create_bd_cell -type ip -vlnv xilinx.com:ip:ila:6.2 ila_2 ]
-
-  # Create instance: ila_3, and set properties
-  set ila_3 [ create_bd_cell -type ip -vlnv xilinx.com:ip:ila:6.2 ila_3 ]
 
   # Create instance: ila_5, and set properties
   set ila_5 [ create_bd_cell -type ip -vlnv xilinx.com:ip:ila:6.2 ila_5 ]
@@ -311,13 +297,6 @@ proc create_root_design { parentCell } {
   # Create instance: ila_6, and set properties
   set ila_6 [ create_bd_cell -type ip -vlnv xilinx.com:ip:ila:6.2 ila_6 ]
 
-  # Create instance: vio_0, and set properties
-  set vio_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:vio:3.0 vio_0 ]
-  set_property -dict [ list \
-   CONFIG.C_EN_PROBE_IN_ACTIVITY {0} \
-   CONFIG.C_NUM_PROBE_IN {0} \
- ] $vio_0
-
   # Create instance: vio_1, and set properties
   set vio_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:vio:3.0 vio_1 ]
   set_property -dict [ list \
@@ -327,7 +306,6 @@ proc create_root_design { parentCell } {
 
   # Create interface connections
   connect_bd_intf_net -intf_net axi_smc_M00_AXI [get_bd_intf_pins axi_led_0/S00_AXI] [get_bd_intf_pins axi_smc/M00_AXI]
-connect_bd_intf_net -intf_net [get_bd_intf_nets axi_smc_M00_AXI] [get_bd_intf_pins axi_smc/M00_AXI] [get_bd_intf_pins ila_3/SLOT_0_AXI]
   connect_bd_intf_net -intf_net axi_smc_M01_AXI [get_bd_intf_pins axi_smc/M01_AXI] [get_bd_intf_pins axi_traffic_gen_1/S_AXI]
   connect_bd_intf_net -intf_net axi_traffic_gen_0_M_AXI_LITE_CH1 [get_bd_intf_pins axi_smc/S00_AXI] [get_bd_intf_pins axi_traffic_gen_0/M_AXI_LITE_CH1]
   connect_bd_intf_net -intf_net axi_traffic_gen_1_M_AXI [get_bd_intf_pins Enable_mod_0/S00_AXI] [get_bd_intf_pins axi_traffic_gen_1/M_AXI]
@@ -346,17 +324,17 @@ connect_bd_intf_net -intf_net [get_bd_intf_nets axi_traffic_gen_2_M_AXI_LITE_CH1
   connect_bd_net -net Score_display_0_led [get_bd_ports led] [get_bd_pins Score_display_0/led]
   connect_bd_net -net Score_display_0_led_rgb [get_bd_pins Score_display_0/led_rgb] [get_bd_pins axi_led_0/sw]
   connect_bd_net -net Score_display_0_ptje [get_bd_pins Score_display_0/ptje] [get_bd_pins dist_mem_gen_0/d]
-  connect_bd_net -net Song_Selector_0_dout [get_bd_pins Score_display_0/note_out] [get_bd_pins Song_Selector_0/dout] [get_bd_pins ila_0/probe0]
+  connect_bd_net -net Song_Selector_0_dout [get_bd_pins Score_display_0/note_out] [get_bd_pins Song_Selector_0/dout]
   connect_bd_net -net axi_led_0_RGB_B [get_bd_ports led6_b] [get_bd_pins axi_led_0/RGB_B]
   connect_bd_net -net axi_led_0_RGB_G [get_bd_ports led6_g] [get_bd_pins axi_led_0/RGB_G]
   connect_bd_net -net axi_led_0_RGB_R [get_bd_ports led6_r] [get_bd_pins axi_led_0/RGB_R]
   connect_bd_net -net btn_0_1 [get_bd_ports btn] [get_bd_pins debouncer_0/btn]
-  connect_bd_net -net clk_1 [get_bd_ports clk] [get_bd_pins ClockDivider_1/clk_in] [get_bd_pins Enable_mod_0/s00_axi_aclk] [get_bd_pins Game_SM_0/clk] [get_bd_pins Score_display_0/clk] [get_bd_pins axi_led_0/clk] [get_bd_pins axi_led_0/s00_axi_aclk] [get_bd_pins axi_smc/aclk] [get_bd_pins axi_traffic_gen_0/s_axi_aclk] [get_bd_pins axi_traffic_gen_1/s_axi_aclk] [get_bd_pins axi_traffic_gen_2/s_axi_aclk] [get_bd_pins axi_traffic_gen_3/s_axi_aclk] [get_bd_pins debouncer_0/clk] [get_bd_pins dist_mem_gen_0/clk] [get_bd_pins ila_0/clk] [get_bd_pins ila_1/clk] [get_bd_pins ila_2/clk] [get_bd_pins ila_3/clk] [get_bd_pins ila_5/clk] [get_bd_pins ila_6/clk] [get_bd_pins vio_0/clk] [get_bd_pins vio_1/clk]
+  connect_bd_net -net clk_1 [get_bd_ports clk] [get_bd_pins ClockDivider_1/clk_in] [get_bd_pins Enable_mod_0/s00_axi_aclk] [get_bd_pins Game_SM_0/clk] [get_bd_pins Score_display_0/clk] [get_bd_pins axi_led_0/clk] [get_bd_pins axi_led_0/s00_axi_aclk] [get_bd_pins axi_smc/aclk] [get_bd_pins axi_traffic_gen_0/s_axi_aclk] [get_bd_pins axi_traffic_gen_1/s_axi_aclk] [get_bd_pins axi_traffic_gen_2/s_axi_aclk] [get_bd_pins axi_traffic_gen_3/s_axi_aclk] [get_bd_pins debouncer_0/clk] [get_bd_pins dist_mem_gen_0/clk] [get_bd_pins ila_1/clk] [get_bd_pins ila_5/clk] [get_bd_pins ila_6/clk] [get_bd_pins vio_1/clk]
   connect_bd_net -net debouncer_0_btn_out [get_bd_pins Score_display_0/btn_push] [get_bd_pins debouncer_0/btn_out]
   connect_bd_net -net dist_mem_gen_0_spo [get_bd_pins dist_mem_gen_0/spo] [get_bd_pins ila_5/probe0]
+  connect_bd_net -net game_on_0_1 [get_bd_ports game_on] [get_bd_pins Game_SM_0/game_on]
   connect_bd_net -net reset_1 [get_bd_ports reset] [get_bd_pins Enable_mod_0/s00_axi_aresetn] [get_bd_pins Game_SM_0/reset] [get_bd_pins MemorySequency_1/reset] [get_bd_pins Score_display_0/reset] [get_bd_pins axi_led_0/s00_axi_aresetn] [get_bd_pins axi_smc/aresetn] [get_bd_pins axi_traffic_gen_0/s_axi_aresetn] [get_bd_pins axi_traffic_gen_1/s_axi_aresetn] [get_bd_pins axi_traffic_gen_3/s_axi_aresetn]
   connect_bd_net -net song_sel_0_1 [get_bd_ports song_sel] [get_bd_pins Game_SM_0/song_sel]
-  connect_bd_net -net vio_0_probe_out0 [get_bd_pins Game_SM_0/game_on] [get_bd_pins vio_0/probe_out0]
   connect_bd_net -net vio_1_probe_out0 [get_bd_pins Enable_mod_0/score_addr_ready] [get_bd_pins vio_1/probe_out0]
 
   # Create address segments
