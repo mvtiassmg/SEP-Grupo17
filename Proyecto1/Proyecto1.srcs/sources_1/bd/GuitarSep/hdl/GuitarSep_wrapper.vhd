@@ -1,7 +1,7 @@
 --Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
---Date        : Fri Oct 17 18:54:49 2025
+--Date        : Fri Oct 17 21:21:01 2025
 --Host        : Macbook running 64-bit major release  (build 9200)
 --Command     : generate_target GuitarSep_wrapper.bd
 --Design      : GuitarSep_wrapper
@@ -15,7 +15,6 @@ entity GuitarSep_wrapper is
   port (
     btn : in STD_LOGIC_VECTOR ( 3 downto 0 );
     clk : in STD_LOGIC;
-    game_on : in STD_LOGIC;
     led : out STD_LOGIC_VECTOR ( 3 downto 0 );
     led6_b : out STD_LOGIC;
     led6_g : out STD_LOGIC;
@@ -30,7 +29,6 @@ architecture STRUCTURE of GuitarSep_wrapper is
   port (
     clk : in STD_LOGIC;
     btn : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    game_on : in STD_LOGIC;
     song_sel : in STD_LOGIC_VECTOR ( 1 downto 0 );
     reset : in STD_LOGIC;
     led : out STD_LOGIC_VECTOR ( 3 downto 0 );
@@ -44,7 +42,6 @@ GuitarSep_i: component GuitarSep
      port map (
       btn(3 downto 0) => btn(3 downto 0),
       clk => clk,
-      game_on => game_on,
       led(3 downto 0) => led(3 downto 0),
       led6_b => led6_b,
       led6_g => led6_g,
