@@ -17,6 +17,15 @@ proc init_gui { IPINST } {
 
 }
 
+proc update_PARAM_VALUE.SCORE_AW { PARAM_VALUE.SCORE_AW } {
+	# Procedure called to update SCORE_AW when any of the dependent parameters in the arguments change
+}
+
+proc validate_PARAM_VALUE.SCORE_AW { PARAM_VALUE.SCORE_AW } {
+	# Procedure called to validate SCORE_AW
+	return true
+}
+
 proc update_PARAM_VALUE.C_S00_AXI_ID_WIDTH { PARAM_VALUE.C_S00_AXI_ID_WIDTH } {
 	# Procedure called to update C_S00_AXI_ID_WIDTH when any of the dependent parameters in the arguments change
 }
@@ -146,5 +155,10 @@ proc update_MODELPARAM_VALUE.C_S00_AXI_RUSER_WIDTH { MODELPARAM_VALUE.C_S00_AXI_
 proc update_MODELPARAM_VALUE.C_S00_AXI_BUSER_WIDTH { MODELPARAM_VALUE.C_S00_AXI_BUSER_WIDTH PARAM_VALUE.C_S00_AXI_BUSER_WIDTH } {
 	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
 	set_property value [get_property value ${PARAM_VALUE.C_S00_AXI_BUSER_WIDTH}] ${MODELPARAM_VALUE.C_S00_AXI_BUSER_WIDTH}
+}
+
+proc update_MODELPARAM_VALUE.SCORE_AW { MODELPARAM_VALUE.SCORE_AW PARAM_VALUE.SCORE_AW } {
+	# Procedure called to set VHDL generic/Verilog parameter value(s) based on TCL parameter value
+	set_property value [get_property value ${PARAM_VALUE.SCORE_AW}] ${MODELPARAM_VALUE.SCORE_AW}
 }
 
