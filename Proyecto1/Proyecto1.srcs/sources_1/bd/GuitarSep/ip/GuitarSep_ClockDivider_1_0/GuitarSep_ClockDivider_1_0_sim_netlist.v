@@ -1,10 +1,10 @@
 // Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
-// Date        : Fri Oct 17 02:17:36 2025
+// Date        : Fri Oct 17 02:17:35 2025
 // Host        : Macbook running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode funcsim
-//               c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_ClockDivider_1_0/GuitarSep_ClockDivider_1_0_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim -rename_top GuitarSep_ClockDivider_1_0 -prefix
+//               GuitarSep_ClockDivider_1_0_ GuitarSep_ClockDivider_1_0_sim_netlist.v
 // Design      : GuitarSep_ClockDivider_1_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -12,28 +12,6 @@
 // --------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* CHECK_LICENSE_TYPE = "GuitarSep_ClockDivider_1_0,ClockDivider,{}" *) (* downgradeipidentifiedwarnings = "yes" *) (* ip_definition_source = "package_project" *) 
-(* x_core_info = "ClockDivider,Vivado 2020.1" *) 
-(* NotValidForBitStream *)
-module GuitarSep_ClockDivider_1_0
-   (clk_in,
-    fr_out,
-    clk_out);
-  input clk_in;
-  input [3:0]fr_out;
-  output clk_out;
-
-  wire clk_in;
-  wire clk_out;
-  wire [3:0]fr_out;
-
-  GuitarSep_ClockDivider_1_0_ClockDivider U0
-       (.clk_in(clk_in),
-        .clk_out(clk_out),
-        .fr_out(fr_out));
-endmodule
-
-(* ORIG_REF_NAME = "ClockDivider" *) 
 module GuitarSep_ClockDivider_1_0_ClockDivider
    (clk_out,
     fr_out,
@@ -6393,6 +6371,27 @@ module GuitarSep_ClockDivider_1_0_ClockDivider
         .D(\counter_reg[8]_i_1_n_6 ),
         .Q(counter_reg[9]),
         .R(clear));
+endmodule
+
+(* CHECK_LICENSE_TYPE = "GuitarSep_ClockDivider_1_0,ClockDivider,{}" *) (* downgradeipidentifiedwarnings = "yes" *) (* ip_definition_source = "package_project" *) 
+(* x_core_info = "ClockDivider,Vivado 2020.1" *) 
+(* NotValidForBitStream *)
+module GuitarSep_ClockDivider_1_0
+   (clk_in,
+    fr_out,
+    clk_out);
+  input clk_in;
+  input [3:0]fr_out;
+  output clk_out;
+
+  wire clk_in;
+  wire clk_out;
+  wire [3:0]fr_out;
+
+  GuitarSep_ClockDivider_1_0_ClockDivider U0
+       (.clk_in(clk_in),
+        .clk_out(clk_out),
+        .fr_out(fr_out));
 endmodule
 `ifndef GLBL
 `define GLBL

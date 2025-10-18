@@ -14,20 +14,19 @@
       "debouncer_0": "",
       "MemorySequency_1": "",
       "ClockDivider_1": "",
-      "axi_led_0": "",
       "axi_traffic_gen_0": "",
       "axi_smc": "",
       "axi_traffic_gen_2": "",
-      "ila_1": "",
       "axi_traffic_gen_1": "",
       "Song_Selector_0": "",
       "dist_mem_gen_0": "",
       "Score_display_0": "",
       "Enable_mod_0": "",
       "axi_traffic_gen_3": "",
-      "ila_5": "",
-      "ila_6": "",
-      "vio_1": ""
+      "ila_mem": "",
+      "ila_full": "",
+      "vio_1": "",
+      "axi_led_0": ""
     },
     "ports": {
       "clk": {
@@ -185,10 +184,6 @@
       "ClockDivider_1": {
         "vlnv": "xilinx.com:user:ClockDivider:1.0",
         "xci_name": "GuitarSep_ClockDivider_1_0"
-      },
-      "axi_led_0": {
-        "vlnv": "xilinx.com:user:axi_led:1.0",
-        "xci_name": "GuitarSep_axi_led_0_0"
       },
       "axi_traffic_gen_0": {
         "vlnv": "xilinx.com:ip:axi_traffic_gen:3.0",
@@ -427,10 +422,6 @@
           }
         }
       },
-      "ila_1": {
-        "vlnv": "xilinx.com:ip:ila:6.2",
-        "xci_name": "GuitarSep_ila_1_0"
-      },
       "axi_traffic_gen_1": {
         "vlnv": "xilinx.com:ip:axi_traffic_gen:3.0",
         "xci_name": "GuitarSep_axi_traffic_gen_1_0",
@@ -562,7 +553,7 @@
           }
         }
       },
-      "ila_5": {
+      "ila_mem": {
         "vlnv": "xilinx.com:ip:ila:6.2",
         "xci_name": "GuitarSep_ila_5_0",
         "parameters": {
@@ -577,7 +568,7 @@
           }
         }
       },
-      "ila_6": {
+      "ila_full": {
         "vlnv": "xilinx.com:ip:ila:6.2",
         "xci_name": "GuitarSep_ila_6_0"
       },
@@ -587,8 +578,15 @@
         "parameters": {
           "C_NUM_PROBE_IN": {
             "value": "0"
+          },
+          "C_PROBE_OUT0_INIT_VAL": {
+            "value": "0x1"
           }
         }
+      },
+      "axi_led_0": {
+        "vlnv": "xilinx.com:user:axi_led:1.0",
+        "xci_name": "GuitarSep_axi_led_0_0"
       }
     },
     "interface_nets": {
@@ -601,8 +599,7 @@
       "axi_traffic_gen_2_M_AXI_LITE_CH1": {
         "interface_ports": [
           "axi_traffic_gen_2/M_AXI_LITE_CH1",
-          "axi_smc/S01_AXI",
-          "ila_1/SLOT_0_AXI"
+          "axi_smc/S01_AXI"
         ]
       },
       "axi_traffic_gen_0_M_AXI_LITE_CH1": {
@@ -615,7 +612,7 @@
         "interface_ports": [
           "Enable_mod_0/S00_AXI",
           "axi_traffic_gen_1/M_AXI",
-          "ila_6/SLOT_0_AXI"
+          "ila_full/SLOT_0_AXI"
         ]
       },
       "axi_smc_M01_AXI": {
@@ -678,23 +675,22 @@
       "clk_1": {
         "ports": [
           "clk",
-          "axi_led_0/clk",
           "axi_traffic_gen_0/s_axi_aclk",
           "axi_smc/aclk",
-          "axi_led_0/s00_axi_aclk",
           "debouncer_0/clk",
           "Game_SM_0/clk",
           "axi_traffic_gen_2/s_axi_aclk",
           "ClockDivider_1/clk_in",
-          "ila_1/clk",
           "Score_display_0/clk",
           "dist_mem_gen_0/clk",
           "axi_traffic_gen_1/s_axi_aclk",
           "Enable_mod_0/s00_axi_aclk",
           "axi_traffic_gen_3/s_axi_aclk",
-          "ila_5/clk",
-          "ila_6/clk",
-          "vio_1/clk"
+          "ila_mem/clk",
+          "ila_full/clk",
+          "vio_1/clk",
+          "axi_led_0/clk",
+          "axi_led_0/s00_axi_aclk"
         ]
       },
       "Score_display_0_led_rgb": {
@@ -761,14 +757,14 @@
           "Score_display_0/reset",
           "axi_traffic_gen_0/s_axi_aresetn",
           "axi_smc/aresetn",
-          "axi_led_0/s00_axi_aresetn",
-          "MemorySequency_1/reset"
+          "MemorySequency_1/reset",
+          "axi_led_0/s00_axi_aresetn"
         ]
       },
       "dist_mem_gen_0_spo": {
         "ports": [
           "dist_mem_gen_0/spo",
-          "ila_5/probe0"
+          "ila_mem/probe0"
         ]
       },
       "vio_1_probe_out0": {

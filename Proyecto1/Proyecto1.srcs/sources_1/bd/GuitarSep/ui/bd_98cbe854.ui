@@ -1,66 +1,65 @@
 {
    "ActiveEmotionalView":"Default View",
-   "Default View_ScaleFactor":"1.16629",
-   "Default View_TopLeft":"232,210",
+   "Default View_ScaleFactor":"0.634801",
+   "Default View_TopLeft":"-131,-5",
    "ExpandedHierarchyInLayout":"",
    "guistr":"# # String gsaved with Nlview 7.0r6  2020-01-29 bk=1.5227 VDI=41 GEI=36 GUI=JA:9.0 non-TLS
 #  -string -flagsOSRD
-preplace port clk -pg 1 -lvl 0 -x -20 -y 300 -defaultsOSRD
-preplace port reset -pg 1 -lvl 0 -x -20 -y 270 -defaultsOSRD
-preplace port led6_b -pg 1 -lvl 9 -x 2440 -y 870 -defaultsOSRD
-preplace port led6_g -pg 1 -lvl 9 -x 2440 -y 840 -defaultsOSRD
-preplace port led6_r -pg 1 -lvl 9 -x 2440 -y 810 -defaultsOSRD
-preplace port game_on -pg 1 -lvl 0 -x -20 -y 330 -defaultsOSRD
-preplace portBus btn -pg 1 -lvl 0 -x -20 -y 230 -defaultsOSRD
-preplace portBus song_sel -pg 1 -lvl 0 -x -20 -y 390 -defaultsOSRD
-preplace portBus led -pg 1 -lvl 9 -x 2440 -y 160 -defaultsOSRD
-preplace inst Game_SM_0 -pg 1 -lvl 1 -x 380 -y 320 -defaultsOSRD
-preplace inst debouncer_0 -pg 1 -lvl 3 -x 950 -y 220 -defaultsOSRD
-preplace inst MemorySequency_1 -pg 1 -lvl 2 -x 670 -y 90 -defaultsOSRD
-preplace inst ClockDivider_1 -pg 1 -lvl 1 -x 380 -y 70 -defaultsOSRD
-preplace inst axi_led_0 -pg 1 -lvl 5 -x 1550 -y 840 -defaultsOSRD
-preplace inst axi_traffic_gen_0 -pg 1 -lvl 3 -x 950 -y 350 -defaultsOSRD
-preplace inst axi_smc -pg 1 -lvl 4 -x 1270 -y 490 -defaultsOSRD
-preplace inst axi_traffic_gen_2 -pg 1 -lvl 3 -x 950 -y 650 -defaultsOSRD
-preplace inst ila_1 -pg 1 -lvl 4 -x 1270 -y 640 -defaultsOSRD
-preplace inst axi_traffic_gen_1 -pg 1 -lvl 5 -x 1550 -y 530 -defaultsOSRD
-preplace inst Song_Selector_0 -pg 1 -lvl 3 -x 950 -y 70 -defaultsOSRD
-preplace inst dist_mem_gen_0 -pg 1 -lvl 7 -x 2110 -y 410 -defaultsOSRD
-preplace inst Score_display_0 -pg 1 -lvl 4 -x 1270 -y 160 -defaultsOSRD
-preplace inst Enable_mod_0 -pg 1 -lvl 6 -x 1830 -y 390 -defaultsOSRD
-preplace inst axi_traffic_gen_3 -pg 1 -lvl 3 -x 950 -y 510 -defaultsOSRD
-preplace inst ila_5 -pg 1 -lvl 8 -x 2330 -y 510 -defaultsOSRD
-preplace inst ila_6 -pg 1 -lvl 6 -x 1830 -y 550 -defaultsOSRD
-preplace inst vio_1 -pg 1 -lvl 5 -x 1550 -y 380 -defaultsOSRD
-preplace netloc btn_0_1 1 0 3 NJ 230 NJ 230 NJ
-preplace netloc Game_SM_0_playing 1 1 3 550 170 810J 150 1110
-preplace netloc song_sel_0_1 1 0 1 10J 350n
-preplace netloc Song_Selector_0_dout 1 3 1 1120 70n
-preplace netloc MemorySequency_1_freq_game 1 0 3 10 0 NJ 0 800
-preplace netloc ClockDivider_1_clk_out 1 1 1 N 70
-preplace netloc debouncer_0_btn_out 1 3 1 1110 200n
-preplace netloc clk_1 1 0 8 0 410 NJ 410 800 140 1100 320 1430 320 1670 300 1980 320 2220J
-preplace netloc Score_display_0_led_rgb 1 4 1 1420 180n
-preplace netloc Score_display_0_led 1 4 5 NJ 140 NJ 140 NJ 140 NJ 140 2420J
-preplace netloc axi_led_0_RGB_B 1 5 4 1670J 870 NJ 870 NJ 870 NJ
-preplace netloc axi_led_0_RGB_G 1 5 4 NJ 840 NJ 840 NJ 840 NJ
-preplace netloc axi_led_0_RGB_R 1 5 4 1670J 810 NJ 810 NJ 810 NJ
-preplace netloc MemorySequency_1_addr 1 2 1 N 80
-preplace netloc Game_SM_0_song_selected 1 1 2 530J 10 810
-preplace netloc Score_display_0_ptje 1 4 3 NJ 160 NJ 160 1990
-preplace netloc Enable_mod_0_score_addr_out 1 6 1 N 380
-preplace netloc reset_1 1 0 6 10J 220 540 220 790 430 1130 390 1400 440 1660J
-preplace netloc dist_mem_gen_0_spo 1 7 1 2210 410n
-preplace netloc vio_1_probe_out0 1 5 1 N 380
+preplace port clk -pg 1 -lvl 0 -x 0 -y 110 -defaultsOSRD
+preplace port reset -pg 1 -lvl 0 -x 0 -y 230 -defaultsOSRD
+preplace port led6_b -pg 1 -lvl 9 -x 2160 -y 500 -defaultsOSRD
+preplace port led6_g -pg 1 -lvl 9 -x 2160 -y 470 -defaultsOSRD
+preplace port led6_r -pg 1 -lvl 9 -x 2160 -y 440 -defaultsOSRD
+preplace port game_on -pg 1 -lvl 0 -x 0 -y 330 -defaultsOSRD
+preplace portBus btn -pg 1 -lvl 0 -x 0 -y 420 -defaultsOSRD
+preplace portBus song_sel -pg 1 -lvl 0 -x 0 -y 360 -defaultsOSRD
+preplace portBus led -pg 1 -lvl 9 -x 2160 -y 350 -defaultsOSRD
+preplace inst Game_SM_0 -pg 1 -lvl 1 -x 190 -y 320 -defaultsOSRD
+preplace inst debouncer_0 -pg 1 -lvl 3 -x 750 -y 410 -defaultsOSRD
+preplace inst MemorySequency_1 -pg 1 -lvl 2 -x 480 -y 140 -defaultsOSRD
+preplace inst ClockDivider_1 -pg 1 -lvl 1 -x 190 -y 120 -defaultsOSRD
+preplace inst axi_traffic_gen_0 -pg 1 -lvl 3 -x 750 -y 760 -defaultsOSRD
+preplace inst axi_smc -pg 1 -lvl 4 -x 1060 -y 600 -defaultsOSRD
+preplace inst axi_traffic_gen_2 -pg 1 -lvl 3 -x 750 -y 600 -defaultsOSRD
+preplace inst axi_traffic_gen_1 -pg 1 -lvl 5 -x 1330 -y 640 -defaultsOSRD
+preplace inst Song_Selector_0 -pg 1 -lvl 3 -x 750 -y 70 -defaultsOSRD
+preplace inst dist_mem_gen_0 -pg 1 -lvl 7 -x 1860 -y 820 -defaultsOSRD
+preplace inst Score_display_0 -pg 1 -lvl 4 -x 1060 -y 370 -defaultsOSRD
+preplace inst Enable_mod_0 -pg 1 -lvl 6 -x 1600 -y 800 -defaultsOSRD
+preplace inst axi_traffic_gen_3 -pg 1 -lvl 3 -x 750 -y 900 -defaultsOSRD
+preplace inst ila_mem -pg 1 -lvl 8 -x 2050 -y 740 -defaultsOSRD
+preplace inst ila_full -pg 1 -lvl 6 -x 1600 -y 640 -defaultsOSRD
+preplace inst vio_1 -pg 1 -lvl 5 -x 1330 -y 790 -defaultsOSRD
+preplace inst axi_led_0 -pg 1 -lvl 5 -x 1330 -y 470 -defaultsOSRD
+preplace netloc btn_0_1 1 0 3 NJ 420 NJ 420 NJ
+preplace netloc Game_SM_0_playing 1 1 3 360 340 NJ 340 890
+preplace netloc song_sel_0_1 1 0 1 40J 350n
+preplace netloc Song_Selector_0_dout 1 3 1 900 70n
+preplace netloc MemorySequency_1_freq_game 1 0 3 40 220 NJ 220 610
+preplace netloc ClockDivider_1_clk_out 1 1 1 N 120
+preplace netloc debouncer_0_btn_out 1 3 1 N 410
+preplace netloc clk_1 1 0 8 30 410 NJ 410 610 680 910 700 1210 730 1450 710 1750 730 NJ
+preplace netloc Score_display_0_led_rgb 1 4 1 1200 390n
+preplace netloc Score_display_0_led 1 4 5 NJ 350 NJ 350 NJ 350 NJ 350 NJ
+preplace netloc axi_led_0_RGB_B 1 5 4 1440J 500 NJ 500 NJ 500 NJ
+preplace netloc axi_led_0_RGB_G 1 5 4 NJ 470 NJ 470 NJ 470 NJ
+preplace netloc axi_led_0_RGB_R 1 5 4 1440J 440 NJ 440 NJ 440 NJ
+preplace netloc MemorySequency_1_addr 1 2 1 610 80n
+preplace netloc Game_SM_0_song_selected 1 1 2 340 60 NJ
+preplace netloc Score_display_0_ptje 1 4 3 NJ 370 NJ 370 1760
+preplace netloc Enable_mod_0_score_addr_out 1 6 1 N 790
+preplace netloc reset_1 1 0 6 20 230 350 430 600 980 920 710 1220 850 1440J
+preplace netloc dist_mem_gen_0_spo 1 7 1 1960 750n
+preplace netloc vio_1_probe_out0 1 5 1 NJ 790
 preplace netloc game_on_0_1 1 0 1 NJ 330
-preplace netloc axi_traffic_gen_0_M_AXI_LITE_CH1 1 3 1 1090 330n
-preplace netloc axi_traffic_gen_2_M_AXI_LITE_CH1 1 3 1 1140 470n
-preplace netloc axi_traffic_gen_1_M_AXI 1 5 1 1680 360n
-preplace netloc axi_smc_M01_AXI 1 4 1 N 500
-preplace netloc axi_traffic_gen_3_M_AXI_LITE_CH1 1 3 1 N 490
-preplace netloc axi_smc_M00_AXI 1 4 1 1410 480n
-levelinfo -pg 1 -20 380 670 950 1270 1550 1830 2110 2330 2440
-pagesize -pg 1 -db -bbox -sgen -150 -20 2540 940
+preplace netloc axi_traffic_gen_0_M_AXI_LITE_CH1 1 3 1 890 560n
+preplace netloc axi_traffic_gen_2_M_AXI_LITE_CH1 1 3 1 NJ 580
+preplace netloc axi_traffic_gen_1_M_AXI 1 5 1 1440 620n
+preplace netloc axi_smc_M01_AXI 1 4 1 N 610
+preplace netloc axi_traffic_gen_3_M_AXI_LITE_CH1 1 3 1 930 600n
+preplace netloc axi_smc_M00_AXI 1 4 1 1190 430n
+levelinfo -pg 1 0 190 480 750 1060 1330 1600 1860 2050 2160
+pagesize -pg 1 -db -bbox -sgen -130 0 2260 990
 "
 }
 {

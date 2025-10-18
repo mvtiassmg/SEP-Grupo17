@@ -1,10 +1,10 @@
 // Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
-// Date        : Fri Oct 17 18:13:04 2025
+// Date        : Fri Oct 17 21:30:33 2025
 // Host        : Macbook running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode funcsim
-//               c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_axi_traffic_gen_2_0/GuitarSep_axi_traffic_gen_2_0_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim -rename_top GuitarSep_axi_traffic_gen_2_0 -prefix
+//               GuitarSep_axi_traffic_gen_2_0_ GuitarSep_axi_traffic_gen_2_0_sim_netlist.v
 // Design      : GuitarSep_axi_traffic_gen_2_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -486,7 +486,7 @@ module GuitarSep_axi_traffic_gen_2_0
         .status(status));
 endmodule
 
-(* ORIG_REF_NAME = "axi_traffic_gen_v3_0_7_asynch_rst_ff" *) (* dont_touch = "true" *) 
+(* dont_touch = "true" *) 
 module GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_asynch_rst_ff
    (data,
     clk,
@@ -598,7 +598,6 @@ module GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_asynch_rst_ff__3
         .Q(q));
 endmodule
 
-(* ORIG_REF_NAME = "axi_traffic_gen_v3_0_7_systeminit_dmg" *) 
 module GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_dmg
    (douta,
     S,
@@ -866,7 +865,6 @@ module GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_dmg__para
         .s_axi_aclk(s_axi_aclk));
 endmodule
 
-(* ORIG_REF_NAME = "axi_traffic_gen_v3_0_7_systeminit_mrdwr" *) 
 module GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_mrdwr
    (s_axi_aresetn_0,
     done,
@@ -4701,7 +4699,6 @@ module GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_mrdwr
         .O(addra[0]));
 endmodule
 
-(* ORIG_REF_NAME = "axi_traffic_gen_v3_0_7_systeminit_top" *) 
 module GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_systeminit_top
    (arvalid_m_reg,
     awvalid_m_reg,
@@ -5014,7 +5011,6 @@ endmodule
 (* C_SRAM_F = "none" *) (* C_STRM_DATA_SEED = "43981" *) (* C_S_AXI_ARUSER_WIDTH = "8" *) 
 (* C_S_AXI_AWUSER_WIDTH = "8" *) (* C_S_AXI_DATA_WIDTH = "32" *) (* C_S_AXI_ID_WIDTH = "1" *) 
 (* C_WRITE_ONLY = "0" *) (* C_ZERO_INVALID = "1" *) (* DowngradeIPIdentifiedWarnings = "yes" *) 
-(* ORIG_REF_NAME = "axi_traffic_gen_v3_0_7_top" *) 
 module GuitarSep_axi_traffic_gen_2_0_axi_traffic_gen_v3_0_7_top
    (s_axi_aclk,
     s_axi_aresetn,
@@ -5973,25 +5969,24 @@ endmodule
 (* CLOCKING_MODE = "0" *) (* ECC_MODE = "0" *) (* MAX_NUM_CHAR = "0" *) 
 (* MEMORY_INIT_FILE = "GuitarSep_axi_traffic_gen_2_0_mask.mem" *) (* MEMORY_INIT_PARAM = "" *) (* MEMORY_OPTIMIZATION = "true" *) 
 (* MEMORY_PRIMITIVE = "1" *) (* MEMORY_SIZE = "512" *) (* MEMORY_TYPE = "0" *) 
-(* MESSAGE_CONTROL = "0" *) (* NUM_CHAR_LOC = "0" *) (* ORIG_REF_NAME = "xpm_memory_base" *) 
-(* P_ECC_MODE = "no_ecc" *) (* P_ENABLE_BYTE_WRITE_A = "1" *) (* P_ENABLE_BYTE_WRITE_B = "0" *) 
-(* P_MAX_DEPTH_DATA = "16" *) (* P_MEMORY_OPT = "yes" *) (* P_MEMORY_PRIMITIVE = "distributed" *) 
-(* P_MIN_WIDTH_DATA = "32" *) (* P_MIN_WIDTH_DATA_A = "32" *) (* P_MIN_WIDTH_DATA_B = "32" *) 
-(* P_MIN_WIDTH_DATA_ECC = "32" *) (* P_MIN_WIDTH_DATA_LDW = "4" *) (* P_MIN_WIDTH_DATA_SHFT = "32" *) 
-(* P_NUM_COLS_WRITE_A = "4" *) (* P_NUM_COLS_WRITE_B = "1" *) (* P_NUM_ROWS_READ_A = "1" *) 
-(* P_NUM_ROWS_READ_B = "1" *) (* P_NUM_ROWS_WRITE_A = "1" *) (* P_NUM_ROWS_WRITE_B = "1" *) 
-(* P_SDP_WRITE_MODE = "yes" *) (* P_WIDTH_ADDR_LSB_READ_A = "0" *) (* P_WIDTH_ADDR_LSB_READ_B = "0" *) 
-(* P_WIDTH_ADDR_LSB_WRITE_A = "0" *) (* P_WIDTH_ADDR_LSB_WRITE_B = "0" *) (* P_WIDTH_ADDR_READ_A = "4" *) 
-(* P_WIDTH_ADDR_READ_B = "4" *) (* P_WIDTH_ADDR_WRITE_A = "4" *) (* P_WIDTH_ADDR_WRITE_B = "4" *) 
-(* P_WIDTH_COL_WRITE_A = "8" *) (* P_WIDTH_COL_WRITE_B = "32" *) (* READ_DATA_WIDTH_A = "32" *) 
-(* READ_DATA_WIDTH_B = "32" *) (* READ_LATENCY_A = "1" *) (* READ_LATENCY_B = "1" *) 
-(* READ_RESET_VALUE_A = "0" *) (* READ_RESET_VALUE_B = "0" *) (* RST_MODE_A = "SYNC" *) 
-(* RST_MODE_B = "SYNC" *) (* SIM_ASSERT_CHK = "0" *) (* USE_EMBEDDED_CONSTRAINT = "0" *) 
-(* USE_MEM_INIT = "1" *) (* USE_MEM_INIT_MMI = "0" *) (* VERSION = "0" *) 
-(* WAKEUP_TIME = "0" *) (* WRITE_DATA_WIDTH_A = "32" *) (* WRITE_DATA_WIDTH_B = "32" *) 
-(* WRITE_MODE_A = "1" *) (* WRITE_MODE_B = "1" *) (* WRITE_PROTECT = "1" *) 
-(* XPM_MODULE = "TRUE" *) (* keep_hierarchy = "soft" *) (* rsta_loop_iter = "32" *) 
-(* rstb_loop_iter = "32" *) 
+(* MESSAGE_CONTROL = "0" *) (* NUM_CHAR_LOC = "0" *) (* P_ECC_MODE = "no_ecc" *) 
+(* P_ENABLE_BYTE_WRITE_A = "1" *) (* P_ENABLE_BYTE_WRITE_B = "0" *) (* P_MAX_DEPTH_DATA = "16" *) 
+(* P_MEMORY_OPT = "yes" *) (* P_MEMORY_PRIMITIVE = "distributed" *) (* P_MIN_WIDTH_DATA = "32" *) 
+(* P_MIN_WIDTH_DATA_A = "32" *) (* P_MIN_WIDTH_DATA_B = "32" *) (* P_MIN_WIDTH_DATA_ECC = "32" *) 
+(* P_MIN_WIDTH_DATA_LDW = "4" *) (* P_MIN_WIDTH_DATA_SHFT = "32" *) (* P_NUM_COLS_WRITE_A = "4" *) 
+(* P_NUM_COLS_WRITE_B = "1" *) (* P_NUM_ROWS_READ_A = "1" *) (* P_NUM_ROWS_READ_B = "1" *) 
+(* P_NUM_ROWS_WRITE_A = "1" *) (* P_NUM_ROWS_WRITE_B = "1" *) (* P_SDP_WRITE_MODE = "yes" *) 
+(* P_WIDTH_ADDR_LSB_READ_A = "0" *) (* P_WIDTH_ADDR_LSB_READ_B = "0" *) (* P_WIDTH_ADDR_LSB_WRITE_A = "0" *) 
+(* P_WIDTH_ADDR_LSB_WRITE_B = "0" *) (* P_WIDTH_ADDR_READ_A = "4" *) (* P_WIDTH_ADDR_READ_B = "4" *) 
+(* P_WIDTH_ADDR_WRITE_A = "4" *) (* P_WIDTH_ADDR_WRITE_B = "4" *) (* P_WIDTH_COL_WRITE_A = "8" *) 
+(* P_WIDTH_COL_WRITE_B = "32" *) (* READ_DATA_WIDTH_A = "32" *) (* READ_DATA_WIDTH_B = "32" *) 
+(* READ_LATENCY_A = "1" *) (* READ_LATENCY_B = "1" *) (* READ_RESET_VALUE_A = "0" *) 
+(* READ_RESET_VALUE_B = "0" *) (* RST_MODE_A = "SYNC" *) (* RST_MODE_B = "SYNC" *) 
+(* SIM_ASSERT_CHK = "0" *) (* USE_EMBEDDED_CONSTRAINT = "0" *) (* USE_MEM_INIT = "1" *) 
+(* USE_MEM_INIT_MMI = "0" *) (* VERSION = "0" *) (* WAKEUP_TIME = "0" *) 
+(* WRITE_DATA_WIDTH_A = "32" *) (* WRITE_DATA_WIDTH_B = "32" *) (* WRITE_MODE_A = "1" *) 
+(* WRITE_MODE_B = "1" *) (* WRITE_PROTECT = "1" *) (* XPM_MODULE = "TRUE" *) 
+(* keep_hierarchy = "soft" *) (* rsta_loop_iter = "32" *) (* rstb_loop_iter = "32" *) 
 module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
    (sleep,
     clka,
@@ -6356,7 +6351,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "0" *) 
   (* ram_slice_end = "0" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_0_0 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6377,7 +6372,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "10" *) 
   (* ram_slice_end = "10" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_10_10 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6398,7 +6393,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "11" *) 
   (* ram_slice_end = "11" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_11_11 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6419,7 +6414,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "12" *) 
   (* ram_slice_end = "12" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_12_12 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6440,7 +6435,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "13" *) 
   (* ram_slice_end = "13" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_13_13 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6461,7 +6456,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "14" *) 
   (* ram_slice_end = "14" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_14_14 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6482,7 +6477,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "15" *) 
   (* ram_slice_end = "15" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_15_15 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6503,7 +6498,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "16" *) 
   (* ram_slice_end = "16" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_16_16 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6524,7 +6519,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "17" *) 
   (* ram_slice_end = "17" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_17_17 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6545,7 +6540,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "18" *) 
   (* ram_slice_end = "18" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_18_18 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6566,7 +6561,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "19" *) 
   (* ram_slice_end = "19" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_19_19 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6587,7 +6582,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "1" *) 
   (* ram_slice_end = "1" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_1_1 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6608,7 +6603,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "20" *) 
   (* ram_slice_end = "20" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_20_20 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6629,7 +6624,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "21" *) 
   (* ram_slice_end = "21" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_21_21 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6650,7 +6645,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "22" *) 
   (* ram_slice_end = "22" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_22_22 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6671,7 +6666,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "23" *) 
   (* ram_slice_end = "23" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_23_23 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6692,7 +6687,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "24" *) 
   (* ram_slice_end = "24" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_24_24 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6713,7 +6708,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "25" *) 
   (* ram_slice_end = "25" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_25_25 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6734,7 +6729,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "26" *) 
   (* ram_slice_end = "26" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_26_26 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6755,7 +6750,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "27" *) 
   (* ram_slice_end = "27" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_27_27 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6776,7 +6771,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "28" *) 
   (* ram_slice_end = "28" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_28_28 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6797,7 +6792,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "29" *) 
   (* ram_slice_end = "29" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_29_29 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6818,7 +6813,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "2" *) 
   (* ram_slice_end = "2" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_2_2 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6839,7 +6834,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "30" *) 
   (* ram_slice_end = "30" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_30_30 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6860,7 +6855,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "31" *) 
   (* ram_slice_end = "31" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_31_31 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6881,7 +6876,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "3" *) 
   (* ram_slice_end = "3" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_3_3 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6902,7 +6897,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "4" *) 
   (* ram_slice_end = "4" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_4_4 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6923,7 +6918,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "5" *) 
   (* ram_slice_end = "5" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_5_5 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6944,7 +6939,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "6" *) 
   (* ram_slice_end = "6" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_6_6 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6965,7 +6960,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "7" *) 
   (* ram_slice_end = "7" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_7_7 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -6986,7 +6981,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "8" *) 
   (* ram_slice_end = "8" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_8_8 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -7007,7 +7002,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base
   (* ram_slice_begin = "9" *) 
   (* ram_slice_end = "9" *) 
   RAM32X1S #(
-    .INIT(32'h0000001F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_9_9 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -7326,7 +7321,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized0
   (* ram_slice_begin = "0" *) 
   (* ram_slice_end = "0" *) 
   RAM32X1S #(
-    .INIT(32'h0000002A)) 
+    .INIT(32'h00000355)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_0_0 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -7347,7 +7342,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized0
   (* ram_slice_begin = "10" *) 
   (* ram_slice_end = "10" *) 
   RAM32X1S #(
-    .INIT(32'h00000038)) 
+    .INIT(32'h00000078)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_10_10 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -7368,7 +7363,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized0
   (* ram_slice_begin = "11" *) 
   (* ram_slice_end = "11" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000380)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_11_11 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -7389,7 +7384,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized0
   (* ram_slice_begin = "12" *) 
   (* ram_slice_end = "12" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_12_12 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -7410,7 +7405,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized0
   (* ram_slice_begin = "13" *) 
   (* ram_slice_end = "13" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_13_13 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -7431,7 +7426,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized0
   (* ram_slice_begin = "14" *) 
   (* ram_slice_end = "14" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_14_14 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -7452,7 +7447,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized0
   (* ram_slice_begin = "15" *) 
   (* ram_slice_end = "15" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_15_15 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -7473,7 +7468,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized0
   (* ram_slice_begin = "16" *) 
   (* ram_slice_end = "16" *) 
   RAM32X1S #(
-    .INIT(32'h0000003F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_16_16 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -7494,7 +7489,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized0
   (* ram_slice_begin = "17" *) 
   (* ram_slice_end = "17" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_17_17 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -7515,7 +7510,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized0
   (* ram_slice_begin = "1" *) 
   (* ram_slice_end = "1" *) 
   RAM32X1S #(
-    .INIT(32'h0000002C)) 
+    .INIT(32'h00000066)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_1_1 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -7536,7 +7531,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized0
   (* ram_slice_begin = "20" *) 
   (* ram_slice_end = "20" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_20_20 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -7557,7 +7552,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized0
   (* ram_slice_begin = "21" *) 
   (* ram_slice_end = "21" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_21_21 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -7578,7 +7573,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized0
   (* ram_slice_begin = "2" *) 
   (* ram_slice_end = "2" *) 
   RAM32X1S #(
-    .INIT(32'h00000030)) 
+    .INIT(32'h00000078)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_2_2 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -7599,7 +7594,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized0
   (* ram_slice_begin = "3" *) 
   (* ram_slice_end = "3" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000380)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_3_3 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -7620,7 +7615,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized0
   (* ram_slice_begin = "4" *) 
   (* ram_slice_end = "4" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_4_4 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -7641,7 +7636,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized0
   (* ram_slice_begin = "5" *) 
   (* ram_slice_end = "5" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_5_5 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -7662,7 +7657,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized0
   (* ram_slice_begin = "6" *) 
   (* ram_slice_end = "6" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_6_6 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -7683,7 +7678,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized0
   (* ram_slice_begin = "7" *) 
   (* ram_slice_end = "7" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_7_7 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -7704,7 +7699,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized0
   (* ram_slice_begin = "8" *) 
   (* ram_slice_end = "8" *) 
   RAM32X1S #(
-    .INIT(32'h00000035)) 
+    .INIT(32'h00000355)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_8_8 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -7725,7 +7720,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized0
   (* ram_slice_begin = "9" *) 
   (* ram_slice_end = "9" *) 
   RAM32X1S #(
-    .INIT(32'h00000026)) 
+    .INIT(32'h00000066)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_9_9 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8126,7 +8121,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "0" *) 
   (* ram_slice_end = "0" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_0_0 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8147,7 +8142,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "10" *) 
   (* ram_slice_end = "10" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_10_10 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8168,7 +8163,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "11" *) 
   (* ram_slice_end = "11" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_11_11 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8189,7 +8184,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "12" *) 
   (* ram_slice_end = "12" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_12_12 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8210,7 +8205,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "13" *) 
   (* ram_slice_end = "13" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_13_13 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8231,7 +8226,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "14" *) 
   (* ram_slice_end = "14" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_14_14 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8252,7 +8247,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "15" *) 
   (* ram_slice_end = "15" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_15_15 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8273,7 +8268,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "16" *) 
   (* ram_slice_end = "16" *) 
   RAM32X1S #(
-    .INIT(32'h0000003F)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_16_16 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8294,7 +8289,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "17" *) 
   (* ram_slice_end = "17" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_17_17 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8315,7 +8310,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "18" *) 
   (* ram_slice_end = "18" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_18_18 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8336,7 +8331,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "19" *) 
   (* ram_slice_end = "19" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_19_19 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8357,7 +8352,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "1" *) 
   (* ram_slice_end = "1" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_1_1 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8378,7 +8373,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "20" *) 
   (* ram_slice_end = "20" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_20_20 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8399,7 +8394,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "21" *) 
   (* ram_slice_end = "21" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_21_21 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8420,7 +8415,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "22" *) 
   (* ram_slice_end = "22" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_22_22 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8441,7 +8436,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "23" *) 
   (* ram_slice_end = "23" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_23_23 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8462,7 +8457,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "24" *) 
   (* ram_slice_end = "24" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_24_24 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8483,7 +8478,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "25" *) 
   (* ram_slice_end = "25" *) 
   RAM32X1S #(
-    .INIT(32'h0000003F)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_25_25 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8504,7 +8499,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "26" *) 
   (* ram_slice_end = "26" *) 
   RAM32X1S #(
-    .INIT(32'h0000003F)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_26_26 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8525,7 +8520,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "27" *) 
   (* ram_slice_end = "27" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_27_27 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8546,7 +8541,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "28" *) 
   (* ram_slice_end = "28" *) 
   RAM32X1S #(
-    .INIT(32'h0000003F)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_28_28 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8567,7 +8562,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "29" *) 
   (* ram_slice_end = "29" *) 
   RAM32X1S #(
-    .INIT(32'h0000003F)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_29_29 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8588,7 +8583,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "2" *) 
   (* ram_slice_end = "2" *) 
   RAM32X1S #(
-    .INIT(32'h0000002A)) 
+    .INIT(32'h00000201)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_2_2 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8609,7 +8604,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "30" *) 
   (* ram_slice_end = "30" *) 
   RAM32X1S #(
-    .INIT(32'h0000003F)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_30_30 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8630,7 +8625,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "31" *) 
   (* ram_slice_end = "31" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_31_31 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8651,7 +8646,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "3" *) 
   (* ram_slice_end = "3" *) 
   RAM32X1S #(
-    .INIT(32'h0000002C)) 
+    .INIT(32'h00000201)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_3_3 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8672,7 +8667,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "4" *) 
   (* ram_slice_end = "4" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h000003FF)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_4_4 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8693,7 +8688,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "5" *) 
   (* ram_slice_end = "5" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_5_5 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8714,7 +8709,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "6" *) 
   (* ram_slice_end = "6" *) 
   RAM32X1S #(
-    .INIT(32'h00000030)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_6_6 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8735,7 +8730,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "7" *) 
   (* ram_slice_end = "7" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_7_7 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8756,7 +8751,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "8" *) 
   (* ram_slice_end = "8" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_8_8 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -8777,7 +8772,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized1
   (* ram_slice_begin = "9" *) 
   (* ram_slice_end = "9" *) 
   RAM32X1S #(
-    .INIT(32'h00000020)) 
+    .INIT(32'h00000200)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_9_9 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9178,7 +9173,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
   (* ram_slice_begin = "0" *) 
   (* ram_slice_end = "0" *) 
   RAM32X1S #(
-    .INIT(32'h00000015)) 
+    .INIT(32'h00000155)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_0_0 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9199,7 +9194,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
   (* ram_slice_begin = "10" *) 
   (* ram_slice_end = "10" *) 
   RAM32X1S #(
-    .INIT(32'h00000001)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_10_10 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9220,7 +9215,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
   (* ram_slice_begin = "11" *) 
   (* ram_slice_end = "11" *) 
   RAM32X1S #(
-    .INIT(32'h0000000A)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_11_11 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9241,7 +9236,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
   (* ram_slice_begin = "12" *) 
   (* ram_slice_end = "12" *) 
   RAM32X1S #(
-    .INIT(32'h00000002)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_12_12 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9262,7 +9257,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
   (* ram_slice_begin = "13" *) 
   (* ram_slice_end = "13" *) 
   RAM32X1S #(
-    .INIT(32'h00000001)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_13_13 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9283,7 +9278,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
   (* ram_slice_begin = "14" *) 
   (* ram_slice_end = "14" *) 
   RAM32X1S #(
-    .INIT(32'h00000008)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_14_14 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9304,7 +9299,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
   (* ram_slice_begin = "15" *) 
   (* ram_slice_end = "15" *) 
   RAM32X1S #(
-    .INIT(32'h00000004)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_15_15 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9325,7 +9320,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
   (* ram_slice_begin = "16" *) 
   (* ram_slice_end = "16" *) 
   RAM32X1S #(
-    .INIT(32'h00000008)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_16_16 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9346,7 +9341,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
   (* ram_slice_begin = "17" *) 
   (* ram_slice_end = "17" *) 
   RAM32X1S #(
-    .INIT(32'h00000002)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_17_17 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9367,7 +9362,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
   (* ram_slice_begin = "18" *) 
   (* ram_slice_end = "18" *) 
   RAM32X1S #(
-    .INIT(32'h00000004)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_18_18 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9388,7 +9383,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
   (* ram_slice_begin = "19" *) 
   (* ram_slice_end = "19" *) 
   RAM32X1S #(
-    .INIT(32'h00000001)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_19_19 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9409,7 +9404,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
   (* ram_slice_begin = "1" *) 
   (* ram_slice_end = "1" *) 
   RAM32X1S #(
-    .INIT(32'h0000000A)) 
+    .INIT(32'h00000198)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_1_1 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9451,7 +9446,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
   (* ram_slice_begin = "21" *) 
   (* ram_slice_end = "21" *) 
   RAM32X1S #(
-    .INIT(32'h0000000C)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_21_21 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9472,7 +9467,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
   (* ram_slice_begin = "22" *) 
   (* ram_slice_end = "22" *) 
   RAM32X1S #(
-    .INIT(32'h00000001)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_22_22 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9493,7 +9488,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
   (* ram_slice_begin = "23" *) 
   (* ram_slice_end = "23" *) 
   RAM32X1S #(
-    .INIT(32'h00000002)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_23_23 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9514,7 +9509,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
   (* ram_slice_begin = "24" *) 
   (* ram_slice_end = "24" *) 
   RAM32X1S #(
-    .INIT(32'h00000006)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_24_24 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9535,7 +9530,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
   (* ram_slice_begin = "25" *) 
   (* ram_slice_end = "25" *) 
   RAM32X1S #(
-    .INIT(32'h00000001)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_25_25 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9556,7 +9551,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
   (* ram_slice_begin = "26" *) 
   (* ram_slice_end = "26" *) 
   RAM32X1S #(
-    .INIT(32'h00000008)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_26_26 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9598,7 +9593,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
   (* ram_slice_begin = "28" *) 
   (* ram_slice_end = "28" *) 
   RAM32X1S #(
-    .INIT(32'h00000001)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_28_28 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9640,7 +9635,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
   (* ram_slice_begin = "2" *) 
   (* ram_slice_end = "2" *) 
   RAM32X1S #(
-    .INIT(32'h00000000)) 
+    .INIT(32'h000001E0)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_2_2 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9661,7 +9656,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
   (* ram_slice_begin = "30" *) 
   (* ram_slice_end = "30" *) 
   RAM32X1S #(
-    .INIT(32'h00000002)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_30_30 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9682,7 +9677,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
   (* ram_slice_begin = "31" *) 
   (* ram_slice_end = "31" *) 
   RAM32X1S #(
-    .INIT(32'h0000000C)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_31_31 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9724,7 +9719,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
   (* ram_slice_begin = "4" *) 
   (* ram_slice_end = "4" *) 
   RAM32X1S #(
-    .INIT(32'h00000008)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_4_4 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9766,7 +9761,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
   (* ram_slice_begin = "6" *) 
   (* ram_slice_end = "6" *) 
   RAM32X1S #(
-    .INIT(32'h00000006)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_6_6 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9787,7 +9782,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
   (* ram_slice_begin = "7" *) 
   (* ram_slice_end = "7" *) 
   RAM32X1S #(
-    .INIT(32'h00000001)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_7_7 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9829,7 +9824,7 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
   (* ram_slice_begin = "9" *) 
   (* ram_slice_end = "9" *) 
   RAM32X1S #(
-    .INIT(32'h00000004)) 
+    .INIT(32'h00000000)) 
     \gen_wr_a.gen_byte_narrow.for_mem_cols[1].mem_reg_0_15_9_9 
        (.A0(addra[0]),
         .A1(addra[1]),
@@ -9842,7 +9837,6 @@ module GuitarSep_axi_traffic_gen_2_0_xpm_memory_base__parameterized2
         .WE(1'b0));
 endmodule
 
-(* ORIG_REF_NAME = "xpm_memory_spram" *) 
 module GuitarSep_axi_traffic_gen_2_0_xpm_memory_spram
    (douta,
     S,

@@ -1,11 +1,11 @@
 -- Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
--- Date        : Fri Oct 17 21:30:26 2025
+-- Date        : Fri Oct 17 22:41:44 2025
 -- Host        : Macbook running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode synth_stub -rename_top GuitarSep_vio_1_0 -prefix
---               GuitarSep_vio_1_0_ GuitarSep_vio_0_0_stub.vhdl
--- Design      : GuitarSep_vio_0_0
+-- Command     : write_vhdl -force -mode synth_stub
+--               c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_vio_1_0/GuitarSep_vio_1_0_stub.vhdl
+-- Design      : GuitarSep_vio_1_0
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xc7z010clg400-1
 -- --------------------------------------------------------------------------------

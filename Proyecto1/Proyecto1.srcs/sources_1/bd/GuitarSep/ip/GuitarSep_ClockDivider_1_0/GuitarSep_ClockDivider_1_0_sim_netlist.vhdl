@@ -1,10 +1,10 @@
 -- Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
--- Date        : Fri Oct 17 02:17:36 2025
+-- Date        : Fri Oct 17 02:17:35 2025
 -- Host        : Macbook running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode funcsim
---               c:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Proyecto1/Proyecto1.srcs/sources_1/bd/GuitarSep/ip/GuitarSep_ClockDivider_1_0/GuitarSep_ClockDivider_1_0_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top GuitarSep_ClockDivider_1_0 -prefix
+--               GuitarSep_ClockDivider_1_0_ GuitarSep_ClockDivider_1_0_sim_netlist.vhdl
 -- Design      : GuitarSep_ClockDivider_1_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -20,8 +20,6 @@ entity GuitarSep_ClockDivider_1_0_ClockDivider is
     fr_out : in STD_LOGIC_VECTOR ( 3 downto 0 );
     clk_in : in STD_LOGIC
   );
-  attribute ORIG_REF_NAME : string;
-  attribute ORIG_REF_NAME of GuitarSep_ClockDivider_1_0_ClockDivider : entity is "ClockDivider";
 end GuitarSep_ClockDivider_1_0_ClockDivider;
 
 architecture STRUCTURE of GuitarSep_ClockDivider_1_0_ClockDivider is
