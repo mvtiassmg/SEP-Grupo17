@@ -1,0 +1,108 @@
+#include "xparameters.h"
+#include "xgpio.h"     // <-- offsets oficiales del AXI GPIO
+#include "xil_io.h"
+#include "sleep.h"
+#include <stdint.h>
+#include <stdbool.h>
+#include "songs.h"
+
+/* ---- Base addresses (Address Editor) ---- */
+#define GPIO0_BASE    XPAR_AXI_GPIO_0_BASEADDR   // botones + RGB
+#define GPIO1_BASE    XPAR_AXI_GPIO_1_BASEADDR   // leds + enable
+#define GPIO2_BASE    XPAR_AXI_GPIO_2_BASEADDR   // selector
+
+#define TICK_MS     1
+
+// NOTA: La variable 'XGpio GPIO;' de tu código original se elimina
+// porque no se usaba. Estabas usando xil_io.h directamente.
+
+/* ---- Helpers (todo activo-alto) ---- */
+// Estas funciones tuyas estaban correctas y se mantienen
+static inline uint32_t read_buttons(void)  { return Xil_In32(GPIO0_BASE + XGPIO_DATA_OFFSET); }
+static inline uint32_t read_selector(void) { return Xil_In32(GPIO2_BASE + XGPIO_DATA_OFFSET); }
+static inline bool     read_enable(void)   { return (Xil_In32(GPIO1_BASE + XGPIO_DATA2_OFFSET)) != 0; }
+
+static inline void write_leds(uint8_t p)   { Xil_Out32(GPIO1_BASE + XGPIO_DATA_OFFSET,  p & 0xF); }
+static inline void rgb(bool r, bool g, bool b) {
+    uint32_t v = (r?1u:0u) | (g?2u:0u) | (b?4u:0u);       // R=bit0, G=bit1, B=bit2
+    Xil_Out32(GPIO0_BASE + XGPIO_DATA2_OFFSET, v);
+}
+
+int main(void)
+{   /* Direcciones (TRI: 1=entrada, 0=salida) */
+    // Tu inicialización de registros TRI estaba correcta y se mantiene
+    Xil_Out32(GPIO0_BASE + XGPIO_TRI_OFFSET,   0xFFFFFFFFu); // CH1 botones IN
+    Xil_Out32(GPIO0_BASE + XGPIO_TRI2_OFFSET,  0x00000000u); // CH2 RGB OUT
+
+    Xil_Out32(GPIO1_BASE + XGPIO_TRI_OFFSET,   0x00000000u); // CH1 leds OUT
+    Xil_Out32(GPIO1_BASE + XGPIO_TRI2_OFFSET,  0xFFFFFFFFu); // CH2 enable IN
+
+    Xil_Out32(GPIO2_BASE + XGPIO_TRI_OFFSET,   0xFFFFFFFFu); // CH1 selector IN
+
+    write_leds(0); rgb(0,0,0);
+
+    uint32_t tick = 0, idx = 0, sel_prev = 0xFFFFFFFFu;
+    SongRef sr = g_songs[0];
+
+    // *** CAMBIO CLAVE ***
+    // Variable de ESTADO: almacena el patrón de LED actual que el jugador debe presionar
+    uint8_t current_pattern = 0;
+
+    while (1) {
+        // --- Pausa Global ---
+        if (!read_enable()) {
+            write_leds(0); rgb(0,0,0);
+            current_pattern = 0; // Resetea el patrón
+            usleep(TICK_MS*1000);
+            continue;
+        }
+
+        // --- Selección de Canción ---
+        uint32_t sel = read_selector();
+        // Si la canción cambia O si la canción terminó
+        if (sel != sel_prev || idx >= sr.len) {
+            sr = g_songs[ sel % g_songs_count ];
+            sel_prev = sel;
+            idx = 0; tick = 0;
+            current_pattern = 0;
+            write_leds(0); rgb(0,0,0);
+
+            if (idx >= sr.len) { // Si fue por fin de canción, añade pausa
+                 usleep(200000); // Pausa de 200ms
+            }
+        }
+
+        // *** LÓGICA CORREGIDA ***
+        // El bucle 'while' interno que tenías fue eliminado.
+        // Ahora la lógica se divide en dos partes:
+
+        // 1. Procesamiento de Eventos (Actualizar LEDs)
+        // Comprueba si en el 'tick' actual debe ocurrir un nuevo evento
+        if (idx < sr.len && sr.ev[idx].tick <= tick) {
+            current_pattern = sr.ev[idx].leds & 0xF;
+            write_leds(current_pattern);
+            idx++; // Avanza al siguiente evento
+        }
+
+        // 2. Procesamiento de Entrada (Comprobar Botones)
+        // Esto ocurre en CADA tick, permitiendo al jugador reaccionar
+        uint32_t btn = read_buttons();
+
+        if (current_pattern == 0) {
+            rgb(0,0,0); // No hay nota activa, RGB apagado
+        } else if (btn == 0) {
+            // Hay nota activa, pero no se presiona nada = ERROR (Miss)
+            rgb(1,0,0);
+        } else if (btn == current_pattern) {
+            // Hay nota activa y se presiona la correcta = OK
+            rgb(0,1,0);
+        } else {
+            // Hay nota activa y se presiona la incorrecta = ERROR
+            rgb(1,0,0);
+        }
+
+        // --- Avanzar el tiempo del juego ---
+        usleep(TICK_MS*1000);
+        tick += TICK_MS;
+    }
+}

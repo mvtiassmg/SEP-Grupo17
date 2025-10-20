@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdx:platform sdx:vendor="xilinx.com"
+              sdx:library="sdx"
+              sdx:name="AYU06_HW"
+              sdx:version="1.0"
+              sdx:schemaVersion="1.0"
+              xmlns:sdx="http://www.xilinx.com/sdx">
+    <sdx:description>
+AYU06_HW
+    </sdx:description>
+    <sdx:systemConfigurations sdx:defaultConfiguration="AYU06_HW">
+        <sdx:configuration sdx:name="AYU06_HW"
+                           sdx:displayName="AYU06_HW"
+                           sdx:defaultProcessorGroup="standalone_domain"
+                           sdx:runtimes="cpp">
+            <sdx:description>AYU06_HW</sdx:description>
+            <sdx:bootImages sdx:default="standard">
+                <sdx:image sdx:name="standard"
+                            sdx:bif="AYU06_HW/boot/AYU06_HW.bif"
+                            sdx:readme="AYU06_HW/boot/generic.readme"
+                            />
+            </sdx:bootImages>
+            <sdx:processorGroup sdx:name="standalone_domain"
+                                sdx:displayName="standalone on microblaze_0"
+                                sdx:cpuType="microblaze_0"
+                                sdx:cpuInstance="microblaze_0">
+                <sdx:os sdx:name="standalone"
+                        sdx:displayName="standalone"
+                        sdx:bspLibraryPaths="AYU06_HW/standalone_domain/bsplib/lib"
+                        sdx:bspIncludePaths="AYU06_HW/standalone_domain/bspinclude/include"
+                        sdx:bspConfig="AYU06_HW/standalone_domain/system.mss"
+                />
+            </sdx:processorGroup>
+        </sdx:configuration>
+    </sdx:systemConfigurations>
+</sdx:platform>

@@ -1,0 +1,89 @@
+#include "xparameters.h"
+#include "xgpio.h"
+#include "xil_io.h"
+#include "sleep.h"
+#include <stdint.h>
+#include <stdbool.h>
+#include "songs.h"   // Event, SongRef, g_songs, g_songs_count
+
+/* ---- GPIO mapping ---- */
+#define GPIO0_DEV_ID   XPAR_AXI_GPIO_0_DEVICE_ID  // botones + RGB
+#define GPIO1_DEV_ID   XPAR_AXI_GPIO_1_DEVICE_ID  // leds + enable
+#define GPIO2_DEV_ID   XPAR_AXI_GPIO_2_DEVICE_ID  // selector
+
+#define GPIO0_BTN_CH   1   // IN  [3:0]
+#define GPIO0_RGB_CH   2   // OUT [2:0]
+#define GPIO1_LED_CH   1   // OUT [3:0]
+#define GPIO1_EN_CH    2   // IN  [0]
+#define GPIO2_SEL_CH   1   // IN  [1:0]
+
+#define TICK_MS        1
+
+static XGpio gpio0, gpio1, gpio2;
+
+/* --- helpers mínimos (todo activo-alto) --- */
+static inline uint32_t read_buttons(void)  { return XGpio_DiscreteRead(&gpio0, GPIO0_BTN_CH) & 0xF; }
+static inline uint32_t read_selector(void) { return XGpio_DiscreteRead(&gpio2, GPIO2_SEL_CH) & 0x3; }
+static inline bool     read_enable(void)   { return (XGpio_DiscreteRead(&gpio1, GPIO1_EN_CH) & 0x1) != 0; }
+
+static inline void write_leds(uint8_t patt){ XGpio_DiscreteWrite(&gpio1, GPIO1_LED_CH, (uint32_t)(patt & 0xF)); }
+static inline void rgb(bool r,bool g,bool b){
+    uint32_t v = (r?1u:0u) | (g?2u:0u) | (b?4u:0u);   // R=bit0, G=bit1, B=bit2
+    XGpio_DiscreteWrite(&gpio0, GPIO0_RGB_CH, v);
+}
+
+int main(void)
+{
+    /* init */
+    XGpio_Initialize(&gpio0, GPIO0_DEV_ID);
+    XGpio_Initialize(&gpio1, GPIO1_DEV_ID);
+    XGpio_Initialize(&gpio2, GPIO2_DEV_ID);
+
+    XGpio_SetDataDirection(&gpio0, GPIO0_BTN_CH, 0xFFFFFFFFu); // IN
+    XGpio_SetDataDirection(&gpio0, GPIO0_RGB_CH, 0x00000000u); // OUT
+    XGpio_SetDataDirection(&gpio1, GPIO1_LED_CH, 0x00000000u); // OUT
+    XGpio_SetDataDirection(&gpio1, GPIO1_EN_CH,  0xFFFFFFFFu); // IN
+    XGpio_SetDataDirection(&gpio2, GPIO2_SEL_CH, 0xFFFFFFFFu); // IN
+
+    write_leds(0); rgb(0,0,0);
+
+    uint32_t tick = 0, idx = 0, sel_prev = 0xFFFFFFFFu;
+    SongRef sr = g_songs[0];
+
+    while (1) {
+        if (!read_enable()) {                 // pausa
+            write_leds(0); rgb(0,0,0);
+            usleep(TICK_MS*1000);
+            continue;
+        }
+
+        uint32_t sel = read_selector();       // canción por switches
+        if (sel != sel_prev || idx >= sr.len) {
+            sr = g_songs[ sel % g_songs_count ];
+            sel_prev = sel;
+            idx = 0; tick = 0;
+            write_leds(0); rgb(0,0,0);
+        }
+
+        while (idx < sr.len && sr.ev[idx].tick <= tick) {
+            uint8_t patt = sr.ev[idx].leds & 0xF;
+            write_leds(patt);
+
+            uint32_t btn = read_buttons();
+            if      (patt == 0)          rgb(0,0,0);
+            else if (btn == patt)        rgb(0,1,0);   // correcto
+            else                         rgb(1,0,0);   // incorrecto
+            idx++;
+        }
+
+        usleep(TICK_MS*1000);
+        tick += TICK_MS;
+
+        if (idx >= sr.len) {                   // fin de canción
+            usleep(200000);
+            idx = 0; tick = 0;
+            write_leds(0); rgb(0,0,0);
+        }
+    }
+}
+}

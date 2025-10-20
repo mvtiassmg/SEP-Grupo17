@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<sdkproject:SdkProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sdkproject="http://www.xilinx.com/sdkproject" name="AYU06_SW" location="C:/Users/crist/Desktop/SEP/AYUDANTIA_6/AYU06/AYU06_SW" platform="C:/Users/crist/Desktop/SEP/AYUDANTIA_6/AYU06/AYU06_HW/export/AYU06_HW/AYU06_HW.xpfm" platformUID="xilinx:zybo-z7-10::0.0(custom)" systemProject="AYU06_SW_system" sysConfig="AYU06_HW" runtime="C/C++" cpu="standalone_domain" cpuInstance="microblaze_0" os="standalone" mssSignature="282304172fece2f87f092b8924844669">
+  <configuration name="Debug" id="xilinx.gnu.mb.exe.debug.798453441">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+    <lastBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <configuration name="Release" id="xilinx.gnu.mb.exe.release.1460243405" dirty="true">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <template appTemplateName="empty_application"/>
+</sdkproject:SdkProject>

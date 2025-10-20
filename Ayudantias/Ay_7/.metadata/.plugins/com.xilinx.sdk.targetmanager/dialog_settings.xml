@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="_ide/bitstream/design_1_wrapper.bit" key="Timer_Ints_SW-bitFile"/>
+	<item value="_ide/bitstream/design_1_wrapper.mmi" key="Timer_Ints_SW-bmmFile"/>
+	<item value="{&quot;cables&quot;:[{&quot;name&quot;:&quot;Digilent Zybo Z7 210351B3FC85A&quot;,&quot;indexContextMap&quot;:{&quot;2&quot;:&quot;jsn-Zybo Z7-210351B3FC85A-4ba00477-0&quot;,&quot;3&quot;:&quot;jsn-Zybo Z7-210351B3FC85A-13722093-0&quot;}}]}" key="devices_info_Local"/>
+	<item value="C:\Users\csier\OneDrive\Escritorio\Ay_2023_2\Ay_AXI_Timer_Ints\Timer_Ints_SW\Debug\Timer_Ints_SW.elf" key="Timer_Ints_SW-microblaze_0-initElf"/>
+	<item value="false" key="Timer_Ints_SW-skip_rev_check"/>
+	<item value="Timer_Ints_SW" key="programfpga.sdxproject"/>
+	<item value="Local" key="Timer_Ints_SW-target"/>
+	<item value="false" key="Timer_Ints_SW-partial_bit"/>
+	<item value="Auto Detect" key="Timer_Ints_SW-device"/>
+</section>

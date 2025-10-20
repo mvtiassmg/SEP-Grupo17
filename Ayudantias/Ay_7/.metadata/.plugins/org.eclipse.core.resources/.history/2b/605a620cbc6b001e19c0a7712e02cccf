@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<sdkproject:SdkProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sdkproject="http://www.xilinx.com/sdkproject" name="Timer_Ints_SW" location="C:/Users/csier/OneDrive/Escritorio/Ay_2023_2/Ay_AXI_Timer_Ints/Timer_Ints_SW" platform="C:/Users/csier/OneDrive/Escritorio/Ay_2023_2/Ay_AXI_Timer_Ints/Timer_Ints_HW/export/Timer_Ints_HW/Timer_Ints_HW.xpfm" platformUID="xilinx:zybo-z7-10::0.0(custom)" systemProject="Timer_Ints_SW_system" sysConfig="Timer_Ints_HW" runtime="C/C++" cpu="standalone_domain" cpuInstance="microblaze_0" os="standalone" mssSignature="516466afb828c2f15f5182788247fd84">
+  <configuration name="Debug" id="xilinx.gnu.mb.exe.debug.673512246">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+    <lastBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <configuration name="Release" id="xilinx.gnu.mb.exe.release.1166318477" dirty="true">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <template appTemplateName="empty_application"/>
+</sdkproject:SdkProject>

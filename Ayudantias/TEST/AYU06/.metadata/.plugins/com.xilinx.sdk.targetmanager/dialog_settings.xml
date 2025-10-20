@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="Local" key="AYU06_SW-target"/>
+	<item value="{&quot;cables&quot;:[{&quot;name&quot;:&quot;Digilent Zybo Z7 210351B3FB94A&quot;,&quot;indexContextMap&quot;:{&quot;2&quot;:&quot;jsn-Zybo Z7-210351B3FB94A-4ba00477-0&quot;,&quot;3&quot;:&quot;jsn-Zybo Z7-210351B3FB94A-13722093-0&quot;}}]}" key="devices_info_Local"/>
+	<item value="C:\Users\crist\Desktop\SEP\AYUDANTIA_6\AYU06\AYU06_SW\Debug\AYU06_SW.elf" key="AYU06_SW-microblaze_0-initElf"/>
+	<item value="_ide/bitstream/design_1_wrapper.mmi" key="AYU06_SW-bmmFile"/>
+	<item value="AYU06_SW" key="programfpga.sdxproject"/>
+	<item value="Auto Detect" key="AYU06_SW-device"/>
+	<item value="false" key="AYU06_SW-skip_rev_check"/>
+	<item value="_ide/bitstream/design_1_wrapper.bit" key="AYU06_SW-bitFile"/>
+	<item value="false" key="AYU06_SW-partial_bit"/>
+</section>

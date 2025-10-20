@@ -1,0 +1,117 @@
+#include "xparameters.h"
+#include "xgpio.h"
+#include "xil_io.h"
+#include "sleep.h"
+#include <stdint.h>
+#include <stdbool.h>
+#include "songs.h"  // SongRef, g_songs, g_songs_count
+
+/* ==== Hardware ==== */
+#define GPIO_DEV_ID     XPAR_AXI_GPIO_0_DEVICE_ID
+#define CH_IN           1   // xlconcat dout[6:0] -> axi_gpio_0 ch1 (IN)
+#define CH_RGB          2   // axi_gpio_0 ch2 (OUT): RGB bits 2..0 = B,G,R (ajusta si difiere)
+
+#define BTN_W           4
+#define SW_W            2
+#define BTN_LSB         0            // In0[3:0] -> dout[3:0]
+#define SW_LSB          (BTN_LSB + BTN_W)     // -> dout[5:4]
+#define EN_LSB          (SW_LSB + SW_W)       // -> dout[6] = In2[0]
+
+#define SONG_BASE  XPAR_SONG_SEQUENCY_0_S00_AXI_BASEADDR
+#define REG_LED_DATA    (SONG_BASE + 0x00)    // slv_reg0
+
+#define TICK_MS         1
+
+/* Polaridades (ajusta si hace falta) */
+#define BTN_ACTIVE_LOW  0
+#define EN_ACTIVE_HIGH  1
+#define RGB_ACTIVE_HIGH 1
+
+/* ==== Globals ==== */
+static XGpio gpio;
+
+/* ==== Helpers ==== */
+static inline uint32_t raw_in(void){
+    return XGpio_DiscreteRead(&gpio, CH_IN);
+}
+static inline uint32_t read_btn(void){
+    uint32_t b = (raw_in() >> BTN_LSB) & ((1u<<BTN_W)-1u);
+    return BTN_ACTIVE_LOW ? (((1u<<BTN_W)-1u) ^ b) : b;
+}
+static inline uint32_t read_sw(void){
+    return (raw_in() >> SW_LSB) & ((1u<<SW_W)-1u);
+}
+static inline bool read_en(void){
+    uint32_t e = (raw_in() >> EN_LSB) & 0x1u;
+    return EN_ACTIVE_HIGH ? (e!=0) : (e==0);
+}
+static inline void rgb(bool r,bool g,bool b){
+#if RGB_ACTIVE_HIGH
+    uint32_t v = (r?1u<<0:0) | (g?1u<<1:0) | (b?1u<<2:0);
+#else
+    uint32_t v = (1u<<0)|(1u<<1)|(1u<<2);
+    if (r) v &= ~(1u<<0);
+    if (g) v &= ~(1u<<1);
+    if (b) v &= ~(1u<<2);
+#endif
+    XGpio_DiscreteWrite(&gpio, CH_RGB, v);
+}
+static inline void set_leds(uint8_t patt){
+    Xil_Out32(REG_LED_DATA, (uint32_t)(patt & ((1u<<BTN_W)-1u)));
+}
+
+/* ==== main ==== */
+int main(void)
+{
+    XGpio_Initialize(&gpio, GPIO_DEV_ID);
+    XGpio_SetDataDirection(&gpio, CH_IN,  0xFFFFFFFFu); // IN[6:0]
+    XGpio_SetDataDirection(&gpio, CH_RGB, 0x00000000u); // OUT[2:0]
+    rgb(0,0,0); set_leds(0);
+
+    uint32_t tick=0, idx=0, sw_prev=0xFFFFFFFFu;
+    SongRef sr = g_songs[0];
+
+    while (1){
+        /* --- ENABLE (In2 -> dout[6]) --- */
+        if (!read_en()){
+            set_leds(0);
+            rgb(0,0,0);
+            usleep(TICK_MS * 1000);
+            /* PAUSA: no avanza el tiempo ni el índice */
+            continue;
+        }
+
+        /* --- Selección por SW[1:0] (In1 -> dout[5:4]) --- */
+        uint32_t sw = read_sw();
+        if (sw != sw_prev || idx >= sr.len){
+            sr = g_songs[ sw % g_songs_count ];
+            sw_prev = sw;
+            idx = 0;
+            tick = 0;
+            set_leds(0);
+            rgb(0,0,0);
+        }
+
+        /* --- Dispara eventos vencidos --- */
+        while (idx < sr.len && sr.ev[idx].tick <= tick){
+            uint8_t patt = sr.ev[idx].leds;
+            set_leds(patt);
+
+            uint32_t btn = read_btn();
+            if (patt == 0)                       rgb(0,0,0);
+            else if (btn == (patt & ((1u<<BTN_W)-1u))) rgb(0,1,0);  // verde
+            else                                   rgb(1,0,0);      // rojo
+            idx++;
+        }
+
+        /* --- Avanza tiempo --- */
+        usleep(TICK_MS * 1000);
+        tick += TICK_MS;
+
+        /* --- Fin de canción → pausa breve y reinicio --- */
+        if (idx >= sr.len){
+            usleep(200 * 1000);
+            idx = 0; tick = 0; set_leds(0); rgb(0,0,0);
+        }
+    }
+}
