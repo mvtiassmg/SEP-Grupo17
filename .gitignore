@@ -63,3 +63,9 @@ xvlog.*
 
 ## checkpoint files
 *.dcpProyecto1.zip
+
+*.zip
+*.rar
+*.7z
+/build/
+/dist/
