@@ -1,3 +1,32 @@
 timestamp=[2025-10-20 00:22:06], mode=WORKBENCH_START, duration=0:00:04.591, duration_ms=4591, data={}
 timestamp=[2025-10-20 00:22:06], mode=WORKBENCH_UI_INIT, duration=0:00:00.604, duration_ms=604, data={editors_count=0, platform_editors_count=0, projects_count=0, platform_projects_count=0, active_platform_editor=false, projects=}
 timestamp=[2025-10-20 00:22:09], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:02.898, duration_ms=2898, data={}
+timestamp=[2025-10-22 19:35:50], mode=WORKBENCH_START, duration=0:00:04.493, duration_ms=4493, data={}
+timestamp=[2025-10-22 19:35:51], mode=WORKBENCH_UI_INIT, duration=0:00:00.417, duration_ms=417, data={editors_count=1, platform_editors_count=0, projects_count=1, platform_projects_count=0, active_platform_editor=false, projects=RemoteSystemsTempFiles}
+timestamp=[2025-10-22 19:35:52], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:01.545, duration_ms=1545, data={}
+timestamp=[2025-10-22 19:36:38], mode=WORKBENCH_START, duration=0:00:04.158, duration_ms=4158, data={}
+timestamp=[2025-10-22 19:36:39], mode=WORKBENCH_UI_INIT, duration=0:00:00.423, duration_ms=423, data={editors_count=1, platform_editors_count=0, projects_count=1, platform_projects_count=0, active_platform_editor=false, projects=RemoteSystemsTempFiles}
+timestamp=[2025-10-22 19:36:40], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:01.630, duration_ms=1630, data={}
+timestamp=[2025-10-22 19:42:34], mode=APP_CREATION, duration=0:00:05.512, duration_ms=5512, data={name=soyweonymaricon, project_type=sdk, os=standalone, processor=microblaze, runtime=cpp, platform=callatejcpapu, application_type=application}
+timestamp=[2025-10-22 19:43:13], mode=PLATFORM_GENERATION, duration=0:00:06.505, duration_ms=6505, data={name=callatejcpapu}
+timestamp=[2025-10-22 19:43:15], mode=BUILD, duration=0:00:01.186, duration_ms=1186, data={name=soyweonymaricon, configuration=Debug, clean_build=false}
+timestamp=[2025-10-22 19:43:45], mode=BUILD, duration=0:00:00.103, duration_ms=103, data={name=soyweonymaricon, configuration=Debug, clean_build=false}
+timestamp=[2025-10-22 19:43:46], mode=BUILD, duration=0:00:00.168, duration_ms=168, data={name=soyweonymaricon_system, configuration=Debug, clean_build=false}
+timestamp=[2025-10-22 19:43:55], mode=BUILD, duration=0:00:00.108, duration_ms=108, data={name=soyweonymaricon, configuration=Debug, clean_build=false}
+timestamp=[2025-10-22 19:44:18], mode=BUILD, duration=0:00:00.102, duration_ms=102, data={name=soyweonymaricon, configuration=Debug, clean_build=false}
+timestamp=[2025-10-22 19:44:18], mode=BUILD, duration=0:00:00.107, duration_ms=107, data={name=soyweonymaricon_system, configuration=Debug, clean_build=false}
+timestamp=[2025-10-22 19:49:03], mode=BUILD, duration=0:00:00.113, duration_ms=113, data={name=soyweonymaricon, configuration=Debug, clean_build=false}
+timestamp=[2025-10-22 19:54:17], mode=BUILD, duration=0:00:00.358, duration_ms=358, data={name=soyweonymaricon, configuration=Debug, clean_build=false}
+timestamp=[2025-10-22 19:54:30], mode=BUILD, duration=0:00:00.665, duration_ms=665, data={name=soyweonymaricon, configuration=Debug, clean_build=false}
+timestamp=[2025-10-22 20:01:48], mode=BUILD, duration=0:00:00.673, duration_ms=673, data={name=soyweonymaricon, configuration=Debug, clean_build=false}
+timestamp=[2025-10-22 20:01:54], mode=BUILD, duration=0:00:00.105, duration_ms=105, data={name=soyweonymaricon, configuration=Debug, clean_build=false}
+timestamp=[2025-10-22 20:01:54], mode=BUILD, duration=0:00:00.113, duration_ms=113, data={name=soyweonymaricon_system, configuration=Debug, clean_build=false}
+timestamp=[2025-10-22 20:05:29], mode=PLATFORM_GENERATION, duration=0:00:48.632, duration_ms=48632, data={name=Proyecto2}
+timestamp=[2025-10-22 20:05:36], mode=BUILD, duration=0:00:04.892, duration_ms=4892, data={name=Booster_TEST_P2, configuration=Debug, clean_build=false}
+timestamp=[2025-10-22 20:05:37], mode=BUILD, duration=0:00:01.296, duration_ms=1296, data={name=Booster_TEST_P2_system, configuration=Debug, clean_build=false}
+timestamp=[2025-10-22 20:05:37], mode=BUILD, duration=0:00:00.101, duration_ms=101, data={name=soyweonymaricon, configuration=Debug, clean_build=false}
+timestamp=[2025-10-22 20:05:38], mode=BUILD, duration=0:00:00.117, duration_ms=117, data={name=soyweonymaricon_system, configuration=Debug, clean_build=false}
+timestamp=[2025-10-22 20:07:22], mode=BUILD, duration=0:00:02.619, duration_ms=2619, data={name=Booster_TEST_P2, configuration=Debug, clean_build=false}
+timestamp=[2025-10-22 20:07:24], mode=BUILD, duration=0:00:01.239, duration_ms=1239, data={name=Booster_TEST_P2_system, configuration=Debug, clean_build=false}
+timestamp=[2025-10-22 20:07:24], mode=BUILD, duration=0:00:00.098, duration_ms=98, data={name=soyweonymaricon, configuration=Debug, clean_build=false}
+timestamp=[2025-10-22 20:07:24], mode=BUILD, duration=0:00:00.113, duration_ms=113, data={name=soyweonymaricon_system, configuration=Debug, clean_build=false}

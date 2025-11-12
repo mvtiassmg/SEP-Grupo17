@@ -1,0 +1,12 @@
+/* /tmp/bootgen_Booster_TEST_P2_system2893405222708418486/sd_card_temp/boot.bif */
+/* Command to create bitstream .bin file:       */
+/*   bootgen -image <bif_file> -split bin -w    */
+/* Command to create BOOT.BIN file:             */
+/*   bootgen  -image <bif_file> -w -o i BOOT.BIN */
+/*Proyecto2*/
+the_ROM_image:
+{
+ [bootloader] /home/articunot/Proyecto_Booster/Proyecto2/export/Proyecto2/sw/Proyecto2/boot/fsbl.elf
+ /home/articunot/Proyecto_Booster/Booster_TEST_P2/_ide/bitstream/RobovoltISSPC.bit
+ /home/articunot/Proyecto_Booster/Booster_TEST_P2/Debug/Booster_TEST_P2.elf
+}

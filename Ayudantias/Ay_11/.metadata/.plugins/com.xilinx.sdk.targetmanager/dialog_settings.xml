@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="false" key="Ayud_11-partial_bit"/>
+	<item value="{&quot;cables&quot;:[{&quot;name&quot;:&quot;Digilent Zybo Z7 210351B3FC05A&quot;,&quot;indexContextMap&quot;:{&quot;2&quot;:&quot;jsn-Zybo Z7-210351B3FC05A-4ba00477-0&quot;,&quot;3&quot;:&quot;jsn-Zybo Z7-210351B3FC05A-13722093-0&quot;}}]}" key="devices_info_Local"/>
+	<item value="Auto Detect" key="Ayud_11-device"/>
+	<item value="" key="Ayud_11-bmmFile"/>
+	<item value="Local" key="Ayud_11-target"/>
+	<item value="Ayud_11" key="programfpga.sdxproject"/>
+	<item value="_ide/bitstream/ay_11_hw.bit" key="Ayud_11-bitFile"/>
+	<item value="false" key="Ayud_11-skip_rev_check"/>
+</section>
