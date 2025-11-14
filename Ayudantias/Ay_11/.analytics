@@ -11,3 +11,8 @@ timestamp=[2025-11-11 21:14:19], mode=BUILD, duration=0:00:00.375, duration_ms=3
 timestamp=[2025-11-11 21:14:24], mode=BUILD, duration=0:00:04.637, duration_ms=4637, data={name=Ayud_11_system, configuration=Debug, clean_build=false}
 timestamp=[2025-11-11 21:14:42], mode=BUILD, duration=0:00:00.361, duration_ms=361, data={name=Ayud_11, configuration=Debug, clean_build=false}
 timestamp=[2025-11-11 21:14:47], mode=BUILD, duration=0:00:04.625, duration_ms=4625, data={name=Ayud_11_system, configuration=Debug, clean_build=false}
+timestamp=[2025-11-14 03:24:22], mode=WORKBENCH_START, duration=0:00:09.130, duration_ms=9130, data={}
+timestamp=[2025-11-14 03:24:22], mode=WORKBENCH_UI_INIT, duration=0:00:00.680, duration_ms=680, data={editors_count=4, platform_editors_count=1, projects_count=4, platform_projects_count=1, active_platform_editor=false, projects=Ayud_11,Ayud_11_system,RemoteSystemsTempFiles,ay_11_hw}
+timestamp=[2025-11-14 03:24:23], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.093, duration_ms=93, data={}
+timestamp=[2025-11-14 03:47:18], mode=BUILD, duration=0:00:02.292, duration_ms=2292, data={name=Ayud_11, configuration=Debug, clean_build=false}
+timestamp=[2025-11-14 03:47:26], mode=BUILD, duration=0:00:07.112, duration_ms=7112, data={name=Ayud_11_system, configuration=Debug, clean_build=false}

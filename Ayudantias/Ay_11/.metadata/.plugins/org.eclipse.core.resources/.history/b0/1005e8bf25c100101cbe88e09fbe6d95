@@ -30,11 +30,11 @@ extern const unsigned char font[] ;
 
 int main()
 {
-	/* int Status;
+	int Status;
 
     //Initialize the UART
     init_platform();
-	// Initialize the GPIO 0 driver
+	/* Initialize the GPIO 0 driver */
 	Status = XGpio_Initialize(&gpio0, XPAR_AXI_GPIO_0_DEVICE_ID);
 	if (Status != XST_SUCCESS) {
 		xil_printf("Gpio 0 Initialization Failed\r\n");
@@ -54,7 +54,6 @@ int main()
 		return XST_FAILURE;
 	}
 	xil_printf("TFT initialized \r\n");
-	*/
 
 	xil_printf("**********Init LCD**********\r\n");
 	LCD_SCAN_DIR LCD_ScanDir = SCAN_DIR_DFT;//SCAN_DIR_DFT = D2U_L2R
@@ -65,7 +64,6 @@ int main()
 	//delay_ms(1000);
 	LCD_Clear(GUI_BACKGROUND);
 	GUI_INTRO();
-	/*
 	delay_ms(5000);
 	LCD_Clear(GUI_BACKGROUND);
 	char joyx[16] = {};
@@ -114,7 +112,7 @@ int main()
 		GUI_DisString_EN(70,100,pot2,&Font16,GUI_BACKGROUND,YELLOW);
 
 		delay_ms(50);
-    } */
+    }
     return 0;
 
 }
