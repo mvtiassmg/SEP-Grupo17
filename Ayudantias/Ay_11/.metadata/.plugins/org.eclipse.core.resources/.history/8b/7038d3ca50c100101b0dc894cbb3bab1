@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ASCII"?>
+<sdkproject:SdkProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sdkproject="http://www.xilinx.com/sdkproject" name="Ayud_11" location="C:/Users/tomas/Downloads/SEP-Grupo17/Ayudantias/Ay_11/Ayud_11" platform="C:/Users/tomas/Downloads/SEP-Grupo17/Ayudantias/Ay_11/ay_11_hw/export/ay_11_hw/ay_11_hw.xpfm" platformUID="xilinx:zybo-z7-10::0.0(custom)" systemProject="Ayud_11_system" sysConfig="ay_11_hw" runtime="cpp" cpu="domain_ps7_cortexa9_0" cpuInstance="ps7_cortexa9_0" os="standalone" mssSignature="c00cadf26bd4d8615c10e4b4fcb41d2e">
+  <configuration name="Debug" id="xilinx.gnu.armv7.exe.debug.216198517" dirty="true">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+    <lastBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <configuration name="Release" id="xilinx.gnu.armv7.exe.release.1616142447" dirty="true">
+    <configBuildOptions xsi:type="sdkproject:SdkOptions"/>
+    <lastBuildOptions xsi:type="sdkproject:SdkOptions"/>
+  </configuration>
+  <template appTemplateName="hello_world"/>
+</sdkproject:SdkProject>

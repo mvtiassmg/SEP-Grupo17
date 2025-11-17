@@ -1,0 +1,252 @@
+/***************** Libraries *****************************/
+#include "xparameters.h"
+#include "xtmrctr.h"
+#include "xil_exception.h"
+#include "xintc.h"
+#include <stdio.h>
+#include "xgpio.h"
+#include "xintc.h"
+
+/***************** Macros ********************************/
+#define TMRCTR_DEVICE_ID	    XPAR_TMRCTR_0_DEVICE_ID
+#define TMRCTR_INTERRUPT_ID XPAR_AXI_INTC_0_UTIL_VECTOR_LOGIC_0_RES_INTR
+
+#define INTC_DEVICE_ID		    XPAR_INTC_0_DEVICE_ID
+#define INTC		            XIntc
+#define INTC_HANDLER	        XIntc_InterruptHandler
+
+#define TIMER_CNTR_0            0
+#define TIMER_CNTR_1            1
+
+#define LED_CHANNEL             1          // Canal leds
+#define LED01_MASK              0x00000003 // LEDs 0 y 1 (bits 0 y 1)
+#define LED23_MASK              0x0000000C // LEDs 2 y 3 (bits 2 y 3)
+
+/* Segundo AXI Timer para PWM (LED RGB verde) */
+#define TMRCTR_PWM_DEVICE_ID    XPAR_TMRCTR_1_DEVICE_ID
+#define PWM_FREQ_HZ             1000u      // Frecuencia PWM (~1 kHz)
+
+/* Canal de switches (sws_4bits) en el mismo GPIO */
+#define SWITCHES_CHANNEL        2          // Canal sws_4bits
+
+/***************** Function declaration *******************/
+void TmrCtrIntrExample(INTC    *IntcInstancePtr,
+			           XTmrCtr *InstancePtr,
+			           u16      DeviceId,
+			           u16      IntrId,
+			           u8       TmrCtrNumber);
+
+void TmrCtrSetupIntrSystem(INTC    *IntcInstancePtr,
+				           XTmrCtr *InstancePtr,
+				           u16      DeviceId,
+				           u16      IntrId,
+				           u8       TmrCtrNumber);
+
+void TimerCounterHandler(void *CallBackRef, u8 TmrCtrNumber);
+
+/* Funciones adicionales para el PWM del LED RGB */
+void PwmTimerInit(void);
+void UpdatePwmFromSwitch(void);
+
+/***************** IPs Instantiation **********************/
+INTC     InterruptController;
+XTmrCtr  TimerCounterInst;
+XTmrCtr  PwmTimerInst;   // Segundo AXI Timer para PWM
+XGpio    GPIO;
+
+/***************** Main ***********************************/
+int main(void)
+{
+    // Inicializar GPIO
+    XGpio_Initialize(&GPIO, XPAR_GPIO_0_DEVICE_ID);
+
+    // Canal 1 como salida (todos los bits)
+    XGpio_SetDataDirection(&GPIO, LED_CHANNEL, 0x00000000);
+
+    // Canal 2 como entrada (4 switches)
+    XGpio_SetDataDirection(&GPIO, SWITCHES_CHANNEL, 0x0000000F);
+
+    // Apagar LEDs al inicio
+    XGpio_DiscreteWrite(&GPIO, LED_CHANNEL, 0x00000000);
+
+    // Configurar el AXI Timer + interrupciones (parpadeo LEDs 0-3)
+    TmrCtrIntrExample(&InterruptController,
+                      &TimerCounterInst,
+                      TMRCTR_DEVICE_ID,
+                      TMRCTR_INTERRUPT_ID,
+                      TIMER_CNTR_0);
+
+    // Inicializar segundo AXI Timer en modo PWM (LED verde RGB)
+    PwmTimerInit();
+
+    // Bucle principal: solo revisa el switch y actualiza el duty del PWM
+    while (1)
+    {
+        UpdatePwmFromSwitch();
+    }
+}
+
+
+/***************** Function Definition ********************/
+void TmrCtrIntrExample(INTC    *IntcInstancePtr,
+                       XTmrCtr *TmrCtrInstancePtr,
+                       u16      DeviceId,
+                       u16      IntrId,
+                       u8       TmrCtrNumber)
+{
+    u32 timer_clk;
+    u32 ticks_3Hz;
+    u32 ticks_2Hz;
+    u32 reset_3Hz;
+    u32 reset_2Hz;
+
+    // 1) Inicializar el AXI Timer
+    XTmrCtr_Initialize(TmrCtrInstancePtr, DeviceId);
+
+    // 2) Configurar el sistema de interrupciones (INTC)
+    TmrCtrSetupIntrSystem(IntcInstancePtr,
+                          TmrCtrInstancePtr,
+                          DeviceId,
+                          IntrId,
+                          TmrCtrNumber);
+
+    // 3) Registrar nuestro handler de alto nivel (común para ambos timers)
+    XTmrCtr_SetHandler(TmrCtrInstancePtr, TimerCounterHandler, TmrCtrInstancePtr);
+
+    // 4) Frecuencia del reloj del timer (definida en xparameters.h)
+    timer_clk = XPAR_TMRCTR_0_CLOCK_FREQ_HZ;
+
+    // Numero de cuentas para lograr 3 Hz y 2 Hz (aprox)
+    // ticks ≈ Fclk / f
+    ticks_3Hz = timer_clk / 3U;
+    ticks_2Hz = timer_clk / 2U;
+
+    // #ticks = 0xFFFFFFFF - RESET_VALUE + 1  =>  RESET_VALUE = 0xFFFFFFFF - (ticks - 1)
+    reset_3Hz = 0xFFFFFFFFU - (ticks_3Hz - 1U);
+    reset_2Hz = 0xFFFFFFFFU - (ticks_2Hz - 1U);
+
+    // 5) Configurar TIMER 0 -> 3 Hz (LEDs 0 y 1)
+    XTmrCtr_SetOptions(TmrCtrInstancePtr,
+                       TIMER_CNTR_0,
+                       XTC_INT_MODE_OPTION | XTC_AUTO_RELOAD_OPTION);
+    XTmrCtr_SetResetValue(TmrCtrInstancePtr, TIMER_CNTR_0, reset_3Hz);
+
+    // 6) Configurar TIMER 1 -> 2 Hz (LEDs 2 y 3)
+    XTmrCtr_SetOptions(TmrCtrInstancePtr,
+                       TIMER_CNTR_1,
+                       XTC_INT_MODE_OPTION | XTC_AUTO_RELOAD_OPTION);
+    XTmrCtr_SetResetValue(TmrCtrInstancePtr, TIMER_CNTR_1, reset_2Hz);
+
+    // 7) Arrancar ambos timers
+    XTmrCtr_Start(TmrCtrInstancePtr, TIMER_CNTR_0);
+    XTmrCtr_Start(TmrCtrInstancePtr, TIMER_CNTR_1);
+}
+
+
+/***********************************************************/
+// Estado actual de los 4 LEDs (bits 0..3)
+static u32 g_led_value = 0;
+
+void TimerCounterHandler(void *CallBackRef, u8 TmrCtrNumber)
+{
+    (void)CallBackRef; // para evitar warning si no se usa
+
+    // Timer 0 controla LEDs 0 y 1 (3 Hz)
+    if (TmrCtrNumber == TIMER_CNTR_0) {
+        g_led_value ^= LED01_MASK;  // toggle bits 0 y 1
+    }
+    // Timer 1 controla LEDs 2 y 3 (2 Hz)
+    else if (TmrCtrNumber == TIMER_CNTR_1) {
+        g_led_value ^= LED23_MASK;  // toggle bits 2 y 3
+    }
+
+    // Escribimos el nuevo estado a los LEDs
+    XGpio_DiscreteWrite(&GPIO, LED_CHANNEL, g_led_value);
+}
+
+/***********************************************************/
+void TmrCtrSetupIntrSystem(INTC    *IntcInstancePtr,
+				           XTmrCtr *TmrCtrInstancePtr,
+				           u16      DeviceId,
+				           u16      IntrId,
+				           u8       TmrCtrNumber)
+{
+	(void)TmrCtrInstancePtr;
+	(void)DeviceId;
+	(void)TmrCtrNumber;
+
+	XIntc_Initialize(IntcInstancePtr, INTC_DEVICE_ID);
+
+	XIntc_Connect(IntcInstancePtr, IntrId,
+				 (XInterruptHandler)XTmrCtr_InterruptHandler,
+				 (void *)TimerCounterInst);
+
+	XIntc_Start(IntcInstancePtr, XIN_REAL_MODE);
+
+	XIntc_Enable(IntcInstancePtr, IntrId);
+
+	Xil_ExceptionInit(); // initialization of Xilinx exceptions subsystem
+	                     // necessary before registering our Interrupt Handler
+
+	Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_INT,
+					            (Xil_ExceptionHandler)INTC_HANDLER,
+					             IntcInstancePtr);
+
+	Xil_ExceptionEnable(); // enables exception management
+}
+
+
+/***************** PWM: segundo AXI Timer *****************/
+/* Inicializa el axi_timer_1 en modo PWM para el LED verde (LED RGB).
+   Frecuencia de PWM fija (PWM_FREQ_HZ) e inicialmente 10 % de duty. */
+void PwmTimerInit(void)
+{
+    u32 timer_clk;
+    u32 period_counts;
+    u32 high_10;
+
+    XTmrCtr_Initialize(&PwmTimerInst, TMRCTR_PWM_DEVICE_ID);
+
+    timer_clk      = XPAR_TMRCTR_1_CLOCK_FREQ_HZ;
+    period_counts  = timer_clk / PWM_FREQ_HZ;   // periodo del PWM en cuentas
+    high_10        = period_counts / 10U;       // 10 % activo
+
+    XTmrCtr_PwmDisable(&PwmTimerInst);
+    XTmrCtr_PwmConfigure(&PwmTimerInst, period_counts, high_10);
+    XTmrCtr_PwmEnable(&PwmTimerInst);
+}
+
+/* Utilizar el SW0 para cambiar el duty cycle entre un 10 % y un 0,5 % activo. */
+void UpdatePwmFromSwitch(void)
+{
+    static u32 last_sw0 = 0xFFFFFFFFU; // valor imposible para forzar actualización inicial
+
+    u32 switches = XGpio_DiscreteRead(&GPIO, SWITCHES_CHANNEL);
+    u32 sw0      = switches & 0x1U;
+
+    if (sw0 != last_sw0)
+    {
+        u32 timer_clk      = XPAR_TMRCTR_1_CLOCK_FREQ_HZ;
+        u32 period_counts  = timer_clk / PWM_FREQ_HZ;
+        u32 high_10        = period_counts / 10U;   // 10 %
+        u32 high_0_5       = period_counts / 200U;  // 0,5 %
+
+        XTmrCtr_PwmDisable(&PwmTimerInst);
+
+        if (sw0)
+        {
+            // SW0 = 1 -> 10 % activo
+            XTmrCtr_PwmConfigure(&PwmTimerInst, period_counts, high_10);
+        }
+        else
+        {
+            // SW0 = 0 -> 0,5 % activo
+            XTmrCtr_PwmConfigure(&PwmTimerInst, period_counts, high_0_5);
+        }
+
+        XTmrCtr_PwmEnable(&PwmTimerInst);
+        last_sw0 = sw0;
+    }
+}
+
+
