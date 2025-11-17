@@ -1629,7 +1629,7 @@ Read:      0 - No interrupt has occurred      1 - Interrupt has occurred  Write:
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>C_ONE_TIMER_ONLY</spirit:name>
         <spirit:displayName>One Timer Only</spirit:displayName>
-        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_ONE_TIMER_ONLY">0</spirit:value>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_ONE_TIMER_ONLY">1</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="std_logic">
         <spirit:name>C_TRIG0_ASSERT</spirit:name>
@@ -1639,7 +1639,7 @@ Read:      0 - No interrupt has occurred      1 - Interrupt has occurred  Write:
       <spirit:modelParameter spirit:dataType="std_logic">
         <spirit:name>C_TRIG1_ASSERT</spirit:name>
         <spirit:displayName>Trig1 Assert</spirit:displayName>
-        <spirit:value spirit:format="bitString" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_TRIG1_ASSERT" spirit:bitStringLength="1">&quot;1&quot;</spirit:value>
+        <spirit:value spirit:format="bitString" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_TRIG1_ASSERT" spirit:bitStringLength="1">1</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="std_logic">
         <spirit:name>C_GEN0_ASSERT</spirit:name>
@@ -1649,7 +1649,7 @@ Read:      0 - No interrupt has occurred      1 - Interrupt has occurred  Write:
       <spirit:modelParameter spirit:dataType="std_logic">
         <spirit:name>C_GEN1_ASSERT</spirit:name>
         <spirit:displayName>Gen1 Assert</spirit:displayName>
-        <spirit:value spirit:format="bitString" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_GEN1_ASSERT" spirit:bitStringLength="1">&quot;1&quot;</spirit:value>
+        <spirit:value spirit:format="bitString" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_GEN1_ASSERT" spirit:bitStringLength="1">1</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>C_S_AXI_DATA_WIDTH</spirit:name>
@@ -1900,7 +1900,7 @@ Read:      0 - No interrupt has occurred      1 - Interrupt has occurred  Write:
       <spirit:vendorExtensions>
         <xilinx:parameterInfo>
           <xilinx:enablement>
-            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PARAM_ENABLEMENT.TRIG1_ASSERT">true</xilinx:isEnabled>
+            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PARAM_ENABLEMENT.TRIG1_ASSERT">false</xilinx:isEnabled>
           </xilinx:enablement>
         </xilinx:parameterInfo>
       </spirit:vendorExtensions>
@@ -1926,7 +1926,7 @@ Read:      0 - No interrupt has occurred      1 - Interrupt has occurred  Write:
       <spirit:vendorExtensions>
         <xilinx:parameterInfo>
           <xilinx:enablement>
-            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PARAM_ENABLEMENT.GEN1_ASSERT">true</xilinx:isEnabled>
+            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PARAM_ENABLEMENT.GEN1_ASSERT">false</xilinx:isEnabled>
           </xilinx:enablement>
         </xilinx:parameterInfo>
       </spirit:vendorExtensions>
@@ -1961,7 +1961,7 @@ Read:      0 - No interrupt has occurred      1 - Interrupt has occurred  Write:
       <spirit:name>enable_timer2</spirit:name>
       <spirit:displayName>Enable Timer 2</spirit:displayName>
       <spirit:description>This enables the second timer.</spirit:description>
-      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.enable_timer2" spirit:choiceRef="choice_pairs_4873554b" spirit:order="1150">1</spirit:value>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.enable_timer2" spirit:choiceRef="choice_pairs_4873554b" spirit:order="1150">0</spirit:value>
       <spirit:vendorExtensions>
         <xilinx:parameterInfo>
           <xilinx:enablement>
@@ -2015,6 +2015,7 @@ Read:      0 - No interrupt has occurred      1 - Interrupt has occurred  Write:
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S_AXI_ACLK.FREQ_TOLERANCE_HZ" xilinx:valuePermission="bd"/>
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S_AXI_ACLK.PHASE" xilinx:valuePermission="bd"/>
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S_AXI_RST.POLARITY" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.enable_timer2" xilinx:valueSource="user"/>
       </xilinx:configElementInfos>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>

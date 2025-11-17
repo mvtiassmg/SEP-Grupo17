@@ -1,0 +1,302 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <time.h>
+#include "platform.h"
+#include "xil_printf.h"
+#include "xparameters.h"
+#include "xgpio.h"
+#include "xil_types.h"
+
+// --- Definiciones y Periféricos ---
+#define LEDS_DEVICE_ID      XPAR_AXI_LEDS_0_DEVICE_ID   // ajusta si tu IP se llama distinto
+#define NUM_USUARIOS        3
+#define MAX_TRANSACCIONES   5
+
+XGpio LEDInst;
+
+// --- Estructuras de Datos Anidadas ---
+typedef struct {
+    char tipo[15];
+    float monto;
+} Transaccion;
+
+typedef struct {
+    char rut[12];
+    char pin[5];
+    float saldo;
+    Transaccion historial[MAX_TRANSACCIONES];
+    int num_transacciones;
+} CuentaUsuario;
+
+// --- "Base de Datos" y Puntero de Sesión ---
+CuentaUsuario base_de_datos[NUM_USUARIOS];
+CuentaUsuario* usuario_actual = NULL;
+
+// --- Prototipos de Funciones ---
+void inicializar_usuarios();
+void limpiar_buffer_entrada();
+void mostrarMenu();
+void consultarSaldo(CuentaUsuario* usuario);
+void verHistorial(CuentaUsuario* usuario);
+
+// --- FUNCIONES A COMPLETAR POR EL ESTUDIANTE ---
+CuentaUsuario* buscarUsuarioPorRUT(const char* rut);
+void procesarLogin(CuentaUsuario** puntero_usuario_actual);
+void realizarRetiro(CuentaUsuario* usuario);
+void agregarTransaccion(CuentaUsuario* usuario, const char* tipo, float monto);
+
+// --- Función Principal (NO MODIFICAR) ---
+int main() {
+    init_platform();
+    srand(time(NULL));
+
+    if (XGpio_Initialize(&LEDInst, LEDS_DEVICE_ID) != XST_SUCCESS) {
+        xil_printf("Error al inicializar el GPIO de los LEDs.\r\n");
+        return XST_FAILURE;
+    }
+    XGpio_SetDataDirection(&LEDInst, 1, 0x0);
+
+    inicializar_usuarios();
+    xil_printf("\r\n--- Bienvenido al Cajero Automático 'Bitis' ---\r\n");
+
+    while (1) {
+        if (usuario_actual == NULL) {
+            procesarLogin(&usuario_actual);
+        } else {
+            int opcion = 0;
+            mostrarMenu();
+            scanf("%d", &opcion);
+            limpiar_buffer_entrada();
+
+            switch (opcion) {
+                case 1:
+                    realizarRetiro(usuario_actual);
+                    break;
+                case 2:
+                    // La función de depósito se deja fuera para simplificar
+                    xil_printf("Funcionalidad no implementada en esta ayudantía.\r\n");
+                    break;
+                case 3:
+                    consultarSaldo(usuario_actual);
+                    break;
+                case 4:
+                    verHistorial(usuario_actual);
+                    break;
+                case 5:
+                    usuario_actual = NULL;
+                    xil_printf("\r\nSesión cerrada. ¡Gracias por preferir Bitis!\r\n\n");
+                    break;
+                default:
+                    xil_printf("Opción no válida. Intente de nuevo.\r\n");
+                    break;
+            }
+        }
+    }
+
+    cleanup_platform();
+    return 0;
+}
+
+
+// -----------------------------------------------------------------
+// --- SECCIÓN DE CÓDIGO A COMPLETAR POR EL ESTUDIANTE ---
+// -----------------------------------------------------------------
+
+/**
+ * Busca un usuario por su RUT en la base de datos.
+ * @return Puntero al usuario si se encuentra, de lo contrario NULL.
+ */
+CuentaUsuario* buscarUsuarioPorRUT(const char* rut) {
+    /*
+     * TAREA: Implementar la lógica de búsqueda.
+     * 1. Usar un bucle 'for' para recorrer el arreglo 'base_de_datos'.
+     *    El bucle debe ir de 0 hasta NUM_USUARIOS.
+     * 2. Dentro del bucle, usar 'strcmp()' para comparar el 'rut' recibido
+     *    como parámetro con el RUT del usuario actual en el arreglo.
+     * 3. Si los RUTs coinciden, retornar un puntero a ese usuario.
+     *    Ejemplo: return &base_de_datos[i];
+     * 4. Si el bucle termina y no se encontró el RUT, retornar NULL.
+    */
+
+    for (int i = 0; i < NUM_USUARIOS; i++) {
+        if (strcmp(base_de_datos[i].rut, rut) == 0) {
+            return &base_de_datos[i];
+        }
+    }
+
+    return NULL;
+}
+
+
+/**
+ * Gestiona el proceso de inicio de sesión.
+ * @param puntero_usuario_actual Puntero al puntero de la sesión actual para poder modificarlo.
+ */
+void procesarLogin(CuentaUsuario** puntero_usuario_actual) {
+    char rut_ingresado[12];
+    char pin_ingresado[5];
+
+    xil_printf("Por favor, inicie sesión.\r\n");
+    xil_printf("RUT: ");
+    scanf("%s", rut_ingresado);
+    limpiar_buffer_entrada();
+
+    xil_printf("PIN: ");
+    scanf("%s", pin_ingresado);
+    limpiar_buffer_entrada();
+
+    /*
+     * TAREA: Implementar la validación del login.
+     * 1. Llamar a la función 'buscarUsuarioPorRUT()' con el rut ingresado
+     *    y guardar el resultado en un puntero local de tipo 'CuentaUsuario*'.
+     * 2. Comprobar si el puntero devuelto NO es NULL Y si el pin ingresado
+     *    es igual al pin del usuario encontrado (usar 'strcmp()').
+     * 3. Si ambas condiciones son verdaderas:
+     *    a. Asignar el puntero del usuario encontrado al puntero de la sesión actual.
+     *       Usa el operador de desreferencia: *puntero_usuario_actual = ...
+     *    b. Imprimir un mensaje de "Login exitoso".
+     * 4. Si alguna condición es falsa, imprimir "RUT o PIN incorrecto".
+    */
+
+    CuentaUsuario* usuario = buscarUsuarioPorRUT(rut_ingresado);
+
+    if (usuario != NULL && strcmp(usuario->pin, pin_ingresado) == 0) {
+        *puntero_usuario_actual = usuario;
+        xil_printf("Login exitoso\r\n");
+    } else {
+        xil_printf("RUT o PIN incorrecto\r\n");
+        *puntero_usuario_actual = NULL;
+    }
+}
+
+
+/**
+ * Gestiona la lógica para retirar dinero, incluyendo la validación con Digipass.
+ */
+void realizarRetiro(CuentaUsuario* usuario) {
+    float monto;
+    xil_printf("Ingrese el monto a retirar: ");
+    scanf("%f", &monto);
+    limpiar_buffer_entrada();
+
+    /*
+     * TAREA: Implementar la lógica del retiro.
+     * 1. Verificar si el 'monto' es mayor al 'saldo' del usuario.
+     *    Si lo es, mostrar un mensaje de "Saldo insuficiente" y terminar la función con 'return;'.
+     *
+     * 2. Implementar la lógica del Digipass:
+     *    a. Generar un número aleatorio entre 0 y 15: int clave_generada = rand() % 16;
+     *    b. Mostrar ese número en los LEDs: XGpio_DiscreteWrite(&LEDInst, 1, clave_generada);
+     *    c. Pedir al usuario que ingrese el número que ve en los LEDs y guardarlo en una variable.
+     *    d. Apagar los LEDs: XGpio_DiscreteWrite(&LEDInst, 1, 0);
+     *
+     * 3. Comparar la clave generada con la clave ingresada por el usuario.
+     *    a. Si son iguales:
+     *       i. Restar el 'monto' al 'saldo' del usuario.
+     *       ii. Llamar a la función 'agregarTransaccion()' para registrar el movimiento.
+     *       iii. Imprimir un mensaje de "Retiro exitoso" con el nuevo saldo.
+     *    b. Si son diferentes, imprimir "Token de seguridad incorrecto".
+    */
+
+    if (monto > usuario->saldo) {
+        xil_printf("Saldo insuficiente\r\n");
+        return;
+    }
+
+    int clave_generada  = rand() % 16;
+    int clave_ingresada = 0;
+
+    XGpio_DiscreteWrite(&LEDInst, 1, clave_generada);
+    xil_printf("Ingrese el número que se ve en los LEDs: ");
+    scanf("%d", &clave_ingresada);
+    limpiar_buffer_entrada();
+    XGpio_DiscreteWrite(&LEDInst, 1, 0);
+
+    if (clave_ingresada == clave_generada) {
+        usuario->saldo -= monto;
+        agregarTransaccion(usuario, "retiro", monto);
+        xil_printf("Retiro exitoso. Nuevo saldo: %.2f\r\n", usuario->saldo);
+    } else {
+        xil_printf("Token de seguridad incorrecto\r\n");
+    }
+}
+
+
+/**
+ *  Agrega una nueva transacción al historial del usuario.
+ */
+void agregarTransaccion(CuentaUsuario* usuario, const char* tipo, float monto) {
+    /*
+     * TAREA: Añadir una transacción al historial.
+     * 1. Obtener el índice donde se guardará la nueva transacción.
+     *    Este es el valor de 'usuario->num_transacciones'.
+     *
+     * 2. Comprobar si el historial está lleno (si el índice es >= MAX_TRANSACCIONES).
+     *    a. Si está lleno, deberás desplazar todos los elementos del historial
+     *       una posición hacia arriba (el de la pos 1 a la 0, el de la 2 a la 1, etc.).
+     *       Usa un bucle 'for'.
+     *    b. Luego, ajusta el índice para que sea el último del arreglo (MAX_TRANSACCIONES - 1).
+     *
+     * 3. Usar 'strcpy()' para guardar el 'tipo' de transacción en el historial.
+     * 4. Guardar el 'monto' en el historial.
+     * 5. Incrementar el contador 'num_transacciones' del usuario, SOLO si aún
+     *    no ha alcanzado el máximo (MAX_TRANSACCIONES).
+    */
+
+    int indice = usuario->num_transacciones;
+
+    if (indice >= MAX_TRANSACCIONES) {
+        // Historial lleno: desplazar todo una posición hacia arriba
+        for (int i = 0; i < MAX_TRANSACCIONES - 1; i++) {
+            usuario->historial[i] = usuario->historial[i + 1];
+        }
+        // La nueva transacción irá al final
+        indice = MAX_TRANSACCIONES - 1;
+    }
+
+    // Guardar la nueva transacción
+    strcpy(usuario->historial[indice].tipo, tipo);
+    usuario->historial[indice].monto = monto;
+
+    // Actualizar contador si aún no estaba lleno
+    if (usuario->num_transacciones < MAX_TRANSACCIONES) {
+        usuario->num_transacciones++;
+    }
+}
+
+
+// --- FUNCIONES YA IMPLEMENTADAS (NO MODIFICAR) ---
+void inicializar_usuarios() {
+    strcpy(base_de_datos[0].rut, "11111111-1"); strcpy(base_de_datos[0].pin, "1234"); base_de_datos[0].saldo = 500000.0; base_de_datos[0].num_transacciones = 0;
+    strcpy(base_de_datos[1].rut, "22222222-2"); strcpy(base_de_datos[1].pin, "4321"); base_de_datos[1].saldo = 125000.0; base_de_datos[1].num_transacciones = 0;
+    strcpy(base_de_datos[2].rut, "33333333-3"); strcpy(base_de_datos[2].pin, "9876"); base_de_datos[2].saldo = 10000.0; base_de_datos[2].num_transacciones = 0;
+}
+
+void limpiar_buffer_entrada() {
+    char c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
+void mostrarMenu() {
+    xil_printf("\r\n--- Menú Principal ---\r\nUsuario: %s\r\n", usuario_actual->rut);
+    xil_printf("1. Realizar Retiro\r\n2. Realizar Depósito (No disp.)\r\n3. Consultar Saldo\r\n4. Ver Últimos Movimientos\r\n5. Cerrar Sesión\r\nSeleccione una opción: ");
+}
+
+void consultarSaldo(CuentaUsuario* usuario) {
+    xil_printf("Su saldo actual es: %.2f\r\n", usuario->saldo);
+}
+
+void verHistorial(CuentaUsuario* usuario) {
+    xil_printf("\r\n--- Historial de Movimientos ---\r\n");
+    if (usuario->num_transacciones == 0) {
+        xil_printf("No hay transacciones para mostrar.\r\n");
+    } else {
+        for (int i = 0; i < usuario->num_transacciones; i++) {
+            xil_printf("%d. Tipo: %s, Monto: %.2f\r\n",
+                       i + 1,
+                       usuario->historial[i].tipo,
+                       usuario->historial[i].monto);
+        }
+    }
+}

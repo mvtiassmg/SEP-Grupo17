@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="49" Path="C:/Users/tomas/Downloads/Proyecto_Base_Booster/HW_booster/HW_booster.xpr">
+<Project Version="7" Minor="49" Path="C:/Users/tomas/Downloads/SEP-Grupo17/Proyecto_2/HW_booster/HW_booster.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="b0d17e9774c8442690a643c349a8be66"/>
@@ -91,32 +91,32 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
+        <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_BUZZER_0_0/DEMO_BUZZER_0_0.xci">
+          <Proxy FileSetName="DEMO_BUZZER_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_axi_quad_spi_0_0/DEMO_axi_quad_spi_0_0.xci">
+          <Proxy FileSetName="DEMO_axi_quad_spi_0_0"/>
+        </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_axi_gpio_0_0/DEMO_axi_gpio_0_0.xci">
           <Proxy FileSetName="DEMO_axi_gpio_0_0"/>
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_processing_system7_0_0/DEMO_processing_system7_0_0.xci">
           <Proxy FileSetName="DEMO_processing_system7_0_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_axi_quad_spi_1_0/DEMO_axi_quad_spi_1_0.xci">
-          <Proxy FileSetName="DEMO_axi_quad_spi_1_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_axi_quad_spi_0_0/DEMO_axi_quad_spi_0_0.xci">
-          <Proxy FileSetName="DEMO_axi_quad_spi_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_axi_iic_0_1/DEMO_axi_iic_0_1.xci">
-          <Proxy FileSetName="DEMO_axi_iic_0_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_BUZZER_0_0/DEMO_BUZZER_0_0.xci">
-          <Proxy FileSetName="DEMO_BUZZER_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_TETRIS_SEQUENCER_1_0/DEMO_TETRIS_SEQUENCER_1_0.xci">
-          <Proxy FileSetName="DEMO_TETRIS_SEQUENCER_1_0"/>
+        <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_xbar_0/DEMO_xbar_0.xci">
+          <Proxy FileSetName="DEMO_xbar_0"/>
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_rst_ps7_0_50M_0/DEMO_rst_ps7_0_50M_0.xci">
           <Proxy FileSetName="DEMO_rst_ps7_0_50M_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_xbar_0/DEMO_xbar_0.xci">
-          <Proxy FileSetName="DEMO_xbar_0"/>
+        <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_axi_quad_spi_1_0/DEMO_axi_quad_spi_1_0.xci">
+          <Proxy FileSetName="DEMO_axi_quad_spi_1_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_axi_iic_0_1/DEMO_axi_iic_0_1.xci">
+          <Proxy FileSetName="DEMO_axi_iic_0_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_TETRIS_SEQUENCER_1_0/DEMO_TETRIS_SEQUENCER_1_0.xci">
+          <Proxy FileSetName="DEMO_TETRIS_SEQUENCER_1_0"/>
         </CompFileExtendedInfo>
       </File>
       <File Path="$PSRCDIR/sources_1/bd/DEMO/hdl/DEMO_wrapper.vhd">
@@ -135,7 +135,7 @@
     </FileSet>
     <FileSet Name="constrs_1" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
       <Filter Type="Constrs"/>
-      <File Path="$PPRDIR/../../../LAB10-Peripherals-with-Zybo-and-Booster/Zybo-Z7-Master.xdc">
+      <File Path="$PPRDIR/../../../../LAB10-Peripherals-with-Zybo-and-Booster/Zybo-Z7-Master.xdc">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
@@ -324,9 +324,7 @@
     </Run>
     <Run Id="DEMO_BUZZER_0_0_synth_1" Type="Ft3:Synth" SrcSet="DEMO_BUZZER_0_0" Part="xc7z010clg400-1" ConstrsSet="DEMO_BUZZER_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/DEMO_BUZZER_0_0_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2020">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2020"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
@@ -336,9 +334,7 @@
     </Run>
     <Run Id="DEMO_TETRIS_SEQUENCER_1_0_synth_1" Type="Ft3:Synth" SrcSet="DEMO_TETRIS_SEQUENCER_1_0" Part="xc7z010clg400-1" ConstrsSet="DEMO_TETRIS_SEQUENCER_1_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/DEMO_TETRIS_SEQUENCER_1_0_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2020">
-          <Desc>Vivado Synthesis Defaults</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2020"/>
         <Step Id="synth_design"/>
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
@@ -485,9 +481,7 @@
     </Run>
     <Run Id="DEMO_BUZZER_0_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z010clg400-1" ConstrsSet="DEMO_BUZZER_0_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="DEMO_BUZZER_0_0_synth_1" IncludeInArchive="false" GenFullBitstream="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2020">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2020"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
@@ -504,9 +498,7 @@
     </Run>
     <Run Id="DEMO_TETRIS_SEQUENCER_1_0_impl_1" Type="Ft2:EntireDesign" Part="xc7z010clg400-1" ConstrsSet="DEMO_TETRIS_SEQUENCER_1_0" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="DEMO_TETRIS_SEQUENCER_1_0_synth_1" IncludeInArchive="false" GenFullBitstream="true">
       <Strategy Version="1" Minor="2">
-        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2020">
-          <Desc>Default settings for Implementation.</Desc>
-        </StratHandle>
+        <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2020"/>
         <Step Id="init_design"/>
         <Step Id="opt_design"/>
         <Step Id="power_opt_design"/>
