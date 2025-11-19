@@ -1,0 +1,7 @@
+/*ay_10*/
+the_ROM_image:
+{
+  [bootloader]<ay_10/boot/fsbl.elf>
+   <bitstream> 
+  <elf,ps7_cortexa9_0>
+}

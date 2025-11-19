@@ -1,7 +1,7 @@
 --Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
---Date        : Mon Oct 20 00:39:25 2025
+--Date        : Tue Nov 18 20:22:37 2025
 --Host        : Macbook running 64-bit major release  (build 9200)
 --Command     : generate_target design_1.bd
 --Design      : design_1
@@ -16,9 +16,11 @@ entity m00_couplers_imp_8RVYHO is
     M_ACLK : in STD_LOGIC;
     M_ARESETN : in STD_LOGIC;
     M_AXI_araddr : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    M_AXI_arprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
     M_AXI_arready : in STD_LOGIC_VECTOR ( 0 to 0 );
     M_AXI_arvalid : out STD_LOGIC_VECTOR ( 0 to 0 );
     M_AXI_awaddr : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    M_AXI_awprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
     M_AXI_awready : in STD_LOGIC_VECTOR ( 0 to 0 );
     M_AXI_awvalid : out STD_LOGIC_VECTOR ( 0 to 0 );
     M_AXI_bready : out STD_LOGIC_VECTOR ( 0 to 0 );
@@ -35,9 +37,11 @@ entity m00_couplers_imp_8RVYHO is
     S_ACLK : in STD_LOGIC;
     S_ARESETN : in STD_LOGIC;
     S_AXI_araddr : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    S_AXI_arprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
     S_AXI_arready : out STD_LOGIC_VECTOR ( 0 to 0 );
     S_AXI_arvalid : in STD_LOGIC_VECTOR ( 0 to 0 );
     S_AXI_awaddr : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    S_AXI_awprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
     S_AXI_awready : out STD_LOGIC_VECTOR ( 0 to 0 );
     S_AXI_awvalid : in STD_LOGIC_VECTOR ( 0 to 0 );
     S_AXI_bready : in STD_LOGIC_VECTOR ( 0 to 0 );
@@ -56,9 +60,11 @@ end m00_couplers_imp_8RVYHO;
 
 architecture STRUCTURE of m00_couplers_imp_8RVYHO is
   signal m00_couplers_to_m00_couplers_ARADDR : STD_LOGIC_VECTOR ( 31 downto 0 );
+  signal m00_couplers_to_m00_couplers_ARPROT : STD_LOGIC_VECTOR ( 2 downto 0 );
   signal m00_couplers_to_m00_couplers_ARREADY : STD_LOGIC_VECTOR ( 0 to 0 );
   signal m00_couplers_to_m00_couplers_ARVALID : STD_LOGIC_VECTOR ( 0 to 0 );
   signal m00_couplers_to_m00_couplers_AWADDR : STD_LOGIC_VECTOR ( 31 downto 0 );
+  signal m00_couplers_to_m00_couplers_AWPROT : STD_LOGIC_VECTOR ( 2 downto 0 );
   signal m00_couplers_to_m00_couplers_AWREADY : STD_LOGIC_VECTOR ( 0 to 0 );
   signal m00_couplers_to_m00_couplers_AWVALID : STD_LOGIC_VECTOR ( 0 to 0 );
   signal m00_couplers_to_m00_couplers_BREADY : STD_LOGIC_VECTOR ( 0 to 0 );
@@ -74,8 +80,10 @@ architecture STRUCTURE of m00_couplers_imp_8RVYHO is
   signal m00_couplers_to_m00_couplers_WVALID : STD_LOGIC_VECTOR ( 0 to 0 );
 begin
   M_AXI_araddr(31 downto 0) <= m00_couplers_to_m00_couplers_ARADDR(31 downto 0);
+  M_AXI_arprot(2 downto 0) <= m00_couplers_to_m00_couplers_ARPROT(2 downto 0);
   M_AXI_arvalid(0) <= m00_couplers_to_m00_couplers_ARVALID(0);
   M_AXI_awaddr(31 downto 0) <= m00_couplers_to_m00_couplers_AWADDR(31 downto 0);
+  M_AXI_awprot(2 downto 0) <= m00_couplers_to_m00_couplers_AWPROT(2 downto 0);
   M_AXI_awvalid(0) <= m00_couplers_to_m00_couplers_AWVALID(0);
   M_AXI_bready(0) <= m00_couplers_to_m00_couplers_BREADY(0);
   M_AXI_rready(0) <= m00_couplers_to_m00_couplers_RREADY(0);
@@ -91,9 +99,11 @@ begin
   S_AXI_rvalid(0) <= m00_couplers_to_m00_couplers_RVALID(0);
   S_AXI_wready(0) <= m00_couplers_to_m00_couplers_WREADY(0);
   m00_couplers_to_m00_couplers_ARADDR(31 downto 0) <= S_AXI_araddr(31 downto 0);
+  m00_couplers_to_m00_couplers_ARPROT(2 downto 0) <= S_AXI_arprot(2 downto 0);
   m00_couplers_to_m00_couplers_ARREADY(0) <= M_AXI_arready(0);
   m00_couplers_to_m00_couplers_ARVALID(0) <= S_AXI_arvalid(0);
   m00_couplers_to_m00_couplers_AWADDR(31 downto 0) <= S_AXI_awaddr(31 downto 0);
+  m00_couplers_to_m00_couplers_AWPROT(2 downto 0) <= S_AXI_awprot(2 downto 0);
   m00_couplers_to_m00_couplers_AWREADY(0) <= M_AXI_awready(0);
   m00_couplers_to_m00_couplers_AWVALID(0) <= S_AXI_awvalid(0);
   m00_couplers_to_m00_couplers_BREADY(0) <= S_AXI_bready(0);
@@ -899,9 +909,11 @@ entity design_1_microblaze_0_axi_periph_2 is
     M00_ACLK : in STD_LOGIC;
     M00_ARESETN : in STD_LOGIC;
     M00_AXI_araddr : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    M00_AXI_arprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
     M00_AXI_arready : in STD_LOGIC_VECTOR ( 0 to 0 );
     M00_AXI_arvalid : out STD_LOGIC_VECTOR ( 0 to 0 );
     M00_AXI_awaddr : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    M00_AXI_awprot : out STD_LOGIC_VECTOR ( 2 downto 0 );
     M00_AXI_awready : in STD_LOGIC_VECTOR ( 0 to 0 );
     M00_AXI_awvalid : out STD_LOGIC_VECTOR ( 0 to 0 );
     M00_AXI_bready : out STD_LOGIC_VECTOR ( 0 to 0 );
@@ -1006,9 +1018,11 @@ architecture STRUCTURE of design_1_microblaze_0_axi_periph_2 is
   );
   end component design_1_xbar_2;
   signal m00_couplers_to_microblaze_0_axi_periph_ARADDR : STD_LOGIC_VECTOR ( 31 downto 0 );
+  signal m00_couplers_to_microblaze_0_axi_periph_ARPROT : STD_LOGIC_VECTOR ( 2 downto 0 );
   signal m00_couplers_to_microblaze_0_axi_periph_ARREADY : STD_LOGIC_VECTOR ( 0 to 0 );
   signal m00_couplers_to_microblaze_0_axi_periph_ARVALID : STD_LOGIC_VECTOR ( 0 to 0 );
   signal m00_couplers_to_microblaze_0_axi_periph_AWADDR : STD_LOGIC_VECTOR ( 31 downto 0 );
+  signal m00_couplers_to_microblaze_0_axi_periph_AWPROT : STD_LOGIC_VECTOR ( 2 downto 0 );
   signal m00_couplers_to_microblaze_0_axi_periph_AWREADY : STD_LOGIC_VECTOR ( 0 to 0 );
   signal m00_couplers_to_microblaze_0_axi_periph_AWVALID : STD_LOGIC_VECTOR ( 0 to 0 );
   signal m00_couplers_to_microblaze_0_axi_periph_BREADY : STD_LOGIC_VECTOR ( 0 to 0 );
@@ -1082,9 +1096,11 @@ architecture STRUCTURE of design_1_microblaze_0_axi_periph_2 is
   signal s00_couplers_to_xbar_WSTRB : STD_LOGIC_VECTOR ( 3 downto 0 );
   signal s00_couplers_to_xbar_WVALID : STD_LOGIC_VECTOR ( 0 to 0 );
   signal xbar_to_m00_couplers_ARADDR : STD_LOGIC_VECTOR ( 31 downto 0 );
+  signal xbar_to_m00_couplers_ARPROT : STD_LOGIC_VECTOR ( 2 downto 0 );
   signal xbar_to_m00_couplers_ARREADY : STD_LOGIC_VECTOR ( 0 to 0 );
   signal xbar_to_m00_couplers_ARVALID : STD_LOGIC_VECTOR ( 0 to 0 );
   signal xbar_to_m00_couplers_AWADDR : STD_LOGIC_VECTOR ( 31 downto 0 );
+  signal xbar_to_m00_couplers_AWPROT : STD_LOGIC_VECTOR ( 2 downto 0 );
   signal xbar_to_m00_couplers_AWREADY : STD_LOGIC_VECTOR ( 0 to 0 );
   signal xbar_to_m00_couplers_AWVALID : STD_LOGIC_VECTOR ( 0 to 0 );
   signal xbar_to_m00_couplers_BREADY : STD_LOGIC_VECTOR ( 0 to 0 );
@@ -1117,12 +1133,12 @@ architecture STRUCTURE of design_1_microblaze_0_axi_periph_2 is
   signal xbar_to_m01_couplers_WREADY : STD_LOGIC_VECTOR ( 0 to 0 );
   signal xbar_to_m01_couplers_WSTRB : STD_LOGIC_VECTOR ( 7 downto 4 );
   signal xbar_to_m01_couplers_WVALID : STD_LOGIC_VECTOR ( 1 to 1 );
-  signal NLW_xbar_m_axi_arprot_UNCONNECTED : STD_LOGIC_VECTOR ( 2 downto 0 );
-  signal NLW_xbar_m_axi_awprot_UNCONNECTED : STD_LOGIC_VECTOR ( 2 downto 0 );
 begin
   M00_AXI_araddr(31 downto 0) <= m00_couplers_to_microblaze_0_axi_periph_ARADDR(31 downto 0);
+  M00_AXI_arprot(2 downto 0) <= m00_couplers_to_microblaze_0_axi_periph_ARPROT(2 downto 0);
   M00_AXI_arvalid(0) <= m00_couplers_to_microblaze_0_axi_periph_ARVALID(0);
   M00_AXI_awaddr(31 downto 0) <= m00_couplers_to_microblaze_0_axi_periph_AWADDR(31 downto 0);
+  M00_AXI_awprot(2 downto 0) <= m00_couplers_to_microblaze_0_axi_periph_AWPROT(2 downto 0);
   M00_AXI_awvalid(0) <= m00_couplers_to_microblaze_0_axi_periph_AWVALID(0);
   M00_AXI_bready(0) <= m00_couplers_to_microblaze_0_axi_periph_BREADY(0);
   M00_AXI_rready(0) <= m00_couplers_to_microblaze_0_axi_periph_RREADY(0);
@@ -1182,9 +1198,11 @@ m00_couplers: entity work.m00_couplers_imp_8RVYHO
       M_ACLK => microblaze_0_axi_periph_ACLK_net,
       M_ARESETN => microblaze_0_axi_periph_ARESETN_net,
       M_AXI_araddr(31 downto 0) => m00_couplers_to_microblaze_0_axi_periph_ARADDR(31 downto 0),
+      M_AXI_arprot(2 downto 0) => m00_couplers_to_microblaze_0_axi_periph_ARPROT(2 downto 0),
       M_AXI_arready(0) => m00_couplers_to_microblaze_0_axi_periph_ARREADY(0),
       M_AXI_arvalid(0) => m00_couplers_to_microblaze_0_axi_periph_ARVALID(0),
       M_AXI_awaddr(31 downto 0) => m00_couplers_to_microblaze_0_axi_periph_AWADDR(31 downto 0),
+      M_AXI_awprot(2 downto 0) => m00_couplers_to_microblaze_0_axi_periph_AWPROT(2 downto 0),
       M_AXI_awready(0) => m00_couplers_to_microblaze_0_axi_periph_AWREADY(0),
       M_AXI_awvalid(0) => m00_couplers_to_microblaze_0_axi_periph_AWVALID(0),
       M_AXI_bready(0) => m00_couplers_to_microblaze_0_axi_periph_BREADY(0),
@@ -1201,9 +1219,11 @@ m00_couplers: entity work.m00_couplers_imp_8RVYHO
       S_ACLK => microblaze_0_axi_periph_ACLK_net,
       S_ARESETN => microblaze_0_axi_periph_ARESETN_net,
       S_AXI_araddr(31 downto 0) => xbar_to_m00_couplers_ARADDR(31 downto 0),
+      S_AXI_arprot(2 downto 0) => xbar_to_m00_couplers_ARPROT(2 downto 0),
       S_AXI_arready(0) => xbar_to_m00_couplers_ARREADY(0),
       S_AXI_arvalid(0) => xbar_to_m00_couplers_ARVALID(0),
       S_AXI_awaddr(31 downto 0) => xbar_to_m00_couplers_AWADDR(31 downto 0),
+      S_AXI_awprot(2 downto 0) => xbar_to_m00_couplers_AWPROT(2 downto 0),
       S_AXI_awready(0) => xbar_to_m00_couplers_AWREADY(0),
       S_AXI_awvalid(0) => xbar_to_m00_couplers_AWVALID(0),
       S_AXI_bready(0) => xbar_to_m00_couplers_BREADY(0),
@@ -1315,7 +1335,7 @@ xbar: component design_1_xbar_2
       m_axi_araddr(63 downto 32) => xbar_to_m01_couplers_ARADDR(63 downto 32),
       m_axi_araddr(31 downto 0) => xbar_to_m00_couplers_ARADDR(31 downto 0),
       m_axi_arprot(5 downto 3) => xbar_to_m01_couplers_ARPROT(5 downto 3),
-      m_axi_arprot(2 downto 0) => NLW_xbar_m_axi_arprot_UNCONNECTED(2 downto 0),
+      m_axi_arprot(2 downto 0) => xbar_to_m00_couplers_ARPROT(2 downto 0),
       m_axi_arready(1) => xbar_to_m01_couplers_ARREADY(0),
       m_axi_arready(0) => xbar_to_m00_couplers_ARREADY(0),
       m_axi_arvalid(1) => xbar_to_m01_couplers_ARVALID(1),
@@ -1323,7 +1343,7 @@ xbar: component design_1_xbar_2
       m_axi_awaddr(63 downto 32) => xbar_to_m01_couplers_AWADDR(63 downto 32),
       m_axi_awaddr(31 downto 0) => xbar_to_m00_couplers_AWADDR(31 downto 0),
       m_axi_awprot(5 downto 3) => xbar_to_m01_couplers_AWPROT(5 downto 3),
-      m_axi_awprot(2 downto 0) => NLW_xbar_m_axi_awprot_UNCONNECTED(2 downto 0),
+      m_axi_awprot(2 downto 0) => xbar_to_m00_couplers_AWPROT(2 downto 0),
       m_axi_awready(1) => xbar_to_m01_couplers_AWREADY(0),
       m_axi_awready(0) => xbar_to_m00_couplers_AWREADY(0),
       m_axi_awvalid(1) => xbar_to_m01_couplers_AWVALID(1),
@@ -1384,7 +1404,7 @@ entity design_1 is
     sys_clock : in STD_LOGIC
   );
   attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of design_1 : entity is "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=17,numReposBlks=12,numNonXlnxBlks=0,numHierBlks=5,maxHierDepth=1,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=9,da_board_cnt=17,da_clkrst_cnt=3,da_mb_cnt=4,synth_mode=OOC_per_IP}";
+  attribute CORE_GENERATION_INFO of design_1 : entity is "design_1,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=design_1,x_ipVersion=1.00.a,x_ipLanguage=VHDL,numBlks=18,numReposBlks=13,numNonXlnxBlks=0,numHierBlks=5,maxHierDepth=1,numSysgenBlks=0,numHlsBlks=0,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=9,da_board_cnt=17,da_clkrst_cnt=3,da_mb_cnt=4,synth_mode=OOC_per_IP}";
   attribute HW_HANDOFF : string;
   attribute HW_HANDOFF of design_1 : entity is "design_1.hwdef";
 end design_1;
@@ -1534,6 +1554,30 @@ architecture STRUCTURE of design_1 is
     peripheral_aresetn : out STD_LOGIC_VECTOR ( 0 to 0 )
   );
   end component design_1_rst_clk_wiz_1_100M_1;
+  component design_1_ila_0_0 is
+  port (
+    clk : in STD_LOGIC;
+    probe0 : in STD_LOGIC_VECTOR ( 0 to 0 );
+    probe1 : in STD_LOGIC_VECTOR ( 8 downto 0 );
+    probe2 : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    probe3 : in STD_LOGIC_VECTOR ( 0 to 0 );
+    probe4 : in STD_LOGIC_VECTOR ( 0 to 0 );
+    probe5 : in STD_LOGIC_VECTOR ( 8 downto 0 );
+    probe6 : in STD_LOGIC_VECTOR ( 0 to 0 );
+    probe7 : in STD_LOGIC_VECTOR ( 0 to 0 );
+    probe8 : in STD_LOGIC_VECTOR ( 0 to 0 );
+    probe9 : in STD_LOGIC_VECTOR ( 0 to 0 );
+    probe10 : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    probe11 : in STD_LOGIC_VECTOR ( 0 to 0 );
+    probe12 : in STD_LOGIC_VECTOR ( 0 to 0 );
+    probe13 : in STD_LOGIC_VECTOR ( 1 downto 0 );
+    probe14 : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    probe15 : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    probe16 : in STD_LOGIC_VECTOR ( 0 to 0 );
+    probe17 : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    probe18 : in STD_LOGIC_VECTOR ( 2 downto 0 )
+  );
+  end component design_1_ila_0_0;
   signal LED_DRIVER_0_leds_out : STD_LOGIC_VECTOR ( 3 downto 0 );
   signal axi_gpio_0_GPIO2_TRI_O : STD_LOGIC_VECTOR ( 2 downto 0 );
   signal clk_wiz_1_locked : STD_LOGIC;
@@ -1560,9 +1604,11 @@ architecture STRUCTURE of design_1 is
   signal microblaze_0_M_AXI_DP_WSTRB : STD_LOGIC_VECTOR ( 3 downto 0 );
   signal microblaze_0_M_AXI_DP_WVALID : STD_LOGIC;
   signal microblaze_0_axi_periph_M00_AXI_ARADDR : STD_LOGIC_VECTOR ( 31 downto 0 );
+  signal microblaze_0_axi_periph_M00_AXI_ARPROT : STD_LOGIC_VECTOR ( 2 downto 0 );
   signal microblaze_0_axi_periph_M00_AXI_ARREADY : STD_LOGIC;
   signal microblaze_0_axi_periph_M00_AXI_ARVALID : STD_LOGIC_VECTOR ( 0 to 0 );
   signal microblaze_0_axi_periph_M00_AXI_AWADDR : STD_LOGIC_VECTOR ( 31 downto 0 );
+  signal microblaze_0_axi_periph_M00_AXI_AWPROT : STD_LOGIC_VECTOR ( 2 downto 0 );
   signal microblaze_0_axi_periph_M00_AXI_AWREADY : STD_LOGIC;
   signal microblaze_0_axi_periph_M00_AXI_AWVALID : STD_LOGIC_VECTOR ( 0 to 0 );
   signal microblaze_0_axi_periph_M00_AXI_BREADY : STD_LOGIC_VECTOR ( 0 to 0 );
@@ -1705,6 +1751,29 @@ clk_wiz_1: component design_1_clk_wiz_1_1
       locked => clk_wiz_1_locked,
       reset => mdm_1_debug_sys_rst
     );
+ila_0: component design_1_ila_0_0
+     port map (
+      clk => microblaze_0_Clk_2,
+      probe0(0) => microblaze_0_axi_periph_M00_AXI_WREADY,
+      probe1(8 downto 0) => microblaze_0_axi_periph_M00_AXI_AWADDR(8 downto 0),
+      probe10(31 downto 0) => microblaze_0_axi_periph_M00_AXI_RDATA(31 downto 0),
+      probe11(0) => microblaze_0_axi_periph_M00_AXI_AWVALID(0),
+      probe12(0) => microblaze_0_axi_periph_M00_AXI_AWREADY,
+      probe13(1 downto 0) => microblaze_0_axi_periph_M00_AXI_RRESP(1 downto 0),
+      probe14(31 downto 0) => microblaze_0_axi_periph_M00_AXI_WDATA(31 downto 0),
+      probe15(3 downto 0) => microblaze_0_axi_periph_M00_AXI_WSTRB(3 downto 0),
+      probe16(0) => microblaze_0_axi_periph_M00_AXI_RVALID,
+      probe17(2 downto 0) => microblaze_0_axi_periph_M00_AXI_ARPROT(2 downto 0),
+      probe18(2 downto 0) => microblaze_0_axi_periph_M00_AXI_AWPROT(2 downto 0),
+      probe2(1 downto 0) => microblaze_0_axi_periph_M00_AXI_BRESP(1 downto 0),
+      probe3(0) => microblaze_0_axi_periph_M00_AXI_BVALID,
+      probe4(0) => microblaze_0_axi_periph_M00_AXI_BREADY(0),
+      probe5(8 downto 0) => microblaze_0_axi_periph_M00_AXI_ARADDR(8 downto 0),
+      probe6(0) => microblaze_0_axi_periph_M00_AXI_RREADY(0),
+      probe7(0) => microblaze_0_axi_periph_M00_AXI_WVALID(0),
+      probe8(0) => microblaze_0_axi_periph_M00_AXI_ARVALID(0),
+      probe9(0) => microblaze_0_axi_periph_M00_AXI_ARREADY
+    );
 mdm_1: component design_1_mdm_1_3
      port map (
       Dbg_Capture_0 => microblaze_0_debug_CAPTURE,
@@ -1780,9 +1849,11 @@ microblaze_0_axi_periph: entity work.design_1_microblaze_0_axi_periph_2
       M00_ACLK => microblaze_0_Clk_2,
       M00_ARESETN => rst_clk_wiz_1_100M_peripheral_aresetn1(0),
       M00_AXI_araddr(31 downto 0) => microblaze_0_axi_periph_M00_AXI_ARADDR(31 downto 0),
+      M00_AXI_arprot(2 downto 0) => microblaze_0_axi_periph_M00_AXI_ARPROT(2 downto 0),
       M00_AXI_arready(0) => microblaze_0_axi_periph_M00_AXI_ARREADY,
       M00_AXI_arvalid(0) => microblaze_0_axi_periph_M00_AXI_ARVALID(0),
       M00_AXI_awaddr(31 downto 0) => microblaze_0_axi_periph_M00_AXI_AWADDR(31 downto 0),
+      M00_AXI_awprot(2 downto 0) => microblaze_0_axi_periph_M00_AXI_AWPROT(2 downto 0),
       M00_AXI_awready(0) => microblaze_0_axi_periph_M00_AXI_AWREADY,
       M00_AXI_awvalid(0) => microblaze_0_axi_periph_M00_AXI_AWVALID(0),
       M00_AXI_bready(0) => microblaze_0_axi_periph_M00_AXI_BREADY(0),

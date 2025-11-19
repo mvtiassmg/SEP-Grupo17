@@ -1,0 +1,40 @@
+#include "timer_utils.h"
+#include <stdio.h>
+#include "xtmrctr.h"
+
+XTmrCtr TimerInstance;
+volatile int flag_read_opt = 0;
+
+// Callback del timer: SOLO marcar la bandera.
+void Timer_Callback(void *CallBackRef, u8 TmrNum)
+{
+    (void)CallBackRef;
+    (void)TmrNum;
+    // NO limpiar la interrupción aquí, eso ya lo hace XTmrCtr_InterruptHandler.
+    flag_read_opt = 1;
+}
+
+int timer_init_1s()
+{
+    int status;
+
+    // Inicializar el AXI Timer
+    status = XTmrCtr_Initialize(&TimerInstance, TIMER_DEVICE_ID);
+    if (status != XST_SUCCESS)
+        return XST_FAILURE;
+
+    // Registrar nuestro callback de alto nivel
+    XTmrCtr_SetHandler(&TimerInstance, Timer_Callback, &TimerInstance);
+
+    // Habilitar interrupciones y auto-reload en el Timer 0
+    XTmrCtr_SetOptions(&TimerInstance, 0,
+                       XTC_INT_MODE_OPTION |
+                       XTC_AUTO_RELOAD_OPTION);
+
+    XTmrCtr_SetResetValue(&TimerInstance, 0, TIMER_CLOCK_FREQ);
+
+    // Arrancar el timer 0
+    XTmrCtr_Start(&TimerInstance, 0);
+
+    return XST_SUCCESS;
+}

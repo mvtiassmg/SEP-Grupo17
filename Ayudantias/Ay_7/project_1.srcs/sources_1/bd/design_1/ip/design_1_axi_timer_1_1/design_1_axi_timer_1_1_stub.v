@@ -1,11 +1,11 @@
 // Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
-// Date        : Sat Sep 30 15:55:58 2023
-// Host        : LAPTOP-S12DIT43 running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode synth_stub -rename_top design_1_axi_timer_1_1 -prefix
-//               design_1_axi_timer_1_1_ design_1_axi_timer_0_0_stub.v
-// Design      : design_1_axi_timer_0_0
+// Date        : Tue Nov 18 18:29:18 2025
+// Host        : Macbook running 64-bit major release  (build 9200)
+// Command     : write_verilog -force -mode synth_stub
+//               c:/Users/tomas/Downloads/SEP-Grupo17/Ayudantias/Ay_7/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_timer_1_1/design_1_axi_timer_1_1_stub.v
+// Design      : design_1_axi_timer_1_1
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7z010clg400-1
 // --------------------------------------------------------------------------------

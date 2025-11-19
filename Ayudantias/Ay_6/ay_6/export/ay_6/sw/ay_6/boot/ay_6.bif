@@ -1,0 +1,6 @@
+/*ay_6*/
+the_ROM_image:
+{
+   <bitstream> 
+   <elf> 
+}

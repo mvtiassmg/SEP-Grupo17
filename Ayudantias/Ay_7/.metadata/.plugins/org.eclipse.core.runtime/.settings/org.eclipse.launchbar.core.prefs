@@ -1,7 +1,10 @@
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
-configDescList=org.eclipse.launchbar.core.descriptorType.default\:SystemDebugger_Timer_Ints_SW_system
+configDescList=org.eclipse.launchbar.core.descriptorType.default\:Debugger_AY_7_SW-Default_2,org.eclipse.launchbar.core.descriptorType.default\:Debugger_AY_7_SW-GDB,org.eclipse.launchbar.core.descriptorType.default\:Debugger_AY_7_SW-Default_3,org.eclipse.launchbar.core.descriptorType.default\:Debugger_AY_7_SW-Default,org.eclipse.launchbar.core.descriptorType.default\:Debugger_AY_7_SW-Default_1
 eclipse.preferences.version=1
+org.eclipse.launchbar.core.descriptorType.default\:Debugger_AY_7_SW-Default/activeLaunchMode=run
+org.eclipse.launchbar.core.descriptorType.default\:Debugger_AY_7_SW-Default/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
+org.eclipse.launchbar.core.descriptorType.default\:Debugger_AY_7_SW-Default_3/activeLaunchMode=debug
 org.eclipse.launchbar.core.descriptorType.default\:SystemDebugger_Timer_Ints_SW_system/activeLaunchMode=systemrun
 org.eclipse.launchbar.core.descriptorType.default\:SystemDebugger_Timer_Ints_SW_system/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local

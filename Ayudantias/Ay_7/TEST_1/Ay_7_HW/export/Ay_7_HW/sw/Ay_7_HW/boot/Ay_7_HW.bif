@@ -1,0 +1,6 @@
+/*Ay_7_HW*/
+the_ROM_image:
+{
+   <bitstream> 
+   <elf> 
+}

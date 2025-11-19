@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="49" Path="C:/Users/tomas/escritorio/Universidad/SEP/Proyecto/SEP-Grupo17/Ayudantias/Ay_6/AYU06/AYU06.xpr">
+<Project Version="7" Minor="49" Path="C:/Users/tomas/Downloads/SEP-Grupo17/Ayudantias/Ay_6/AYU06/AYU06.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="3f7782de92e44196a80f9968ebe0b360"/>
@@ -75,12 +75,6 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_gpio_0_1/design_1_axi_gpio_0_1.xci">
-          <Proxy FileSetName="design_1_axi_gpio_0_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_dlmb_bram_if_cntlr_3/design_1_dlmb_bram_if_cntlr_3.xci">
-          <Proxy FileSetName="design_1_dlmb_bram_if_cntlr_3"/>
-        </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_rst_clk_wiz_1_100M_1/design_1_rst_clk_wiz_1_100M_1.xci">
           <Proxy FileSetName="design_1_rst_clk_wiz_1_100M_1"/>
         </CompFileExtendedInfo>
@@ -90,8 +84,14 @@
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_lmb_bram_3/design_1_lmb_bram_3.xci">
           <Proxy FileSetName="design_1_lmb_bram_3"/>
         </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_dlmb_bram_if_cntlr_3/design_1_dlmb_bram_if_cntlr_3.xci">
+          <Proxy FileSetName="design_1_dlmb_bram_if_cntlr_3"/>
+        </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_clk_wiz_1_1/design_1_clk_wiz_1_1.xci">
           <Proxy FileSetName="design_1_clk_wiz_1_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_gpio_0_1/design_1_axi_gpio_0_1.xci">
+          <Proxy FileSetName="design_1_axi_gpio_0_1"/>
         </CompFileExtendedInfo>
       </File>
       <File Path="$PSRCDIR/sources_1/bd/design_1/hdl/design_1_wrapper.vhd">

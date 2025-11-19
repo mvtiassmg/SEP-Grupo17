@@ -208,6 +208,7 @@ void realizarRetiro(CuentaUsuario* usuario) {
 
     XGpio_DiscreteWrite(&LEDInst, 1, clave_generada);
     xil_printf("Ingrese el número que se ve en los LEDs: ");
+    xil_printf("%d", clave_generada);
     scanf("%d", &clave_ingresada);
     limpiar_buffer_entrada();
     XGpio_DiscreteWrite(&LEDInst, 1, 0);

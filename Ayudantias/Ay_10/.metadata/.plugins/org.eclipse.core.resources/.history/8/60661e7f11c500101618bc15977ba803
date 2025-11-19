@@ -1,0 +1,17 @@
+#ifndef TIMER_UTILS_H
+#define TIMER_UTILS_H
+
+#include "xparameters.h"
+#include "xtmrctr.h"
+
+#define TIMER_DEVICE_ID   XPAR_TMRCTR_0_DEVICE_ID
+#define TIMER_CLOCK_FREQ  XPAR_TMRCTR_0_CLOCK_FREQ_HZ
+
+// Declaraciones (extern)
+extern XTmrCtr TimerInstance;
+extern volatile int flag_read_opt;
+
+int timer_init_1s(void);
+void Timer_Callback(void *CallBackRef, u8 TmrNum);
+
+#endif

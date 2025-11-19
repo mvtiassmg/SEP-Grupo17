@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <unistd.h>
+#include "platform.h"
+#include "xil_printf.h"
+#include "xstatus.h"
+#include "I2C.h"
+#include "timer_utils.h"
+#include "gic_utils.h"
+#include "xtmrctr.h"
+
+// Declaraciones globales
+//XTmrCtr TimerInstance;          // Instancia del temporizador
+//volatile int flag_read_opt = 0; // Bandera para lectura (modificada por interrupción)
+
+int main()
+{
+    int Status;
+    int TEMPERATURA = 0;
+    int LUX = 0;
+
+    init_platform();
+
+    // Inicialización del I2C
+    Status = init_IIC();
+    if (Status != XST_SUCCESS) {
+        xil_printf("Error al inicializar I2C\n");
+        return XST_FAILURE;
+    }
+
+    // Inicialización del GIC para el temporizador
+    Status = init_gic_for_timer_default(XTmrCtr_InterruptHandler, &TimerInstance);
+    if (Status != XST_SUCCESS) {
+        xil_printf("Error al inicializar GIC\n");
+        return XST_FAILURE;
+    }
+
+    // Inicialización del temporizador a 1 segundo
+    Status = timer_init_1s();
+    if (Status != XST_SUCCESS) {
+        xil_printf("Error al inicializar temporizador\n");
+        return XST_FAILURE;
+    }
+
+    xil_printf("Sistema iniciado. Lectura cada 1 segundo.\n");
+
+    while (1)
+    {
+        if (flag_read_opt)
+        {
+            flag_read_opt = 0;
+
+            TEMPERATURA = read_tmp();
+            LUX = read_opt();
+
+            xil_printf("TEMPERATURA: %d\n", TEMPERATURA);
+            xil_printf("LUZ: %d\n\n", LUX);
+        }
+        else{
+        	 xil_printf("FALLA");
+        }
+    }
+
+    cleanup_platform();
+    return 0;
+}
