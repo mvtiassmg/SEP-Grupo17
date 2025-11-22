@@ -1,62 +1,52 @@
 #include "Joystick.h"
-#include "xgpio.h"
-#include "xparameters.h"
-#include "ADC.h"        // Tu driver ADC
+#include "ADC.h"
+#include "Delay.h"
 
-// GPIO para JOY_SEL
-static XGpio gpio_joy;
-
-// Rango ADC Booster (12 bits)
-#define ADC_MAX 4095.0f
-#define ADC_MID 2048.0f     // Centro del potenciómetro
-
-
-static float clampf(float v, float min, float max)
+void Joystick_init(Joystick *js)
 {
-    if (v < min) return min;
-    if (v > max) return max;
-    return v;
+    js->center_x = 2048;
+    js->center_y = 2048;
+
+    js->deadzone = 0.05f;
+    js->max_range = 2048.0f;
 }
 
-
-void Joystick_init(Joystick *joy,
-                   int adc_ch_x,
-                   int adc_ch_y,
-                   u8 gpio_pin)
+void Joystick_calibrate(Joystick *js, int samples)
 {
-    joy->adc_channel_x = adc_ch_x;
-    joy->adc_channel_y = adc_ch_y;
-    joy->gpio_pin = gpio_pin;
+    long sumx = 0, sumy = 0;
 
-    // Inicializar GPIO del botón
-    XGpio_Initialize(&gpio_joy, XPAR_AXI_GPIO_JOYSTICK_DEVICE_ID);
-    XGpio_SetDataDirection(&gpio_joy, 1, 0xFFFFFFFF); // entrada
+    for (int i = 0; i < samples; i++) {
+        sumx += read_joyx();
+        sumy += read_joyy();
+        Delay_ms(5);
+    }
+
+    js->center_x = sumx / samples;
+    js->center_y = sumy / samples;
 }
 
-
-void Joystick_update(Joystick *joy)
+void Joystick_read_raw(int *jx, int *jy)
 {
-    // --- Leer ADC X ---
-    joy->raw_x = ADC_ReadChannel(joy->adc_channel_x);
-
-    // --- Leer ADC Y ---
-    joy->raw_y = ADC_ReadChannel(joy->adc_channel_y);
-
-    // --- Normalizar a rango [-1, 1] ---
-    joy->norm_x = (joy->raw_x - ADC_MID) / ADC_MID;
-    joy->norm_y = (joy->raw_y - ADC_MID) / ADC_MID;
-
-    joy->norm_x = clampf(joy->norm_x, -1.0f, 1.0f);
-    joy->norm_y = clampf(joy->norm_y, -1.0f, 1.0f);
-
-    // --- Leer botón JOY_SEL ---
-    u32 data = XGpio_DiscreteRead(&gpio_joy, 1);
-
-    // Pull-up → 0 = presionado
-    joy->pressed = !(data & (1 << joy->gpio_pin));
+    if (jx) *jx = read_joyx();
+    if (jy) *jy = read_joyy();
 }
 
+void Joystick_read_normalized(Joystick *js, float *nx, float *ny)
+{
+    int rx = read_joyx();
+    int ry = read_joyy();
 
-float Joystick_getX (Joystick *joy) { return joy->norm_x; }
-float Joystick_getY (Joystick *joy) { return joy->norm_y; }
-u8    Joystick_isPressed(Joystick *joy) { return joy->pressed; }
+    float dx = (rx - js->center_x) / js->max_range;
+    float dy = (ry - js->center_y) / js->max_range;
+
+    if (dx < js->deadzone && dx > -js->deadzone) dx = 0.0f;
+    if (dy < js->deadzone && dy > -js->deadzone) dy = 0.0f;
+
+    if (dx >  1.0f) dx =  1.0f;
+    if (dx < -1.0f) dx = -1.0f;
+    if (dy >  1.0f) dy =  1.0f;
+    if (dy < -1.0f) dy = -1.0f;
+
+    if (nx) *nx = dx;
+    if (ny) *ny = dy;
+}

@@ -1,45 +1,29 @@
 #ifndef ACCELEROMETER_H
 #define ACCELEROMETER_H
 
-#include "xil_types.h"
+#include <stdint.h>
 
-
+/* Estructura del acelerómetro */
 typedef struct {
-    // ADC channels
-    u8 adc_x_channel;
-    u8 adc_y_channel;
-    u8 adc_z_channel;
+    float offset_gx;
+    float offset_gy;
+    float offset_gz;
 
-    // GPIO control pins
-    u8 pin_enable;
-    u8 pin_selftest;
-
-    // Calibration
-    float offset_x;
-    float offset_y;
-    float offset_z;
-
-    float sensitivity;   // V/g
-    u8 calibrated;
+    float max_g;         // límite máximo de inclinación (ej: 0.6g)
+    float deadzone;      // zona muerta (ej: 0.05g)
+    float smoothing;     // factor de suavizado 0–1
 } Accelerometer;
 
-// Inicialización
+/* Inicialización */
 void Accelerometer_init(Accelerometer *acc);
 
-// Calibración real
+/* Calibración (mantener quieto el sensor durante 1 segundo) */
 void Accelerometer_calibrate(Accelerometer *acc, int samples);
 
-// Lectura cruda (Voltios)
-void Accelerometer_read_raw(Accelerometer *acc, float *vx, float *vy, float *vz);
-
-// Lectura normalizada (g)
+/* Lectura directa en g */
 void Accelerometer_read_g(Accelerometer *acc, float *gx, float *gy, float *gz);
 
-// Self test
-void Accelerometer_setSelfTest(Accelerometer *acc, u8 enable);
-
-// Power
-void Accelerometer_enable(Accelerometer *acc);
-void Accelerometer_disable(Accelerometer *acc);
+/* Conversión a movimiento (–1.0 → +1.0) */
+float Accelerometer_to_movement(Accelerometer *acc, float gvalue);
 
 #endif

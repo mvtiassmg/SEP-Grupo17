@@ -1,105 +1,61 @@
 #include "Accelerometer.h"
 #include "ADC.h"
-#include "xgpio.h"
-#include "sleep.h"
-#include "xparameters.h"
+#include "Delay.h"
 
-#define ACC_DEFAULT_SENSITIVITY 0.660f
+static inline float raw_to_g(int raw)
+{
+    float voltage = raw * (3.3f / 4096.0f);
+    float dv = voltage - 1.65f;
+    return dv / 0.3f; 
+}
 
-static XGpio gpio_acc;
-
-// -----------------------------------------------------------------------------
-// Inicialización del acelerómetro
-// -----------------------------------------------------------------------------
 void Accelerometer_init(Accelerometer *acc)
 {
-    XGpio_Initialize(&gpio_acc, XPAR_AXI_GPIO_ACCELEROMETER_DEVICE_ID);
-    XGpio_SetDataDirection(&gpio_acc, 1, 0x00);
+    acc->offset_gx = 0.0f;
+    acc->offset_gy = 0.0f;
+    acc->offset_gz = 0.0f;
 
-    acc->sensitivity = ACC_DEFAULT_SENSITIVITY;
-    acc->calibrated = 0;
-
-    Accelerometer_enable(acc);
-    Accelerometer_setSelfTest(acc, 0);
+    acc->max_g = 0.6f;
+    acc->deadzone = 0.05f;
+    acc->smoothing = 0.20f;
 }
 
-// -----------------------------------------------------------------------------
-// Power control
-// -----------------------------------------------------------------------------
-void Accelerometer_enable(Accelerometer *acc)
-{
-    u32 out = XGpio_DiscreteRead(&gpio_acc, 1);
-    out |= (1 << acc->pin_enable);
-    XGpio_DiscreteWrite(&gpio_acc, 1, out);
-}
-
-void Accelerometer_disable(Accelerometer *acc)
-{
-    u32 out = XGpio_DiscreteRead(&gpio_acc, 1);
-    out &= ~(1 << acc->pin_enable);
-    XGpio_DiscreteWrite(&gpio_acc, 1, out);
-}
-
-// -----------------------------------------------------------------------------
-// Self test
-// -----------------------------------------------------------------------------
-void Accelerometer_setSelfTest(Accelerometer *acc, u8 enable)
-{
-    u32 out = XGpio_DiscreteRead(&gpio_acc, 1);
-
-    if (enable)
-        out |= (1 << acc->pin_selftest);
-    else
-        out &= ~(1 << acc->pin_selftest);
-
-    XGpio_DiscreteWrite(&gpio_acc, 1, out);
-}
-
-// -----------------------------------------------------------------------------
-// Lectura cruda en voltios
-// -----------------------------------------------------------------------------
-void Accelerometer_read_raw(Accelerometer *acc, float *vx, float *vy, float *vz)
-{
-    *vx = ADC_ReadVoltage(acc->adc_x_channel);
-    *vy = ADC_ReadVoltage(acc->adc_y_channel);
-    *vz = ADC_ReadVoltage(acc->adc_z_channel);
-}
-
-// -----------------------------------------------------------------------------
-// Lectura en g (normalizada)
-// -----------------------------------------------------------------------------
-void Accelerometer_read_g(Accelerometer *acc, float *gx, float *gy, float *gz)
-{
-    float vx, vy, vz;
-    Accelerometer_read_raw(acc, &vx, &vy, &vz);
-
-    *gx = (vx - acc->offset_x) / acc->sensitivity;
-    *gy = (vy - acc->offset_y) / acc->sensitivity;
-    *gz = (vz - acc->offset_z) / acc->sensitivity;
-}
-
-// -----------------------------------------------------------------------------
-// Calibración real (promedio de N muestras)
-// -----------------------------------------------------------------------------
 void Accelerometer_calibrate(Accelerometer *acc, int samples)
 {
-    float sx = 0, sy = 0, sz = 0;
+    float sumx = 0, sumy = 0, sumz = 0;
 
-    for (int i = 0; i < samples; i++)
-    {
-        float vx, vy, vz;
-        Accelerometer_read_raw(acc, &vx, &vy, &vz);
+    for (int i = 0; i < samples; i++) {
+        sumx += raw_to_g(read_acx());
+        sumy += raw_to_g(read_acy());
+        sumz += raw_to_g(read_acz());
 
-        sx += vx;
-        sy += vy;
-        sz += vz;
-
-        usleep(5000);
+        Delay_ms(5);
     }
 
-    acc->offset_x = sx / samples;
-    acc->offset_y = sy / samples;
-    acc->offset_z = sz / samples;
+    acc->offset_gx = sumx / samples;
+    acc->offset_gy = sumy / samples;
+    acc->offset_gz = (sumz / samples) - 1.0f;
+}
 
-    acc->calibrated = 1;
+void Accelerometer_read_g(Accelerometer *acc, float *gx, float *gy, float *gz)
+{
+    if (gx) *gx = raw_to_g(read_acx()) - acc->offset_gx;
+    if (gy) *gy = raw_to_g(read_acy()) - acc->offset_gy;
+    if (gz) *gz = raw_to_g(read_acz()) - acc->offset_gz;
+}
+
+float Accelerometer_to_movement(Accelerometer *acc, float gvalue)
+{
+    if (gvalue > -acc->deadzone && gvalue < acc->deadzone)
+        return 0.0f;
+
+    if (gvalue >  acc->max_g) gvalue =  acc->max_g;
+    if (gvalue < -acc->max_g) gvalue = -acc->max_g;
+
+    float mv = gvalue / acc->max_g;
+
+    static float filtered = 0.0f;
+    filtered = filtered * (1.0f - acc->smoothing) + mv * acc->smoothing;
+
+    return filtered;
 }
