@@ -1,0 +1,82 @@
+#include "maze_gui.h"
+#include "LCD_GUI.h"
+#include "LCD_Driver.h"
+
+/* Ajusta estos valores si quieres mover o escalar el laberinto */
+#define MAZE_ORIGIN_X   10
+#define MAZE_ORIGIN_Y   20
+
+#define MAZE_CELL_W     16   // separación horizontal entre celdas
+#define MAZE_CELL_H     16   // separación vertical entre celdas
+
+void GUI_DrawMazeAndPlayer(const GameState *game)
+{
+    const Maze   *m = &game->maze;
+    const Player *p = &game->player;
+
+    for (int r = 0; r < m->rows; r++) {
+        for (int c = 0; c < m->cols; c++) {
+
+            int x = MAZE_ORIGIN_X + c * MAZE_CELL_W;
+            int y = MAZE_ORIGIN_Y + r * MAZE_CELL_H;
+
+            char text[3] = " ";   // 2 caracteres + fin de cadena
+            uint16_t fg = YELLOW;
+            uint16_t bg = GUI_BACKGROUND;
+
+            int isPlayer = (r == p->row && c == p->col);
+
+            if (isPlayer) {
+                text[0] = 'P';
+                text[1] = 'P';
+                fg      = YELLOW;
+            } else {
+                int cell = m->cells[r][c];
+                switch (cell) {
+                case CELL_WALL:
+                    text[0] = '#';
+                    text[1] = '#';
+                    fg      = BLUE;
+                    break;
+
+                case CELL_PATH:
+                    text[0] = '.';
+                    text[1] = '.';
+                    fg      = WHITE;
+                    break;
+
+                case CELL_TRAP:
+                    text[0] = 'X';
+                    text[1] = 'X';
+                    fg      = RED;
+                    break;
+
+                case CELL_EXIT:
+                    text[0] = 'E';
+                    text[1] = 'E';
+                    fg      = GREEN;
+                    break;
+
+                default:
+                    text[0] = '?';
+                    text[1] = '?';
+                    fg      = WHITE;
+                    break;
+                }
+            }
+
+            // Borramos primero la celda
+            GUI_DisString_EN(x, y, "  ", &Font16, GUI_BACKGROUND, GUI_BACKGROUND);
+            // Dibujamos el contenido
+            GUI_DisString_EN(x, y, text, &Font16, bg, fg);
+        }
+    }
+
+    // Opcional: mostrar vidas y score debajo del laberinto
+    char info[32];
+    sprintf(info, "Vidas:%d  Score:%d", p->lives, p->score);
+    GUI_DisString_EN(MAZE_ORIGIN_X,
+                     MAZE_ORIGIN_Y + m->rows * MAZE_CELL_H + 5,
+                     info, &Font12, GUI_BACKGROUND, YELLOW);
+}
+

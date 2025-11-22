@@ -1,0 +1,120 @@
+#include "maze_gui.h"
+#include "maze_game.h"
+#include "LCD_GUI.h"
+#include "LCD_Driver.h"
+#include <stdio.h>
+
+// Ajuste de macros para compatibilidad
+#if defined(DRAW_FILL_FULL) && !defined(DRAW_FULL)
+    #define DRAW_FULL  DRAW_FILL_FULL
+#endif
+#if defined(DRAW_FILL_EMPTY) && !defined(DRAW_EMPTY)
+    #define DRAW_EMPTY DRAW_FILL_EMPTY
+#endif
+
+// Configuración visual del laberinto (8x10 celdas)
+#define MAZE_START_X   4
+#define MAZE_START_Y   20
+#define MAZE_TILE_SIZE 12    // 12x12 píxeles por celda
+
+static void GUI_DrawMazeCell(const Maze *m, int row, int col)
+{
+    int x0 = MAZE_START_X + col * MAZE_TILE_SIZE;
+    int y0 = MAZE_START_Y + row * MAZE_TILE_SIZE;
+    int x1 = x0 + MAZE_TILE_SIZE - 1;
+    int y1 = y0 + MAZE_TILE_SIZE - 1;
+
+    uint16_t color;
+
+    switch (m->cells[row][col]) {
+    case CELL_WALL:
+        color = BLUE;
+        break;
+    case CELL_TRAP:
+        color = RED;
+        break;
+    case CELL_EXIT:
+        color = GREEN;
+        break;
+    case CELL_PATH:
+    default:
+        color = BLACK; // Fondo negro para el camino
+        break;
+    }
+
+    // Dibujar bloque sólido
+    GUI_DrawRectangle(x0, y0, x1, y1, color, DRAW_FULL, DOT_PIXEL_1X1);
+
+    // Opcional: Dibujar rejilla suave si es camino, o borde si es muro
+    if (m->cells[row][col] == CELL_WALL) {
+        GUI_DrawRectangle(x0, y0, x1, y1, WHITE, DRAW_EMPTY, DOT_PIXEL_1X1);
+    }
+}
+
+void GUI_DrawMazeAndPlayer(const GameState *game)
+{
+    static int firstTime = 1;
+    static int prevRow = -1;
+    static int prevCol = -1;
+    static int prevLives = -1;
+    static int prevGameState = -99;
+
+    const Maze   *m = &game->maze;
+    const Player *p = &game->player;
+
+    // 1. Dibujado inicial completo
+    if (firstTime) {
+        LCD_Clear(GUI_BACKGROUND); // Limpiar pantalla completa al inicio
+
+        // Dibujar todo el laberinto estático
+        for (int r = 0; r < m->rows; r++) {
+            for (int c = 0; c < m->cols; c++) {
+                GUI_DrawMazeCell(m, r, c);
+            }
+        }
+
+        // Dibujar etiquetas estáticas
+        GUI_DisString_EN(5, 5, "Maze Game", &Font12, GUI_BACKGROUND, YELLOW);
+
+        firstTime = 0;
+        prevRow = p->row;
+        prevCol = p->col;
+    }
+
+    // 2. Borrar la posición anterior del jugador (restaurar lo que había en el laberinto)
+    // Solo si la posición ha cambiado o es necesaria una actualización
+    if (prevRow != p->row || prevCol != p->col) {
+        if (prevRow >= 0 && prevCol >= 0 && prevRow < m->rows && prevCol < m->cols) {
+            GUI_DrawMazeCell(m, prevRow, prevCol);
+        }
+    }
+
+    // 3. Dibujar al jugador en la nueva posición
+    int x0 = MAZE_START_X + p->col * MAZE_TILE_SIZE;
+    int y0 = MAZE_START_Y + p->row * MAZE_TILE_SIZE;
+    int x1 = x0 + MAZE_TILE_SIZE - 1;
+    int y1 = y0 + MAZE_TILE_SIZE - 1;
+    int margin = 2;
+
+    GUI_DrawRectangle(x0 + margin, y0 + margin, x1 - margin, y1 - margin, YELLOW, DRAW_FULL, DOT_PIXEL_1X1);
+
+    // 4. Actualizar HUD (Vidas y Estado) solo si cambiaron
+    if (p->lives != prevLives || game->state != prevGameState) {
+        char info[30];
+        sprintf(info, "Vidas: %d  ", p->lives); // Espacios extra para borrar números antiguos
+        GUI_DisString_EN(5, 118, info, &Font12, GUI_BACKGROUND, CYAN);
+
+        if (game->state == GAME_WIN) {
+            GUI_DisString_EN(60, 118, "GANASTE!", &Font12, GUI_BACKGROUND, GREEN);
+        } else if (game->state == GAME_LOSE) {
+            GUI_DisString_EN(60, 118, "FIN JUEGO", &Font12, GUI_BACKGROUND, RED);
+        }
+
+        prevLives = p->lives;
+        prevGameState = game->state;
+    }
+
+    // Guardar estado
+    prevRow = p->row;
+    prevCol = p->col;
+}

@@ -1,0 +1,12 @@
+#ifndef MAZE_GUI_H
+#define MAZE_GUI_H
+
+#include "maze_game.h"
+
+/* Dibuja el juego */
+void GUI_DrawMazeAndPlayer(const GameState *game);
+
+/* Resetea la bandera de "primera vez" para forzar un redibujado completo (ej: cambio de nivel) */
+void GUI_ResetDrawState(void);
+
+#endif

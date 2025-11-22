@@ -1,71 +1,108 @@
 #include "maze_game.h"
-#include <stdio.h>   // solo necesario para Maze_DebugPrint
-
-/* ================== IMPLEMENTACIÓN ================== */
+#include <stdio.h>
 
 void Maze_InitLevel1(GameState *game)
 {
     Maze *m = &game->maze;
     Player *p = &game->player;
 
-    m->rows = 6;
-    m->cols = 6;
+    // Laberinto 10x10
+    m->rows = 10;
+    m->cols = 10;
 
-    // Primero dejamos todo como camino
+    // Llenar TODO con muros
     for (int r = 0; r < m->rows; r++) {
         for (int c = 0; c < m->cols; c++) {
-            m->cells[r][c] = CELL_PATH;
+            m->cells[r][c] = CELL_WALL;
         }
     }
 
-    // Creamos algunos muros (basado en tu ejemplo 6x6)
-    m->cells[0][3] = CELL_WALL;
-    m->cells[0][4] = CELL_WALL;
-    m->cells[0][5] = CELL_WALL;
+    /* Diseño del Nivel 1 (Tu diseño) */
 
-    m->cells[1][1] = CELL_WALL;
-    m->cells[1][2] = CELL_WALL;
+    // Caminos básicos
+    for (int c = 0; c <= 2; c++) m->cells[0][c] = CELL_PATH;
+    for (int r = 1; r <= 2; r++) m->cells[r][2] = CELL_PATH;
+    for (int c = 3; c <= 4; c++) m->cells[2][c] = CELL_PATH;
+    for (int c = 4; c <= 6; c++) m->cells[1][c] = CELL_PATH;
+    for (int r = 2; r <= 4; r++) m->cells[r][6] = CELL_PATH;
+    for (int r = 4; r <= 7; r++) m->cells[r][5] = CELL_PATH;
+    for (int c = 5; c <= 7; c++) m->cells[7][c] = CELL_PATH;
+    for (int r = 8; r <= 9; r++) m->cells[r][7] = CELL_PATH;
+    m->cells[9][8] = CELL_PATH;
 
-    m->cells[2][2] = CELL_WALL;
-    m->cells[2][4] = CELL_WALL;
+    // Salida
+    m->exitRow = 9;
+    m->exitCol = 9;
+    m->cells[9][9] = CELL_EXIT;
 
-    m->cells[3][4] = CELL_WALL;
+    /* Trampas */
+    m->cells[1][1] = CELL_PATH;
+    m->cells[1][0] = CELL_TRAP;
+    m->cells[1][3] = CELL_TRAP;
+    m->cells[4][7] = CELL_PATH;
+    m->cells[4][8] = CELL_PATH;
+    m->cells[4][9] = CELL_TRAP;
+    m->cells[6][7] = CELL_PATH;
+    m->cells[5][7] = CELL_TRAP;
+    m->cells[8][6] = CELL_PATH;
 
-    m->cells[4][0] = CELL_WALL;
-    m->cells[4][2] = CELL_WALL;
-    m->cells[4][4] = CELL_WALL;
-
-    m->cells[5][0] = CELL_WALL;
-    m->cells[5][2] = CELL_WALL;
-    m->cells[5][4] = CELL_WALL;
-
-    // Opcional: definimos algunas trampas
-    m->cells[3][1] = CELL_TRAP;
-    m->cells[4][3] = CELL_TRAP;
-
-    // Definimos inicio y salida
+    // Inicio
     m->startRow = 0;
     m->startCol = 0;
 
-    m->exitRow  = 5;
-    m->exitCol  = 5;
-    m->cells[m->exitRow][m->exitCol] = CELL_EXIT;
-
-    // Inicializamos jugador
     p->row   = m->startRow;
     p->col   = m->startCol;
-    p->lives = 3;   // por ejemplo, 3 vidas
+    p->lives = 3;
     p->score = 0;
 
-    // Estado del juego
+    game->state = GAME_RUNNING;
+}
+
+void Maze_InitLevel2(GameState *game)
+{
+    Maze *m = &game->maze;
+    Player *p = &game->player;
+
+    m->rows = 10;
+    m->cols = 10;
+
+    for (int r = 0; r < m->rows; r++) {
+        for (int c = 0; c < m->cols; c++) m->cells[r][c] = CELL_WALL;
+    }
+
+    // Espiral hacia el centro (Diseño corregido y soluble)
+    for(int c=0; c<=9; c++) m->cells[0][c] = CELL_PATH;
+    for(int r=0; r<=9; r++) m->cells[r][9] = CELL_PATH;
+    for(int c=0; c<=9; c++) m->cells[9][c] = CELL_PATH;
+    for(int r=2; r<=9; r++) m->cells[r][0] = CELL_PATH;
+
+    for(int c=0; c<=7; c++) m->cells[2][c] = CELL_PATH;
+    for(int r=2; r<=7; r++) m->cells[r][7] = CELL_PATH;
+    for(int c=2; c<=7; c++) m->cells[7][c] = CELL_PATH;
+    for(int r=4; r<=7; r++) m->cells[r][2] = CELL_PATH;
+
+    m->cells[4][2] = CELL_PATH;
+    m->cells[4][3] = CELL_PATH;
+    m->cells[4][4] = CELL_PATH;
+
+    m->exitRow = 4; m->exitCol = 4;
+    m->cells[4][4] = CELL_EXIT;
+
+    m->cells[5][5] = CELL_TRAP;
+    m->cells[1][5] = CELL_TRAP;
+
+    m->startRow = 0;
+    m->startCol = 0;
+
+    p->row = m->startRow;
+    p->col = m->startCol;
+
     game->state = GAME_RUNNING;
 }
 
 int Game_TryMove(GameState *game, char dir)
 {
-    if (game->state != GAME_RUNNING) {
-        return MOVE_INVALID;   // ya terminó el juego
-    }
+    if (game->state != GAME_RUNNING) return MOVE_INVALID;
 
     Maze   *m = &game->maze;
     Player *p = &game->player;
@@ -73,55 +110,29 @@ int Game_TryMove(GameState *game, char dir)
     int newRow = p->row;
     int newCol = p->col;
 
-    // Calculamos la nueva posición según la dirección
     switch (dir) {
-    case 'u':
-    case 'U':
-        newRow--;
-        break;
-    case 'd':
-    case 'D':
-        newRow++;
-        break;
-    case 'l':
-    case 'L':
-        newCol--;
-        break;
-    case 'r':
-    case 'R':
-        newCol++;
-        break;
-    default:
-        // Dirección inválida
-        return MOVE_INVALID;
+    case 'u': case 'U': newRow--; break;
+    case 'd': case 'D': newRow++; break;
+    case 'l': case 'L': newCol--; break;
+    case 'r': case 'R': newCol++; break;
+    default: return MOVE_INVALID;
     }
 
-    // Verificamos límites de la matriz
-    if (newRow < 0 || newRow >= m->rows ||
-        newCol < 0 || newCol >= m->cols) {
-        // Fuera del laberinto -> movimiento inválido
+    if (newRow < 0 || newRow >= m->rows || newCol < 0 || newCol >= m->cols)
         return MOVE_INVALID;
-    }
 
     int cell = m->cells[newRow][newCol];
 
-    // Si es muro, no se mueve
-    if (cell == CELL_WALL) {
-        return MOVE_INVALID;
-    }
+    if (cell == CELL_WALL) return MOVE_INVALID;
 
-    // Actualizamos posición (se puede pisar PATH, TRAP o EXIT)
     p->row = newRow;
     p->col = newCol;
 
-    // Lógica según el tipo de celda
     if (cell == CELL_TRAP) {
-        // Pierde una vida y vuelve al inicio
         p->lives--;
         if (p->lives <= 0) {
-            game->state = GAME_LOSE;
+            game->state = GAME_LOSE; // ¡AQUÍ SE ESTABLECE EL ESTADO DE DERROTA!
         } else {
-            // Vuelve al inicio si aún tiene vidas
             p->row = m->startRow;
             p->col = m->startCol;
         }
@@ -129,55 +140,16 @@ int Game_TryMove(GameState *game, char dir)
     }
 
     if (cell == CELL_EXIT) {
-        // Llegó a la salida
         game->state = GAME_WIN;
-        // Puedes sumar puntaje extra aquí
         p->score += 100;
         return MOVE_EXIT;
     }
 
-    // Camino normal
-    p->score += 1;  // por ejemplo, 1 punto por paso
+    p->score++;
     return MOVE_OK;
 }
 
 int Game_HasFinished(const GameState *game)
 {
     return game->state;
-}
-
-void Maze_DebugPrint(const GameState *game)
-{
-    const Maze   *m = &game->maze;
-    const Player *p = &game->player;
-
-    for (int r = 0; r < m->rows; r++) {
-        for (int c = 0; c < m->cols; c++) {
-
-            if (r == p->row && c == p->col) {
-                printf("P ");
-                continue;
-            }
-
-            switch (m->cells[r][c]) {
-            case CELL_WALL:
-                printf("# ");
-                break;
-            case CELL_PATH:
-                printf(". ");
-                break;
-            case CELL_TRAP:
-                printf("X ");
-                break;
-            case CELL_EXIT:
-                printf("E ");
-                break;
-            default:
-                printf("? ");
-                break;
-            }
-        }
-        printf("\n");
-    }
-    printf("Lives: %d   Score: %d\n\n", p->lives, p->score);
 }

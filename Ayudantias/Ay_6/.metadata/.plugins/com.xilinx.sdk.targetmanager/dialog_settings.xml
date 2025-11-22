@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="Auto Detect" key="ay_6_sw-device"/>
+	<item value="_ide/bitstream/design_1_wrapper.mmi" key="ay_6_sw-bmmFile"/>
+	<item value="false" key="ay_6_sw-partial_bit"/>
+	<item value="{&quot;cables&quot;:[{&quot;name&quot;:&quot;Digilent Zybo Z7 210351B3FC05A&quot;,&quot;indexContextMap&quot;:{&quot;2&quot;:&quot;jsn-Zybo Z7-210351B3FC05A-4ba00477-0&quot;,&quot;3&quot;:&quot;jsn-Zybo Z7-210351B3FC05A-13722093-0&quot;}}]}" key="devices_info_Local"/>
+	<item value="_ide/bitstream/design_1_wrapper.bit" key="ay_6_sw-bitFile"/>
+	<item value="Local" key="ay_6_sw-target"/>
+	<item value="ay_6_sw" key="programfpga.sdxproject"/>
+	<item value="bootloop" key="ay_6_sw-microblaze_0-initElf"/>
+	<item value="false" key="ay_6_sw-skip_rev_check"/>
+</section>

@@ -1,0 +1,128 @@
+#include <stdio.h>
+#include <sleep.h>
+#include <time.h>
+#include <unistd.h>
+#include <math.h>          // para fabsf
+
+#include "platform.h"
+#include "xil_printf.h"
+#include "xparameters.h"
+#include "xgpio.h"
+#include "xstatus.h"
+#include "Delay.h"
+#include "LCD_SPI.h"
+#include "LCD_Driver.h"
+#include "LCD_GUI.h"
+#include "ADC.h"
+#include "I2C.h"
+
+#include "maze_game.h"
+#include "maze_gui.h"      // IMPORTANTE: Usar la librería de GUI dedicada
+#include "Accelerometer.h"
+
+extern XGpio gpio0;
+extern XSpi  SpiInstance;   /* The instance of the SPI device (LCD) */
+extern XSpi  SpiInstance1;  /* The instance of the SPI device (ADC) */
+extern const unsigned char font[];
+
+/* Control del movimiento */
+#define LOOP_DELAY_MS        40      // tiempo entre iteraciones del while(1)
+#define MOVE_COOLDOWN_TICKS  5       // Ligeramente aumentado para evitar rebotes
+#define TILT_THRESHOLD       0.20f   // umbral de inclinación en g
+
+int main()
+{
+    int Status;
+
+    init_platform();
+
+    /* Initialize the GPIO 0 driver */
+    Status = XGpio_Initialize(&gpio0, XPAR_AXI_GPIO_0_DEVICE_ID);
+    if (Status != XST_SUCCESS) return XST_FAILURE;
+
+    /* Set up the AXI SPI Controller 0 (Screen) */
+    Status = XSpi_Init(&SpiInstance, SPI_DEVICE_ID);
+    if (Status != XST_SUCCESS) return XST_FAILURE;
+
+    /* Set up the AXI SPI Controller 1 (ADC) */
+    Status = init_adc(&SpiInstance1, SPI_DEVICE_ID_1);
+    if (Status != XST_SUCCESS) return XST_FAILURE;
+
+    /* Set up the AXI IIC Controller 0 */
+    Status = init_IIC();
+    if (Status != XST_SUCCESS) return XST_FAILURE;
+
+    xil_printf("Iniciando Laberinto...\r\n");
+
+    /* Init screen */
+    LCD_Init(SCAN_DIR_DFT);
+    LCD_Clear(GUI_BACKGROUND);
+
+    /* Intro */
+    GUI_INTRO();
+    delay_ms(1000);
+    LCD_Clear(GUI_BACKGROUND);
+
+    /* Inicializar acelerómetro */
+    Accelerometer acc;
+    Accelerometer_init(&acc);
+
+    GUI_DisString_EN(10, 50, "Calibrando...", &Font12, GUI_BACKGROUND, CYAN);
+    Accelerometer_calibrate(&acc, 100);
+    LCD_Clear(GUI_BACKGROUND);
+
+    /* Inicializar juego */
+    GameState game;
+    Maze_InitLevel1(&game);
+
+    /* Dibujado inicial usando la versión de BLOQUES (maze_gui.c) */
+    GUI_DrawMazeAndPlayer(&game);
+
+    int moveCooldown = 0;
+
+    while (1) {
+        float gx, gy, gz;
+        Accelerometer_read_g(&acc, &gx, &gy, &gz);
+
+        float mvx = Accelerometer_to_movement(&acc, gx);
+        float mvy = Accelerometer_to_movement(&acc, gy);
+
+        char dir = 0;
+
+        // Lógica de control
+        if (fabsf(mvx) > fabsf(mvy)) {
+            if (mvx > TILT_THRESHOLD) dir = 'd';      // Abajo
+            else if (mvx < -TILT_THRESHOLD) dir = 'u'; // Arriba
+        } else {
+            if (mvy > TILT_THRESHOLD) dir = 'r';      // Derecha
+            else if (mvy < -TILT_THRESHOLD) dir = 'l'; // Izquierda
+        }
+
+        if (moveCooldown > 0) {
+            moveCooldown--;
+        }
+
+        if (dir != 0 && moveCooldown == 0 && Game_HasFinished(&game) == GAME_RUNNING) {
+            // Intentar mover
+            int result = Game_TryMove(&game, dir);
+
+            // Si el movimiento fue válido o hubo un evento (trampa/salida), redibujar
+            if (result != MOVE_INVALID) {
+                GUI_DrawMazeAndPlayer(&game);
+                moveCooldown = MOVE_COOLDOWN_TICKS;
+
+                xil_printf("Movimiento: %c -> Pos: %d,%d\r\n", dir, game.player.row, game.player.col);
+            }
+        }
+
+        // Mostrar estado final si terminó
+        if (Game_HasFinished(&game) != GAME_RUNNING) {
+             GUI_DrawMazeAndPlayer(&game); // Asegura que se dibuje el mensaje de fin
+             // Aquí podrías añadir lógica para reiniciar con un botón
+        }
+
+        delay_ms(LOOP_DELAY_MS);
+    }
+
+    return 0;
+}

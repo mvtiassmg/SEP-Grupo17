@@ -40,7 +40,7 @@ main-build: SW_base_booster.elf secondary-outputs
 SW_base_booster.elf: $(OBJS) ../src/lscript.ld $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: ARM v7 gcc linker'
-	arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -LC:/Users/tomas/Downloads/Proyecto_Base_Booster/HW_base_booster/export/HW_base_booster/sw/HW_base_booster/standalone_domain/bsplib/lib -o "SW_base_booster.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -LC:/Users/tomas/Downloads/SEP-Grupo17/Proyecto_2/HW_base_booster/export/HW_base_booster/sw/HW_base_booster/standalone_domain/bsplib/lib -o "SW_base_booster.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

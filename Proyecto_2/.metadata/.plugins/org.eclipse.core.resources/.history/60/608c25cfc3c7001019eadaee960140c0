@@ -1,0 +1,71 @@
+#include "maze_gui.h"
+#include "LCD_GUI.h"
+#include "LCD_Driver.h"
+
+// Posición del laberinto en pantalla (ajústala si quieres moverlo)
+#define MAZE_ORIGIN_X   5
+#define MAZE_ORIGIN_Y   20
+
+// Tamaño "aprox" de cada celda en píxeles según la fuente
+// Ajusta estos valores si ves que se montan o quedan separados.
+#define MAZE_CELL_W     8   // ancho por columna
+#define MAZE_CELL_H     12  // alto por fila
+
+void GUI_DrawMazeAndPlayer(const GameState *game)
+{
+    const Maze   *m = &game->maze;
+    const Player *p = &game->player;
+
+    for (int r = 0; r < m->rows; r++) {
+        for (int c = 0; c < m->cols; c++) {
+
+            int x = MAZE_ORIGIN_X + c * MAZE_CELL_W;
+            int y = MAZE_ORIGIN_Y + r * MAZE_CELL_H;
+
+            char ch[2] = {' ', '\0'};
+            uint16_t fg = YELLOW;        // color de texto
+            uint16_t bg = GUI_BACKGROUND; // fondo
+
+            // Si en esta celda está el jugador, dibujamos la P
+            if (r == p->row && c == p->col) {
+                ch[0] = 'P';
+                fg    = YELLOW;  // jugador en amarillo
+            } else {
+                // Si no, dibujamos según el tipo de celda
+                int cell = m->cells[r][c];
+                switch (cell) {
+                case CELL_WALL:
+                    ch[0] = '#';
+                    fg    = BLUE;
+                    break;
+
+                case CELL_PATH:
+                    ch[0] = '.';
+                    fg    = WHITE;
+                    break;
+
+                case CELL_TRAP:
+                    ch[0] = 'X';
+                    fg    = CYAN;
+                    break;
+
+                case CELL_EXIT:
+                    ch[0] = 'E';
+                    fg    = WHITE;
+                    break;
+
+                default:
+                    ch[0] = '?';
+                    fg    = WHITE;
+                    break;
+                }
+            }
+
+            // Borramos primero la celda (pintamos espacio con fondo)
+            GUI_DisString_EN(x, y, " ", &Font12, GUI_BACKGROUND, GUI_BACKGROUND);
+
+            // Ahora dibujamos el carácter de la celda
+            GUI_DisString_EN(x, y, ch, &Font12, bg, fg);
+        }
+    }
+}

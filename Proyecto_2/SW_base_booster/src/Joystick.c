@@ -18,7 +18,7 @@ void Joystick_calibrate(Joystick *js, int samples)
     for (int i = 0; i < samples; i++) {
         sumx += read_joyx();
         sumy += read_joyy();
-        Delay_ms(5);
+        delay_ms(5);
     }
 
     js->center_x = sumx / samples;

@@ -1,0 +1,172 @@
+#include <stdio.h>
+#include <sleep.h>
+#include <time.h>
+#include <unistd.h>
+
+#include "platform.h"
+#include "xil_printf.h"
+#include "xparameters.h"
+#include "xgpio.h"
+#include "xstatus.h"
+#include "xspi.h"
+#include "Delay.h"
+#include "LCD_SPI.h"
+#include "LCD_Driver.h"
+#include "LCD_GUI.h"
+#include "ADC.h"
+#include "I2C.h"
+
+#include "maze_game.h"
+#include "maze_gui.h"
+#include "Accelerometer.h"
+
+extern XGpio gpio0;
+extern XSpi  SpiInstance;     /* The instance of the SPI device */
+extern XSpi  SpiInstance1;
+extern const unsigned char font[] ;
+
+#define BACKGROUND  WHITE
+#define FOREGROUND  BLUE
+#define DELAY       1000
+
+int main()
+{
+    int Status;
+
+    // Initialize the UART, caches, etc.
+    init_platform();
+
+    /* Initialize the GPIO 0 driver */
+    Status = XGpio_Initialize(&gpio0, XPAR_AXI_GPIO_0_DEVICE_ID);
+    if (Status != XST_SUCCESS) {
+        xil_printf("Gpio 0 Initialization Failed\r\n");
+        return XST_FAILURE;
+    }
+
+    // Set up the AXI SPI Controller 0 (Screen)
+    Status = XSpi_Init(&SpiInstance, SPI_DEVICE_ID);
+    if (Status != XST_SUCCESS) {
+        xil_printf("SPI Mode Failed\r\n");
+        return XST_FAILURE;
+    }
+
+    // Set up the AXI SPI Controller 1 (Joystick(x,y), accelerometer, potentiometer, mic)
+    Status = init_adc(&SpiInstance1, SPI_DEVICE_ID_1);
+    if (Status != XST_SUCCESS) {
+        xil_printf("SPI-ADC Mode Failed\r\n");
+        return XST_FAILURE;
+    }
+
+    // Set up the AXI IIC Controller 0 (temperature sensor, light sensor)
+    Status = init_IIC();
+    if (Status != XST_SUCCESS) {
+        xil_printf("IIC Mode Failed\r\n");
+        return XST_FAILURE;
+    }
+
+    // Write through UART to PC
+    xil_printf("TFT initialized \r\n");
+    xil_printf("**********Init LCD**********\r\n");
+
+    // Init screen
+    LCD_SCAN_DIR LCD_ScanDir = SCAN_DIR_DFT; // SCAN_DIR_DFT = D2U_L2R
+    LCD_Init(LCD_ScanDir);
+
+    // Default intro image from screen company
+    xil_printf("LCD Show \r\n");
+    GUI_Show();
+    delay_ms(500);
+    LCD_Clear(GUI_BACKGROUND);
+
+    // Default intro image given by SEP course.
+    GUI_INTRO();
+    delay_ms(500);
+    LCD_Clear(GUI_BACKGROUND);
+
+    // ================== INICIO JUEGO DEL LABERINTO ==================
+    GameState game;
+    Accelerometer acc;
+
+    Maze_InitLevel1(&game);
+    Accelerometer_init(&acc);
+
+    // Mensaje de calibración
+    GUI_DisString_EN(10, 0, "Calibrando...", &Font16, GUI_BACKGROUND, CYAN);
+    // 200 muestras ~ 1s si el delay es 5ms en Accelerometer_calibrate
+    Accelerometer_calibrate(&acc, 200);
+    // Borramos mensaje
+    GUI_DisString_EN(10, 0, "             ", &Font16, GUI_BACKGROUND, GUI_BACKGROUND);
+
+    // Dibujamos el laberinto inicial
+    GUI_DrawMazeAndPlayer(&game);
+
+    // Acumuladores para movimiento suave
+    float accX = 0.0f;
+    float accY = 0.0f;
+
+    // Parámetros de velocidad (ajustables)
+    const float steps_per_sec = 4.0f;   // pasos por segundo cuando g = max_g
+    const float dt           = 0.05f;   // 50 ms → igual al delay_ms(50)
+
+    while (1) {
+
+        float gx, gy, gz;
+        Accelerometer_read_g(&acc, &gx, &gy, &gz);
+
+        // Convertimos a -1..+1 según tus parámetros (max_g, deadzone, etc.)
+        float mvx = Accelerometer_to_movement(&acc, gx);
+        float mvy = Accelerometer_to_movement(&acc, gy);
+
+        // Dependiendo de cómo esté montada la placa puede que quieras invertir
+        // alguno de los ejes. Si se mueve al revés, cambia el signo:
+        // mvx = -mvx;
+        // mvy = -mvy;
+
+        // Integramos movimiento
+        accX += mvx * steps_per_sec * dt;
+        accY += mvy * steps_per_sec * dt;
+
+        int moved = 0;
+
+        // Mientras el acumulador supere 1 paso, movemos una casilla
+        while (accX > 1.0f) {
+            Game_TryMove(&game, 'R');  // derecha
+            accX -= 1.0f;
+            moved = 1;
+        }
+        while (accX < -1.0f) {
+            Game_TryMove(&game, 'L');  // izquierda
+            accX += 1.0f;
+            moved = 1;
+        }
+        while (accY > 1.0f) {
+            Game_TryMove(&game, 'D');  // abajo
+            accY -= 1.0f;
+            moved = 1;
+        }
+        while (accY < -1.0f) {
+            Game_TryMove(&game, 'U');  // arriba
+            accY += 1.0f;
+            moved = 1;
+        }
+
+        if (moved) {
+            GUI_DrawMazeAndPlayer(&game);
+        }
+
+        // Mostrar estado final si gana o pierde
+        int state = Game_HasFinished(&game);
+        if (state == GAME_WIN) {
+            GUI_DisString_EN(10, 0, "GANASTE!", &Font16, GUI_BACKGROUND, GREEN);
+        } else if (state == GAME_LOSE) {
+            GUI_DisString_EN(10, 0, "PERDISTE", &Font16, GUI_BACKGROUND, RED);
+        }
+
+        // (Opcional) debug por UART:
+         xil_printf("gx=%.2f gy=%.2f mvx=%.2f mvy=%.2f\r\n", gx, gy, mvx, mvy);
+
+        delay_ms(50);
+    }
+
+    return 0;
+}

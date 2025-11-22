@@ -19,6 +19,10 @@ ay_6
                             sdx:bif="ay_6/boot/ay_6.bif"
                             sdx:readme="ay_6/boot/generic.readme"
                             />
+                <sdx:image sdx:name="standalone_domain"
+                            sdx:bif="ay_6/boot/ay_6.bif"
+                            sdx:readme="ay_6/boot/generic.readme"
+                            />
             </sdx:bootImages>
             <sdx:processorGroup sdx:name="standalone_domain"
                                 sdx:displayName="standalone on microblaze_0"

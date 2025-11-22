@@ -1,0 +1,277 @@
+#include <stdio.h>
+#include <sleep.h>
+#include <time.h>
+#include <unistd.h>
+#include <math.h>          // para fabsf
+
+#include "platform.h"
+#include "xil_printf.h"
+#include "xparameters.h"
+#include "xgpio.h"
+#include "xstatus.h"
+#include "Delay.h"
+#include "LCD_SPI.h"
+#include "LCD_Driver.h"
+#include "LCD_GUI.h"
+#include "ADC.h"
+#include "I2C.h"
+
+#include "maze_game.h"
+#include "Accelerometer.h"
+
+extern XGpio gpio0;
+extern XSpi  SpiInstance;   /* The instance of the SPI device (LCD) */
+extern XSpi  SpiInstance1;  /* The instance of the SPI device (ADC) */
+extern const unsigned char font[];
+
+/* Colores y ajustes de la pantalla */
+#define LCD_SIZE_PIXELS      128     // 128x128 según datasheet del booster
+#define MAZE_START_X         0       // esquina superior izquierda del laberinto
+#define MAZE_START_Y         0
+
+/* Para el dibujo con texto */
+#define CELL_CHAR_WIDTH      8       // aprox. ancho de un carácter Font16
+#define CELL_CHAR_HEIGHT     16      // alto de Font16
+
+/* Control del movimiento */
+#define LOOP_DELAY_MS        40      // tiempo entre iteraciones del while(1)
+#define MOVE_COOLDOWN_TICKS  4       // ~ 4 * 40 ms = 160 ms entre pasos
+#define TILT_THRESHOLD       0.25f   // umbral de inclinación en g
+
+/* ====================== FUNCIONES DE DIBUJO ====================== */
+
+/**
+ * Dibuja el laberinto completo en la pantalla usando caracteres grandes (Font16).
+ * Cada celda se dibuja como dos caracteres, para que el laberinto ocupe más ancho.
+ * Luego se dibuja el jugador como una 'P' amarilla encima.
+ */
+static void GUI_DrawMazeAndPlayer(const GameState *game)
+{
+    const Maze   *m = &game->maze;
+    const Player *p = &game->player;
+
+    /* Cada fila se representa como una cadena de hasta 2*cols caracteres */
+    char line[2 * MAZE_MAX_COLS + 1];
+
+    for (int r = 0; r < m->rows; r++) {
+        int idx = 0;
+        for (int c = 0; c < m->cols; c++) {
+            int cell = m->cells[r][c];
+            char ch;
+
+            switch (cell) {
+            case CELL_WALL:  ch = '#'; break;
+            case CELL_TRAP:  ch = 'X'; break;
+            case CELL_EXIT:  ch = 'E'; break;
+            case CELL_PATH:
+            default:         ch = '.'; break;
+            }
+
+            /* duplicamos el carácter para que cada celda sea más ancha */
+            line[idx++] = ch;
+            line[idx++] = ch;
+        }
+        line[idx] = '\0';
+
+        /* Dibujamos la fila del laberinto en pantalla */
+        GUI_DisString_EN(
+            MAZE_START_X,
+            MAZE_START_Y + r * CELL_CHAR_HEIGHT,
+            line,
+            &Font16,
+            GUI_BACKGROUND,
+            CYAN       // color del laberinto
+        );
+    }
+
+    /* Ahora dibujamos el jugador como 'P' en amarillo encima del laberinto */
+    char pStr[2] = { 'P', '\0' };
+
+    int px = MAZE_START_X + (p->col * 2) * CELL_CHAR_WIDTH;
+    int py = MAZE_START_Y + (p->row)      * CELL_CHAR_HEIGHT;
+
+    GUI_DisString_EN(
+        px,
+        py,
+        pStr,
+        &Font16,
+        GUI_BACKGROUND,
+        YELLOW    // jugador bien visible
+    );
+
+    /* Mostrar vidas y estado del juego en la parte baja de la pantalla */
+    char info[32];
+
+    // Vidas
+    sprintf(info, "Vidas: %d", p->lives);
+    GUI_DisString_EN(
+        0,
+        LCD_SIZE_PIXELS - 2 * CELL_CHAR_HEIGHT,
+        info,
+        &Font12,
+        GUI_BACKGROUND,
+        CYAN
+    );
+
+    // Estado
+    if (game->state == GAME_WIN) {
+        GUI_DisString_EN(
+            0,
+            LCD_SIZE_PIXELS - CELL_CHAR_HEIGHT,
+            "GANASTE!",
+            &Font12,
+            GUI_BACKGROUND,
+            YELLOW
+        );
+    } else if (game->state == GAME_LOSE) {
+        GUI_DisString_EN(
+            0,
+            LCD_SIZE_PIXELS - CELL_CHAR_HEIGHT,
+            "GAME OVER",
+            &Font12,
+            GUI_BACKGROUND,
+            YELLOW
+        );
+    } else {
+        GUI_DisString_EN(
+            0,
+            LCD_SIZE_PIXELS - CELL_CHAR_HEIGHT,
+            "Jugando...",
+            &Font12,
+            GUI_BACKGROUND,
+            CYAN
+        );
+    }
+}
+
+/* ====================== PROGRAMA PRINCIPAL ====================== */
+
+int main()
+{
+    int Status;
+
+    // Inicializar UART, memoria, etc.
+    init_platform();
+
+    /* Initialize the GPIO 0 driver */
+    Status = XGpio_Initialize(&gpio0, XPAR_AXI_GPIO_0_DEVICE_ID);
+    if (Status != XST_SUCCESS) {
+        xil_printf("Gpio 0 Initialization Failed\r\n");
+        return XST_FAILURE;
+    }
+
+    /* Set up the AXI SPI Controller 0 (Screen) */
+    Status = XSpi_Init(&SpiInstance, SPI_DEVICE_ID);
+    if (Status != XST_SUCCESS) {
+        xil_printf("SPI Mode Failed\r\n");
+        return XST_FAILURE;
+    }
+
+    /* Set up the AXI SPI Controller 1 (Joystick, accelerometer, etc.) */
+    Status = init_adc(&SpiInstance1, SPI_DEVICE_ID_1);
+    if (Status != XST_SUCCESS) {
+        xil_printf("SPI-ADC Mode Failed\r\n");
+        return XST_FAILURE;
+    }
+
+    /* Set up the AXI IIC Controller 0 (temperature sensor, light sensor) */
+    Status = init_IIC();
+    if (Status != XST_SUCCESS) {
+        xil_printf("IIC Mode Failed\r\n");
+        return XST_FAILURE;
+    }
+
+    xil_printf("TFT initialized \r\n");
+    xil_printf("**********Init LCD**********\r\n");
+
+    /* Init screen */
+    LCD_SCAN_DIR LCD_ScanDir = SCAN_DIR_DFT; // SCAN_DIR_DFT = D2U_L2R
+    LCD_Init(LCD_ScanDir);
+
+    xil_printf("LCD Show \r\n");
+    GUI_Show();
+    delay_ms(500);
+    LCD_Clear(GUI_BACKGROUND);
+
+    /* Intro propia del curso */
+    GUI_INTRO();
+    delay_ms(500);
+    LCD_Clear(GUI_BACKGROUND);
+
+    /* ---------- Inicializar acelerómetro ---------- */
+    Accelerometer acc;
+    Accelerometer_init(&acc);
+
+    GUI_DisString_EN(0, 0, "Calibrando...", &Font12, GUI_BACKGROUND, CYAN);
+    /* Calibrar durante ~1 segundo */
+    Accelerometer_calibrate(&acc, 200);
+    LCD_Clear(GUI_BACKGROUND);
+    xil_printf("Calibracion OK\r\n");
+
+    /* ---------- Inicializar juego del laberinto ---------- */
+    GameState game;
+    Maze_InitLevel1(&game);
+
+    /* Dibujar laberinto y jugador al inicio */
+    GUI_DrawMazeAndPlayer(&game);
+
+    /* ---------- Bucle principal ---------- */
+    int moveCooldown = 0;
+
+    while (1) {
+
+        float gx, gy, gz;
+        Accelerometer_read_g(&acc, &gx, &gy, &gz);
+
+        float mvx = Accelerometer_to_movement(&acc, gx);
+        float mvy = Accelerometer_to_movement(&acc, gy);
+
+        char dir = 0;
+
+        /*
+         * Elegimos el eje con mayor inclinación absoluta.
+         * Puedes ajustar los sentidos según cómo tengas montado el booster.
+         */
+
+        if (fabsf(mvx) > fabsf(mvy)) {
+            // Eje X domina: mover arriba/abajo
+            if (mvx > TILT_THRESHOLD) {
+                dir = 'd'; // inclina hacia "abajo" -> mover hacia abajo
+            } else if (mvx < -TILT_THRESHOLD) {
+                dir = 'u'; // inclina hacia "arriba" -> mover hacia arriba
+            }
+        } else {
+            // Eje Y domina: mover izquierda/derecha
+            if (mvy > TILT_THRESHOLD) {
+                dir = 'r'; // inclina a la derecha -> mover derecha
+            } else if (mvy < -TILT_THRESHOLD) {
+                dir = 'l'; // inclina a la izquierda -> mover izquierda
+            }
+        }
+
+        if (moveCooldown > 0) {
+            moveCooldown--;
+        }
+
+        if (dir != 0 && moveCooldown == 0 && Game_HasFinished(&game) == GAME_RUNNING) {
+            int result = Game_TryMove(&game, dir);
+            (void)result; // por si no lo usas todavía
+
+            // Redibujar laberinto completo y jugador.
+            // Al dibujar de cero, la posición anterior del jugador desaparece.
+            GUI_DrawMazeAndPlayer(&game);
+
+            // Pequeño "cooldown" para que no se mueva mil celdas de golpe
+            moveCooldown = MOVE_COOLDOWN_TICKS;
+        }
+
+        /* Si ya ganó o perdió, mostramos el estado (ya lo hace GUI_DrawMazeAndPlayer),
+           pero puedes añadir lógica para reiniciar el juego con un botón si quieres. */
+
+        delay_ms(LOOP_DELAY_MS);
+    }
+
+    // Nunca llegamos aquí normalmente
+    // cleanup_platform();
+    return 0;
+}

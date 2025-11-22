@@ -1,0 +1,12 @@
+#ifndef MAZE_GUI_H
+#define MAZE_GUI_H
+
+#include "maze_game.h"
+
+/**
+ * Dibuja el laberinto y la posición del jugador en la pantalla LCD.
+ * Usa caracteres para representar cada celda.
+ */
+void GUI_DrawMazeAndPlayer(const GameState *game);
+
+#endif

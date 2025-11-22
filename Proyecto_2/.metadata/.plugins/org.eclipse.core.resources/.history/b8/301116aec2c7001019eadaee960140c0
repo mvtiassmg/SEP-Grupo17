@@ -1,0 +1,140 @@
+#include <stdio.h>
+#include <sleep.h>
+#include <time.h>
+#include <unistd.h>
+
+#include "platform.h"
+#include "xil_printf.h"
+#include "xparameters.h"
+#include "xgpio.h"
+#include "xstatus.h"
+#include "Delay.h"
+#include "LCD_SPI.h"
+#include "LCD_Driver.h"
+#include "LCD_GUI.h"
+#include "ADC.h"
+#include "I2C.h"
+#include "maze_game.h"
+#include "Accelerometer.h"
+
+
+extern XGpio gpio0;
+extern XSpi  SpiInstance;	 /* The instance of the SPI device */
+extern XSpi  SpiInstance1;
+extern const unsigned char font[] ;
+
+#define BACKGROUND  WHITE
+#define FOREGROUND BLUE
+#define DELAY 1000
+
+
+int main()
+{
+	int Status;
+
+    //Initialize the UART
+    init_platform();
+	/* Initialize the GPIO 0 driver */
+	Status = XGpio_Initialize(&gpio0, XPAR_AXI_GPIO_0_DEVICE_ID);
+	if (Status != XST_SUCCESS) {
+		xil_printf("Gpio 0 Initialization Failed\r\n");
+		return XST_FAILURE;
+	}
+
+	// Set up the AXI SPI Controller 0 (Screen)
+	Status = XSpi_Init(&SpiInstance,SPI_DEVICE_ID);
+	if (Status != XST_SUCCESS) {
+		xil_printf("SPI Mode Failed\r\n");
+		return XST_FAILURE;
+	}
+	// Set up the AXI SPI Controller 0 (Joystick(x,y), accelerometer, potentiometer, mic)
+	Status = init_adc(&SpiInstance1, SPI_DEVICE_ID_1);
+	if (Status != XST_SUCCESS) {
+		xil_printf("SPI-ADC Mode Failed\r\n");
+		return XST_FAILURE;
+	}
+	// Set up the AXI IIC Controller 0 (temperature sensor, light sensor)
+	Status = init_IIC();
+	if (Status != XST_SUCCESS) {
+		xil_printf("IIC Mode Failed\r\n");
+		return XST_FAILURE;
+	}
+	//Write through UART to PC
+	xil_printf("TFT initialized \r\n");
+	xil_printf("**********Init LCD**********\r\n");
+	// Init screen
+	LCD_SCAN_DIR LCD_ScanDir = SCAN_DIR_DFT;//SCAN_DIR_DFT = D2U_L2R
+	LCD_Init(LCD_ScanDir );
+	// Default intro image from screen company
+	xil_printf("LCD Show \r\n");
+
+	GUI_Show();
+	delay_ms(500);
+	LCD_Clear(GUI_BACKGROUND);
+	// Default intro image given by SEP course.
+	GUI_INTRO();
+	delay_ms(500);
+	LCD_Clear(GUI_BACKGROUND);
+	// ---------- INICIALIZAR JUEGO DEL LABERINTO ----------
+	    GameState game;
+	    Maze_InitLevel1(&game);
+
+	    // ---------- INICIALIZAR ACELERÓMETRO ----------
+	    Accelerometer acc;
+	    Accelerometer_init(&acc);
+
+	    xil_printf("Calibrando acelerometro... mantén la placa quieta.\r\n");
+	    Accelerometer_calibrate(&acc, 200);   // ~200 muestras, con delay_ms(5) → ~1s
+	    xil_printf("Calibración OK.\r\n");
+
+	    // Dibujamos por primera vez el laberinto
+	    GUI_DrawMazeAndPlayer(&game);
+
+	    // Umbral de movimiento (entre -1.0 y 1.0, viene de Accelerometer_to_movement)
+	    const float MOVE_THRESHOLD = 0.4f;
+
+	    while (1) {
+
+	        float gx, gy, gz;
+	        Accelerometer_read_g(&acc, &gx, &gy, &gz);
+
+	        float mx = Accelerometer_to_movement(&acc, gx);  // movimiento horizontal normalizado
+	        float my = Accelerometer_to_movement(&acc, gy);  // movimiento vertical normalizado
+	        xil_printf("gx=%.2f gy=%.2f | mx=%.2f my=%.2f",gx,gy,mx,my);
+	        char dir = 0;
+
+	        // Decide la dirección dominante según la inclinación
+	        if (mx >  MOVE_THRESHOLD) {
+	            dir = 'R';
+	        } else if (mx < -MOVE_THRESHOLD) {
+	            dir = 'L';
+	        } else if (my >  MOVE_THRESHOLD) {
+	            dir = 'D';
+	        } else if (my < -MOVE_THRESHOLD) {
+	            dir = 'U';
+	        }
+
+	        if (dir != 0 && game.state == GAME_RUNNING) {
+	            int result = Game_TryMove(&game, dir);
+
+	            xil_printf("gx=%.2f gy=%.2f | mx=%.2f my=%.2f | dir=%c result=%d vidas=%d score=%d\r\n",
+	                       gx, gy, mx, my, dir, result, game.player.lives, game.player.score);
+
+	            GUI_DrawMazeAndPlayer(&game);
+
+	            if (game.state == GAME_WIN) {
+	                xil_printf("Has llegado a la salida!\r\n");
+	            } else if (game.state == GAME_LOSE) {
+	                xil_printf("Te quedaste sin vidas.\r\n");
+	            }
+
+	            // Para que no corra como loco: un "paso" cada 200 ms aprox
+	            delay_ms(200);
+	        } else {
+	            // Sin inclinación significativa → solo suavizamos lectura
+	            delay_ms(40);
+	        }
+	    }
+
+	    return 0;
+	}

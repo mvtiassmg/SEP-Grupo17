@@ -21,3 +21,8 @@ timestamp=[2025-11-18 23:43:25], mode=BUILD, duration=0:00:00.245, duration_ms=2
 timestamp=[2025-11-18 23:43:30], mode=BUILD, duration=0:00:04.696, duration_ms=4696, data={name=ay_9_hw_system, configuration=Debug, clean_build=false}
 timestamp=[2025-11-18 23:49:27], mode=BUILD, duration=0:00:01.334, duration_ms=1334, data={name=ay_9_hw, configuration=Debug, clean_build=false}
 timestamp=[2025-11-18 23:49:32], mode=BUILD, duration=0:00:04.910, duration_ms=4910, data={name=ay_9_hw_system, configuration=Debug, clean_build=false}
+timestamp=[2025-11-19 08:34:52], mode=WORKBENCH_START, duration=0:00:09.901, duration_ms=9901, data={}
+timestamp=[2025-11-19 08:34:53], mode=WORKBENCH_UI_INIT, duration=0:00:00.869, duration_ms=869, data={editors_count=6, platform_editors_count=0, projects_count=4, platform_projects_count=1, active_platform_editor=false, projects=RemoteSystemsTempFiles,ay_9_hw,ay_9_hw_system,design_1_wrapper}
+timestamp=[2025-11-19 08:34:53], mode=PLATFORM_REPOSITORY_INIT, duration=0:00:00.091, duration_ms=91, data={}
+timestamp=[2025-11-19 08:35:39], mode=BUILD, duration=0:00:00.335, duration_ms=335, data={name=ay_9_hw, configuration=Debug, clean_build=false}
+timestamp=[2025-11-19 08:35:46], mode=BUILD, duration=0:00:06.697, duration_ms=6697, data={name=ay_9_hw_system, configuration=Debug, clean_build=false}

@@ -1,0 +1,124 @@
+#include "maze_gui.h"
+#include "maze_game.h"
+#include "LCD_GUI.h"
+#include "LCD_Driver.h"
+
+/*
+ * Compatibilidad con distintas versiones de la librería:
+ *  - Algunas usan DRAW_FULL / DRAW_EMPTY
+ *  - Otras usan DRAW_FILL_FULL / DRAW_FILL_EMPTY
+ */
+#if defined(DRAW_FILL_FULL) && !defined(DRAW_FULL)
+    #define DRAW_FULL  DRAW_FILL_FULL
+#endif
+
+#if defined(DRAW_FILL_EMPTY) && !defined(DRAW_EMPTY)
+    #define DRAW_EMPTY DRAW_FILL_EMPTY
+#endif
+
+/* Ajusta esto si quieres el laberinto más grande o más centrado */
+/* Pensado para 8x10 celdas en una pantalla tipo 128x160 */
+#define MAZE_START_X    4
+#define MAZE_START_Y   20
+#define MAZE_TILE_SIZE 12   // cada celda es de 12x12 píxeles
+
+/* ---------- Dibuja una sola celda del laberinto ---------- */
+static void GUI_DrawMazeCell(const Maze *m, int row, int col)
+{
+    int x0 = MAZE_START_X + col * MAZE_TILE_SIZE;
+    int y0 = MAZE_START_Y + row * MAZE_TILE_SIZE;
+    int x1 = x0 + MAZE_TILE_SIZE - 1;
+    int y1 = y0 + MAZE_TILE_SIZE - 1;
+
+    uint16_t color;
+
+    switch (m->cells[row][col]) {
+    case CELL_WALL:
+        color = BLUE;           // muros
+        break;
+    case CELL_TRAP:
+        color = RED;            // trampas
+        break;
+    case CELL_EXIT:
+        color = GREEN;          // salida
+        break;
+    case CELL_PATH:
+    default:
+        color = GUI_BACKGROUND; // camino = fondo (normalmente negro)
+        break;
+    }
+
+    // Relleno completo de la celda (IMPORTANTE: DRAW_FULL al final)
+    GUI_DrawRectangle(
+        x0, y0,
+        x1, y1,
+        color,
+        DOT_PIXEL_1X1,
+        DRAW_FULL
+    );
+
+    // Borde blanco para que se vea la grilla
+    GUI_DrawRectangle(
+        x0, y0,
+        x1, y1,
+        WHITE,
+        DOT_PIXEL_1X1,
+        DRAW_EMPTY
+    );
+}
+
+/*
+ * Dibuja el laberinto la primera vez y, en las siguientes llamadas,
+ * solo "borra" la posición anterior del jugador y dibuja la nueva.
+ */
+void GUI_DrawMazeAndPlayer(const GameState *game)
+{
+    static int firstTime = 1;
+    static int prevRow = -1;
+    static int prevCol = -1;
+
+    const Maze   *m = &game->maze;
+    const Player *p = &game->player;
+
+    // La primera vez dibujamos TODO el laberinto
+    if (firstTime) {
+        for (int r = 0; r < m->rows; r++) {
+            for (int c = 0; c < m->cols; c++) {
+                GUI_DrawMazeCell(m, r, c);
+            }
+        }
+        firstTime = 0;
+
+        // Inicializamos la posición "anterior" como la actual
+        prevRow = p->row;
+        prevCol = p->col;
+    }
+
+    // Redibujamos (rellenamos) la celda donde estaba antes el jugador
+    if (prevRow >= 0 && prevCol >= 0 &&
+        prevRow < m->rows && prevCol < m->cols)
+    {
+        GUI_DrawMazeCell(m, prevRow, prevCol);
+    }
+
+    // Ahora dibujamos al jugador en su nueva posición
+    int x0 = MAZE_START_X + p->col * MAZE_TILE_SIZE;
+    int y0 = MAZE_START_Y + p->row * MAZE_TILE_SIZE;
+    int x1 = x0 + MAZE_TILE_SIZE - 1;
+    int y1 = y0 + MAZE_TILE_SIZE - 1;
+
+    int margin = 3; // margen para que el jugador sea un cuadrado más pequeño dentro de la celda
+
+    GUI_DrawRectangle(
+        x0 + margin, y0 + margin,
+        x1 - margin, y1 - margin,
+        YELLOW,
+        DOT_PIXEL_1X1,
+        DRAW_FULL
+    );
+
+    // Guardamos la posición actual como "anterior" para la próxima llamada
+    prevRow = p->row;
+    prevCol = p->col;
+}
+

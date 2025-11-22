@@ -28,16 +28,19 @@ int main()
     // Semilla para rand()
     srand(12345);
 
+    //xil_printf("Juego de dado iniciado...\n\r");
 
     while(1)
     {
         // Leer botón
         boton = Xil_In32(AXI_GPIO_BTN_BASE) & 0x1;
-
+        Xil_Out32(AXI_GPIO_LEDS_BASE, 0b000001);
         // Si no se está jugando y se aprieta el botón
         if (!jugando && boton)
         {
             jugando = 1; // bloquear
+
+            xil_printf("Lanzando dado...\n\r");
 
             // ANIMACIÓN usando tu IP AXI personalizado
             for (int i = 0; i < 8; i++)
@@ -48,6 +51,8 @@ int main()
 
             // Número aleatorio entre 1 y 6
             numero = (rand() % 6) + 1;
+
+            xil_printf("Resultado: %d\n\r", numero);
 
             // Mostrar número en LEDs (misma estructura que usabas)
             switch(numero)
