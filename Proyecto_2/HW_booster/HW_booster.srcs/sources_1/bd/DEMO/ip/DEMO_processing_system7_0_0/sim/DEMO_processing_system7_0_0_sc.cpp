@@ -1,4 +1,4 @@
-// (c) Copyright 1995-2023 Xilinx, Inc. All rights reserved.
+// (c) Copyright 1995-2025 Xilinx, Inc. All rights reserved.
 // 
 // This file contains confidential and proprietary information
 // of Xilinx, Inc. and is protected under U.S. and
@@ -92,7 +92,7 @@ DEMO_processing_system7_0_0_sc::DEMO_processing_system7_0_0_sc(const sc_core::sc
     model_param_props.addLong("C_S_AXI_HP3_DATA_WIDTH", "64");
     model_param_props.addLong("C_M_AXI_GP0_THREAD_ID_WIDTH", "12");
     model_param_props.addLong("C_M_AXI_GP1_THREAD_ID_WIDTH", "12");
-    model_param_props.addLong("C_NUM_F2P_INTR_INPUTS", "1");
+    model_param_props.addLong("C_NUM_F2P_INTR_INPUTS", "2");
     model_param_props.addLong("C_DQ_WIDTH", "32");
     model_param_props.addLong("C_DQS_WIDTH", "4");
     model_param_props.addLong("C_DM_WIDTH", "4");

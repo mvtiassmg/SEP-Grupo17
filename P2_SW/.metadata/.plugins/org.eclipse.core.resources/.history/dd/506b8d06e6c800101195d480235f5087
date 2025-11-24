@@ -1,0 +1,79 @@
+#include "I2C.h"
+
+XIic  iic;
+u8 SendBuffer[2];
+u8 RecvBuffer[2];
+u8 config[3];
+u16 Lux;
+int16_t val;
+int temp;
+
+int init_IIC()
+{
+    XIic_Config *iic_conf;
+
+    // init_platform(); // ELIMINADO: Ya se llama en main.c para evitar doble init
+
+    iic_conf = XIic_LookupConfig(IIC_dev);
+    XIic_CfgInitialize(&iic, iic_conf, iic_conf->BaseAddress);
+    XIic_Start(&iic);
+
+    // Resetear y configurar TMP006 (CR=2 => 4 conversiones/seg, MOD=7 => Continuo)
+    SendBuffer[0] = 0x02; // Pointer to Configuration Register
+    SendBuffer[1] = 0x74; // MSB: MOD=111 (Continuous), CR=010 (1/sec)
+    SendBuffer[2] = 0x00; // LSB
+    XIic_Send(iic.BaseAddress, TMP_ADDR, (u8 *)&SendBuffer, 3, XIIC_STOP);
+
+    return XST_SUCCESS;
+}
+
+int read_tmp()
+{
+    // 1. Apuntar al registro de Temperatura Ambiente (Local Die Temp) = 0x01
+    u8 reg_temp = 0x01;
+
+    XIic_Send(iic.BaseAddress, TMP_ADDR, &reg_temp, 1, XIIC_REPEATED_START);
+    XIic_Recv(iic.BaseAddress, TMP_ADDR, (u8 *)&RecvBuffer, 2, XIIC_STOP);
+
+    // 2. Procesar los 16 bits (Big Endian)
+    // El valor es un entero de 14 bits con signo, alineado a la izquierda (bits 15-2)
+    val = (RecvBuffer[0] << 8) | RecvBuffer[1];
+
+    // 3. Desplazar 2 bits a la derecha para obtener el valor real de 14 bits
+    val = val >> 2;
+
+    // 4. Conversión a Celsius: cada LSB es 0.03125 °C (equivalente a dividir por 32)
+    temp = val / 32;
+
+    return temp; // Retorna temperatura en grados Celsius (aprox)
+}
+
+int read_opt()
+{
+    // Configuración para OPT3001 (Automatic Full-Scale, 100ms conversion)
+    u8 config_cmd[3];
+    config_cmd[0] = 0x01; // Puntero a Config
+    config_cmd[1] = 0xC4; // RN=1100 (Auto), CT=1 (800ms)
+    config_cmd[2] = 0x10; // Latch=1, Mode=11 (Continuous)
+
+    // Escribir configuración
+    XIic_Send(iic.BaseAddress, OPT_ADDR, config_cmd, 3, XIIC_STOP);
+
+    // Leer Registro de Resultado (0x00)
+    u8 reg_result = 0x00;
+    XIic_Send(iic.BaseAddress, OPT_ADDR, &reg_result, 1, XIIC_REPEATED_START);
+    XIic_Recv(iic.BaseAddress, OPT_ADDR, RecvBuffer, 2, XIIC_STOP);
+
+    // Calcular Lux (simplificado para visualización rápida)
+    // Formula Real: Result = 0.01 * (2^E) * R
+    u16 raw = (RecvBuffer[0] << 8) | RecvBuffer[1];
+    u16 exponent = (raw >> 12) & 0x0F;
+    u16 mantissa = raw & 0x0FFF;
+
+    // Cálculo aproximado en enteros para evitar floats lentos
+    // Lux = mantissa * (2^exponent) / 100
+    u32 lux_val = mantissa * (1 << exponent);
+    Lux = (u16)(lux_val / 100);
+
+    return (int)Lux;
+}

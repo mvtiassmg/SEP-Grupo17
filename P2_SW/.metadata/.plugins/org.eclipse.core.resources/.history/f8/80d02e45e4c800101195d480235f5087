@@ -1,0 +1,275 @@
+#include <stdio.h>
+#include "platform.h"
+#include "xil_printf.h"
+#include "xparameters.h"
+#include "xgpio.h"
+#include "xstatus.h"
+#include "xtmrctr.h"
+#include "xil_io.h"
+#include "xuartps_hw.h"
+#include "xscugic.h"
+#include "sleep.h"
+
+// Includes del usuario
+#include "Delay.h"
+#include "LCD_SPI.h"
+#include "LCD_Driver.h"
+#include "LCD_GUI.h"
+#include "ADC.h"
+#include "I2C.h"
+#include "maze_game.h"
+#include "maze_gui.h"
+#include "Accelerometer.h"
+#include "Joystick.h"
+#include "MotionJoystick.h"
+#include "LightSensor.h"
+#include "TempSensor.h"
+#include "timer_utils.h"
+#include "gic_utils.h"
+
+/* === DEFINICIONES HARDWARE === */
+// AJUSTA ESTA LÍNEA SI TU IP TIENE OTRO NOMBRE EN XPARAMETERS.H
+#ifndef TETRIS_BASE_ADDR
+#define TETRIS_BASE_ADDR    XPAR_TETRIS_SEQUENCER_0_S00_AXI_BASEADDR
+#endif
+
+#define BTN_DEVICE_ID       XPAR_AXI_GPIO_1_DEVICE_ID
+#define SPI_LCD_ID          XPAR_AXI_QUAD_SPI_0_DEVICE_ID
+#define SPI_ADC_ID          XPAR_AXI_QUAD_SPI_1_DEVICE_ID
+
+/* === CONTROL === */
+typedef enum {
+    CTRL_ACCEL = 1,
+    CTRL_JOYSTICK = 2
+} ControlMode;
+
+ControlMode currentControl = CTRL_ACCEL;
+
+/* === OBJETOS GLOBALES === */
+LightSensor lightSensor;
+TempSensor tempSensor;
+XGpio gpio_lcd;
+XGpio gpio_btn_zybo;
+XSpi  SpiInstance;
+XSpi  SpiInstance1;
+// TimerInstance y flag_read_opt están definidos en timer_utils.c
+
+/* === FUNCIONES === */
+
+// Controlar Música IP Core (Registro 0, Bit 0)
+void Music_Control(int enable) {
+    Xil_Out32((u32)TETRIS_BASE_ADDR, (u32)(enable ? 1 : 0));
+}
+
+// Menú UART
+void Show_Menu() {
+    xil_printf("\033[2J\033[H"); // Limpiar terminal
+    xil_printf("====================================\r\n");
+    xil_printf("       LABERINTO ZYNQ - DEBUG       \r\n");
+    xil_printf("====================================\r\n");
+    xil_printf("Seleccione control:\r\n");
+    xil_printf("1. Acelerometro\r\n");
+    xil_printf("2. Joystick\r\n");
+    xil_printf("------------------------------------\r\n");
+    xil_printf("Esperando seleccion...\r\n");
+}
+
+int main()
+{
+    int Status;
+    u32 seed_val;
+    char opt;
+
+    init_platform();
+
+    /* 1. Inicialización Hardware */
+    XGpio_Initialize(&gpio_lcd, XPAR_AXI_GPIO_0_DEVICE_ID);
+
+    Status = XGpio_Initialize(&gpio_btn_zybo, BTN_DEVICE_ID);
+    if (Status == XST_SUCCESS) {
+        XGpio_SetDataDirection(&gpio_btn_zybo, 1, 0xF); // Inputs
+    }
+
+    XSpi_Init(&SpiInstance, SPI_LCD_ID);
+    init_adc(&SpiInstance1, SPI_ADC_ID);
+    init_IIC();
+
+    LCD_Init(SCAN_DIR_DFT);
+    LCD_Clear(WHITE);
+
+    /* 2. Configurar Interrupciones (Timer 1s) */
+    Status = init_gic_for_timer_default((Xil_ExceptionHandler)XTmrCtr_InterruptHandler, &TimerInstance);
+    if (Status != XST_SUCCESS) xil_printf("Error GIC\r\n");
+
+    Status = timer_init_1s();
+    if (Status != XST_SUCCESS) xil_printf("Error Timer\r\n");
+
+    /* 3. Inicializar Sensores y Objetos */
+    Accelerometer acc;
+    Accelerometer_init(&acc);
+
+    Joystick js;
+    Joystick_init(&js);
+    MotionJoystick mjs;
+    MotionJoystick_init(&mjs);
+
+    LightSensor_init(&lightSensor);
+    TempSensor_init(&tempSensor);
+
+    /* 4. Menú e Inicio */
+    Show_Menu();
+    opt = inbyte(); // Bloqueante
+
+    seed_val = XTmrCtr_GetValue(&TimerInstance, 0);
+
+    if (opt == '2') {
+        currentControl = CTRL_JOYSTICK;
+        xil_printf("Joystick Seleccionado\r\n");
+        LCD_Clear(WHITE);
+        GUI_DisString_EN(10, 50, "Calibrando Joy...", &Font12, WHITE, RED);
+
+        // Debug Joystick Calibración
+        int raw_x, raw_y;
+        Joystick_read_raw(&raw_x, &raw_y);
+        xil_printf("Joy RAW Pre-Calib: X=%d, Y=%d\r\n", raw_x, raw_y);
+
+        Joystick_calibrate(&js, 50);
+
+        xil_printf("Joy Centro Calibrado: X=%d, Y=%d\r\n", js.center_x, js.center_y);
+
+    } else {
+        currentControl = CTRL_ACCEL;
+        xil_printf("Acelerometro Seleccionado\r\n");
+        LCD_Clear(WHITE);
+        GUI_DisString_EN(10, 50, "Calibrando Acc...", &Font12, WHITE, BLUE);
+        Accelerometer_calibrate(&acc, 50);
+    }
+
+    /* 5. Bucle de Juego */
+    // Music_Control(1);
+
+    GameState game;
+    Maze_GenerateRandom(&game, seed_val);
+    GUI_ResetDrawState();
+
+    // Dibujo inicial
+    GUI_DrawMazeAndPlayer(&game, lightSensor.mode, tempSensor.player_color);
+
+    int game_time_seconds = 60;
+    int moveCooldown = 0;
+
+    // Variables para detectar cambios de estado y no saturar el UART
+    int prev_ls_mode = -1;
+    int prev_ts_color = -1;
+
+    while (1) {
+
+        /* A. Interrupción de Timer (1 Hz) */
+        if (flag_read_opt == 1) {
+            flag_read_opt = 0; // Bajar bandera
+
+            // 1. Leer Sensores
+            LightSensor_update(&lightSensor);
+            TempSensor_update(&tempSensor);
+
+            // 2. Debug Sensores (Imprimir cada segundo)
+            xil_printf("[SENSOR] Luz: %d (Modo: %d) | Temp: %d C (Color: 0x%04X)\r\n",
+                       lightSensor.lux_value, lightSensor.mode,
+                       tempSensor.current_temp, tempSensor.player_color);
+
+            // 3. Detectar cambios de estado para imprimir mensaje especial
+            if (lightSensor.mode != prev_ls_mode) {
+                if (prev_ls_mode != -1) // Ignorar el primero
+                    xil_printf(">>> CAMBIO MODO LUZ: %s\r\n", (lightSensor.mode == LIGHT_MODE_DAY) ? "DIA" : "NOCHE");
+                prev_ls_mode = lightSensor.mode;
+            }
+
+            if (tempSensor.player_color != prev_ts_color) {
+                if (prev_ts_color != -1)
+                    xil_printf(">>> CAMBIO COLOR JUGADOR: 0x%04X\r\n", tempSensor.player_color);
+                prev_ts_color = tempSensor.player_color;
+            }
+
+            // Restar tiempo de juego
+            if (game.state == GAME_RUNNING) {
+                game_time_seconds--;
+                if (game_time_seconds <= 0) game.state = GAME_TIMEOUT;
+            }
+        }
+
+        /* C. Movimiento (Solo si juego activo) */
+        char dir = 0;
+        if (game.state == GAME_RUNNING) {
+            if (currentControl == CTRL_ACCEL) {
+                // ... (Código acelerómetro igual) ...
+                float gx, gy, gz;
+                float mvx, mvy;
+                Accelerometer_read_g(&acc, &gx, &gy, &gz);
+                mvx = Accelerometer_to_movement(&acc, gy);
+                mvy = Accelerometer_to_movement(&acc, gx);
+
+                if (fabs(mvy) > fabs(mvx)) {
+                    if (mvy > 0.25f) dir = 'd'; else if (mvy < -0.25f) dir = 'u';
+                } else {
+                    if (mvx > 0.25f) dir = 'r'; else if (mvx < -0.25f) dir = 'l';
+                }
+            } else { // Joystick
+                float vx, vy;
+                int raw_x, raw_y;
+                float nx, ny;
+
+                // Debug Joystick RAW (descomentar si es necesario, satura mucho)
+                // Joystick_read_raw(&raw_x, &raw_y);
+                // xil_printf("Joy RAW: %d, %d\r\n", raw_x, raw_y);
+
+                MotionJoystick_update(&mjs, &js, &vx, &vy);
+
+                // Debug Velocidad Calculada
+                if (fabs(vx) > 0.1 || fabs(vy) > 0.1) {
+                     // xil_printf("Joy Vel: X=%.2f, Y=%.2f\r\n", vx, vy);
+                }
+
+                if (fabs(vy) > fabs(vx)) {
+                    if (vy > 0.5f) dir = 'd'; else if (vy < -0.5f) dir = 'u';
+                } else {
+                    if (vx > 0.5f) dir = 'r'; else if (vx < -0.5f) dir = 'l';
+                }
+
+                if (dir != 0) {
+                    xil_printf("Joy Moviendo: %c\r\n", dir);
+                }
+            }
+        }
+
+        if (moveCooldown > 0) moveCooldown--;
+
+        if (dir != 0 && moveCooldown == 0 && game.state == GAME_RUNNING) {
+            if (Game_TryMove(&game, dir) != MOVE_INVALID) {
+                moveCooldown = 5;
+            }
+        }
+
+        /* D. Dibujar */
+        // Actualiza pantalla con modo día/noche y color de temperatura
+        GUI_DrawMazeAndPlayer(&game, lightSensor.mode, tempSensor.player_color);
+
+        // HUD Tiempo
+        char timeStr[16];
+        sprintf(timeStr, "T:%d ", game_time_seconds);
+        uint16_t txtC = (lightSensor.mode == LIGHT_MODE_DAY) ? BLACK : WHITE;
+        uint16_t bgC  = (lightSensor.mode == LIGHT_MODE_DAY) ? WHITE : BLACK;
+        GUI_DisString_EN(80, 120, timeStr, &Font8, bgC, txtC);
+
+        /* E. Fin del Juego */
+        if (game.state != GAME_RUNNING) {
+            // Music_Control(0);
+            xil_printf("Juego Terminado. Estado: %d\r\n", game.state);
+            while(1) { delay_ms(100); }
+        }
+
+        delay_ms(40); // ~25 FPS
+    }
+
+    cleanup_platform();
+    return 0;
+}

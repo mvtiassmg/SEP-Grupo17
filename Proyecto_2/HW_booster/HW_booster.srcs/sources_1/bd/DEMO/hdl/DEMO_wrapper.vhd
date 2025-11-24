@@ -1,7 +1,7 @@
 --Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
---Date        : Mon Nov 10 08:42:47 2025
+--Date        : Mon Nov 24 00:21:07 2025
 --Host        : Macbook running 64-bit major release  (build 9200)
 --Command     : generate_target DEMO_wrapper.bd
 --Design      : DEMO_wrapper
@@ -61,6 +61,7 @@ architecture STRUCTURE of DEMO_wrapper is
     BTN0 : in STD_LOGIC;
     BUZZER_PWM : out STD_LOGIC;
     RS_tri_o : out STD_LOGIC_VECTOR ( 0 to 0 );
+    RST_tri_o : out STD_LOGIC_VECTOR ( 0 to 0 );
     DDR_cas_n : inout STD_LOGIC;
     DDR_cke : inout STD_LOGIC;
     DDR_ck_n : inout STD_LOGIC;
@@ -82,7 +83,6 @@ architecture STRUCTURE of DEMO_wrapper is
     FIXED_IO_ps_srstb : inout STD_LOGIC;
     FIXED_IO_ps_clk : inout STD_LOGIC;
     FIXED_IO_ps_porb : inout STD_LOGIC;
-    RST_tri_o : out STD_LOGIC_VECTOR ( 0 to 0 );
     iic_rtl_scl_i : in STD_LOGIC;
     iic_rtl_scl_o : out STD_LOGIC;
     iic_rtl_scl_t : out STD_LOGIC;

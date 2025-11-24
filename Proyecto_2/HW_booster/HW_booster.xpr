@@ -91,32 +91,32 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
-        <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_BUZZER_0_0/DEMO_BUZZER_0_0.xci">
-          <Proxy FileSetName="DEMO_BUZZER_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_axi_quad_spi_0_0/DEMO_axi_quad_spi_0_0.xci">
-          <Proxy FileSetName="DEMO_axi_quad_spi_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_axi_gpio_0_0/DEMO_axi_gpio_0_0.xci">
-          <Proxy FileSetName="DEMO_axi_gpio_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_processing_system7_0_0/DEMO_processing_system7_0_0.xci">
-          <Proxy FileSetName="DEMO_processing_system7_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_xbar_0/DEMO_xbar_0.xci">
-          <Proxy FileSetName="DEMO_xbar_0"/>
-        </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_rst_ps7_0_50M_0/DEMO_rst_ps7_0_50M_0.xci">
           <Proxy FileSetName="DEMO_rst_ps7_0_50M_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_TETRIS_SEQUENCER_1_0/DEMO_TETRIS_SEQUENCER_1_0.xci">
+          <Proxy FileSetName="DEMO_TETRIS_SEQUENCER_1_0"/>
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_axi_quad_spi_1_0/DEMO_axi_quad_spi_1_0.xci">
           <Proxy FileSetName="DEMO_axi_quad_spi_1_0"/>
         </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_axi_gpio_0_0/DEMO_axi_gpio_0_0.xci">
+          <Proxy FileSetName="DEMO_axi_gpio_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_xbar_0/DEMO_xbar_0.xci">
+          <Proxy FileSetName="DEMO_xbar_0"/>
+        </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_axi_iic_0_1/DEMO_axi_iic_0_1.xci">
           <Proxy FileSetName="DEMO_axi_iic_0_1"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_TETRIS_SEQUENCER_1_0/DEMO_TETRIS_SEQUENCER_1_0.xci">
-          <Proxy FileSetName="DEMO_TETRIS_SEQUENCER_1_0"/>
+        <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_processing_system7_0_0/DEMO_processing_system7_0_0.xci">
+          <Proxy FileSetName="DEMO_processing_system7_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_axi_quad_spi_0_0/DEMO_axi_quad_spi_0_0.xci">
+          <Proxy FileSetName="DEMO_axi_quad_spi_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="DEMO.bd" FileRelPathName="ip/DEMO_BUZZER_0_0/DEMO_BUZZER_0_0.xci">
+          <Proxy FileSetName="DEMO_BUZZER_0_0"/>
         </CompFileExtendedInfo>
       </File>
       <File Path="$PSRCDIR/sources_1/bd/DEMO/hdl/DEMO_wrapper.vhd">

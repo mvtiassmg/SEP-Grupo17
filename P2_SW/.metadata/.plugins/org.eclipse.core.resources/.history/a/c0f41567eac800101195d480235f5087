@@ -1,0 +1,20 @@
+#ifndef ADC_H
+#define ADC_H
+
+#include "xparameters.h"
+#include "xspi.h" // Mantenido por compatibilidad
+
+// Prototipos
+int init_adc(XSpi *SpiPtr, u16 SpiDeviceId);
+u32 read_adc(int channel);
+
+int read_joyx();
+int read_joyy();
+int read_acx();
+int read_acy();
+int read_acz();
+int read_POT1();
+int read_POT2();
+int read_MIC();
+
+#endif

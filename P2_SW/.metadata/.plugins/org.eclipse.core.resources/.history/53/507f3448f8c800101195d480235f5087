@@ -1,0 +1,268 @@
+#include <stdio.h>
+#include <sleep.h>
+#include <stdlib.h>
+#include <math.h>
+#include "platform.h"
+#include "xil_printf.h"
+#include "xparameters.h"
+#include "xgpio.h"
+#include "xstatus.h"
+#include "xtmrctr.h"
+#include "xil_io.h"
+#include "xuartps_hw.h"
+#include "xscugic.h"
+
+// Includes del usuario
+#include "Delay.h"
+#include "LCD_SPI.h"
+#include "LCD_Driver.h"
+#include "LCD_GUI.h"
+#include "ADC.h"
+#include "I2C.h"
+#include "maze_game.h"
+#include "maze_gui.h"
+#include "Accelerometer.h"
+#include "Joystick.h"
+#include "MotionJoystick.h"
+#include "LightSensor.h"
+#include "TempSensor.h"
+
+
+#define SPI_LCD_ID          XPAR_AXI_QUAD_SPI_0_DEVICE_ID
+#ifndef SPI_ADC_ID
+#define SPI_ADC_ID          XPAR_AXI_QUAD_SPI_1_DEVICE_ID
+#endif
+
+
+// CORRECCIÓN: Usar Timer 1 (TMRCTR_1) para interrupción porque es el que tiene vector definido
+#define TIMER_DEVICE_ID     XPAR_TMRCTR_1_DEVICE_ID
+#define GIC_DEVICE_ID       XPAR_SCUGIC_0_DEVICE_ID
+// Usamos el ID del vector de interrupción del Timer 1 que aparece en xparameters.h
+#define TIMER_IRQ_ID        XPAR_FABRIC_AXI_TIMER_1_INTERRUPT_INTR
+
+/* === CONTROL === */
+typedef enum {
+    CTRL_ACCEL = 1,
+    CTRL_JOYSTICK = 2
+} ControlMode;
+
+ControlMode currentControl = CTRL_ACCEL;
+
+/* === OBJETOS GLOBALES === */
+LightSensor lightSensor;
+TempSensor tempSensor;
+XTmrCtr TimerInstance;
+XScuGic GicInstance;
+XGpio gpio0; // GPIO del LCD
+XSpi  SpiInstance;   // SPI LCD
+// SpiInstance1 se define en ADC.c, la declaramos extern para inicializarla si es necesario
+extern XSpi SpiInstance1;
+
+// Variables volátiles
+volatile int tick_counter = 0;
+volatile int flag_game_tick = 0;
+volatile int flag_1sec_event = 0;
+
+/* === MANEJADOR INTERRUPCIÓN === */
+void TimerCounterHandler(void *CallBackRef, u8 TmrNum)
+{
+    flag_game_tick = 1;
+    tick_counter++;
+    if (tick_counter >= 25) { // 1 seg (25 * 40ms)
+        flag_1sec_event = 1;
+        tick_counter = 0;
+    }
+}
+
+int SetupIntrSystem(XScuGic *GicInstancePtr, XTmrCtr *TmrInstancePtr, u16 TimerIntrId)
+{
+    int Status;
+    XScuGic_Config *GicConfig;
+
+    GicConfig = XScuGic_LookupConfig(GIC_DEVICE_ID);
+    if (NULL == GicConfig) return XST_FAILURE;
+
+    Status = XScuGic_CfgInitialize(GicInstancePtr, GicConfig, GicConfig->CpuBaseAddress);
+    if (Status != XST_SUCCESS) return XST_FAILURE;
+
+    Status = XScuGic_Connect(GicInstancePtr, TimerIntrId,
+                             (Xil_ExceptionHandler)XTmrCtr_InterruptHandler,
+                             (void *)TmrInstancePtr);
+    if (Status != XST_SUCCESS) return XST_FAILURE;
+
+    XScuGic_Enable(GicInstancePtr, TimerIntrId);
+
+    Xil_ExceptionInit();
+    Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_INT,
+                                (Xil_ExceptionHandler)XScuGic_InterruptHandler,
+                                GicInstancePtr);
+    Xil_ExceptionEnable();
+
+    return XST_SUCCESS;
+}
+
+void Show_Menu() {
+    xil_printf("\033[2J\033[H");
+    xil_printf("=== LABERINTO ZYNQ - DEBUG ===\r\n");
+    xil_printf("1. Acelerometro\r\n");
+    xil_printf("2. Joystick\r\n");
+    xil_printf("Seleccion: ");
+}
+
+int main()
+{
+    int Status;
+    u32 seed_val;
+    char opt;
+
+    init_platform();
+
+    /* 1. Hardware Init */
+    XGpio_Initialize(&gpio0, XPAR_AXI_GPIO_0_DEVICE_ID);
+    XSpi_Init(&SpiInstance, SPI_LCD_ID);
+
+    // Inicializar ADC (Joystick) usando tu función init_adc
+    Status = init_adc(&SpiInstance1, SPI_ADC_ID);
+    if(Status != XST_SUCCESS) xil_printf("Error ADC Init\r\n");
+
+    init_IIC();
+
+    /* 2. LCD */
+    LCD_Init(SCAN_DIR_DFT);
+    LCD_Clear(WHITE);
+
+    /* 3. Timer e Interrupciones */
+    Status = XTmrCtr_Initialize(&TimerInstance, TIMER_DEVICE_ID);
+    if (Status != XST_SUCCESS) xil_printf("Error Timer Init\r\n");
+
+    XTmrCtr_SetHandler(&TimerInstance, TimerCounterHandler, &TimerInstance);
+    // 100MHz * 0.04s = 4,000,000 ciclos
+    XTmrCtr_SetResetValue(&TimerInstance, 0, 4000000);
+    XTmrCtr_SetOptions(&TimerInstance, 0, XTC_INT_MODE_OPTION | XTC_AUTO_RELOAD_OPTION | XTC_DOWN_COUNT_OPTION);
+
+    Status = SetupIntrSystem(&GicInstance, &TimerInstance, TIMER_IRQ_ID);
+    if (Status != XST_SUCCESS) xil_printf("Error GIC Init\r\n");
+
+    XTmrCtr_Start(&TimerInstance, 0);
+
+    /* 4. Objetos */
+    Accelerometer acc; Accelerometer_init(&acc);
+    Joystick js; Joystick_init(&js);
+    MotionJoystick mjs; MotionJoystick_init(&mjs);
+    LightSensor_init(&lightSensor);
+    TempSensor_init(&tempSensor);
+
+    /* 5. Menú */
+    Show_Menu();
+    opt = inbyte();
+    xil_printf("%c\r\n", opt);
+
+    seed_val = XTmrCtr_GetValue(&TimerInstance, 0);
+
+    if (opt == '2') {
+        currentControl = CTRL_JOYSTICK;
+        xil_printf("Joystick\r\n");
+
+        // Debug Pre-Calibración
+        int rx, ry;
+        rx = read_joyx();
+        ry = read_joyy();
+        xil_printf("Raw Pre: %d, %d\r\n", rx, ry);
+
+        LCD_Clear(WHITE);
+        GUI_DisString_EN(10, 50, "Calibrando...", &Font12, WHITE, RED);
+        Joystick_calibrate(&js, 50);
+        xil_printf("Calibrado: %d, %d\r\n", js.center_x, js.center_y);
+    } else {
+        currentControl = CTRL_ACCEL;
+        xil_printf("Acelerometro\r\n");
+        LCD_Clear(WHITE);
+        GUI_DisString_EN(10, 50, "Calibrando...", &Font12, WHITE, BLUE);
+        Accelerometer_calibrate(&acc, 50);
+    }
+
+    /* 6. Juego */
+    GameState game;
+    Maze_GenerateRandom(&game, seed_val);
+    GUI_ResetDrawState();
+    GUI_DrawMazeAndPlayer(&game, lightSensor.mode, tempSensor.player_color);
+
+    int game_time_seconds = 60;
+    int moveCooldown = 0;
+
+    while (1) {
+
+        /* Evento 1s */
+        if (flag_1sec_event == 1) {
+            flag_1sec_event = 0;
+
+            LightSensor_update(&lightSensor);
+            TempSensor_update(&tempSensor);
+
+            // Debug
+            xil_printf("L:%d T:%d C\r\n", lightSensor.lux_value, tempSensor.current_temp);
+
+            if (game.state == GAME_RUNNING) {
+                game_time_seconds--;
+                if (game_time_seconds <= 0) game.state = GAME_TIMEOUT;
+            }
+        }
+
+        /* Game Tick */
+        if (flag_game_tick == 1) {
+            flag_game_tick = 0;
+            char dir = 0;
+
+            if (game.state == GAME_RUNNING) {
+                if (currentControl == CTRL_ACCEL) {
+                    float gx, gy, gz;
+                    float mvx, mvy;
+                    Accelerometer_read_g(&acc, &gx, &gy, &gz);
+                    mvx = Accelerometer_to_movement(&acc, gy);
+                    mvy = Accelerometer_to_movement(&acc, gx);
+
+                    if (fabs(mvy) > fabs(mvx)) {
+                        if (mvy > 0.25f) dir = 'd'; else if (mvy < -0.25f) dir = 'u';
+                    } else {
+                        if (mvx > 0.25f) dir = 'r'; else if (mvx < -0.25f) dir = 'l';
+                    }
+                } else { // Joystick
+                    float vx, vy;
+                    MotionJoystick_update(&mjs, &js, &vx, &vy);
+                    if (fabs(vy) > fabs(vx)) {
+                        if (vy > 0.5f) dir = 'd'; else if (vy < -0.5f) dir = 'u';
+                    } else {
+                        if (vx > 0.5f) dir = 'r'; else if (vx < -0.5f) dir = 'l';
+                    }
+
+                    // Debug movimiento si se detecta
+                    if (dir != 0) xil_printf("J: %c\r\n", dir);
+                }
+            }
+
+            if (moveCooldown > 0) moveCooldown--;
+
+            if (dir != 0 && moveCooldown == 0 && game.state == GAME_RUNNING) {
+                if (Game_TryMove(&game, dir) != MOVE_INVALID) {
+                    moveCooldown = 5;
+                }
+            }
+
+            GUI_DrawMazeAndPlayer(&game, lightSensor.mode, tempSensor.player_color);
+
+            char timeStr[16];
+            sprintf(timeStr, "T:%d ", game_time_seconds);
+            uint16_t txtC = (lightSensor.mode == LIGHT_MODE_DAY) ? BLACK : WHITE;
+            uint16_t bgC  = (lightSensor.mode == LIGHT_MODE_DAY) ? WHITE : BLACK;
+            GUI_DisString_EN(80, 120, timeStr, &Font8, bgC, txtC);
+
+            if (game.state != GAME_RUNNING) {
+                xil_printf("Fin: %d\r\n", game.state);
+                while(1) { delay_ms(100); }
+            }
+        }
+    }
+
+    cleanup_platform();
+    return 0;
+}

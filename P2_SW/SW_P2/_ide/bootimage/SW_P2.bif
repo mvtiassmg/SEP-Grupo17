@@ -1,0 +1,12 @@
+/* C:/Users/tomas/AppData/Local/Temp/bootgen_SW_P25743040856968486468/sd_card_temp/boot.bif */
+/* Command to create bitstream .bin file:       */
+/*   bootgen -image <bif_file> -split bin -w    */
+/* Command to create BOOT.BIN file:             */
+/*   bootgen  -image <bif_file> -w -o i BOOT.BIN */
+/*DEMO_wrapper*/
+the_ROM_image:
+{
+ [bootloader] C:/Users/tomas/Downloads/SEP-Grupo17/P2_SW/DEMO_wrapper/export/DEMO_wrapper/sw/DEMO_wrapper/boot/fsbl.elf
+ C:/Users/tomas/Downloads/SEP-Grupo17/P2_SW/SW_P2/_ide/bitstream/DEMO_wrapper.bit
+ C:/Users/tomas/Downloads/SEP-Grupo17/P2_SW/SW_P2/Debug/SW_P2.elf
+}

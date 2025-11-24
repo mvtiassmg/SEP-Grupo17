@@ -1,0 +1,174 @@
+#include "ADC.h"
+XSpi SpiInstance1;
+typedef u8 DataBuffer[BUFFER_SIZE_ADC];
+
+
+
+// Mantenemos la firma antigua pero ignoramos los parámetros de SPI
+#include "ADC.h"
+#include "xadcps.h"
+#include "xparameters.h"
+#include "xstatus.h"
+
+// ID del XADC (interno del PS)
+#define XADC_DEVICE_ID 		XPAR_XADCPS_0_DEVICE_ID
+
+static XAdcPs XAdcInst;      /* XADC driver instance */
+static int IsInitialized = 0;
+
+// Mantenemos la firma antigua pero ignoramos los parámetros de SPI
+int init_adc(XSpi *SpiPtr, u16 SpiDeviceId)
+{
+    int Status;
+    XAdcPs_Config *ConfigPtr;
+
+    if (IsInitialized) return XST_SUCCESS;
+
+    xil_printf("ADC: Iniciando XADC...\r\n");
+
+    ConfigPtr = XAdcPs_LookupConfig(XADC_DEVICE_ID);
+    if (ConfigPtr == NULL) {
+        xil_printf("ADC: Error LookupConfig\r\n");
+        return XST_FAILURE;
+    }
+
+    Status = XAdcPs_CfgInitialize(&XAdcInst, ConfigPtr, ConfigPtr->BaseAddress);
+    if (Status != XST_SUCCESS) {
+        xil_printf("ADC: Error CfgInitialize\r\n");
+        return XST_FAILURE;
+    }
+
+    Status = XAdcPs_SelfTest(&XAdcInst);
+    if (Status != XST_SUCCESS) {
+        xil_printf("ADC: Error SelfTest\r\n");
+        return XST_FAILURE;
+    }
+
+    // Configurar para modo secuenciador seguro (lectura continua de todos los canales)
+    XAdcPs_SetSequencerMode(&XAdcInst, XADCPS_SEQ_MODE_SAFE);
+
+    // Habilitar canales auxiliares si es necesario (depende del hardware, pero safe mode suele bastar)
+    // XAdcPs_SetSeqChEnables(&XAdcInst, XADCPS_SEQ_CH_AUX00 | ...);
+
+    IsInitialized = 1;
+    xil_printf("ADC: Inicializacion Exitosa\r\n");
+    return XST_SUCCESS;
+}
+
+// Función genérica de lectura
+u32 read_adc(int channel)
+{
+    if (!IsInitialized) return 0;
+
+    // Mapeo de canales 0-15 a canales auxiliares XADC (16-31)
+    u8 XAdcChannel;
+    if (channel < 16) {
+        XAdcChannel = XADCPS_CH_AUX_MIN + channel;
+    } else {
+        XAdcChannel = channel;
+    }
+
+    // Leer y convertir (12 bits significativos)
+    u32 raw_data = XAdcPs_GetAdcData(&XAdcInst, XAdcChannel);
+    return (raw_data >> 4);
+}
+
+
+int read_joyx(){
+	u8 WriteBufferX[BUFFER_SIZE_ADC] = { 0x00, 0x00 };
+	u8 ReadBufferX[BUFFER_SIZE_ADC] = { 0x00, 0x00 };
+	u16 ejeX;
+	for (int i = 0; i < 2; i++) {
+		XSpi_Transfer(&SpiInstance1, WriteBufferX, ReadBufferX,
+				BUFFER_SIZE_ADC);
+		ejeX = (ReadBufferX[0] + ReadBufferX[1] * 256)/4;
+	}
+	return ejeX;
+}
+int read_joyy(){
+	u8 WriteBufferY[BUFFER_SIZE_ADC] = { 0x08, 0x08 };
+	u8 ReadBufferY[BUFFER_SIZE_ADC] = { 0x08, 0x08 };
+	u16 ejeY;
+	for (int i = 0; i < 2; i++) {
+		XSpi_Transfer(&SpiInstance1, WriteBufferY, ReadBufferY,
+				BUFFER_SIZE_ADC);
+		ejeY = (ReadBufferY[0] + ReadBufferY[1] * 256)/4;
+	}
+	return ejeY;
+
+}
+int read_acx(){
+	u8 WriteBufferACX[BUFFER_SIZE_ADC] = { 0x10, 0x10 };
+	u8 ReadBufferACX[BUFFER_SIZE_ADC] = { 0x10, 0x10 };
+	u16 ejeACX;
+	for (int i = 0; i < 2; i++) {
+		XSpi_Transfer(&SpiInstance1, WriteBufferACX, ReadBufferACX,
+				BUFFER_SIZE_ADC);
+		ejeACX = (ReadBufferACX[0] + ReadBufferACX[1] * 256)/4;
+	}
+	return ejeACX;
+
+}
+int read_acy(){
+	u8 WriteBufferACY[BUFFER_SIZE_ADC] = { 0x18, 0x18 };
+	u8 ReadBufferACY[BUFFER_SIZE_ADC] = { 0x18, 0x18 };
+	u16 ejeACY;
+	for (int i = 0; i < 2; i++) {
+		XSpi_Transfer(&SpiInstance1, WriteBufferACY, ReadBufferACY,
+				BUFFER_SIZE_ADC);
+		ejeACY = (ReadBufferACY[0] + ReadBufferACY[1] * 256)/4;
+	}
+	return ejeACY;
+
+}
+int read_acz(){
+	u8 WriteBufferACZ[BUFFER_SIZE_ADC] = { 0x20, 0x20 };
+	u8 ReadBufferACZ[BUFFER_SIZE_ADC] = { 0x20, 0x20 };
+	u16 ejeACZ;
+	for (int i = 0; i < 2; i++) {
+		XSpi_Transfer(&SpiInstance1, WriteBufferACZ, ReadBufferACZ,
+				BUFFER_SIZE_ADC);
+		ejeACZ = (ReadBufferACZ[0] + ReadBufferACZ[1] * 256)/4;
+	}
+	return ejeACZ;
+
+}
+
+int read_POT1(){
+	u8 WriteBufferACZ[BUFFER_SIZE_ADC] = { 0x30, 0x30 };
+	u8 ReadBufferACZ[BUFFER_SIZE_ADC] = { 0x30, 0x30 };
+	u16 POT1;
+	for (int i = 0; i < 2; i++) {
+		XSpi_Transfer(&SpiInstance1, WriteBufferACZ, ReadBufferACZ,
+				BUFFER_SIZE_ADC);
+		POT1 = (ReadBufferACZ[0] + ReadBufferACZ[1] * 256)/4;
+	}
+	return POT1;
+
+}
+
+int read_POT2(){
+	u8 WriteBufferACZ[BUFFER_SIZE_ADC] = { 0x38, 0x38 };
+	u8 ReadBufferACZ[BUFFER_SIZE_ADC] = { 0x38, 0x38 };
+	u16 POT2;
+	for (int i = 0; i < 2; i++) {
+		XSpi_Transfer(&SpiInstance1, WriteBufferACZ, ReadBufferACZ,
+				BUFFER_SIZE_ADC);
+		POT2 = (ReadBufferACZ[0] + ReadBufferACZ[1] * 256)/4;
+	}
+	return POT2;
+
+}
+
+int read_MIC(){
+	u8 WriteBufferACZ[BUFFER_SIZE_ADC] = { 0x28, 0x28 };
+	u8 ReadBufferACZ[BUFFER_SIZE_ADC] = { 0x28, 0x28 };
+	u16 MIC;
+	for (int i = 0; i < 2; i++) {
+		XSpi_Transfer(&SpiInstance1, WriteBufferACZ, ReadBufferACZ,
+				BUFFER_SIZE_ADC);
+		MIC = (ReadBufferACZ[0] + ReadBufferACZ[1] * 256)/4;
+	}
+	return MIC;
+
+}

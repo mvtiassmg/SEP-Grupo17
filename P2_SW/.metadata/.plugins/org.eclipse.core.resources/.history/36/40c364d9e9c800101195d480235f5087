@@ -1,0 +1,66 @@
+#include "Joystick.h"
+#include "ADC.h"
+#include "Delay.h"
+#include "xil_printf.h" // Para debug
+
+// AJUSTAR ESTOS CANALES SI NO FUNCIONA
+// Prueba con combinaciones como 14/15, 6/14, etc. si 2/10 no van.
+#define ADC_CH_JOY_X  2
+#define ADC_CH_JOY_Y  10
+
+void Joystick_init(Joystick *js)
+{
+    js->center_x = 2048;
+    js->center_y = 2048;
+    js->deadzone = 0.15f;
+    js->max_range = 2048.0f;
+}
+
+void Joystick_calibrate(Joystick *js, int samples)
+{
+    long sum_x = 0;
+    long sum_y = 0;
+    int val_x, val_y;
+
+    xil_printf("Calibrando Joystick... No tocar!\r\n");
+
+    for(int i = 0; i < samples; i++) {
+        val_x = read_adc(ADC_CH_JOY_X);
+        val_y = read_adc(ADC_CH_JOY_Y);
+
+        sum_x += val_x;
+        sum_y += val_y;
+        delay_ms(10);
+    }
+
+    js->center_x = (int)(sum_x / samples);
+    js->center_y = (int)(sum_y / samples);
+
+    xil_printf("Calibracion OK. Centro: (%d, %d)\r\n", js->center_x, js->center_y);
+}
+
+void Joystick_read_raw(int *jx, int *jy)
+{
+    *jx = read_adc(ADC_CH_JOY_X);
+    *jy = read_adc(ADC_CH_JOY_Y);
+}
+
+void Joystick_read_normalized(Joystick *js, float *nx, float *ny)
+{
+    int raw_x, raw_y;
+    float dx, dy;
+
+    Joystick_read_raw(&raw_x, &raw_y);
+
+    dx = (float)(raw_x - js->center_x);
+    dy = (float)(raw_y - js->center_y);
+
+    *nx = dx / js->max_range;
+    *ny = dy / js->max_range;
+
+    // Deadzone circular simple
+    if ((*nx * *nx + *ny * *ny) < (js->deadzone * js->deadzone)) {
+        *nx = 0.0f;
+        *ny = 0.0f;
+    }
+}

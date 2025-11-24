@@ -1,0 +1,93 @@
+#include "I2C.h"
+
+XIic  iic;
+u8 SendBuffer[2];
+u8 RecvBuffer[2];
+u8 config[3];
+u16 Lux;
+int16_t val;
+int temp;
+
+#define OPT_ADDR 0x44
+
+// Registro de Configuración
+#define OPT_REG_CONFIG 0x01
+
+int init_IIC()
+{
+
+
+    u8 config_cmd[3];
+
+    // 1. Apuntar al registro de Configuración (0x01)
+    config_cmd[0] = OPT_REG_CONFIG;
+
+    // 2. Escribir el valor MSB (0xC4)
+    // RN=1100 (el sensor escoge automáticamente el rango de operación)
+    // M=10 (el sensor mide constantemente)
+    // 1100 0100 = C4
+    config_cmd[1] = 0xC4;
+
+    // 3. Escribir el valor LSB (0x10)
+    // L=1 (Latch window style para interrupciones)
+    // POL=0 (Active Low), ME=0, FC=00
+    // 0001 0000 = 10
+    config_cmd[2] = 0x10;
+
+    // Enviar los 3 bytes por I2C
+    int Status = XIic_Send(iic.BaseAddress, OPT_ADDR, config_cmd, 3, XIIC_STOP);
+
+    if (Status != 3) {
+        xil_printf("Error configurando OPT3001\r\n");
+        return XST_FAILURE;
+    }
+
+    // --- CONFIGURACIÓN DEL SENSOR DE TEMPERATURA (TMP006) ---
+    // (Ya lo tenías, pero asegúrate que esté activo también)
+    // Registro 0x02 (Config), Valor 0x7400 (Reset, Continuous, 1 conv/sec)
+    u8 tmp_config[3];
+    tmp_config[0] = 0x02;
+    tmp_config[1] = 0x74;
+    tmp_config[2] = 0x00;
+    XIic_Send(iic.BaseAddress, TMP_ADDR, tmp_config, 3, XIIC_STOP);
+
+    return XST_SUCCESS;
+}
+
+
+int read_tmp()
+{
+    u8 reg_temp = 0x01; // Registro de temperatura ambiente
+
+    XIic_Send(iic.BaseAddress, TMP_ADDR, &reg_temp, 1, XIIC_REPEATED_START);
+    XIic_Recv(iic.BaseAddress, TMP_ADDR, RecvBuffer, 2, XIIC_STOP);
+
+    val = (RecvBuffer[0] << 8) | RecvBuffer[1];
+    val = val >> 2; // Ajuste de 14 bits
+    temp = val / 32; // Conversión a Celsius
+
+    return temp;
+}
+
+int read_opt()
+{
+    u8 config_cmd[3];
+    config_cmd[0] = 0x01;
+    config_cmd[1] = 0xC4;
+    config_cmd[2] = 0x10;
+
+    XIic_Send(iic.BaseAddress, OPT_ADDR, config_cmd, 3, XIIC_STOP);
+
+    u8 reg_result = 0x00;
+    XIic_Send(iic.BaseAddress, OPT_ADDR, &reg_result, 1, XIIC_REPEATED_START);
+    XIic_Recv(iic.BaseAddress, OPT_ADDR, RecvBuffer, 2, XIIC_STOP);
+
+    u16 raw = (RecvBuffer[0] << 8) | RecvBuffer[1];
+    u16 exponent = (raw >> 12) & 0x0F;
+    u16 mantissa = raw & 0x0FFF;
+
+    u32 lux_val = mantissa * (1 << exponent);
+    Lux = (u16)(lux_val / 100);
+
+    return (int)Lux;
+}

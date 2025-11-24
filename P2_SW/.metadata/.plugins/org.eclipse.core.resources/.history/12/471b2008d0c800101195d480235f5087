@@ -1,0 +1,17 @@
+#ifndef TEMP_SENSOR_H
+#define TEMP_SENSOR_H
+
+#include "I2C.h"
+
+/* * Estructura del sensor de temperatura.
+ * Se usa 'int' porque la función read_tmp() del driver I2C devuelve un entero.
+ */
+typedef struct {
+    int current_temp;  // Cambiado de float a int
+    int player_color;  // Color resultante para el jugador (uint16_t compatible)
+} TempSensor;
+
+void TempSensor_init(TempSensor *ts);
+void TempSensor_update(TempSensor *ts);
+
+#endif

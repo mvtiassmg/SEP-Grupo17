@@ -1,0 +1,231 @@
+#include <stdio.h>
+#include <sleep.h>
+#include <stdlib.h>
+#include <math.h>
+
+#include "platform.h"
+#include "xil_printf.h"
+#include "xparameters.h"
+#include "xgpio.h"
+#include "xstatus.h"
+#include "xtmrctr.h"
+#include "xil_io.h"
+#include "xuartps_hw.h"
+#include "xscugic.h"
+
+// Includes del usuario
+#include "Delay.h"
+#include "LCD_SPI.h"
+#include "LCD_Driver.h"
+#include "LCD_GUI.h"
+#include "ADC.h"
+#include "I2C.h"
+#include "maze_game.h"
+#include "maze_gui.h"
+#include "Accelerometer.h"
+#include "Joystick.h"
+#include "MotionJoystick.h"
+#include "LightSensor.h"
+#include "TempSensor.h"
+
+/* === DEFINICIONES HARDWARE === */
+#define GPIO_LCD_ID         XPAR_AXI_GPIO_0_DEVICE_ID
+#define SPI_LCD_ID          XPAR_AXI_QUAD_SPI_0_DEVICE_ID
+#define SPI_ADC_ID          XPAR_AXI_QUAD_SPI_1_DEVICE_ID
+
+/* Control del movimiento */
+#define LOOP_DELAY_MS       40      // 40ms por tick
+#define MOVE_COOLDOWN_TICKS 5
+#define TILT_THRESHOLD      0.25f
+
+/* --- CONTROL / ESTADO --- */
+typedef enum {
+    CTRL_ACCEL = 1,
+    CTRL_JOYSTICK = 2
+} ControlMode;
+
+ControlMode currentControl = CTRL_ACCEL;
+
+LightSensor lightSensor;
+TempSensor tempSensor;
+XGpio gpio0;
+XSpi SpiInstance;
+extern XSpi SpiInstance1; // SPI ADC (definida en ADC.c)
+
+// Variables de tiempo y sensor (polling)
+static int game_time_seconds = 60;
+static int tick_counter_1s = 0; // Contador para saber cuándo pasó 1 segundo
+
+/* === MENÚ UART === */
+void Show_Menu(void)
+{
+    xil_printf("\033[2J\033[H");
+    xil_printf("=== LABERINTO - MODO POLLING ===\r\n");
+    xil_printf("1. Acelerometro\r\n");
+    xil_printf("2. Joystick\r\n");
+    xil_printf("Seleccion: ");
+}
+
+/* === MAIN === */
+int main(void)
+{
+    int Status;
+    u32 seed_val = 0;
+    char opt;
+
+    init_platform();
+
+    /* 1. Inicialización hardware base */
+    Status = XGpio_Initialize(&gpio0, XPAR_AXI_GPIO_0_DEVICE_ID);
+    if (Status != XST_SUCCESS) return XST_FAILURE;
+
+    // SPI LCD (CRÍTICO: Añadir configuración Master/Polled)
+    Status = XSpi_Init(&SpiInstance, SPI_LCD_ID);
+    if (Status != XST_SUCCESS) return XST_FAILURE;
+    XSpi_SetOptions(&SpiInstance, XSP_MASTER_OPTION | XSP_MANUAL_SSELECT_OPTION);
+    XSpi_Start(&SpiInstance);
+    XSpi_IntrGlobalDisable(&SpiInstance);
+
+    // SPI ADC (Joystick/Accel) - Inicialización de instancia
+    Status = XSpi_Init(&SpiInstance1, SPI_ADC_ID);
+    if (Status != XST_SUCCESS) return XST_FAILURE;
+    // init_adc contiene la lógica que llama a XSpi_SetOptions, etc., para SpiInstance1
+    Status = init_adc(&SpiInstance1, SPI_ADC_ID);
+    if (Status != XST_SUCCESS) return XST_FAILURE;
+
+    // I2C para sensores de luz / temperatura
+    Status = init_IIC();
+    if (Status != XST_SUCCESS) return XST_FAILURE;
+
+    xil_printf("Hardware OK. Init LCD...\r\n");
+
+    /* 2. LCD */
+    LCD_Init(SCAN_DIR_DFT);
+    LCD_Clear(WHITE);
+
+    /* 3. Objetos */
+    Accelerometer acc; Accelerometer_init(&acc);
+    Joystick js; Joystick_init(&js);
+    MotionJoystick mjs; MotionJoystick_init(&mjs);
+
+    LightSensor_init(&lightSensor);
+    TempSensor_init(&tempSensor);
+
+
+    /* 4. Menú y Calibración */
+    Show_Menu();
+    opt = inbyte();
+    xil_printf("Seleccion: %c\r\n", opt);
+
+    // Usar valor fijo de semilla ya que no hay timer preciso
+    seed_val = 0xAA;
+
+    if (opt == '2') {
+        currentControl = CTRL_JOYSTICK;
+        xil_printf("Modo: Joystick\r\n");
+        LCD_Clear(WHITE);
+        GUI_DisString_EN(10, 50, "Calibrando Joy...", &Font12, WHITE, RED);
+
+        Joystick_calibrate(&js, 50);
+        xil_printf("JOY centro: %d, %d\r\n", js.center_x, js.center_y);
+    } else {
+        currentControl = CTRL_ACCEL;
+        xil_printf("Modo: Acelerometro\r\n");
+        LCD_Clear(WHITE);
+        GUI_DisString_EN(10, 50, "Calibrando Acc...", &Font12, WHITE, BLUE);
+
+        // Calibración Acelerómetro
+        Accelerometer_calibrate(&acc, 50);
+    }
+
+    LCD_Clear(WHITE);
+
+    /* 5. Inicialización del juego */
+    GameState game;
+    Maze_GenerateRandom(&game, seed_val);
+    GUI_ResetDrawState();
+
+    int moveCooldown = 0;
+
+    /* 6. Bucle principal de juego */
+    while (1) {
+
+        // --- POLLING DE SENSORES Y TIEMPO (Cada 40ms) ---
+        tick_counter_1s++;
+        if (tick_counter_1s * LOOP_DELAY_MS >= 1000) { // 1000ms = 1 segundo
+            tick_counter_1s = 0;
+
+            // Leer Sensores y actualizar estado (1 Hz)
+            LightSensor_update(&lightSensor);
+            TempSensor_update(&tempSensor);
+
+            // Debug de sensores
+            xil_printf("L:%d lux, T:%d C\r\n", lightSensor.lux_value, tempSensor.current_temp);
+
+            // Restar tiempo de juego
+            if (game.state == GAME_RUNNING) {
+                game_time_seconds--;
+                if (game_time_seconds <= 0) game.state = GAME_TIMEOUT;
+            }
+        }
+
+        /* A. Lectura de control */
+        char dir = 0;
+        if (game.state == GAME_RUNNING) {
+            if (currentControl == CTRL_ACCEL) {
+                float gx, gy, gz;
+                float mvx, mvy;
+
+                Accelerometer_read_g(&acc, &gx, &gy, &gz);
+
+                mvx = Accelerometer_to_movement(&acc, gy);
+                mvy = Accelerometer_to_movement(&acc, gx);
+
+                if (fabsf(mvy) > fabsf(mvx)) {
+                    if (mvy > TILT_THRESHOLD) dir = 'd'; else if (mvy < -TILT_THRESHOLD) dir = 'u';
+                } else {
+                    if (mvx > TILT_THRESHOLD) dir = 'r'; else if (mvx < -TILT_THRESHOLD) dir = 'l';
+                }
+
+            } else { // Joystick
+                float vx, vy;
+                MotionJoystick_update(&mjs, &js, &vx, &vy);
+
+                if (fabsf(vy) > fabsf(vx)) {
+                    if (vy > 0.5f) dir = 'd'; else if (vy < -0.5f) dir = 'u';
+                } else {
+                    if (vx > 0.5f) dir = 'r'; else if (vx < -0.5f) dir = 'l';
+                }
+            }
+        }
+
+        if (moveCooldown > 0) moveCooldown--;
+
+        /* B. Lógica de Juego y Movimiento */
+        if (dir != 0 && moveCooldown == 0 && game.state == GAME_RUNNING) {
+            if (Game_TryMove(&game, dir) != MOVE_INVALID) {
+                moveCooldown = MOVE_COOLDOWN_TICKS;
+            }
+        }
+
+        /* C. Dibujar */
+        GUI_DrawMazeAndPlayer(&game, lightSensor.mode, tempSensor.player_color);
+
+        // HUD Tiempo
+        char timeStr[16];
+        sprintf(timeStr, "T:%d ", game_time_seconds);
+        uint16_t txtC = (lightSensor.mode == LIGHT_MODE_DAY) ? BLACK : WHITE;
+        uint16_t bgC  = (lightSensor.mode == LIGHT_MODE_DAY) ? WHITE : BLACK;
+        GUI_DisString_EN(80, 120, timeStr, &Font8, bgC, txtC);
+
+        /* D. Fin del Juego */
+        if (game.state != GAME_RUNNING) {
+            while (1) { delay_ms(100); }
+        }
+
+        delay_ms(LOOP_DELAY_MS); // Esperar 40ms
+    }
+
+    cleanup_platform();
+    return 0;
+}

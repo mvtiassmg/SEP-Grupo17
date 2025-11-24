@@ -1,0 +1,118 @@
+#include "maze_game.h"
+#include <stdlib.h>
+
+int random_int(int min, int max) {
+    return min + (rand() % (max - min + 1));
+}
+
+void Maze_GenerateRandom(GameState *game, unsigned int seed)
+{
+    Maze *m = &game->maze;
+    Player *p = &game->player;
+
+    srand(seed);
+
+    m->rows = MAZE_MAX_ROWS;
+    m->cols = MAZE_MAX_COLS;
+
+    // Llenar con muros
+    for (int r = 0; r < m->rows; r++) {
+        for (int c = 0; c < m->cols; c++) {
+            m->cells[r][c] = CELL_WALL;
+        }
+    }
+
+    m->startRow = 0; m->startCol = 0;
+    m->exitRow = m->rows - 1; m->exitCol = m->cols - 1;
+
+    // Camino soluble (Random Walk sesgado)
+    int cr = m->startRow;
+    int cc = m->startCol;
+    m->cells[cr][cc] = CELL_PATH;
+
+    while (cr != m->exitRow || cc != m->exitCol) {
+        int moveVert = rand() % 2;
+        if (moveVert) {
+            if (cr < m->exitRow) cr++; else if (cr > m->exitRow) cr--;
+        } else {
+            if (cc < m->exitCol) cc++; else if (cc > m->exitCol) cc--;
+        }
+        m->cells[cr][cc] = CELL_PATH;
+    }
+    m->cells[m->exitRow][m->exitCol] = CELL_EXIT;
+
+    // Ruido (Caminos extra)
+    for (int r = 0; r < m->rows; r++) {
+        for (int c = 0; c < m->cols; c++) {
+            if (m->cells[r][c] == CELL_WALL) {
+                if (random_int(0, 100) < 40) m->cells[r][c] = CELL_PATH;
+            }
+        }
+    }
+
+    // Trampas
+    int traps = 0;
+    while (traps < 5) {
+        int tr = random_int(0, m->rows - 1);
+        int tc = random_int(0, m->cols - 1);
+        if (m->cells[tr][tc] == CELL_PATH && !(tr == 0 && tc == 0)) {
+            m->cells[tr][tc] = CELL_TRAP;
+            traps++;
+        }
+    }
+
+    p->row = m->startRow;
+    p->col = m->startCol;
+    p->lives = 3;
+    p->score = 0;
+    game->state = GAME_RUNNING;
+}
+
+// ... (El resto de funciones Maze_TryMove, etc. igual que antes)
+int Game_TryMove(GameState *game, char dir) {
+    // ... (tu implementación de movimiento) ...
+    // Asegúrate de cambiar game->state = GAME_LOSE si vidas <= 0
+    // Asegúrate de cambiar game->state = GAME_WIN si llega a la salida
+    // Copia la implementación que ya tenías en la respuesta anterior si es necesario
+    if (game->state != GAME_RUNNING) return MOVE_INVALID;
+    Maze   *m = &game->maze;
+    Player *p = &game->player;
+    int newRow = p->row;
+    int newCol = p->col;
+
+    switch (dir) {
+    case 'u': newRow--; break;
+    case 'd': newRow++; break;
+    case 'l': newCol--; break;
+    case 'r': newCol++; break;
+    default: return MOVE_INVALID;
+    }
+
+    if (newRow < 0 || newRow >= m->rows || newCol < 0 || newCol >= m->cols) return MOVE_INVALID;
+    int cell = m->cells[newRow][newCol];
+    if (cell == CELL_WALL) return MOVE_INVALID;
+
+    p->row = newRow;
+    p->col = newCol;
+
+    if (cell == CELL_TRAP) {
+        p->lives--;
+        if (p->lives <= 0) game->state = GAME_LOSE;
+        else {
+            p->row = m->startRow;
+            p->col = m->startCol;
+        }
+        return MOVE_TRAP;
+    }
+
+    if (cell == CELL_EXIT) {
+        game->state = GAME_WIN;
+        p->score += 100;
+        return MOVE_EXIT;
+    }
+
+    p->score++;
+    return MOVE_OK;
+}
+
+int Game_HasFinished(const GameState *game) { return game->state; }

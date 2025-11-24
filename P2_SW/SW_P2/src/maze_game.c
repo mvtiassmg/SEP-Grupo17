@@ -1,0 +1,213 @@
+#include "maze_game.h"
+#include <stdlib.h>
+
+int random_int(int min, int max) {
+    return min + (rand() % (max - min + 1));
+}
+
+void Maze_GenerateRandom(GameState *game, unsigned int seed)
+{
+    Maze *m = &game->maze;
+    Player *p = &game->player;
+
+    srand(seed);
+
+    m->rows = MAZE_MAX_ROWS;
+    m->cols = MAZE_MAX_COLS;
+
+    // Llenar con muros
+    for (int r = 0; r < m->rows; r++) {
+        for (int c = 0; c < m->cols; c++) {
+            m->cells[r][c] = CELL_WALL;
+        }
+    }
+
+    m->startRow = 0; m->startCol = 0;
+    m->exitRow = m->rows - 1; m->exitCol = m->cols - 1;
+
+    // Camino soluble (Random Walk sesgado)
+    int cr = m->startRow;
+    int cc = m->startCol;
+    m->cells[cr][cc] = CELL_PATH;
+
+    while (cr != m->exitRow || cc != m->exitCol) {
+        int moveVert = rand() % 2;
+        if (moveVert) {
+            if (cr < m->exitRow) cr++; else if (cr > m->exitRow) cr--;
+        } else {
+            if (cc < m->exitCol) cc++; else if (cc > m->exitCol) cc--;
+        }
+        m->cells[cr][cc] = CELL_PATH;
+    }
+    m->cells[m->exitRow][m->exitCol] = CELL_EXIT;
+
+    // Ruido (Caminos extra)
+    for (int r = 0; r < m->rows; r++) {
+        for (int c = 0; c < m->cols; c++) {
+            if (m->cells[r][c] == CELL_WALL) {
+                if (random_int(0, 100) < 40) m->cells[r][c] = CELL_PATH;
+            }
+        }
+    }
+
+    // Trampas
+    int traps = 0;
+    while (traps < 5) {
+        int tr = random_int(0, m->rows - 1);
+        int tc = random_int(0, m->cols - 1);
+        if (m->cells[tr][tc] == CELL_PATH && !(tr == 0 && tc == 0)) {
+            m->cells[tr][tc] = CELL_TRAP;
+            traps++;
+        }
+    }
+
+    p->row = m->startRow;
+    p->col = m->startCol;
+    p->lives = 3;
+    p->score = 0;
+    game->state = GAME_RUNNING;
+}
+
+
+int Game_TryMove(GameState *game, char dir) {
+    if (game->state != GAME_RUNNING) return MOVE_INVALID;
+    Maze   *m = &game->maze;
+    Player *p = &game->player;
+    int newRow = p->row;
+    int newCol = p->col;
+
+    switch (dir) {
+    case 'u': newRow--; break;
+    case 'd': newRow++; break;
+    case 'l': newCol--; break;
+    case 'r': newCol++; break;
+    default: return MOVE_INVALID;
+    }
+
+    if (newRow < 0 || newRow >= m->rows || newCol < 0 || newCol >= m->cols) return MOVE_INVALID;
+    int cell = m->cells[newRow][newCol];
+    if (cell == CELL_WALL) return MOVE_INVALID;
+
+    p->row = newRow;
+    p->col = newCol;
+
+    if (cell == CELL_TRAP) {
+        p->lives--;
+        if (p->lives <= 0) game->state = GAME_LOSE;
+        else {
+            p->row = m->startRow;
+            p->col = m->startCol;
+        }
+        return MOVE_TRAP;
+    }
+
+    if (cell == CELL_EXIT) {
+        game->state = GAME_WIN;
+        p->score += 100;
+        return MOVE_EXIT;
+    }
+
+    p->score++;
+    return MOVE_OK;
+}
+
+int Game_HasFinished(const GameState *game) { return game->state; }
+
+void Maze_InitLevel1(GameState *game)
+{
+    Maze *m = &game->maze;
+    Player *p = &game->player;
+
+    // Laberinto 10x10
+    m->rows = 10;
+    m->cols = 10;
+
+    // Llenar TODO con muros
+    for (int r = 0; r < m->rows; r++) {
+        for (int c = 0; c < m->cols; c++) {
+            m->cells[r][c] = CELL_WALL;
+        }
+    }
+
+    /* Diseño del Nivel 1 (Tu diseño) */
+
+    // Caminos básicos
+    for (int c = 0; c <= 2; c++) m->cells[0][c] = CELL_PATH;
+    for (int r = 1; r <= 2; r++) m->cells[r][2] = CELL_PATH;
+    for (int c = 3; c <= 4; c++) m->cells[2][c] = CELL_PATH;
+    for (int c = 4; c <= 6; c++) m->cells[1][c] = CELL_PATH;
+    for (int r = 2; r <= 4; r++) m->cells[r][6] = CELL_PATH;
+    for (int r = 4; r <= 7; r++) m->cells[r][5] = CELL_PATH;
+    for (int c = 5; c <= 7; c++) m->cells[7][c] = CELL_PATH;
+    for (int r = 8; r <= 9; r++) m->cells[r][7] = CELL_PATH;
+    m->cells[9][8] = CELL_PATH;
+
+    // Salida
+    m->exitRow = 9;
+    m->exitCol = 9;
+    m->cells[9][9] = CELL_EXIT;
+
+    /* Trampas */
+    m->cells[1][1] = CELL_PATH;
+    m->cells[1][0] = CELL_TRAP;
+    m->cells[1][3] = CELL_TRAP;
+    m->cells[4][7] = CELL_PATH;
+    m->cells[4][8] = CELL_PATH;
+    m->cells[4][9] = CELL_TRAP;
+    m->cells[6][7] = CELL_PATH;
+    m->cells[5][7] = CELL_TRAP;
+    m->cells[8][6] = CELL_PATH;
+
+    // Inicio
+    m->startRow = 0;
+    m->startCol = 0;
+
+    p->row   = m->startRow;
+    p->col   = m->startCol;
+    p->lives = 3;
+    p->score = 0;
+
+    game->state = GAME_RUNNING;
+}
+
+void Maze_InitLevel2(GameState *game)
+{
+    Maze *m = &game->maze;
+    Player *p = &game->player;
+
+    m->rows = 10;
+    m->cols = 10;
+
+    for (int r = 0; r < m->rows; r++) {
+        for (int c = 0; c < m->cols; c++) m->cells[r][c] = CELL_WALL;
+    }
+
+    // Espiral hacia el centro (Diseño corregido y soluble)
+    for(int c=0; c<=9; c++) m->cells[0][c] = CELL_PATH;
+    for(int r=0; r<=9; r++) m->cells[r][9] = CELL_PATH;
+    for(int c=0; c<=9; c++) m->cells[9][c] = CELL_PATH;
+    for(int r=2; r<=9; r++) m->cells[r][0] = CELL_PATH;
+
+    for(int c=0; c<=7; c++) m->cells[2][c] = CELL_PATH;
+    for(int r=2; r<=7; r++) m->cells[r][7] = CELL_PATH;
+    for(int c=2; c<=7; c++) m->cells[7][c] = CELL_PATH;
+    for(int r=4; r<=7; r++) m->cells[r][2] = CELL_PATH;
+
+    m->cells[4][2] = CELL_PATH;
+    m->cells[4][3] = CELL_PATH;
+    m->cells[4][4] = CELL_PATH;
+
+    m->exitRow = 4; m->exitCol = 4;
+    m->cells[4][4] = CELL_EXIT;
+
+    m->cells[5][5] = CELL_TRAP;
+    m->cells[1][5] = CELL_TRAP;
+
+    m->startRow = 0;
+    m->startCol = 0;
+
+    p->row = m->startRow;
+    p->col = m->startCol;
+
+    game->state = GAME_RUNNING;
+}

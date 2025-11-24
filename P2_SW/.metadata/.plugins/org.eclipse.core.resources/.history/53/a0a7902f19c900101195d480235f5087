@@ -1,0 +1,79 @@
+#include "Accelerometer.h"
+#include "ADC.h"
+#include "Delay.h"
+#include "xil_printf.h" // Para debug
+
+#define ADC_MAX_COUNTS 4095.0f    // XADC es de 12 bits -> 0..4095
+
+static float raw_to_g(int raw)
+{
+    // El XADC tiene referencia interna de 1V normalmente, pero si usa externa puede ser 3.3V
+    // Asumiremos 1V de referencia interna si no hay divisor externo, o ajusta según tu hardware.
+    // En la Zybo, los pines auxiliares suelen aceptar 0-1V.
+    // Si el BoosterPack entrega 0-3.3V, debería haber un divisor resistivo.
+    // Vamos a asumir rango completo 0-4095 = 0-3.3V para este cálculo (ajusta si es 1V).
+
+    float voltage = (float)raw * (3.3f / ADC_MAX_COUNTS);
+    float dv = voltage - 1.65f; // Centro en 1.65V
+    return dv / 0.66f;          // Sensibilidad 660mV/g
+}
+
+void Accelerometer_init(Accelerometer *acc)
+{
+    acc->offset_gx = 0.0f;
+    acc->offset_gy = 0.0f;
+    acc->offset_gz = 0.0f;
+    acc->max_g     = 0.8f;
+    acc->deadzone  = 0.10f;
+    acc->smoothing = 0.2f;
+}
+
+void Accelerometer_calibrate(Accelerometer *acc, int samples)
+{
+    float sumx = 0, sumy = 0, sumz = 0;
+    int rx, ry, rz;
+
+    xil_printf("ACC: Calibrando (%d muestras)...\r\n", samples);
+
+    for (int i = 0; i < samples; i++) {
+        rx = read_acx();
+        ry = read_acy();
+        rz = read_acz();
+
+        // Debug cada 10 muestras para ver si está vivo
+        if (i % 10 == 0) {
+            xil_printf("ACC Raw: %d %d %d\r\n", rx, ry, rz);
+        }
+
+        sumx += raw_to_g(rx);
+        sumy += raw_to_g(ry);
+        sumz += raw_to_g(rz);
+        delay_ms(20); // Pequeño delay
+    }
+
+    acc->offset_gx = sumx / samples;
+    acc->offset_gy = sumy / samples;
+    acc->offset_gz = (sumz / samples) - 1.0f; // Z debe ser 1g
+
+    xil_printf("ACC: Calibrado. Offsets: X=%d Y=%d Z=%d (x100)\r\n",
+               (int)(acc->offset_gx*100), (int)(acc->offset_gy*100), (int)(acc->offset_gz*100));
+}
+
+void Accelerometer_read_g(Accelerometer *acc, float *gx, float *gy, float *gz)
+{
+    if (gx) *gx = raw_to_g(read_acx()) - acc->offset_gx;
+    if (gy) *gy = raw_to_g(read_acy()) - acc->offset_gy;
+    if (gz) *gz = raw_to_g(read_acz()) - acc->offset_gz;
+}
+
+float Accelerometer_to_movement(Accelerometer *acc, float gvalue)
+{
+    if (gvalue > -acc->deadzone && gvalue < acc->deadzone)
+        return 0.0f;
+
+    if (gvalue >  acc->max_g) gvalue =  acc->max_g;
+    if (gvalue < -acc->max_g) gvalue = -acc->max_g;
+
+    float mv = gvalue / acc->max_g;
+    return mv;
+}

@@ -1,0 +1,167 @@
+#include <stdio.h>
+#include <sleep.h>
+#include <math.h>
+
+#include "platform.h"
+#include "xil_printf.h"
+#include "xparameters.h"
+#include "xgpio.h"
+#include "xstatus.h"
+#include "Delay.h"
+#include "LCD_SPI.h"
+#include "LCD_Driver.h"
+#include "LCD_GUI.h"
+#include "ADC.h"
+#include "I2C.h"
+#include "maze_game.h"
+#include "maze_gui.h"
+#include "Accelerometer.h"
+#include "LightSensor.h"
+#include "TempSensor.h"
+
+/* === Declaraciones externas === */
+extern XGpio gpio0;
+extern XSpi  SpiInstance;   /* LCD */
+extern XSpi  SpiInstance1;  /* ADC */
+
+/* === Configuración de control === */
+#define LOOP_DELAY_MS         40
+#define MOVE_COOLDOWN_TICKS    5
+#define TILT_THRESHOLD       0.25f
+
+int main(void)
+{
+    int Status;
+    int moveCooldown = 0;
+    int sensorTick = 0; // para lectura I2C
+    xil_printf("=== Juego del Laberinto (Booster + Zynq) ===\r\n");
+
+    /* ==== Inicialización general ==== */
+    init_platform();
+
+    // GPIO para LCD
+    Status = XGpio_Initialize(&gpio0, XPAR_AXI_GPIO_0_DEVICE_ID);
+    if (Status != XST_SUCCESS) return XST_FAILURE;
+
+    // SPI 0: LCD
+    Status = XSpi_Init(&SpiInstance, XPAR_AXI_QUAD_SPI_0_DEVICE_ID);
+    if (Status != XST_SUCCESS) {
+        xil_printf("Error: SPI LCD init\r\n");
+        return XST_FAILURE;
+    }
+
+    // SPI 1: ADC externo (para acelerómetro)
+    Status = XSpi_Init(&SpiInstance1, XPAR_AXI_QUAD_SPI_1_DEVICE_ID);
+    if (Status != XST_SUCCESS) {
+        xil_printf("Error: SPI ADC init\r\n");
+        return XST_FAILURE;
+    }
+
+    // Inicializar ADC (XADC interno si lo usas)
+    Status = init_adc(&SpiInstance1, XPAR_AXI_QUAD_SPI_1_DEVICE_ID);
+    if (Status != XST_SUCCESS) {
+        xil_printf("Advertencia: init_adc devolvió error\r\n");
+    }
+
+    // Inicializar I2C para sensores de luz/temperatura
+    Status = init_IIC();
+    if (Status != XST_SUCCESS) {
+        xil_printf("Error: I2C init\r\n");
+    }
+
+    /* ==== Pantalla LCD ==== */
+    LCD_Init(SCAN_DIR_DFT);
+    LCD_Clear(WHITE);
+    GUI_INTRO();
+    delay_ms(700);
+    LCD_Clear(WHITE);
+
+    /* ==== Acelerómetro ==== */
+    Accelerometer acc;
+    Accelerometer_init(&acc);
+    GUI_DisString_EN(10, 50, "Calibrando...", &Font12, WHITE, BLUE);
+    Accelerometer_calibrate(&acc, 50);
+    LCD_Clear(WHITE);
+    xil_printf("Calibracion completa\r\n");
+
+    /* ==== Sensores I2C ==== */
+    LightSensor light;
+    TempSensor  temp;
+    LightSensor_init(&light);
+    TempSensor_init(&temp);
+    LightSensor_update(&light);
+    TempSensor_update(&temp);
+
+    /* ==== Juego ==== */
+    GameState game;
+    Maze_InitLevel1(&game);
+    GUI_ResetDrawState();
+    GUI_DrawMazeAndPlayer(&game, light.mode, temp.player_color);
+
+    xil_printf("Juego iniciado.\r\n");
+
+    /* ==== Bucle principal ==== */
+    while (1) {
+        // --- 1. Leer acelerómetro ---
+        float gx, gy, gz;
+        Accelerometer_read_g(&acc, &gx, &gy, &gz);
+
+        // Intercambio ejes: Booster montado 90°
+        float mvx = Accelerometer_to_movement(&acc, gy);
+        float mvy = Accelerometer_to_movement(&acc, gx);
+
+        char dir = 0;
+
+        // --- 2. Decidir dirección ---
+        if (fabsf(mvy) > fabsf(mvx)) {
+            if (mvy >  TILT_THRESHOLD) dir = 'd';
+            else if (mvy < -TILT_THRESHOLD) dir = 'u';
+        } else {
+            if (mvx >  TILT_THRESHOLD) dir = 'r';
+            else if (mvx < -TILT_THRESHOLD) dir = 'l';
+        }
+
+        if (moveCooldown > 0) moveCooldown--;
+
+        // --- 3. Movimiento ---
+        if (dir != 0 && moveCooldown == 0 && Game_HasFinished(&game) == GAME_RUNNING) {
+            int result = Game_TryMove(&game, dir);
+            if (result != MOVE_INVALID) {
+                GUI_DrawMazeAndPlayer(&game, light.mode, temp.player_color);
+                moveCooldown = MOVE_COOLDOWN_TICKS;
+            }
+        }
+
+        // --- 4. Lectura periódica sensores I2C (cada ~1 s) ---
+        sensorTick += LOOP_DELAY_MS;
+        if (sensorTick >= 1000) {
+            sensorTick = 0;
+            LightSensor_update(&light);
+            TempSensor_update(&temp);
+
+            xil_printf("Lux: %d | Temp: %d C\r\n", light.lux_value, temp.current_temp);
+        }
+
+        // --- 5. Fin de nivel ---
+        int state = Game_HasFinished(&game);
+
+        if (state == GAME_WIN) {
+            LCD_Clear(BLACK);
+            GUI_DisString_EN(20, 60, "GANASTE!", &Font16, BLACK, GREEN);
+            delay_ms(2000);
+            Maze_InitLevel1(&game); // reiniciar mismo nivel
+            GUI_ResetDrawState();
+            GUI_DrawMazeAndPlayer(&game, light.mode, temp.player_color);
+        }
+        else if (state == GAME_LOSE) {
+            LCD_Clear(BLACK);
+            GUI_DisString_EN(30, 60, "GAME OVER", &Font16, BLACK, RED);
+            while (1) delay_ms(100);
+        }
+
+        delay_ms(LOOP_DELAY_MS);
+    }
+
+    cleanup_platform();
+    return 0;
+}
