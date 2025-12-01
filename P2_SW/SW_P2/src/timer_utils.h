@@ -7,7 +7,6 @@
 #include "xil_printf.h"
 
 /* IDs y frecuencia reales sacados de xparameters.h */
-/* CORRECCIÓN: Usar Timer 1 */
 #define TIMER_DEVICE_ID   XPAR_TMRCTR_1_DEVICE_ID
 #define TIMER_CLOCK_FREQ  XPAR_TMRCTR_1_CLOCK_FREQ_HZ
 

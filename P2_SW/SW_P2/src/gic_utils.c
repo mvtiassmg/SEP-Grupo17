@@ -29,7 +29,7 @@ int init_gic_and_connect(u32 gic_device_id, u32 irq_id,
     status = XScuGic_Connect(&GicInst, irq_id, handler, callback_ref);
     if (status != XST_SUCCESS) return XST_FAILURE;
 
-    /* Habilitar esa línea de interrupción */
+    /* Habilitar esa lï¿½nea de interrupciï¿½n */
     XScuGic_Enable(&GicInst, irq_id);
 
     /* Habilitar interrupciones a nivel de CPU */

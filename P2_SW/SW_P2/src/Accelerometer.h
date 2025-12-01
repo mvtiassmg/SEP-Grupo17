@@ -9,9 +9,9 @@ typedef struct {
     float offset_gy;
     float offset_gz;
 
-    float max_g;         // límite máximo de inclinación (ej: 0.6g)
-    float deadzone;      // zona muerta (ej: 0.05g)
-    float smoothing;     // factor de suavizado 0–1
+    float max_g;         // límite máximo de inclinación 
+    float deadzone;      // zona muerta 
+    float smoothing;     // factor de suavizado 
 } Accelerometer;
 
 /* Inicialización */

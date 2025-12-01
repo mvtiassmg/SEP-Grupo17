@@ -1,14 +1,9 @@
 #include "Joystick.h"
-#include "ADC.h"   // Para acceder a read_joyx() y read_joyy()
-#include "Delay.h" // Para delay_ms
+#include "ADC.h"   
+#include "Delay.h" 
 
 void Joystick_init(Joystick *js)
 {
-    // Ajusta estos valores según la resolución de tu ADC
-    // Si tu ADC es de 10 bits (0-1023), el centro es ~512
-    // Si es de 12 bits (0-4095), el centro es ~2048
-    // Viendo tu ADC.c, parece que divides por 4, así que si es 12 bits -> 10 bits efectivos?
-    // Asumiremos rango 0-1023 por seguridad.
     js->center_x = 512;
     js->center_y = 512;
     js->deadzone = 0.15f;

@@ -11,9 +11,9 @@ void GUI_Swop(POINT Point1, POINT Point2)
     Point2 = Temp;
 }
 
-// ... (Funciones DrawPoint, DrawLine, DrawRectangle, DrawCircle originales o simplificadas aquí) ...
+// ... (Funciones DrawPoint, DrawLine, DrawRectangle, DrawCircle originales o simplificadas aqui) ...
 // Para abreviar, pongo las funciones clave corregidas abajo. Copia todo el archivo si puedes,
-// pero lo más importante es GUI_DisChar.
+// pero lo mas importante es GUI_DisChar.
 
 void GUI_DrawPoint(POINT Xpoint, POINT Ypoint, COLOR Color,
                    DOT_PIXEL Dot_Pixel, DOT_STYLE DOT_STYLE)
@@ -176,7 +176,7 @@ void GUI_DisChar(POINT Xpoint, POINT Ypoint, const char Acsii_Char,
     for(Page = 0; Page < Font->Height; Page ++ ) {
         for(Column = 0; Column < Font->Width; Column ++ ) {
 
-            // CORRECCIÓN: Dibujar SIEMPRE, sea fondo o frente
+            // CORRECCIï¿½N: Dibujar SIEMPRE, sea fondo o frente
             if(*ptr &(0x80 >>(Column % 8))) {
                 GUI_DrawPoint(Xpoint + Column, Ypoint + Page, Color_Foreground, DOT_PIXEL_DFT, DOT_STYLE_DFT);
             } else {

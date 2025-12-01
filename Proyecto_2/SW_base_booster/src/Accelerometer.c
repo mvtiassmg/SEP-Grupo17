@@ -2,17 +2,12 @@
 #include "ADC.h"
 #include "Delay.h"
 
-#define ADC_MAX_COUNTS 1023.0f    // 10 bits -> 0..1023
+#define ADC_MAX_COUNTS 1023.0f
 
 static inline float raw_to_g(int raw)
 {
-    // Pasar cuentas ADC a volt
     float voltage = (float)raw * (3.3f / ADC_MAX_COUNTS);
-
-    // Desplazamiento respecto al punto medio (~1.65 V)
     float dv = voltage - 1.65f;
-
-    // Sensibilidad típica del KXTC9-2050 ≈ 0.66 V/g
     return dv / 0.66f;   // resultado en "g"
 }
 
@@ -22,9 +17,9 @@ void Accelerometer_init(Accelerometer *acc)
     acc->offset_gy = 0.0f;
     acc->offset_gz = 0.0f;
 
-    acc->max_g     = 0.8f;   // inclinación máxima que te interesa
-    acc->deadzone  = 0.10f;  // zona muerta ~0.1g para que no tiemble
-    acc->smoothing = 0.2f;   // suavizado
+    acc->max_g     = 0.8f;   
+    acc->deadzone  = 0.10f;  
+    acc->smoothing = 0.2f; 
 }
 
 void Accelerometer_calibrate(Accelerometer *acc, int samples)

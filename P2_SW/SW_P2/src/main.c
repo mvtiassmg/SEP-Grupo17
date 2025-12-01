@@ -28,7 +28,6 @@
 #define GPIO_LCD_ID         XPAR_AXI_GPIO_0_DEVICE_ID
 #define SPI_LCD_ID          XPAR_AXI_QUAD_SPI_0_DEVICE_ID
 
-// Si no está definido en xparameters, usar el ID 1 por defecto
 #ifndef SPI_ADC_ID
 #define SPI_ADC_ID          XPAR_AXI_QUAD_SPI_1_DEVICE_ID
 #endif
@@ -45,7 +44,7 @@ typedef enum {
 
 ControlMode currentControl = CTRL_ACCEL;
 
-/* === VARIABLES GLOBALES === */
+
 // Instancias de drivers (externas para compartir con otras librerías)
 extern XGpio gpio0;
 extern XSpi  SpiInstance;   /* LCD */
@@ -55,7 +54,7 @@ extern XSpi  SpiInstance1;  /* ADC */
 LightSensor lightSensor;
 TempSensor  tempSensor;
 
-/* === FUNCIONES AUXILIARES === */
+
 
 void Show_Menu(void)
 {

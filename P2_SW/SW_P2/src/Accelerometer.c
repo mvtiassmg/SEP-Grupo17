@@ -22,7 +22,7 @@ void Accelerometer_init(Accelerometer *acc)
     acc->offset_gy = 0.0f;
     acc->offset_gz = 0.0f;
 
-    acc->max_g     = 0.8f;   // inclinación máxima que te interesa
+    acc->max_g     = 0.8f;   // inclinación máxima
     acc->deadzone  = 0.10f;  // zona muerta ~0.1g para que no tiemble
     acc->smoothing = 0.2f;   // suavizado
 }
@@ -38,7 +38,6 @@ void Accelerometer_calibrate(Accelerometer *acc, int samples)
 
         delay_ms(5);
     }
-
     acc->offset_gx = sumx / samples;
     acc->offset_gy = sumy / samples;
     acc->offset_gz = (sumz / samples) - 1.0f;

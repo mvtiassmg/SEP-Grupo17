@@ -21,7 +21,7 @@
 #include "Accelerometer.h"
 
 extern XGpio gpio0;
-extern XSpi  SpiInstance;   /* The instance of the SPI device (LCD) */
+extern XSpi  SpiInstancee instance of the SPI device (LCD) */
 extern XSpi  SpiInstance1;  /* The instance of the SPI device (ADC) */
 
 /* Control del movimiento */

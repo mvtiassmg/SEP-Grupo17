@@ -4,7 +4,7 @@ typedef u8 DataBuffer[BUFFER_SIZE_ADC];
 
 
 
-// Mantenemos la firma antigua pero ignoramos los parámetros de SPI
+// Mantenemos la firma antigua pero ignoramos los parï¿½metros de SPI
 #include "ADC.h"
 #include "xadcps.h"
 #include "xparameters.h"
@@ -16,7 +16,7 @@ typedef u8 DataBuffer[BUFFER_SIZE_ADC];
 static XAdcPs XAdcInst;      /* XADC driver instance */
 static int IsInitialized = 0;
 
-// Mantenemos la firma antigua pero ignoramos los parámetros de SPI
+// Mantenemos la firma antigua pero ignoramos los parï¿½metros de SPI
 int init_adc(XSpi *SpiPtr, u16 SpiDeviceId)
 {
     int Status;
@@ -55,7 +55,7 @@ int init_adc(XSpi *SpiPtr, u16 SpiDeviceId)
     return XST_SUCCESS;
 }
 
-// Función genérica de lectura
+// Funcion generica de lectura
 u32 read_adc(int channel)
 {
     if (!IsInitialized) return 0;
