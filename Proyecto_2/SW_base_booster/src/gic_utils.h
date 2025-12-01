@@ -12,7 +12,7 @@
 
 extern XScuGic GicInst;
 
-/* Prototipos */
+
 int init_gic_and_connect(u32 gic_device_id, u32 irq_id,
                          Xil_ExceptionHandler handler, void *callback_ref);
 

@@ -3,7 +3,6 @@
 #include "Accelerometer.h"
 #include "xil_printf.h"
 
-/* ================= Variables globales ================= */
 XScuGic AIntc;
 XTmrCtr ATimer0;
 XTmrCtr ATimer1;
