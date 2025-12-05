@@ -1,0 +1,142 @@
+#include "interrupts.h"
+#include "xil_printf.h"
+#include "song.h"
+
+TetrisPlayer myTetris;
+
+XScuGic AIntc;
+XTmrCtr ATimer0;
+XTmrCtr ATimer1;
+XGpio   ALightGpio;
+
+volatile int ao2_game_tick = 0;
+volatile int ao2_light_flag = 0;
+
+// CONTADOR DE DIAGNÓSTICO
+volatile u32 debug_isr_count = 0;
+
+static u32 seconds_to_ticks(#ifndef INTERRUPTS_H
+#define INTERRUPTS_H
+
+#include "xparameters.h"
+#include "xscugic.h"
+#include "xtmrctr.h"
+#include "xgpio.h"
+#include "xil_exception.h"
+
+// --- IDs de Hardware (Ajusta si tus nombres en xparameters son distintos) ---
+#define TIMER0_DEVICE_ID     XPAR_AXI_TIMER_0_DEVICE_ID
+#define TIMER1_DEVICE_ID     XPAR_AXI_TIMER_1_DEVICE_ID
+#define TIMER0_IRPT_ID       XPAR_FABRIC_AXI_TIMER_0_INTERRUPT_INTR
+#define TIMER1_IRPT_ID       XPAR_FABRIC_AXI_TIMER_1_INTERRUPT_INTR
+
+#define LIGHT_GPIO_DEVICE_ID XPAR_AXI_GPIO_1_DEVICE_ID
+#define LIGHT_GPIO_IRQ_ID    XPAR_FABRIC_AXI_GPIO_1_IP2INTC_IRPT_INTR
+#define LIGHT_GPIO_CHANNEL   1
+
+#define TIMER_CLOCK_HZ       XPAR_AXI_TIMER_0_CLOCK_FREQ_HZ
+#define TIMER0_PERIOD_SEC    0.001f // 1 ms (Música y Sensores)
+#define TIMER1_PERIOD_SEC    0.050f // 50 ms (Lógica Juego)
+
+// --- Variables globales compartidas ---
+extern volatile int ao2_game_tick;
+extern volatile int ao2_light_flag;
+// extern volatile float ao2_gx, ao2_gy, ao2_gz; // Eliminadas para evitar conflicto SPI
+// extern volatile int ao2_pot1, ao2_pot2;       // Eliminadas para evitar conflicto SPI
+extern XGpio ALightGpio; // Necesario si main.c lee el GPIO directamente
+
+// --- DEBUG: Contador de interrupciones ---
+extern volatile u32 debug_isr_count;
+
+// --- Prototipos ---
+int AO2_InitInterruptSystem();
+
+// Estas son las funciones que faltaban:
+void AO2_EnableLightInterrupt(void);
+void AO2_DisableLightInterrupt(void);
+
+#endiffloat sec) {
+    double ticks = (double)TIMER_CLOCK_HZ * sec;
+    if (ticks < 1) return 1;
+    return (u32)ticks;
+}
+
+/* ISR Timer 0 (1ms) */
+void Timer0_ISR(void *ref, u8 Timer) {
+    // 1. Incrementamos contador para saber si estamos vivos
+    debug_isr_count++;
+
+    // 2. Música
+    Tetris_Tick_1ms(&myTetris);
+
+    XTmrCtr_ClearStats((XTmrCtr*)ref);
+}
+
+/* ISR Timer 1 (50ms) */
+void Timer1_ISR(void *ref, u8 Timer) {
+    ao2_game_tick = 1;
+    XTmrCtr_ClearStats((XTmrCtr*)ref);
+}
+
+/* ISR GPIO Luz */
+void LightGPIO_ISR(void *ref) {
+    u32 st = XGpio_InterruptGetStatus(&ALightGpio);
+    XGpio_InterruptClear(&ALightGpio, st);
+    ao2_light_flag = 1;
+}
+
+void AO2_EnableLightInterrupt(void) {
+    XGpio_InterruptEnable(&ALightGpio, XGPIO_IR_CH1_MASK);
+    XGpio_InterruptGlobalEnable(&ALightGpio);
+}
+
+void AO2_DisableLightInterrupt(void) {
+    XGpio_InterruptDisable(&ALightGpio, XGPIO_IR_CH1_MASK);
+    XGpio_InterruptGlobalDisable(&ALightGpio);
+}
+
+int AO2_InitInterruptSystem() {
+    int st;
+    XScuGic_Config *cfg;
+
+    cfg = XScuGic_LookupConfig(XPAR_SCUGIC_0_DEVICE_ID);
+    if (!cfg) return XST_FAILURE;
+
+    st = XScuGic_CfgInitialize(&AIntc, cfg, cfg->CpuBaseAddress);
+    if (st != XST_SUCCESS) return st;
+
+    Xil_ExceptionInit();
+
+    // Timer 0
+    XTmrCtr_Initialize(&ATimer0, TIMER0_DEVICE_ID);
+    XTmrCtr_SetHandler(&ATimer0, Timer0_ISR, &ATimer0);
+    XTmrCtr_SetOptions(&ATimer0, 0, XTC_INT_MODE_OPTION | XTC_AUTO_RELOAD_OPTION);
+    XTmrCtr_SetResetValue(&ATimer0, 0, seconds_to_ticks(TIMER0_PERIOD_SEC));
+    XScuGic_Connect(&AIntc, TIMER0_IRPT_ID, (Xil_ExceptionHandler)XTmrCtr_InterruptHandler, &ATimer0);
+    XScuGic_Enable(&AIntc, TIMER0_IRPT_ID);
+
+    // Timer 1
+    XTmrCtr_Initialize(&ATimer1, TIMER1_DEVICE_ID);
+    XTmrCtr_SetHandler(&ATimer1, Timer1_ISR, &ATimer1);
+    XTmrCtr_SetOptions(&ATimer1, 0, XTC_INT_MODE_OPTION | XTC_AUTO_RELOAD_OPTION);
+    XTmrCtr_SetResetValue(&ATimer1, 0, seconds_to_ticks(TIMER1_PERIOD_SEC));
+    XScuGic_Connect(&AIntc, TIMER1_IRPT_ID, (Xil_ExceptionHandler)XTmrCtr_InterruptHandler, &ATimer1);
+    XScuGic_Enable(&AIntc, TIMER1_IRPT_ID);
+
+    // GPIO
+    XGpio_Initialize(&ALightGpio, LIGHT_GPIO_DEVICE_ID);
+    XGpio_SetDataDirection(&ALightGpio, LIGHT_GPIO_CHANNEL, 0xFFFFFFFF);
+    XScuGic_Connect(&AIntc, LIGHT_GPIO_IRQ_ID, (Xil_ExceptionHandler)LightGPIO_ISR, &ALightGpio);
+    XScuGic_Enable(&AIntc, LIGHT_GPIO_IRQ_ID);
+    AO2_DisableLightInterrupt();
+
+    // Handler Global
+    Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_IRQ_INT, (Xil_ExceptionHandler)XScuGic_InterruptHandler, &AIntc);
+    Xil_ExceptionEnable();
+
+    // Start
+    XTmrCtr_Start(&ATimer0, 0);
+    XTmrCtr_Start(&ATimer1, 0);
+
+    return XST_SUCCESS;
+}

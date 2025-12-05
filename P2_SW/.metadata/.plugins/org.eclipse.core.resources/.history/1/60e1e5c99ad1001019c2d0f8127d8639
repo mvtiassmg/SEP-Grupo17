@@ -1,0 +1,460 @@
+#include <stdio.h>
+#include <sleep.h>
+#include <math.h>
+#include <stdlib.h>
+
+#include "platform.h"
+#include "xil_printf.h"
+#include "xparameters.h"
+#include "xgpio.h"
+#include "xstatus.h"
+#include "xscugic.h"
+#include "xtmrctr.h"
+#include "xil_exception.h"
+
+// Includes del usuario
+#include "Delay.h"
+#include "LCD_SPI.h"
+#include "LCD_Driver.h"
+#include "LCD_GUI.h"
+#include "ADC.h"
+#include "I2C.h"
+#include "maze_game.h"
+#include "maze_gui.h"
+#include "Accelerometer.h"
+#include "Joystick.h"
+#include "MotionJoystick.h"
+#include "LightSensor.h"
+#include "TempSensor.h"
+#include "game_config.h"
+#include "song.h" // Música Tetris (tetris_player.h)
+
+/* ==========================================================================
+ * DEFINICIONES DE TIPOS Y MODOS (Movido al inicio para evitar errores)
+ * ========================================================================== */
+typedef enum {
+    CTRL_ACCEL = 1,
+    CTRL_JOYSTICK = 2
+} ControlMode;
+
+/* ==========================================================================
+ * DEFINICIONES DE HARDWARE (IDs)
+ * ========================================================================== */
+
+// 1. GIC (Controlador de Interrupciones)
+#define INTC_DEVICE_ID       XPAR_SCUGIC_SINGLE_DEVICE_ID
+
+// 2. TIMERS (AXI Timer 0 y 1)
+#define TIMER0_DEVICE_ID     XPAR_AXI_TIMER_0_DEVICE_ID
+#define TIMER0_IRPT_ID       XPAR_FABRIC_AXI_TIMER_0_INTERRUPT_INTR
+
+#define TIMER1_DEVICE_ID     XPAR_AXI_TIMER_1_DEVICE_ID
+#define TIMER1_IRPT_ID       XPAR_FABRIC_AXI_TIMER_1_INTERRUPT_INTR
+
+#define TIMER_CLOCK_HZ       XPAR_AXI_TIMER_0_CLOCK_FREQ_HZ
+
+// 3. GPIOs
+// GPIO 0: LCD (Reset/DC)
+#define GPIO_LCD_ID          XPAR_AXI_GPIO_0_DEVICE_ID
+// GPIO 1: Sensor Luz (Interrupción) - ASUMIENDO QUE ES EL 1 SEGÚN TUS PROYECTOS DE EJEMPLO
+#define GPIO_LIGHT_ID        XPAR_AXI_GPIO_1_DEVICE_ID
+#define LIGHT_IRPT_ID        XPAR_FABRIC_AXI_GPIO_1_IP2INTC_IRPT_INTR
+#define LIGHT_CHANNEL        1
+#define LIGHT_INT_MASK       XGPIO_IR_CH1_MASK
+
+// 4. SPI
+#define SPI_LCD_ID           XPAR_AXI_QUAD_SPI_0_DEVICE_ID
+#ifndef SPI_ADC_ID
+#define SPI_ADC_ID           XPAR_AXI_QUAD_SPI_1_DEVICE_ID
+#endif
+
+// 5. IP AUDIO
+#ifndef MY_PWM_BASEADDR
+#define MY_PWM_BASEADDR      XPAR_BUZZERBOOSTER_DRIVER_0_S00_AXI_BASEADDR
+#endif
+
+/* ==========================================================================
+ * VARIABLES GLOBALES Y OBJETOS
+ * ========================================================================== */
+
+// --- Instancias de Drivers ---
+XScuGic IntcInstance;       // Controlador de Interrupciones
+XTmrCtr Timer0;             // Timer Música (1ms)
+XTmrCtr Timer1;             // Timer Juego (50ms)
+XGpio   GpioLight;          // GPIO Sensor Luz
+XGpio   gpio0;              // GPIO LCD (Externo en LCD_Driver)
+XSpi    SpiInstance;        // SPI LCD (Externo en LCD_Driver)
+XSpi    SpiInstance1;       // SPI ADC
+
+// --- Objetos Lógicos ---
+LightSensor lightSensor;
+TempSensor  tempSensor;
+TetrisPlayer myTetris;
+
+// --- Flags Volátiles (Comunicación ISR -> Main) ---
+volatile int game_tick_flag = 0;
+volatile int light_irq_flag = 0;
+volatile u32 isr_debug_count = 0;
+
+// --- Configuración ---
+int music_enabled = 0;
+ControlMode currentControl = CTRL_ACCEL;
+
+#define TIMER0_PERIOD_SEC    0.001f // 1 ms
+#define TIMER1_PERIOD_SEC    0.050f // 50 ms
+#define TILT_THRESHOLD       0.25f
+#define MOVE_COOLDOWN_TICKS  5
+// LOOP_DELAY_MS ya no se usa para timing crítico, solo para liberar CPU
+#define LOOP_IDLE_US        1000   // 1ms de descanso en el while
+
+/* ==========================================================================
+ * PROTOTIPOS LOCALES
+ * ========================================================================== */
+static int SetupInterruptSystem(void);
+static void Timer0_Handler(void *CallBackRef);
+static void Timer1_Handler(void *CallBackRef);
+static void Light_GPIO_Handler(void *CallBackRef);
+void AO2_EnableLightInterrupt(void);  // Necesaria para game_config.c
+void AO2_DisableLightInterrupt(void); // Necesaria para game_config.c
+
+// Helper para calcular ticks
+static u32 seconds_to_ticks(float sec) {
+    return (u32)(TIMER_CLOCK_HZ * sec);
+}
+
+/* ==========================================================================
+ * MAIN
+ * ========================================================================== */
+int main(void)
+{
+    int Status;
+    char opt;
+    u32 seed_val = 1000;
+
+    // Variables de Loop
+    int game_time_seconds = 60;
+    int tick_counter_1s   = 0;
+    int moveCooldown      = 0;
+    u32 last_isr_count    = 0;
+    int debug_sec_counter = 0;
+
+    init_platform();
+    xil_printf("\r\n--- INICIO SISTEMA (INTERRUPCIONES EN MAIN) ---\r\n");
+
+    // 1. Inicialización Hardware Base (Sin Interrupciones)
+    Status = XGpio_Initialize(&gpio0, GPIO_LCD_ID);
+    if (Status != XST_SUCCESS) return XST_FAILURE;
+
+    Status = XSpi_Init(&SpiInstance, SPI_LCD_ID);
+    if (Status != XST_SUCCESS) return XST_FAILURE;
+
+    Status = XSpi_Init(&SpiInstance1, SPI_ADC_ID);
+    Status = init_adc(&SpiInstance1, SPI_ADC_ID);
+    Status = init_IIC();
+
+    // 2. Inicializar Pantalla
+    LCD_Init(SCAN_DIR_DFT);
+    LCD_Clear(BLACK);
+    GUI_DisString_EN(10, 50, "INICIANDO SISTEMA...", &Font12, BLACK, WHITE);
+
+    // 3. Inicializar Lógica Audio (ANTES de interrupciones)
+    xil_printf("[INIT] Tetris Core...\r\n");
+    Tetris_Init(&myTetris, MY_PWM_BASEADDR);
+
+    // 4. Inicializar Sensores Lógicos
+    Accelerometer acc; Accelerometer_init(&acc);
+    Joystick js;       Joystick_init(&js);
+    MotionJoystick mjs; MotionJoystick_init(&mjs);
+    LightSensor_init(&lightSensor);
+    TempSensor_init(&tempSensor);
+
+    // 5. CONFIGURAR INTERRUPCIONES (GIC + Timers + GPIO)
+    xil_printf("[INIT] Configurando Interrupciones...\r\n");
+    Status = SetupInterruptSystem();
+    if (Status != XST_SUCCESS) {
+        xil_printf("[ERROR] Fallo SetupInterruptSystem (%d)\r\n", Status);
+        LCD_Clear(RED);
+        GUI_DisString_EN(10, 50, "ERROR IRQ", &Font16, RED, WHITE);
+        return XST_FAILURE;
+    }
+
+    // 6. Arrancar Timers
+    XTmrCtr_Start(&Timer0, 0);
+    XTmrCtr_Start(&Timer1, 0);
+
+    // --------------------------------------------------------
+    // PANTALLA DE CONFIGURACIÓN (Lo que pediste)
+    // --------------------------------------------------------
+    LCD_Clear(BLACK);
+    GUI_DisString_EN(15, 30, "CONFIGURACION", &Font16, BLACK, CYAN);
+    GUI_DisString_EN(10, 60, "MIRAR CONSOLA", &Font12, BLACK, YELLOW);
+    GUI_DisString_EN(20, 80, "UART...", &Font16, BLACK, YELLOW);
+
+    GameConfig cfg;
+    GameConfig_ReadUART(&cfg);
+    GameHardware_Init(&cfg); // Esto llamará a AO2_Enable/DisableLightInterrupt
+
+    if (cfg.audio_enabled) {
+        music_enabled = 1;
+        Tetris_TogglePlay(&myTetris);
+    }
+
+    // --------------------------------------------------------
+    // CALIBRACIÓN Y MENÚ
+    // --------------------------------------------------------
+    xil_printf("\r\n--- CALIBRACION ---\r\n");
+    xil_printf("1. Acelerometro\r\n2. Joystick\r\nSeleccione: ");
+    opt = inbyte();
+    xil_printf("%c\r\n", opt);
+
+    LCD_Clear(BLACK);
+    if (opt == '2') {
+        currentControl = CTRL_JOYSTICK;
+        GUI_DisString_EN(10, 50, "CALIBRANDO JOY...", &Font12, BLACK, YELLOW);
+        Joystick_calibrate(&js, 50);
+    } else {
+        currentControl = CTRL_ACCEL;
+        GUI_DisString_EN(10, 50, "CALIBRANDO ACC...", &Font12, BLACK, CYAN);
+        Accelerometer_calibrate(&acc, 50);
+    }
+
+    // --------------------------------------------------------
+    // INICIO JUEGO
+    // --------------------------------------------------------
+    GameState game;
+    Maze_GenerateRandom(&game, seed_val);
+    GUI_ResetDrawState();
+
+    // Dibujo inicial
+    LCD_Clear(WHITE);
+    GUI_DrawMazeAndPlayer(&game, lightSensor.mode, tempSensor.player_color);
+
+    xil_printf("[MAIN] Entrando al bucle principal...\r\n");
+
+    while (1) {
+
+        // --- A. ESPERA ACTIVA (Sincronización con Timer1 - 50ms) ---
+        // Si no ha pasado el tiempo, verificamos la bandera de Luz o dormimos
+        if (!game_tick_flag) {
+
+            // Revisar interrupción de luz asíncrona
+            if (light_irq_flag) {
+                light_irq_flag = 0; // Limpiar bandera
+                // Leer sensor real para confirmar estado
+                int lux_raw = XGpio_DiscreteRead(&GpioLight, LIGHT_CHANNEL);
+                xil_printf("[IRQ] Luz disparada. GPIO: %d\r\n", lux_raw);
+
+                // Actualizar lógica del sensor
+                LightSensor_update(&lightSensor);
+                // Actualizar gráficos inmediatos
+                GUI_DrawMazeAndPlayer(&game, lightSensor.mode, tempSensor.player_color);
+            }
+
+            usleep(1000); // 1ms sleep para no saturar CPU
+            continue;
+        }
+
+        // Consumir el tick de juego
+        game_tick_flag = 0;
+
+        // --- B. LÓGICA DE 1 SEGUNDO (Heartbeat y Sensores lentos) ---
+        tick_counter_1s++;
+        if (tick_counter_1s >= 20) { // 20 ticks de 50ms = 1 seg
+            tick_counter_1s = 0;
+
+            // Debug: Verificar que las interrupciones corren
+            u32 diff = isr_debug_count - last_isr_count;
+            last_isr_count = isr_debug_count;
+            xil_printf("[HEARTBEAT] Time: %d | Timer0 (Music) IRQs/seg: %lu\r\n",
+                       game_time_seconds, (unsigned long)diff);
+
+            // Actualizar Temp
+            TempSensor_update(&tempSensor);
+
+            // Lógica tiempo
+            if (game.state == GAME_RUNNING) {
+                game_time_seconds--;
+                if (game_time_seconds <= 0) game.state = GAME_TIMEOUT;
+            }
+        }
+
+        // --- C. CONTROLES (Polling seguro) ---
+        char dir = 0;
+        if (game.state == GAME_RUNNING) {
+            if (currentControl == CTRL_ACCEL) {
+                float gx, gy, gz;
+                // Leer directo (seguro en main)
+                Accelerometer_read_g(&acc, &gx, &gy, &gz);
+
+                float mvx = Accelerometer_to_movement(&acc, gy);
+                float mvy = Accelerometer_to_movement(&acc, gx);
+
+                if (fabsf(mvy) > fabsf(mvx)) {
+                    if (mvy > TILT_THRESHOLD) dir = 'd'; else if (mvy < -TILT_THRESHOLD) dir = 'u';
+                } else {
+                    if (mvx > TILT_THRESHOLD) dir = 'r'; else if (mvx < -TILT_THRESHOLD) dir = 'l';
+                }
+            } else { // Joystick
+                int jx = read_joyx();
+                int jy = read_joyy();
+                if (jy > 2600) dir = 'u'; else if (jy < 1500) dir = 'd';
+                if (jx > 2600) dir = 'r'; else if (jx < 1500) dir = 'l';
+            }
+
+            if (moveCooldown > 0) moveCooldown--;
+
+            if (dir != 0 && moveCooldown == 0) {
+                if (Game_TryMove(&game, dir) != MOVE_INVALID) {
+                    moveCooldown = MOVE_COOLDOWN_TICKS;
+                    GUI_DrawMazeAndPlayer(&game, lightSensor.mode, tempSensor.player_color);
+                }
+            }
+        }
+
+        // --- D. GUI (Tiempo) ---
+        if (tick_counter_1s == 0) { // Actualizar texto 1 vez por segundo
+            char timeStr[16];
+            sprintf(timeStr, "T:%d ", game_time_seconds);
+            uint16_t txtC = (lightSensor.mode == LIGHT_MODE_DAY) ? BLACK : WHITE;
+            uint16_t bgC  = (lightSensor.mode == LIGHT_MODE_DAY) ? WHITE : BLACK;
+            GUI_DisString_EN(80, 120, timeStr, &Font8, bgC, txtC);
+        }
+
+        // --- E. FIN DEL JUEGO ---
+        if (game.state != GAME_RUNNING) {
+            LCD_Clear(BLACK);
+            if (game.state == GAME_WIN)
+                GUI_DisString_EN(30, 50, "GANASTE!", &Font16, BLACK, GREEN);
+            else
+                GUI_DisString_EN(30, 50, "GAME OVER", &Font16, BLACK, RED);
+
+            if (music_enabled) Tetris_TogglePlay(&myTetris); // Stop music
+            while (1) usleep(100000);
+        }
+    }
+
+    return 0;
+}
+
+/* ==========================================================================
+ * IMPLEMENTACIÓN DE HANDLERS Y SETUP
+ * ========================================================================== */
+
+static void Timer0_Handler(void *CallBackRef) {
+    XTmrCtr *InstancePtr = (XTmrCtr *)CallBackRef;
+    if (XTmrCtr_IsExpired(InstancePtr, 0)) {
+        XTmrCtr_Stop(InstancePtr, 0);
+
+        // --- LÓGICA MÚSICA (1ms) ---
+        isr_debug_count++;
+        if (music_enabled) Tetris_Tick_1ms(&myTetris);
+        // ---------------------------
+
+        XTmrCtr_Reset(InstancePtr, 0);
+        XTmrCtr_Start(InstancePtr, 0);
+    }
+}
+
+static void Timer1_Handler(void *CallBackRef) {
+    XTmrCtr *InstancePtr = (XTmrCtr *)CallBackRef;
+    if (XTmrCtr_IsExpired(InstancePtr, 0)) {
+        XTmrCtr_Stop(InstancePtr, 0);
+
+        // --- LÓGICA JUEGO (50ms) ---
+        game_tick_flag = 1;
+        // ---------------------------
+
+        XTmrCtr_Reset(InstancePtr, 0);
+        XTmrCtr_Start(InstancePtr, 0);
+    }
+}
+
+static void Light_GPIO_Handler(void *CallBackRef) {
+    XGpio *GpioPtr = (XGpio *)CallBackRef;
+
+    // Deshabilitar temporalmente para debounce simple
+    XGpio_InterruptDisable(GpioPtr, LIGHT_INT_MASK);
+
+    if ((XGpio_InterruptGetStatus(GpioPtr) & LIGHT_INT_MASK) == LIGHT_INT_MASK) {
+        // --- LÓGICA LUZ ---
+        light_irq_flag = 1;
+        // ------------------
+        XGpio_InterruptClear(GpioPtr, LIGHT_INT_MASK);
+    }
+
+    XGpio_InterruptEnable(GpioPtr, LIGHT_INT_MASK);
+}
+
+static int SetupInterruptSystem(void) {
+    int Status;
+    XScuGic_Config *IntcConfig;
+
+    // 1. Inicializar GIC
+    IntcConfig = XScuGic_LookupConfig(INTC_DEVICE_ID);
+    if (NULL == IntcConfig) return XST_FAILURE;
+    Status = XScuGic_CfgInitialize(&IntcInstance, IntcConfig, IntcConfig->CpuBaseAddress);
+    if (Status != XST_SUCCESS) return XST_FAILURE;
+
+    Xil_ExceptionInit();
+    Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_INT,
+                                (Xil_ExceptionHandler)XScuGic_InterruptHandler,
+                                &IntcInstance);
+    Xil_ExceptionEnable();
+
+    // 2. Inicializar Timer 0 (Música)
+    Status = XTmrCtr_Initialize(&Timer0, TIMER0_DEVICE_ID);
+    if (Status != XST_SUCCESS) return XST_FAILURE;
+
+    XTmrCtr_SetHandler(&Timer0, Timer0_Handler, &Timer0);
+    XTmrCtr_SetResetValue(&Timer0, 0, seconds_to_ticks(TIMER0_PERIOD_SEC));
+    // CRÍTICO: DOWN COUNT
+    XTmrCtr_SetOptions(&Timer0, 0, XTC_INT_MODE_OPTION | XTC_AUTO_RELOAD_OPTION | XTC_DOWN_COUNT_OPTION);
+
+    Status = XScuGic_Connect(&IntcInstance, TIMER0_IRPT_ID,
+                             (Xil_ExceptionHandler)XTmrCtr_InterruptHandler, &Timer0);
+    if (Status != XST_SUCCESS) return XST_FAILURE;
+    XScuGic_Enable(&IntcInstance, TIMER0_IRPT_ID);
+
+    // 3. Inicializar Timer 1 (Juego)
+    Status = XTmrCtr_Initialize(&Timer1, TIMER1_DEVICE_ID);
+    if (Status != XST_SUCCESS) return XST_FAILURE;
+
+    XTmrCtr_SetHandler(&Timer1, Timer1_Handler, &Timer1);
+    XTmrCtr_SetResetValue(&Timer1, 0, seconds_to_ticks(TIMER1_PERIOD_SEC));
+    XTmrCtr_SetOptions(&Timer1, 0, XTC_INT_MODE_OPTION | XTC_AUTO_RELOAD_OPTION | XTC_DOWN_COUNT_OPTION);
+
+    Status = XScuGic_Connect(&IntcInstance, TIMER1_IRPT_ID,
+                             (Xil_ExceptionHandler)XTmrCtr_InterruptHandler, &Timer1);
+    if (Status != XST_SUCCESS) return XST_FAILURE;
+    XScuGic_Enable(&IntcInstance, TIMER1_IRPT_ID);
+
+    // 4. Inicializar GPIO Luz
+    // OJO: Usamos XPAR_AXI_GPIO_1_DEVICE_ID según tus ejemplos
+    Status = XGpio_Initialize(&GpioLight, GPIO_LIGHT_ID);
+    if (Status != XST_SUCCESS) return XST_FAILURE;
+    XGpio_SetDataDirection(&GpioLight, LIGHT_CHANNEL, 0xFFFFFFFF); // Input
+
+    Status = XScuGic_Connect(&IntcInstance, LIGHT_IRPT_ID,
+                             (Xil_ExceptionHandler)Light_GPIO_Handler, &GpioLight);
+    if (Status != XST_SUCCESS) return XST_FAILURE;
+    XScuGic_Enable(&IntcInstance, LIGHT_IRPT_ID);
+
+    // Habilitar a nivel GPIO
+    XGpio_InterruptEnable(&GpioLight, LIGHT_INT_MASK);
+    XGpio_InterruptGlobalEnable(&GpioLight);
+
+    return XST_SUCCESS;
+}
+
+/* ==========================================================================
+ * FUNCIONES DE SOPORTE (Para que game_config.c no falle)
+ * ========================================================================== */
+void AO2_EnableLightInterrupt(void) {
+    XGpio_InterruptEnable(&GpioLight, LIGHT_INT_MASK);
+    XGpio_InterruptGlobalEnable(&GpioLight);
+}
+
+void AO2_DisableLightInterrupt(void) {
+    XGpio_InterruptDisable(&GpioLight, LIGHT_INT_MASK);
+    XGpio_InterruptGlobalDisable(&GpioLight);
+}

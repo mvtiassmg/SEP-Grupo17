@@ -2,17 +2,27 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="seed" key="selection"/>
+		<item value="int" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="seed"/>
-			<item value="flag"/>
-			<item value="flag_gam"/>
-			<item value="init"/>
-			<item value="TETRI"/>
+			<item value="int"/>
+			<item value="ip2"/>
+			<item value="gpio"/>
+			<item value="gpio1"/>
+			<item value="inte"/>
+			<item value="activa"/>
+			<item value="0x0169"/>
+			<item value="0x169"/>
+			<item value="0x16"/>
+			<item value="0x43"/>
+			<item value="0x4"/>
+			<item value="ip"/>
+			<item value="interr|"/>
+			<item value="interr"/>
+			<item value="iic"/>
 		</list>
 		<list key="replacehistory">
 		</list>
@@ -21,7 +31,7 @@
 		<item value="385" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="523" key="DIALOG_HEIGHT"/>
-		<item value="1514" key="DIALOG_X_ORIGIN"/>
-		<item value="324" key="DIALOG_Y_ORIGIN"/>
+		<item value="1916" key="DIALOG_X_ORIGIN"/>
+		<item value="478" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

@@ -59,6 +59,12 @@
     <stringAttribute key="multilaunch.selected_apps" value=""/>
     <stringAttribute key="multilaunch.standalone_peer_id" value="Local"/>
     <stringAttribute key="org.eclipse.cdt.launch.PROJECT_ATTR" value="SW_P2_system"/>
+    <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+        <listEntry value="/SW_P2_system"/>
+    </listAttribute>
+    <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+        <listEntry value="4"/>
+    </listAttribute>
     <booleanAttribute key="org.eclipse.tcf.debug.AttachChildren" value="true"/>
     <booleanAttribute key="org.eclipse.tcf.debug.DisconnectOnCtxExit" value="false"/>
     <booleanAttribute key="org.eclipse.tcf.debug.StopAtEntry" value="false"/>

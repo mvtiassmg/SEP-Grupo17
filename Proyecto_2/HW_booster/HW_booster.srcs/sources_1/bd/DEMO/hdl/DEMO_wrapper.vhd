@@ -1,7 +1,7 @@
 --Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
---Date        : Mon Nov 24 00:21:07 2025
+--Date        : Fri Dec  5 08:59:13 2025
 --Host        : Macbook running 64-bit major release  (build 9200)
 --Command     : generate_target DEMO_wrapper.bd
 --Design      : DEMO_wrapper
@@ -14,6 +14,7 @@ use UNISIM.VCOMPONENTS.ALL;
 entity DEMO_wrapper is
   port (
     BTN0 : in STD_LOGIC;
+    BTN1 : in STD_LOGIC_VECTOR ( 0 to 0 );
     BUZZER_PWM : out STD_LOGIC;
     CS : out STD_LOGIC_VECTOR ( 0 to 0 );
     DDR_addr : inout STD_LOGIC_VECTOR ( 14 downto 0 );
@@ -41,9 +42,9 @@ entity DEMO_wrapper is
     RST_tri_o : out STD_LOGIC_VECTOR ( 0 to 0 );
     RS_tri_o : out STD_LOGIC_VECTOR ( 0 to 0 );
     SCLK : out STD_LOGIC;
-    clk : in STD_LOGIC;
     iic_rtl_scl_io : inout STD_LOGIC;
     iic_rtl_sda_io : inout STD_LOGIC;
+    luz_int : out STD_LOGIC_VECTOR ( 0 to 0 );
     spi_rtl_io0_io : inout STD_LOGIC;
     spi_rtl_io1_io : inout STD_LOGIC;
     spi_rtl_sck_io : inout STD_LOGIC;
@@ -57,11 +58,17 @@ architecture STRUCTURE of DEMO_wrapper is
     MOSI : out STD_LOGIC;
     SCLK : out STD_LOGIC;
     CS : out STD_LOGIC_VECTOR ( 0 to 0 );
-    clk : in STD_LOGIC;
     BTN0 : in STD_LOGIC;
     BUZZER_PWM : out STD_LOGIC;
-    RS_tri_o : out STD_LOGIC_VECTOR ( 0 to 0 );
+    luz_int : out STD_LOGIC_VECTOR ( 0 to 0 );
     RST_tri_o : out STD_LOGIC_VECTOR ( 0 to 0 );
+    iic_rtl_scl_i : in STD_LOGIC;
+    iic_rtl_scl_o : out STD_LOGIC;
+    iic_rtl_scl_t : out STD_LOGIC;
+    iic_rtl_sda_i : in STD_LOGIC;
+    iic_rtl_sda_o : out STD_LOGIC;
+    iic_rtl_sda_t : out STD_LOGIC;
+    RS_tri_o : out STD_LOGIC_VECTOR ( 0 to 0 );
     DDR_cas_n : inout STD_LOGIC;
     DDR_cke : inout STD_LOGIC;
     DDR_ck_n : inout STD_LOGIC;
@@ -83,12 +90,6 @@ architecture STRUCTURE of DEMO_wrapper is
     FIXED_IO_ps_srstb : inout STD_LOGIC;
     FIXED_IO_ps_clk : inout STD_LOGIC;
     FIXED_IO_ps_porb : inout STD_LOGIC;
-    iic_rtl_scl_i : in STD_LOGIC;
-    iic_rtl_scl_o : out STD_LOGIC;
-    iic_rtl_scl_t : out STD_LOGIC;
-    iic_rtl_sda_i : in STD_LOGIC;
-    iic_rtl_sda_o : out STD_LOGIC;
-    iic_rtl_sda_t : out STD_LOGIC;
     spi_rtl_io0_i : in STD_LOGIC;
     spi_rtl_io0_o : out STD_LOGIC;
     spi_rtl_io0_t : out STD_LOGIC;
@@ -100,7 +101,8 @@ architecture STRUCTURE of DEMO_wrapper is
     spi_rtl_sck_t : out STD_LOGIC;
     spi_rtl_ss_i : in STD_LOGIC_VECTOR ( 0 to 0 );
     spi_rtl_ss_o : out STD_LOGIC_VECTOR ( 0 to 0 );
-    spi_rtl_ss_t : out STD_LOGIC
+    spi_rtl_ss_t : out STD_LOGIC;
+    BTN1 : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
   end component DEMO;
   component IOBUF is
@@ -134,6 +136,7 @@ begin
 DEMO_i: component DEMO
      port map (
       BTN0 => BTN0,
+      BTN1(0) => BTN1(0),
       BUZZER_PWM => BUZZER_PWM,
       CS(0) => CS(0),
       DDR_addr(14 downto 0) => DDR_addr(14 downto 0),
@@ -161,13 +164,13 @@ DEMO_i: component DEMO
       RST_tri_o(0) => RST_tri_o(0),
       RS_tri_o(0) => RS_tri_o(0),
       SCLK => SCLK,
-      clk => clk,
       iic_rtl_scl_i => iic_rtl_scl_i,
       iic_rtl_scl_o => iic_rtl_scl_o,
       iic_rtl_scl_t => iic_rtl_scl_t,
       iic_rtl_sda_i => iic_rtl_sda_i,
       iic_rtl_sda_o => iic_rtl_sda_o,
       iic_rtl_sda_t => iic_rtl_sda_t,
+      luz_int(0) => luz_int(0),
       spi_rtl_io0_i => spi_rtl_io0_i,
       spi_rtl_io0_o => spi_rtl_io0_o,
       spi_rtl_io0_t => spi_rtl_io0_t,

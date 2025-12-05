@@ -3,10 +3,6 @@
 
 extern int read_tmp();
 
-// Umbrales Ajustados
-#define TEMP_COLD_THRESH 27
-#define TEMP_HOT_THRESH  31
-
 void TempSensor_init(TempSensor *ts)
 {
     ts->current_temp = 25;
@@ -17,16 +13,14 @@ void TempSensor_update(TempSensor *ts)
 {
     ts->current_temp = read_tmp();
 
+    int t = ts->current_temp;
     COLOR new_color;
-    if (ts->current_temp < TEMP_COLD_THRESH) {
-        new_color = CYAN;
-    }
-    else if (ts->current_temp > TEMP_HOT_THRESH) {
-        new_color = RED;
-    }
-    else {
-        new_color = YELLOW;
-    }
+
+    if (t <= 25)          new_color = RED;    // muy frío
+    else if (t <= 27)     new_color = YELLOW;
+    else if (t <= 29)     new_color = GREEN;
+    else if (t <= 31)     new_color = CYAN;
+    else                  new_color = BLUE;     // muy caliente
 
     ts->player_color = new_color;
 }

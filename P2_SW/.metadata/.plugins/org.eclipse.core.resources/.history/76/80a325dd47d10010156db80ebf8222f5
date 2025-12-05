@@ -1,0 +1,96 @@
+#include "game_config.h"
+#include "xil_printf.h"
+#include "LCD_Driver.h"
+#include "LCD_GUI.h"
+#include "interrupts.h"
+#include "ADC.h"
+#include "Accelerometer.h"
+
+extern void LCD_SetBrightnessLevel(int lvl);
+extern void init_buzzer();
+extern void disable_buzzer();
+extern void set_game_difficulty(int d);
+
+/**
+ * Pregunta por UART los parámetros del usuario
+ */
+void GameConfig_ReadUART(GameConfig *cfg)
+{
+    char c;
+
+    xil_printf("\r\n==============================\r\n");
+    xil_printf(" CONFIGURACION DEL JUEGO (AO1)\r\n");
+    xil_printf("==============================\r\n");
+
+    /* ---- INPUT MODE ---- */
+    xil_printf("Seleccione modo de entrada:\r\n");
+    xil_printf("0: Joystick\r\n");
+    xil_printf("1: Acelerometro\r\n");
+    c = inbyte();
+    cfg->inputMode = (c == '1');
+
+    xil_printf(" --> Seleccionado: %s\r\n",
+        cfg->inputMode ? "Acelerometro" : "Joystick");
+
+    /* ---- DIFICULTAD ---- */
+    xil_printf("Seleccione dificultad:\r\n");
+    xil_printf("1: Facil\r\n");
+    xil_printf("2: Medio\r\n");
+    xil_printf("3: Dificil\r\n");
+    c = inbyte();
+    cfg->difficulty = c - '0';
+
+    xil_printf(" --> Dificultad: %d\r\n", cfg->difficulty);
+
+    /* ---- BRILLO LCD ---- */
+    xil_printf("Brillo (1 a 10):\r\n");
+    c = inbyte();
+    cfg->lcd_brightness = c - '0';
+
+    xil_printf(" --> Brillo: %d\r\n", cfg->lcd_brightness);
+
+    /* ---- AUDIO ---- */
+    xil_printf("Audio habilitado? (1=Si, 0=No)\r\n");
+    c = inbyte();
+    cfg->audio_enabled = (c == '1');
+
+    xil_printf(" --> Audio: %s\r\n",
+        cfg->audio_enabled ? "ON" : "OFF");
+
+    /* ---- MODO LUZ ---- */
+    xil_printf("Modo oscuro segun sensor de luz? (1=Si, 0=No)\r\n");
+    c = inbyte();
+    cfg->light_mode_auto = (c == '1');
+
+    xil_printf(" --> Modo luz auto: %s\r\n",
+        cfg->light_mode_auto ? "SI" : "NO");
+
+    xil_printf("\r\nConfiguración completada.\r\n\r\n");
+}
+
+
+
+void GameHardware_Init(GameConfig *cfg)
+{
+    xil_printf("Inicializando hardware segun configuracion...\r\n");
+
+    /* ---- BRILLO ---- */
+
+
+    /* ---- DIFICULTAD ---- */
+    set_game_difficulty(cfg->difficulty);
+
+    /* ---- AUDIO ---- */
+    if (cfg->audio_enabled)
+        init_buzzer();
+    else
+        disable_buzzer();
+
+    /* ---- SENSOR DE LUZ ---- */
+    if (cfg->light_mode_auto) {
+        xil_printf("Activando sensor de luz (GPIO + interrupcion)...\r\n");
+        AO2_Init_LightInterrupt();
+    }
+
+    xil_printf("Hardware inicializado.\r\n");
+}

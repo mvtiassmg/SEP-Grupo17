@@ -1,0 +1,185 @@
+#include "interrupts.h"
+#include "xil_printf.h"
+#include "song.h"
+
+// --- Instancias Globales ---
+XScuGic INTCInst;
+XTmrCtr TMR0Inst;
+XTmrCtr TMR1Inst;
+XGpio   ALightGpio;
+
+// --- Instancia Externa (Música) ---
+// Definimos myTetris aquí para evitar problemas de linker si main.c falla
+TetrisPlayer myTetris;
+
+// --- Flags Volátiles ---
+volatile int ao2_game_tick = 0;
+volatile int ao2_light_flag = 0;
+volatile u32 debug_isr_count = 0;
+
+// Helper para calcular ticks
+static u32 seconds_to_ticks(float sec) {
+    return (u32)(TIMER_CLOCK_HZ * sec);
+}
+
+// ============================================================================
+// HANDLERS (Rutinas de Servicio de Interrupción)
+// ============================================================================
+
+// 1. Timer 0: Música (Alta Prioridad - 1ms)
+static void TMR_0_Intr_Handler(void *CallBackRef) {
+    XTmrCtr *InstancePtr = (XTmrCtr *)CallBackRef;
+
+    if (XTmrCtr_IsExpired(InstancePtr, 0)) {
+        XTmrCtr_Stop(InstancePtr, 0);
+
+        // --- Lógica Crítica ---
+        debug_isr_count++;          // Diagnóstico
+        Tetris_Tick_1ms(&myTetris); // Avanzar música
+        // ----------------------
+
+        XTmrCtr_Reset(InstancePtr, 0);
+        XTmrCtr_Start(InstancePtr, 0);
+    }
+}
+
+// 2. Timer 1: Juego (Baja Prioridad - 50ms)
+static void TMR_1_Intr_Handler(void *CallBackRef) {
+    XTmrCtr *InstancePtr = (XTmrCtr *)CallBackRef;
+
+    if (XTmrCtr_IsExpired(InstancePtr, 0)) {
+        XTmrCtr_Stop(InstancePtr, 0);
+
+        // --- Lógica Juego ---
+        ao2_game_tick = 1; // Avisar al main loop
+        // --------------------
+
+        XTmrCtr_Reset(InstancePtr, 0);
+        XTmrCtr_Start(InstancePtr, 0);
+    }
+}
+
+// 3. GPIO: Sensor de Luz (Disparado por cambio de nivel/flanco)
+static void Light_Intr_Handler(void *CallBackRef) {
+    XGpio *GpioPtr = (XGpio *)CallBackRef;
+
+    // Deshabilitar interrupción temporalmente para evitar rebotes inmediatos
+    XGpio_InterruptDisable(GpioPtr, LIGHT_INT_MASK);
+
+    // Verificar si es la interrupción correcta
+    if ((XGpio_InterruptGetStatus(GpioPtr) & LIGHT_INT_MASK) != LIGHT_INT_MASK) {
+        return;
+    }
+
+    // --- Lógica ---
+    ao2_light_flag = 1; // Avisar al main que revise el sensor
+    // --------------
+
+    // Limpiar flag y reactivar
+    XGpio_InterruptClear(GpioPtr, LIGHT_INT_MASK);
+    XGpio_InterruptEnable(GpioPtr, LIGHT_INT_MASK);
+}
+
+// ============================================================================
+// FUNCIONES DE INICIALIZACIÓN
+// ============================================================================
+
+int AO2_InitInterruptSystem() {
+    int status;
+    XScuGic_Config *IntcConfig;
+
+    // 1. Inicializar Controlador de Interrupciones (GIC)
+    IntcConfig = XScuGic_LookupConfig(INTC_DEVICE_ID);
+    if (NULL == IntcConfig) return XST_FAILURE;
+
+    status = XScuGic_CfgInitialize(&INTCInst, IntcConfig, IntcConfig->CpuBaseAddress);
+    if (status != XST_SUCCESS) return XST_FAILURE;
+
+    // Conectar GIC al procesador
+    Xil_ExceptionInit();
+    Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_INT,
+                                 (Xil_ExceptionHandler)XScuGic_InterruptHandler,
+                                 &INTCInst);
+    Xil_ExceptionEnable();
+
+    // 2. Inicializar Drivers de Hardware
+
+    // Timer 0
+    status = XTmrCtr_Initialize(&TMR0Inst, TIMER0_DEVICE_ID);
+    if (status != XST_SUCCESS) return XST_FAILURE;
+
+    // Timer 1
+    status = XTmrCtr_Initialize(&TMR1Inst, TIMER1_DEVICE_ID);
+    if (status != XST_SUCCESS) return XST_FAILURE;
+
+    // GPIO Luz
+    status = XGpio_Initialize(&ALightGpio, LIGHT_GPIO_DEVICE_ID);
+    if (status != XST_SUCCESS) return XST_FAILURE;
+    XGpio_SetDataDirection(&ALightGpio, LIGHT_GPIO_CHANNEL, 0xFFFFFFFF); // Input
+
+    // 3. Configurar Handlers y Conexiones
+
+    // --- Timer 0 ---
+    XTmrCtr_SetHandler(&TMR0Inst, TMR_0_Intr_Handler, &TMR0Inst);
+    XTmrCtr_SetResetValue(&TMR0Inst, 0, seconds_to_ticks(TIMER0_PERIOD_SEC));
+    // Opción Down Count (como en tus ejemplos) es vital para precisión
+    XTmrCtr_SetOptions(&TMR0Inst, 0, XTC_INT_MODE_OPTION | XTC_AUTO_RELOAD_OPTION | XTC_DOWN_COUNT_OPTION);
+
+    status = XScuGic_Connect(&INTCInst, TIMER0_IRPT_ID,
+                             (Xil_ExceptionHandler)TMR_0_Intr_Handler,
+                             &TMR0Inst);
+    if (status != XST_SUCCESS) return XST_FAILURE;
+
+    // --- Timer 1 ---
+    XTmrCtr_SetHandler(&TMR1Inst, TMR_1_Intr_Handler, &TMR1Inst);
+    XTmrCtr_SetResetValue(&TMR1Inst, 0, seconds_to_ticks(TIMER1_PERIOD_SEC));
+    XTmrCtr_SetOptions(&TMR1Inst, 0, XTC_INT_MODE_OPTION | XTC_AUTO_RELOAD_OPTION | XTC_DOWN_COUNT_OPTION);
+
+    status = XScuGic_Connect(&INTCInst, TIMER1_IRPT_ID,
+                             (Xil_ExceptionHandler)TMR_1_Intr_Handler,
+                             &TMR1Inst);
+    if (status != XST_SUCCESS) return XST_FAILURE;
+
+    // --- GPIO Luz ---
+    status = XScuGic_Connect(&INTCInst, LIGHT_GPIO_IRQ_ID,
+                             (Xil_ExceptionHandler)Light_Intr_Handler,
+                             &ALightGpio);
+    if (status != XST_SUCCESS) return XST_FAILURE;
+
+    // 4. Configurar Prioridades (Basado en ejemplo Snake)
+    // 0x00 es máxima prioridad, 0xF8 mínima. El último bit (0x3) es tipo de trigger (Rising Edge = 3)
+    XScuGic_SetPriorityTriggerType(&INTCInst, TIMER0_IRPT_ID,    0x10, 0x3); // Música (Alta)
+    XScuGic_SetPriorityTriggerType(&INTCInst, LIGHT_GPIO_IRQ_ID, 0x18, 0x3); // Luz (Media)
+    XScuGic_SetPriorityTriggerType(&INTCInst, TIMER1_IRPT_ID,    0x20, 0x3); // Juego (Baja)
+
+    // 5. Habilitar Interrupciones en GIC
+    XScuGic_Enable(&INTCInst, TIMER0_IRPT_ID);
+    XScuGic_Enable(&INTCInst, TIMER1_IRPT_ID);
+    XScuGic_Enable(&INTCInst, LIGHT_GPIO_IRQ_ID);
+
+    // 6. Habilitar Interrupciones en Periféricos
+
+    // GPIO (Habilitar Global y Canal)
+    XGpio_InterruptEnable(&ALightGpio, LIGHT_INT_MASK);
+    XGpio_InterruptGlobalEnable(&ALightGpio);
+
+    // Arrancar Timers
+    XTmrCtr_Start(&TMR0Inst, 0);
+    XTmrCtr_Start(&TMR1Inst, 0);
+
+    return XST_SUCCESS;
+}
+
+// ============================================================================
+// FUNCIONES AUXILIARES (Requeridas por game_config.c)
+// ============================================================================
+
+void AO2_EnableLightInterrupt(void) {
+    XGpio_InterruptEnable(&ALightGpio, LIGHT_INT_MASK);
+    XGpio_InterruptGlobalEnable(&ALightGpio);
+}
+
+void AO2_DisableLightInterrupt(void) {
+    XGpio_InterruptDisable(&ALightGpio, LIGHT_INT_MASK);
+    XGpio_InterruptGlobalDisable(&ALightGpio);
+}

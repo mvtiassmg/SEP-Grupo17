@@ -2,10 +2,16 @@
 <section name="Workbench">
 	<item value="Auto Detect" key="HW_P2-device"/>
 	<item value="" key="HW_P2-bmmFile"/>
-	<item value="{&quot;cables&quot;:[{&quot;name&quot;:&quot;Digilent Zybo Z7 210351B3FC05A&quot;,&quot;indexContextMap&quot;:{&quot;2&quot;:&quot;jsn-Zybo Z7-210351B3FC05A-4ba00477-0&quot;,&quot;3&quot;:&quot;jsn-Zybo Z7-210351B3FC05A-13722093-0&quot;}}]}" key="devices_info_Local"/>
-	<item value="false" key="HW_P2-skip_rev_check"/>
+	<item value="Local" key="SW_P2-target"/>
 	<item value="Local" key="HW_P2-target"/>
 	<item value="false" key="HW_P2-partial_bit"/>
-	<item value="HW_P2" key="programfpga.sdxproject"/>
+	<item value="SW_P2" key="programfpga.sdxproject"/>
+	<item value="_ide/bitstream/DEMO_wrapper.bit" key="SW_P2-bitFile"/>
+	<item value="" key="SW_P2-bmmFile"/>
+	<item value="{&quot;cables&quot;:[{&quot;name&quot;:&quot;Digilent Zybo Z7 210351B3FC05A&quot;,&quot;indexContextMap&quot;:{&quot;2&quot;:&quot;jsn-Zybo Z7-210351B3FC05A-4ba00477-0&quot;,&quot;3&quot;:&quot;jsn-Zybo Z7-210351B3FC05A-13722093-0&quot;}}]}" key="devices_info_Local"/>
+	<item value="false" key="HW_P2-skip_rev_check"/>
+	<item value="false" key="SW_P2-skip_rev_check"/>
+	<item value="Auto Detect" key="SW_P2-device"/>
+	<item value="false" key="SW_P2-partial_bit"/>
 	<item value="_ide/bitstream/DEMO_wrapper.bit" key="HW_P2-bitFile"/>
 </section>

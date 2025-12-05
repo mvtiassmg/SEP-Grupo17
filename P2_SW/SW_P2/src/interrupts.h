@@ -1,0 +1,41 @@
+#ifndef INTERRUPTS_H
+#define INTERRUPTS_H
+
+#include "xparameters.h"
+#include "xscugic.h"
+#include "xtmrctr.h"
+#include "xgpio.h"
+#include "xil_exception.h"
+
+// IDs Hardware
+#define INTC_DEVICE_ID       XPAR_SCUGIC_SINGLE_DEVICE_ID
+#define TIMER0_DEVICE_ID     XPAR_AXI_TIMER_0_DEVICE_ID
+#define TIMER0_IRPT_ID       XPAR_FABRIC_AXI_TIMER_0_INTERRUPT_INTR
+#define TIMER1_DEVICE_ID     XPAR_AXI_TIMER_1_DEVICE_ID
+#define TIMER1_IRPT_ID       XPAR_FABRIC_AXI_TIMER_1_INTERRUPT_INTR
+#define LIGHT_GPIO_DEVICE_ID XPAR_AXI_GPIO_1_DEVICE_ID
+#define LIGHT_GPIO_IRQ_ID    XPAR_FABRIC_AXI_GPIO_1_IP2INTC_IRPT_INTR
+#define LIGHT_GPIO_CHANNEL   1
+
+#define TIMER_CLOCK_HZ       XPAR_AXI_TIMER_0_CLOCK_FREQ_HZ
+#define TIMER0_PERIOD_SEC    0.001f
+#define TIMER1_PERIOD_SEC    0.050f
+
+// Variables Globales
+extern volatile int ao2_game_tick;
+extern volatile int ao2_light_flag;
+extern volatile u32 debug_isr_count;
+extern XGpio ALightGpio;
+
+// Prototipos que faltaban
+int Initialize_Interrupt_Controller(XScuGic *IntcInstancePtr);
+int Setup_Timer0_System(XScuGic *IntcInstancePtr, XTmrCtr *TmrInstancePtr);
+int Setup_Timer1_System(XScuGic *IntcInstancePtr, XTmrCtr *TmrInstancePtr);
+int Setup_GPIO_Light_System(XScuGic *IntcInstancePtr, XGpio *GpioInstancePtr);
+void Start_Timers(XTmrCtr *Tmr0, XTmrCtr *Tmr1);
+
+void AO2_EnableLightInterrupt(void);
+void AO2_DisableLightInterrupt(void);
+int AO2_InitInterruptSystem(); // Compatibilidad
+
+#endif

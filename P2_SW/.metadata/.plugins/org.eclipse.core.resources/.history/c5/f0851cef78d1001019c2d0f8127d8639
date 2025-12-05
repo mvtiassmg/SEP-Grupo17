@@ -1,0 +1,178 @@
+#include <stdio.h>
+#include <sleep.h>
+#include <math.h>
+#include <stdlib.h>
+
+#include "platform.h"
+#include "xil_printf.h"
+#include "xparameters.h"
+#include "xgpio.h"
+#include "xstatus.h"
+#include "xscugic.h"
+#include "xtmrctr.h"
+#include "xil_exception.h"
+
+// Includes del usuario
+#include "Delay.h"
+#include "LCD_SPI.h"
+#include "LCD_Driver.h"
+#include "LCD_GUI.h"
+#include "ADC.h"
+#include "I2C.h"
+#include "maze_game.h"
+#include "maze_gui.h"
+#include "Accelerometer.h"
+#include "Joystick.h"
+#include "MotionJoystick.h"
+#include "LightSensor.h"
+#include "TempSensor.h"
+#include "song.h"   // <<< Música Tetris
+
+/* === DEFINICIONES HARDWARE === */
+#define GPIO_LCD_ID         XPAR_AXI_GPIO_0_DEVICE_ID
+#define SPI_LCD_ID          XPAR_AXI_QUAD_SPI_0_DEVICE_ID
+
+#ifndef SPI_ADC_ID
+#define SPI_ADC_ID          XPAR_AXI_QUAD_SPI_1_DEVICE_ID
+#endif
+
+// --- DIRECCIÓN IP AUDIO (TetrisPlayer) ---
+#ifndef MY_PWM_BASEADDR
+#define MY_PWM_BASEADDR  XPAR_BUZZERBOOSTER_DRIVER_0_S00_AXI_BASEADDR
+#endif
+
+/* === TIMER + GIC (INTERRUPCIONES) ===
+ * Usamos AXI TIMER 0 con el SCUGIC "SINGLE"
+ */
+#define INTC_DEVICE_ID      XPAR_SCUGIC_SINGLE_DEVICE_ID
+#define TIMER_DEVICE_ID     XPAR_AXI_TIMER_0_DEVICE_ID
+#define TIMER_IRPT_ID       XPAR_FABRIC_AXI_TIMER_0_INTERRUPT_INTR
+#define TIMER_CLOCK_HZ      XPAR_AXI_TIMER_0_CLOCK_FREQ_HZ
+
+// Periodo del timer HW: 1 ms
+#define TIMER_PERIOD_SEC    0.001f
+#define ISR_PERIOD_MS       1          // 1 ms por interrupción
+
+// Queremos un tick de juego cada 40 ms (como antes)
+#define GAME_TICK_MS        40
+#define TICKS_PER_SECOND    (1000 / GAME_TICK_MS)  // 25
+
+/* === CONTROL === */
+#define LOOP_DELAY_MS       1           // El ritmo real viene del timer
+#define MOVE_COOLDOWN_TICKS 5
+#define TILT_THRESHOLD      0.25f
+
+typedef enum {
+    CTRL_ACCEL = 1,
+    CTRL_JOYSTICK = 2
+} ControlMode;
+
+ControlMode currentControl = CTRL_ACCEL;
+
+/* === Instancias de drivers (externas para compartir con otras librerías) === */
+extern XGpio gpio0;
+extern XSpi  SpiInstance;   /* LCD */
+extern XSpi  SpiInstance1;  /* ADC */
+
+/* === Objetos lógicos === */
+LightSensor lightSensor;
+TempSensor  tempSensor;
+
+/* === TIMER + GIC: instancias y flags === */
+static XScuGic IntcInstance;
+static XTmrCtr TimerInstance;
+
+volatile int game_tick_flag      = 0;   // Se pone a 1 cada 40 ms
+volatile u32 isr_counter         = 0;   // Cuántas veces se llamó la ISR del timer
+static volatile int ms_accumulo  = 0;   // Acumulador para llegar a 40 ms
+
+/* === MÚSICA TETRIS === */
+TetrisPlayer myTetris;
+int music_enabled = 0;
+
+/* === Funciones auxiliares === */
+
+// Convierte segundos a "ticks" del AXI Timer (down-counter)
+static u32 seconds_to_ticks(float sec)
+{
+    double ticks = (double)TIMER_CLOCK_HZ * (double)sec;
+    if (ticks < 1.0) ticks = 1.0;
+    return (u32)ticks;
+}
+
+/* ISR del Timer:
+ *  - Se llama cada 1 ms.
+ *  - Avanza la música (Tetris_Tick_1ms).
+ *  - Cada 40 ms levanta game_tick_flag para el juego.
+ */
+static void GameTimer_ISR(void *CallBackRef, u8 TmrNum)
+{
+    XTmrCtr *InstancePtr = (XTmrCtr *)CallBackRef;
+
+    if (XTmrCtr_IsExpired(InstancePtr, TmrNum)) {
+        XTmrCtr_Stop(InstancePtr, TmrNum);
+
+        isr_counter++;   // Contador para debug
+
+        // --- Música Tetris cada 1 ms ---
+        if (music_enabled) {
+            Tetris_Tick_1ms(&myTetris);
+        }
+
+        // --- Tick de juego cada GAME_TICK_MS ---
+        ms_accumulo += ISR_PERIOD_MS;      // +1 ms por ISR
+        if (ms_accumulo >= GAME_TICK_MS) {
+            ms_accumulo -= GAME_TICK_MS;   // mantiene error bajo
+            game_tick_flag = 1;
+        }
+
+        XTmrCtr_Reset(InstancePtr, TmrNum);
+        XTmrCtr_Start(InstancePtr, TmrNum);
+    }
+}
+
+/* Configura:
+ *  - GIC
+ *  - Timer 0
+ *  - Conecta la ISR del timer al GIC
+ */
+static int SetupInterruptSystem(void)
+{
+    int Status;
+    XScuGic_Config *IntcConfig;
+
+    xil_printf("[INT] Buscando config del GIC...\r\n");
+    IntcConfig = XScuGic_LookupConfig(INTC_DEVICE_ID);
+    if (IntcConfig == NULL) {
+        xil_printf("[INT][ERR] XScuGic_LookupConfig fallo\r\n");
+        return XST_FAILURE;
+    }
+
+    xil_printf("[INT] Inicializando GIC...\r\n");
+    Status = XScuGic_CfgInitialize(&IntcInstance, IntcConfig, IntcConfig->CpuBaseAddress);
+    if (Status != XST_SUCCESS) {
+        xil_printf("[INT][ERR] XScuGic_CfgInitialize = %d\r\n", Status);
+        return Status;
+    }
+
+    Xil_ExceptionInit();
+    Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_INT,
+                                 (Xil_ExceptionHandler)XScuGic_InterruptHandler,
+                                 &IntcInstance);
+    Xil_ExceptionEnable();
+
+    xil_printf("[INT] Inicializando Timer (AXI_TIMER_0)...\r\n");
+    Status = XTmrCtr_Initialize(&TimerInstance, TIMER_DEVICE_ID);
+    if (Status != XST_SUCCESS) {
+        xil_printf("[INT][ERR] XTmrCtr_Initialize = %d\r\n", Status);
+        return Status;
+    }
+
+    // Asignar nuestra ISR al driver del timer
+    XTmrCtr_SetHandler(&TimerInstance, GameTimer_ISR, &TimerInstance);
+
+    // Modo: interrupción, autoreload, conteo descendente
+    XTmrCtr_SetOptions(&TimerInstance, 0,
+                       XTC_INT_MODE_OPTION | XTC_AUTO_RELOAD_OPTION | XTC_DOWN_COUNT_OPTION);
+
+    u32 load_value = seconds_to_ticks(TIMER_PERI

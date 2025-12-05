@@ -1,0 +1,275 @@
+#include <stdio.h>
+#include <sleep.h>
+#include <time.h>
+#include <unistd.h>
+#include <math.h>
+#include <stdlib.h>
+
+#include "platform.h"
+#include "xil_printf.h"
+#include "xparameters.h"
+#include "xgpio.h"
+#include "xstatus.h"
+#include "Delay.h"
+#include "LCD_SPI.h"
+#include "LCD_Driver.h"
+#include "LCD_GUI.h"
+#include "ADC.h"
+#include "I2C.h"
+
+#include "maze_game.h"
+#include "maze_gui.h"
+#include "Accelerometer.h"
+
+#include "interrupts.h"
+#include "game_config.h"
+#include "LightSensor.h"
+
+#include "tetris_player.h"
+
+// !!! CRITICO !!!
+// Si el sistema se congela al arrancar la música, ESTA DIRECCION ESTA MAL.
+// Verifica en Vivado -> Address Editor la dirección exacta de 'buzzerbooster_driver_0'.
+#ifndef MY_PWM_BASEADDR
+#define MY_PWM_BASEADDR  XPAR_BUZZERBOOSTER_DRIVER_0_S00_AXI_BASEADDR
+#endif
+
+TetrisPlayer myTetris;
+
+extern XGpio gpio0;
+extern XSpi  SpiInstance;
+extern XSpi  SpiInstance1;
+
+#define LOOP_DELAY_MS        40
+#define MOVE_COOLDOWN_TICKS  5
+#define TILT_THRESHOLD       0.25f
+
+// Macro auxiliar para imprimir floats con xil_printf
+#define PRINT_FLOAT(val) (int)(val), (int)(abs((int)((val)*100.0f)) % 100)
+
+int main()
+{
+    int Status;
+
+    init_platform();
+    xil_printf("\r\n--- INICIO SISTEMA (DEBUG MODE) ---\r\n");
+
+    /* --------------------------------------------------------------------------
+     * 1. INICIALIZACIÓN PERIFÉRICOS
+     * -------------------------------------------------------------------------- */
+    Status = XGpio_Initialize(&gpio0, XPAR_AXI_GPIO_0_DEVICE_ID);
+    if (Status != XST_SUCCESS) { xil_printf("Fallo GPIO\r\n"); return XST_FAILURE; }
+
+    Status = XSpi_Init(&SpiInstance, SPI_DEVICE_ID);
+    if (Status != XST_SUCCESS) { xil_printf("Fallo SPI LCD\r\n"); return XST_FAILURE; }
+
+    Status = init_adc(&SpiInstance1, SPI_DEVICE_ID_1);
+    if (Status != XST_SUCCESS) { xil_printf("Fallo ADC\r\n"); return XST_FAILURE; }
+
+    Status = init_IIC();
+    if (Status != XST_SUCCESS) { xil_printf("Fallo I2C\r\n"); return XST_FAILURE; }
+
+    /* --------------------------------------------------------------------------
+     * 2. INICIALIZACIÓN TETRIS
+     * -------------------------------------------------------------------------- */
+    xil_printf("Init Tetris Struct en 0x%08x...\r\n", MY_PWM_BASEADDR);
+    Tetris_Init(&myTetris, MY_PWM_BASEADDR);
+
+    /* --------------------------------------------------------------------------
+     * 3. INICIALIZACIÓN INTERRUPCIONES
+     * -------------------------------------------------------------------------- */
+    xil_printf("Iniciando Interrupciones...\r\n");
+    Status = AO2_InitInterruptSystem();
+    if (Status != XST_SUCCESS) {
+        xil_printf("Error AO2 Interrupts\r\n");
+        return XST_FAILURE;
+    }
+
+    /* --------------------------------------------------------------------------
+     * 4. PANTALLA
+     * -------------------------------------------------------------------------- */
+    xil_printf("Iniciando LCD...\r\n");
+    LCD_Init(SCAN_DIR_DFT);
+    LCD_Clear(BLACK);
+    GUI_DisString_EN(10, 50, "SISTEMA OK...", &Font16, BLACK, WHITE);
+    delay_ms(500);
+
+    /* --------------------------------------------------------------------------
+     * 5. CONFIGURACIÓN
+     * -------------------------------------------------------------------------- */
+    GameConfig cfg;
+    GameConfig_ReadUART(&cfg);
+    GameHardware_Init(&cfg);
+
+    if (cfg.audio_enabled) {
+        xil_printf("Arrancando musica (Escribiendo al IP Core)...\r\n");
+        // Si se congela aqui, la direccion MY_PWM_BASEADDR es incorrecta o el IP no tiene reloj.
+        Tetris_TogglePlay(&myTetris);
+        xil_printf("Musica activada correctamente.\r\n");
+    } else {
+        xil_printf("Musica deshabilitada.\r\n");
+    }
+
+    /* --------------------------------------------------------------------------
+     * 6. CALIBRACIÓN
+     * -------------------------------------------------------------------------- */
+    Accelerometer acc;
+    Accelerometer_init(&acc);
+
+    if (cfg.inputMode == 1) {
+        LCD_Clear(BLACK);
+        GUI_DisString_EN(10, 50, "CALIBRANDO...", &Font12, BLACK, CYAN);
+        xil_printf("Calibrando acelerometro...\r\n");
+        Accelerometer_calibrate(&acc, 50);
+        xil_printf("Calibrado OK.\r\n");
+    }
+
+    /* --------------------------------------------------------------------------
+     * 7. JUEGO
+     * -------------------------------------------------------------------------- */
+    GameState game;
+    Maze_InitLevel1(&game);
+    GUI_ResetDrawState();
+
+    int   themeMode   = LIGHT_MODE_DAY;
+    COLOR playerColor = YELLOW;
+
+    LCD_Clear(WHITE);
+    GUI_DrawMazeAndPlayer(&game, themeMode, playerColor);
+
+    /* --------------------------------------------------------------------------
+     * 8. BUCLE PRINCIPAL
+     * -------------------------------------------------------------------------- */
+    xil_printf("Entrando al bucle principal...\r\n");
+
+    int currentLevel = 1;
+    int pendingLevelChange = 0;
+    int moveCooldown = 0;
+    int debug_counter = 0;
+
+    // Diagnóstico de Timer
+    int ticks_received = 0;
+
+    while (1)
+    {
+        // --- DIAGNÓSTICO: HEARTBEAT ---
+        debug_counter++;
+        if (debug_counter >= 25) { // Cada ~1 segundo
+            xil_printf("[HEARTBEAT] CPU Viva. Ticks Juego Recibidos: %d\r\n", ticks_received);
+
+            // Si ticks_received es 0, las interrupciones NO están funcionando.
+            if (ticks_received == 0) {
+                xil_printf("ALERTA: Interrupciones no detectadas (Timer 1 muerto?)\r\n");
+            }
+            ticks_received = 0;
+            debug_counter = 0;
+
+            // Debug Sensores
+            if (cfg.inputMode == 0) {
+                 int jx = read_joyx();
+                 int jy = read_joyy();
+                 xil_printf("Joy: %d, %d\r\n", jx, jy);
+            }
+        }
+
+        // A. Sensor Luz
+        if (cfg.light_mode_auto && ao2_light_flag)
+        {
+            ao2_light_flag = 0;
+            int luz = XGpio_DiscreteRead(&ALightGpio, LIGHT_GPIO_CHANNEL);
+            xil_printf("IRQ Luz detectada. Valor: %d\r\n", luz);
+
+            if (luz == 0) {
+                if (themeMode != LIGHT_MODE_NIGHT) {
+                    LCD_Clear(BLACK);
+                    themeMode = LIGHT_MODE_NIGHT;
+                    GUI_DrawMazeAndPlayer(&game, themeMode, playerColor);
+                }
+            } else {
+                if (themeMode != LIGHT_MODE_DAY) {
+                    LCD_Clear(WHITE);
+                    themeMode = LIGHT_MODE_DAY;
+                    GUI_DrawMazeAndPlayer(&game, themeMode, playerColor);
+                }
+            }
+        }
+
+        // B. Controles
+        char dir = 0;
+        if (cfg.inputMode == 1) { // Acelerómetro
+            float gx = ao2_gx;
+            float gy = ao2_gy;
+            float mvx = Accelerometer_to_movement(&acc, gy);
+            float mvy = Accelerometer_to_movement(&acc, gx);
+
+            if (fabsf(mvy) > fabsf(mvx)) {
+                if (mvy > TILT_THRESHOLD) dir = 'd'; else if (mvy < -TILT_THRESHOLD) dir = 'u';
+            } else {
+                if (mvx > TILT_THRESHOLD) dir = 'r'; else if (mvx < -TILT_THRESHOLD) dir = 'l';
+            }
+        } else { // Joystick
+            int joy_x = read_joyx();
+            int joy_y = read_joyy();
+            if (joy_y > 2600) dir = 'u';
+            if (joy_y < 1500) dir = 'd';
+            if (joy_x > 2600) dir = 'r';
+            if (joy_x < 1500) dir = 'l';
+        }
+
+        if (moveCooldown > 0) moveCooldown--;
+
+        // C. Juego (Timer 1)
+        if (ao2_game_tick == 1)
+        {
+            ao2_game_tick = 0;
+            ticks_received++; // Contamos para diagnóstico
+
+            if (dir != 0 && moveCooldown == 0 && Game_HasFinished(&game) == GAME_RUNNING)
+            {
+                int result = Game_TryMove(&game, dir);
+                if (result != MOVE_INVALID) {
+                    GUI_DrawMazeAndPlayer(&game, themeMode, playerColor);
+                    moveCooldown = MOVE_COOLDOWN_TICKS;
+                }
+            }
+        }
+
+        // D. Estado
+        int state = Game_HasFinished(&game);
+        if (state == GAME_WIN) {
+             // ... Lógica ganar ...
+             if (pendingLevelChange == 0) {
+                GUI_DrawMazeAndPlayer(&game, themeMode, playerColor);
+                pendingLevelChange = 50;
+            } else if (--pendingLevelChange == 1) {
+                if (currentLevel == 1) {
+                    currentLevel = 2;
+                    Maze_InitLevel2(&game);
+                    GUI_ResetDrawState();
+                    LCD_Clear(themeMode == LIGHT_MODE_DAY ? WHITE : BLACK);
+                    GUI_DrawMazeAndPlayer(&game, themeMode, playerColor);
+                } else {
+                    LCD_Clear(BLACK);
+                    GUI_DisString_EN(10, 60, "VICTORIA!", &Font12, BLACK, GREEN);
+                    if(cfg.audio_enabled) Tetris_TogglePlay(&myTetris);
+                    while(1) delay_ms(100);
+                }
+            }
+        } else if (state == GAME_LOSE) {
+             // ... Lógica perder ...
+             if (pendingLevelChange == 0) {
+                GUI_DrawMazeAndPlayer(&game, themeMode, playerColor);
+                pendingLevelChange = 50;
+            } else if (--pendingLevelChange == 1) {
+                LCD_Clear(BLACK);
+                GUI_DisString_EN(10, 60, "GAME OVER", &Font12, BLACK, RED);
+                if(cfg.audio_enabled) Tetris_TogglePlay(&myTetris);
+                while(1) delay_ms(100);
+            }
+        }
+
+        delay_ms(LOOP_DELAY_MS);
+    }
+
+    return 0;
+}

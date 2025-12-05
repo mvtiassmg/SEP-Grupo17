@@ -3,27 +3,33 @@
 
 #include <stdint.h>
 
-/* Estructura del acelerÃ³metro */
+// Definición de la estructura del acelerómetro
 typedef struct {
     float offset_gx;
     float offset_gy;
     float offset_gz;
-
-    float max_g;         // lÃ­mite mÃ¡ximo de inclinaciÃ³n 
-    float deadzone;      // zona muerta 
-    float smoothing;     // factor de suavizado 
+    float max_g;
+    float deadzone;
+    float smoothing;
 } Accelerometer;
 
-/* InicializaciÃ³n */
+// --- Prototipos de funciones ---
+
+// Función para inicializar los parámetros
 void Accelerometer_init(Accelerometer *acc);
 
-/* CalibraciÃ³n (mantener quieto el sensor durante 1 segundo) */
+// Función de calibración (bloqueante)
 void Accelerometer_calibrate(Accelerometer *acc, int samples);
 
-/* Lectura directa en g */
+// Lectura de valores en G
 void Accelerometer_read_g(Accelerometer *acc, float *gx, float *gy, float *gz);
 
-/* ConversiÃ³n a movimiento (â€“1.0 â†’ +1.0) */
+// Convertir G a movimiento (-1.0 a 1.0)
 float Accelerometer_to_movement(Accelerometer *acc, float gvalue);
+
+// ---Prototipo público para que interrupts.c pueda usarlo ---
+float raw_to_g(int raw);
+
+
 
 #endif

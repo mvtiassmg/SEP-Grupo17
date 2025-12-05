@@ -1,0 +1,43 @@
+#ifndef INTERRUPTS_H
+#define INTERRUPTS_H
+
+#include "xscugic.h"
+#include "xtmrctr.h"
+#include "xgpio.h"
+#include "xparameters.h"
+
+#define TIMER0_DEVICE_ID     XPAR_TMRCTR_0_DEVICE_ID
+#define TIMER1_DEVICE_ID     XPAR_TMRCTR_1_DEVICE_ID
+
+#define TIMER0_IRPT_ID       XPAR_FABRIC_TMRCTR_0_VEC_ID
+#define TIMER1_IRPT_ID       XPAR_FABRIC_TMRCTR_1_VEC_ID
+
+#define LIGHT_GPIO_DEVICE_ID XPAR_AXI_GPIO_0_DEVICE_ID
+#define LIGHT_GPIO_CHANNEL   1   // entrada del INT del sensor
+#define LIGHT_GPIO_IRQ_ID    XPAR_FABRIC_AXI_GPIO_1_IP2INTC_IRPT_INTR
+
+#define TIMER_CLOCK_HZ       XPAR_PS7_CORTEXA9_0_CPU_CLK_FREQ_HZ
+
+
+#define TIMER0_PERIOD_SEC    0.03f  // 30ms → lectura de ADC y ACC
+#define TIMER1_PERIOD_SEC    0.08f  // 80ms → tick del juego
+
+extern volatile int ao2_game_tick;
+extern volatile int ao2_light_flag;
+
+extern volatile float ao2_gx, ao2_gy, ao2_gz;
+extern volatile int ao2_pot1, ao2_pot2;
+extern volatile int ao2_mic;
+
+extern XScuGic AIntc;
+extern XTmrCtr ATimer0;
+extern XTmrCtr ATimer1;
+extern XGpio   ALightGpio;
+
+int AO2_InitInterruptSystem();
+
+void Timer0_ISR(void *Ref, u8 Timer);
+void Timer1_ISR(void *Ref, u8 Timer);
+void LightGPIO_ISR(void *Ref);
+
+#endif

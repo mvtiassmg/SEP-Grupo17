@@ -1,0 +1,213 @@
+#include <stdio.h>
+#include <sleep.h>
+#include <stdlib.h>
+#include <math.h>
+
+#include "platform.h"
+#include "xil_printf.h"
+#include "xparameters.h"
+#include "xgpio.h"
+#include "xstatus.h"
+#include "xtmrctr.h"
+#include "xil_io.h"
+#include "xuartps_hw.h"
+#include "xscugic.h"
+
+// Includes del usuario
+#include "Delay.h"
+#include "LCD_SPI.h"
+#include "LCD_Driver.h"
+#include "LCD_GUI.h"
+#include "ADC.h"
+#include "I2C.h"
+#include "maze_game.h"
+#include "maze_gui.h"
+#include "Accelerometer.h"
+#include "Joystick.h"
+#include "MotionJoystick.h"
+#include "LightSensor.h"
+#include "TempSensor.h"
+
+#include "interrupts.h"   // ISRs y flags (ao2_...)
+#include "game_config.h"  // GameConfig, GameConfig_ReadUART, GameHardware_Init
+
+/* === Declaraciones externas de HW (como en el código base) === */
+extern XGpio gpio0;
+extern XSpi  SpiInstance;
+extern XSpi  SpiInstance1;
+
+/* === Configuración de control === */
+#define TILT_THRESHOLD       0.25f
+#define MOVE_COOLDOWN_TICKS  5
+#define LOOP_DELAY_MS        1   // Solo para darle respiro a la CPU
+
+/* === OBJETOS LÓGICOS === */
+LightSensor lightSensor;
+TempSensor  tempSensor;
+
+int main()
+{
+    int Status;
+    u32 seed_val = 0;
+
+    // Variables de estado del juego
+    int currentLevel        = 1;
+    int pendingLevelChange  = 0;
+    int moveCooldown        = 0;
+    int game_time_seconds   = 60;
+
+    init_platform();
+
+    /* 1. Inicialización de Hardware Básico */
+    Status = XGpio_Initialize(&gpio0, XPAR_AXI_GPIO_0_DEVICE_ID);
+    if (Status != XST_SUCCESS) return XST_FAILURE;
+
+    Status = XSpi_Init(&SpiInstance, SPI_DEVICE_ID);
+    if (Status != XST_SUCCESS) return XST_FAILURE;
+
+    Status = init_adc(&SpiInstance1, SPI_DEVICE_ID_1);
+    if (Status != XST_SUCCESS) return XST_FAILURE;
+
+    Status = init_IIC();
+    if (Status != XST_SUCCESS) return XST_FAILURE;
+
+    /* --- Lógica de Configuración (AO3) --- */
+    GameConfig cfg;
+    GameConfig_ReadUART(&cfg);
+    GameHardware_Init(&cfg);
+
+    /* --- Inicialización del Sistema de Interrupciones (AO2) --- */
+    Status = AO2_InitInterruptSystem();
+    if (Status != XST_SUCCESS) xil_printf("Error AO2\r\n");
+
+    /* 2. Inicialización de Pantalla y Calibración */
+    LCD_Init(SCAN_DIR_DFT);
+    LCD_Clear(GUI_BACKGROUND);
+    GUI_INTRO();
+    delay_ms(500);
+    LCD_Clear(GUI_BACKGROUND);
+
+    Accelerometer acc;
+    Accelerometer_init(&acc);
+    GUI_DisString_EN(10, 50, "Calibrando...", &Font12, GUI_BACKGROUND, CYAN);
+    // Calibración usa lectura por polling, no por ISR
+    Accelerometer_calibrate(&acc, 50);
+    LCD_Clear(GUI_BACKGROUND);
+
+    // Inicializar lógica de sensores (valores iniciales)
+    LightSensor_init(&lightSensor);
+    TempSensor_init(&tempSensor);
+
+    /* 3. Inicialización del juego */
+    GameState game;
+    Maze_InitLevel1(&game);
+    GUI_ResetDrawState();
+
+    // Primer dibujado usando valores iniciales de modo y color
+    GUI_DrawMazeAndPlayer(&game, lightSensor.mode, tempSensor.player_color);
+
+    while (1)
+    {
+        /* A. EVENTO de sensores / tiempo (bandera puesta por ISR del GPIO/timer) */
+        if (ao2_light_flag == 1)
+        {
+            ao2_light_flag = 0;
+
+            // TODO: cuando tengas lux y temperatura en las ISRs,
+            // copia aquí los valores hacia las estructuras lógicas:
+            // lightSensor.lux_value    = ao2_lux;
+            // tempSensor.current_temp  = ao2_temp_c;
+
+            // De momento, si todavía no tienes esas variables,
+            // podrías seguir usando tus funciones de polling:
+            // LightSensor_update(&lightSensor);
+            // TempSensor_update(&tempSensor);
+
+            LightSensor_update(&lightSensor);  // Actualiza lightSensor.mode
+            TempSensor_update(&tempSensor);    // Actualiza tempSensor.player_color
+
+            // Tiempo de juego (según la freq. de esta bandera)
+            game_time_seconds--;
+            if (game_time_seconds <= 0) {
+                // Si no tienes GAME_TIMEOUT, puedes usar GAME_LOSE
+                game.state = GAME_LOSE;
+            }
+        }
+
+        /* B. TICK DE JUEGO (Movimiento y Dibujado) */
+        if (ao2_game_tick == 1)  // Activado por Timer1_ISR
+        {
+            ao2_game_tick = 0;   // Limpiar bandera de tick
+
+            char  dir = 0;
+            float mvx = 0.0f;
+            float mvy = 0.0f;
+
+            /* --- Lógica de Entrada --- */
+            if (cfg.inputMode == 1) // Acelerómetro
+            {
+                // Valores leídos en Timer0_ISR: ao2_gx, ao2_gy
+                mvx = Accelerometer_to_movement(&acc, ao2_gy);
+                mvy = Accelerometer_to_movement(&acc, ao2_gx);
+
+                if (fabsf(mvy) > fabsf(mvx)) {
+                    if (mvy > TILT_THRESHOLD)      dir = 'd';
+                    else if (mvy < -TILT_THRESHOLD) dir = 'u';
+                } else {
+                    if (mvx > TILT_THRESHOLD)      dir = 'r';
+                    else if (mvx < -TILT_THRESHOLD) dir = 'l';
+                }
+            }
+            else  // Joystick
+            {
+                // Si aún no usas ao2_pot1/2, puedes seguir con polling:
+                int joy_x = read_joyx();
+                int joy_y = read_joyy();
+
+                if      (joy_y > 2600) dir = 'u';
+                else if (joy_y < 1500) dir = 'd';
+                else if (joy_x > 2600) dir = 'r';
+                else if (joy_x < 1500) dir = 'l';
+            }
+
+            if (moveCooldown > 0) moveCooldown--;
+
+            if (dir != 0 && moveCooldown == 0 &&
+                Game_HasFinished(&game) == GAME_RUNNING)
+            {
+                int result = Game_TryMove(&game, dir);
+
+                if (result != MOVE_INVALID)
+                {
+                    GUI_DrawMazeAndPlayer(&game,
+                                         lightSensor.mode,
+                                         tempSensor.player_color);
+                    moveCooldown = MOVE_COOLDOWN_TICKS;
+                }
+            }
+
+            // Redibujar siempre (por si cambió modo de luz / color jugador)
+            GUI_DrawMazeAndPlayer(&game,
+                                  lightSensor.mode,
+                                  tempSensor.player_color);
+
+            int state = Game_HasFinished(&game);
+
+            if (state == GAME_WIN) {
+                // Aquí puedes copiar tu lógica de cambio de nivel
+                // usando currentLevel y pendingLevelChange
+            }
+            else if (state == GAME_LOSE /*|| state == GAME_TIMEOUT*/)
+            {
+                LCD_Clear(BLACK);
+                GUI_DisString_EN(10, 60, "JUEGO TERMINADO", &Font12, BLACK, RED);
+                while (1) delay_ms(100);
+            }
+        }
+
+        // El bucle principal debe girar rápido para esperar las interrupciones
+        delay_ms(LOOP_DELAY_MS);
+    }
+
+    return 0;
+}

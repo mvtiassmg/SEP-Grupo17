@@ -262,7 +262,7 @@ void GUI_Disbitmap(POINT Xpoint, POINT Ypoint, const unsigned char *pBmp,
 void GUI_Show(void)
 {
     LCD_Clear(GUI_BACKGROUND);
-    // ... (contenido original de GUI_Show si lo necesitas) ...
+
 }
 
 void GUI_INTRO(){

@@ -4,7 +4,7 @@
 
 #define ADC_MAX_COUNTS 1023.0f    // 10 bits -> 0..1023
 
-static inline float raw_to_g(int raw)
+ float raw_to_g(int raw)
 {
     // Pasar cuentas ADC a volt
     float voltage = (float)raw * (3.3f / ADC_MAX_COUNTS);

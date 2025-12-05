@@ -1,3 +1,5 @@
 eclipse.preferences.version=1
 encoding//src/Accelerometer.c=UTF-8
+encoding//src/interrupts.c=UTF-8
 encoding//src/main.c=UTF-8
+encoding//src/main_2.c=UTF-8
