@@ -1063,7 +1063,9 @@ proc create_root_design { parentCell } {
   # Create instance: util_vector_logic_0, and set properties
   set util_vector_logic_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:util_vector_logic:2.0 util_vector_logic_0 ]
   set_property -dict [ list \
+   CONFIG.C_OPERATION {and} \
    CONFIG.C_SIZE {1} \
+   CONFIG.LOGO_FILE {data/sym_andgate.png} \
  ] $util_vector_logic_0
 
   # Create instance: vio_0, and set properties

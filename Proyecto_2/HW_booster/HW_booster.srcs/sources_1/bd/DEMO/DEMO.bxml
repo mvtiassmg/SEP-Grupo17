@@ -2,10 +2,10 @@
 <Root MajorVersion="0" MinorVersion="39">
   <CompositeFile CompositeFileTopName="DEMO" CanBeSetAsTop="false" CanDisplayChildGraph="true">
     <Description>Composite Fileset</Description>
-    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1764935954"/>
-    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1764935954"/>
-    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1764935954"/>
-    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1764935954"/>
+    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1764961181"/>
+    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1764961181"/>
+    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1764961181"/>
+    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1764961181"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
       <File Name="ip\DEMO_axi_quad_spi_0_0\DEMO_axi_quad_spi_0_0.xci" Type="IP">
         <Instance HierarchyPath="axi_quad_spi_0"/>

@@ -1,6 +1,6 @@
 #include "DisplayTheme.h"
 
-void DisplayTheme_init(DisplayTheme *t)
+void DisplayTheme_init(DisplayTheme *t) //Inicializa el mapa en modo claro
 {
     t->mode = THEME_LIGHT;
     t->background = WHITE;
@@ -10,7 +10,7 @@ void DisplayTheme_init(DisplayTheme *t)
 
 void DisplayTheme_update(DisplayTheme *t, LightSensor *ls)
 {
-    if(ls->mode == LIGHT_MODE_DAY) {
+    if(ls->mode == LIGHT_MODE_DAY) { //Definición de colores para modo oscuro
         t->mode = THEME_LIGHT;
         t->background = WHITE;
         t->text = BLACK;

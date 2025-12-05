@@ -65,14 +65,14 @@ const uint32_t DURATION_ROM[SONG_LENGTH] = {
 static void Tetris_WriteToIP(TetrisPlayer *p, uint32_t period, uint8_t enable) {
     // Escribir Periodo (Registro 0)
     Xil_Out32(p->BaseAddress + p->RegOffsetPeriod, period);
-    // Escribir Enable (Registro 1 o offset 4 bytes)
+    // Escribir Enable (Registro 1)
     Xil_Out32(p->BaseAddress + p->RegOffsetEnable, enable);
 }
 
 void Tetris_Init(TetrisPlayer *player, uint32_t baseAddr) {
     player->BaseAddress = baseAddr;
-    player->RegOffsetPeriod = 0; // Asumiendo slv_reg0
-    player->RegOffsetEnable = 4; // Asumiendo slv_reg1
+    player->RegOffsetPeriod = 0; //  slv_reg0
+    player->RegOffsetEnable = 4; //  slv_reg1
 
     player->is_playing = 0;
     player->note_index = 0;
@@ -103,8 +103,8 @@ void Tetris_TogglePlay(TetrisPlayer *player) {
     }
 }
 
-// Esta función replica el "Process(clk)" del VHDL cuando s_clk_1ms = '1'
-void Tetris_Tick_1ms(TetrisPlayer *player) {
+
+void Tetris_Tick_1ms(TetrisPlayer *player) { //Función que hace el cambio de notas según sus duraciones
     if (player->is_playing) {
 
         if (player->duration_counter > 0) {

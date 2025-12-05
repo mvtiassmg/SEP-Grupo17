@@ -9,10 +9,10 @@
     // Pasar cuentas ADC a volt
     float voltage = (float)raw * (3.3f / ADC_MAX_COUNTS);
 
-    // Desplazamiento respecto al punto medio (~1.65 V)
+    // Desplazamiento respecto al punto medio
     float dv = voltage - 1.65f;
 
-    // Sensibilidad típica del KXTC9-2050 ≈ 0.66 V/g
+    // Sensibilidad 0.66 V/g (datasheet)
     return dv / 0.66f;   // resultado en "g"
 }
 
@@ -27,6 +27,7 @@ void Accelerometer_init(Accelerometer *acc)
     acc->smoothing = 0.2f;   // suavizado
 }
 
+//Para calibrar tomamos un promedio del estado inicial del acelerómetro, para medir el ruido inicial
 void Accelerometer_calibrate(Accelerometer *acc, int samples)
 {
     float sumx = 0, sumy = 0, sumz = 0;
@@ -43,6 +44,7 @@ void Accelerometer_calibrate(Accelerometer *acc, int samples)
     acc->offset_gz = (sumz / samples) - 1.0f;
 }
 
+//Restamos el offset medido anteriormente
 void Accelerometer_read_g(Accelerometer *acc, float *gx, float *gy, float *gz)
 {
     if (gx) *gx = raw_to_g(read_acx()) - acc->offset_gx;
@@ -50,6 +52,7 @@ void Accelerometer_read_g(Accelerometer *acc, float *gx, float *gy, float *gz)
     if (gz) *gz = raw_to_g(read_acz()) - acc->offset_gz;
 }
 
+//Hacemos un debouncer (filtro IIR), para no considerar el ruido
 float Accelerometer_to_movement(Accelerometer *acc, float gvalue)
 {
     if (gvalue > -acc->deadzone && gvalue < acc->deadzone)

@@ -9,7 +9,7 @@ static float clamp(float v, float mn, float mx)
     return v;
 }
 
-void MotionAccel_init(MotionAccel *m)
+void MotionAccel_init(MotionAccel *m) //Definición de movimientos máximos y suavización
 {
     m->max_speed = 3.0f;
     m->smoothing = 0.25f;
@@ -17,7 +17,7 @@ void MotionAccel_init(MotionAccel *m)
     m->last_vy = 0.0f;
 }
 
-void MotionAccel_update(MotionAccel *m, Accelerometer *acc, float *vx, float *vy)
+void MotionAccel_update(MotionAccel *m, Accelerometer *acc, float *vx, float *vy) //Actialización de posición del acelerómetro
 {
     float gx, gy, gz;
     Accelerometer_read_g(acc, &gx, &gy, &gz);

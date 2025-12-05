@@ -1,7 +1,7 @@
 --Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
---Date        : Fri Dec  5 08:59:13 2025
+--Date        : Fri Dec  5 15:59:40 2025
 --Host        : Macbook running 64-bit major release  (build 9200)
 --Command     : generate_target DEMO_wrapper.bd
 --Design      : DEMO_wrapper
@@ -61,29 +61,7 @@ architecture STRUCTURE of DEMO_wrapper is
     BTN0 : in STD_LOGIC;
     BUZZER_PWM : out STD_LOGIC;
     luz_int : out STD_LOGIC_VECTOR ( 0 to 0 );
-    RST_tri_o : out STD_LOGIC_VECTOR ( 0 to 0 );
-    iic_rtl_scl_i : in STD_LOGIC;
-    iic_rtl_scl_o : out STD_LOGIC;
-    iic_rtl_scl_t : out STD_LOGIC;
-    iic_rtl_sda_i : in STD_LOGIC;
-    iic_rtl_sda_o : out STD_LOGIC;
-    iic_rtl_sda_t : out STD_LOGIC;
-    RS_tri_o : out STD_LOGIC_VECTOR ( 0 to 0 );
-    DDR_cas_n : inout STD_LOGIC;
-    DDR_cke : inout STD_LOGIC;
-    DDR_ck_n : inout STD_LOGIC;
-    DDR_ck_p : inout STD_LOGIC;
-    DDR_cs_n : inout STD_LOGIC;
-    DDR_reset_n : inout STD_LOGIC;
-    DDR_odt : inout STD_LOGIC;
-    DDR_ras_n : inout STD_LOGIC;
-    DDR_we_n : inout STD_LOGIC;
-    DDR_ba : inout STD_LOGIC_VECTOR ( 2 downto 0 );
-    DDR_addr : inout STD_LOGIC_VECTOR ( 14 downto 0 );
-    DDR_dm : inout STD_LOGIC_VECTOR ( 3 downto 0 );
-    DDR_dq : inout STD_LOGIC_VECTOR ( 31 downto 0 );
-    DDR_dqs_n : inout STD_LOGIC_VECTOR ( 3 downto 0 );
-    DDR_dqs_p : inout STD_LOGIC_VECTOR ( 3 downto 0 );
+    BTN1 : in STD_LOGIC_VECTOR ( 0 to 0 );
     FIXED_IO_mio : inout STD_LOGIC_VECTOR ( 53 downto 0 );
     FIXED_IO_ddr_vrn : inout STD_LOGIC;
     FIXED_IO_ddr_vrp : inout STD_LOGIC;
@@ -102,7 +80,29 @@ architecture STRUCTURE of DEMO_wrapper is
     spi_rtl_ss_i : in STD_LOGIC_VECTOR ( 0 to 0 );
     spi_rtl_ss_o : out STD_LOGIC_VECTOR ( 0 to 0 );
     spi_rtl_ss_t : out STD_LOGIC;
-    BTN1 : in STD_LOGIC_VECTOR ( 0 to 0 )
+    RS_tri_o : out STD_LOGIC_VECTOR ( 0 to 0 );
+    RST_tri_o : out STD_LOGIC_VECTOR ( 0 to 0 );
+    iic_rtl_scl_i : in STD_LOGIC;
+    iic_rtl_scl_o : out STD_LOGIC;
+    iic_rtl_scl_t : out STD_LOGIC;
+    iic_rtl_sda_i : in STD_LOGIC;
+    iic_rtl_sda_o : out STD_LOGIC;
+    iic_rtl_sda_t : out STD_LOGIC;
+    DDR_cas_n : inout STD_LOGIC;
+    DDR_cke : inout STD_LOGIC;
+    DDR_ck_n : inout STD_LOGIC;
+    DDR_ck_p : inout STD_LOGIC;
+    DDR_cs_n : inout STD_LOGIC;
+    DDR_reset_n : inout STD_LOGIC;
+    DDR_odt : inout STD_LOGIC;
+    DDR_ras_n : inout STD_LOGIC;
+    DDR_we_n : inout STD_LOGIC;
+    DDR_ba : inout STD_LOGIC_VECTOR ( 2 downto 0 );
+    DDR_addr : inout STD_LOGIC_VECTOR ( 14 downto 0 );
+    DDR_dm : inout STD_LOGIC_VECTOR ( 3 downto 0 );
+    DDR_dq : inout STD_LOGIC_VECTOR ( 31 downto 0 );
+    DDR_dqs_n : inout STD_LOGIC_VECTOR ( 3 downto 0 );
+    DDR_dqs_p : inout STD_LOGIC_VECTOR ( 3 downto 0 )
   );
   end component DEMO;
   component IOBUF is

@@ -1,0 +1,614 @@
+#include <stdio.h>
+#include <sleep.h>
+#include <math.h>
+#include <stdlib.h>
+#include <stdint.h>
+
+#include "platform.h"
+#include "xil_printf.h"
+#include "xparameters.h"
+#include "xgpio.h"
+#include "xstatus.h"
+#include "xscugic.h"
+#include "xtmrctr.h"
+#include "xil_exception.h"
+
+// Includes del usuario
+#include "Delay.h"
+#include "LCD_SPI.h"
+#include "LCD_Driver.h"
+#include "LCD_GUI.h"
+#include "ADC.h"
+#include "I2C.h"
+#include "maze_game.h"
+#include "maze_gui.h"
+#include "Accelerometer.h"
+#include "Joystick.h"
+#include "MotionJoystick.h"
+#include "LightSensor.h"
+#include "TempSensor.h"
+#include "song.h"          // TetrisPlayer + NOTAS
+
+/* === DEFINICIONES HARDWARE === */
+#define GPIO_LCD_ID         XPAR_AXI_GPIO_0_DEVICE_ID
+#define GPIO_RESET_ID       XPAR_AXI_GPIO_2_DEVICE_ID
+#define SPI_LCD_ID          XPAR_AXI_QUAD_SPI_0_DEVICE_ID
+
+#ifndef SPI_ADC_ID
+#define SPI_ADC_ID          XPAR_AXI_QUAD_SPI_1_DEVICE_ID
+#endif
+
+/* === BASE ADDRESS DEL IP DE CANCIÓN === */
+#define TETRIS_IP_BASEADDR  XPAR_TETRIS_SONG_0_S00_AXI_BASEADDR
+
+/* === TIMER + GIC (2 TIMERS) ===
+ * AXI_TIMER_0 -> 1 ms (música)
+ * AXI_TIMER_1 -> 40 ms (juego)
+ */
+#define INTC_DEVICE_ID          XPAR_SCUGIC_0_DEVICE_ID
+
+#define TIMER_MUSIC_DEVICE_ID   XPAR_AXI_TIMER_0_DEVICE_ID
+#define TIMER_GAME_DEVICE_ID    XPAR_AXI_TIMER_1_DEVICE_ID
+
+#define TIMER_MUSIC_IRPT_ID     XPAR_FABRIC_AXI_TIMER_0_INTERRUPT_INTR
+#define TIMER_GAME_IRPT_ID      XPAR_FABRIC_AXI_TIMER_1_INTERRUPT_INTR
+
+#define TIMER_CLOCK_HZ          XPAR_AXI_TIMER_0_CLOCK_FREQ_HZ
+
+// Periodos
+#define MUSIC_TICK_SEC          0.001f   // 1 ms
+#define GAME_TICK_SEC           0.04f    // 40 ms
+#define GAME_TICKS_PER_SEC      25       // 1 s / 40 ms
+
+/* === CONTROL === */
+#define LOOP_DELAY_MS       40
+#define MOVE_COOLDOWN_TICKS 5
+#define TILT_THRESHOLD      0.25f
+
+typedef enum {
+    CTRL_ACCEL = 1,
+    CTRL_JOYSTICK = 2
+} ControlMode;
+
+ControlMode currentControl = CTRL_ACCEL;
+
+/* === Instancias de drivers (externas para compartir con otras librerías) === */
+extern XGpio gpio0;          // LCD (de tus librerías)
+extern XSpi  SpiInstance;    /* LCD */
+extern XSpi  SpiInstance1;   /* ADC */
+
+/* GPIO extra para reset */
+static XGpio gpioReset;
+
+/* === Objetos lógicos === */
+LightSensor lightSensor;
+TempSensor  tempSensor;
+
+/* === TIMER + GIC: instancias y flags === */
+static XScuGic IntcInstance;
+
+/* Dos timers HW distintos */
+static XTmrCtr TimerMusicInstance;   // AXI_TIMER_0 -> 1 ms
+static XTmrCtr TimerGameInstance;    // AXI_TIMER_1 -> 40 ms
+
+volatile int  game_tick_flag      = 0;   // Se pone a 1 cada 40 ms (timer juego)
+volatile u32  isr_music_counter   = 0;   // Cuenta interrupciones de 1 ms (música)
+volatile u32  isr_game_counter    = 0;   // Cuenta interrupciones de 40 ms (juego)
+
+/* === CANCIÓN TETRIS === */
+static TetrisPlayer gTetrisPlayer;    // Controlador de la canción en software
+volatile int g_music_on = 0;          // 1 = Tick de música activo en ISR
+
+/* === Funciones auxiliares === */
+
+// Convierte segundos a "ticks" del AXI Timer (down-counter)
+static u32 seconds_to_ticks(float sec)
+{
+    double ticks = (double)TIMER_CLOCK_HZ * (double)sec;
+    if (ticks < 1.0) ticks = 1.0;
+    return (u32)ticks;
+}
+
+/* ISR del Timer de MÚSICA (AXI_TIMER_0):
+ * - Se llama cada 1 ms.
+ * - Si la música está activa, llama Tetris_Tick_1ms.
+ */
+static void MusicTimer_ISR(void *CallBackRef, u8 TmrNum)
+{
+    XTmrCtr *InstancePtr = (XTmrCtr *)CallBackRef;
+
+    if (XTmrCtr_IsExpired(InstancePtr, TmrNum)) {
+        XTmrCtr_Stop(InstancePtr, TmrNum);
+
+        isr_music_counter++;
+
+        if (g_music_on) {
+            Tetris_Tick_1ms(&gTetrisPlayer);
+        }
+
+        XTmrCtr_Reset(InstancePtr, TmrNum);
+        XTmrCtr_Start(InstancePtr, TmrNum);
+    }
+}
+
+/* ISR del Timer de JUEGO (AXI_TIMER_1):
+ * - Se llama cada 40 ms.
+ * - Levanta game_tick_flag para que el main avance la lógica.
+ */
+static void GameTimer_ISR(void *CallBackRef, u8 TmrNum)
+{
+    XTmrCtr *InstancePtr = (XTmrCtr *)CallBackRef;
+
+    if (XTmrCtr_IsExpired(InstancePtr, TmrNum)) {
+        XTmrCtr_Stop(InstancePtr, TmrNum);
+
+        isr_game_counter++;
+        game_tick_flag = 1;
+
+        XTmrCtr_Reset(InstancePtr, TmrNum);
+        XTmrCtr_Start(InstancePtr, TmrNum);
+    }
+}
+
+/* Configura:
+ *  - GIC
+ *  - AXI_TIMER_0 (1 ms, música)
+ *  - AXI_TIMER_1 (40 ms, juego)
+ *  - Conecta ambas ISRs al GIC
+ */
+static int SetupInterruptSystem(void)
+{
+    int Status;
+    XScuGic_Config *IntcConfig;
+
+    xil_printf("[INT] Buscando config del GIC...\r\n");
+    IntcConfig = XScuGic_LookupConfig(INTC_DEVICE_ID);
+    if (IntcConfig == NULL) {
+        xil_printf("[INT][ERR] XScuGic_LookupConfig fallo\r\n");
+        return XST_FAILURE;
+    }
+
+    xil_printf("[INT] Inicializando GIC...\r\n");
+    Status = XScuGic_CfgInitialize(&IntcInstance, IntcConfig, IntcConfig->CpuBaseAddress);
+    if (Status != XST_SUCCESS) {
+        xil_printf("[INT][ERR] XScuGic_CfgInitialize = %d\r\n", Status);
+        return Status;
+    }
+
+    Xil_ExceptionInit();
+    Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_INT,
+                                 (Xil_ExceptionHandler)XScuGic_InterruptHandler,
+                                 &IntcInstance);
+    Xil_ExceptionEnable();
+
+    /* === Timer de MUSICA (AXI_TIMER_0) === */
+    xil_printf("[INT] Inicializando Timer MUSICA (AXI_TIMER_0)...\r\n");
+    Status = XTmrCtr_Initialize(&TimerMusicInstance, TIMER_MUSIC_DEVICE_ID);
+    if (Status != XST_SUCCESS) {
+        xil_printf("[INT][ERR] XTmrCtr_Initialize(MUSIC) = %d\r\n", Status);
+        return Status;
+    }
+
+    XTmrCtr_SetHandler(&TimerMusicInstance, MusicTimer_ISR, &TimerMusicInstance);
+    XTmrCtr_SetOptions(&TimerMusicInstance, 0,
+                       XTC_INT_MODE_OPTION | XTC_AUTO_RELOAD_OPTION | XTC_DOWN_COUNT_OPTION);
+
+    u32 load_music = seconds_to_ticks(MUSIC_TICK_SEC); // 1 ms
+    xil_printf("[INT] Music Timer ticks: %lu (%.3f ms)\r\n",
+               (unsigned long)load_music, MUSIC_TICK_SEC * 1000.0f);
+    XTmrCtr_SetResetValue(&TimerMusicInstance, 0, load_music);
+
+    /* === Timer de JUEGO (AXI_TIMER_1) === */
+    xil_printf("[INT] Inicializando Timer JUEGO (AXI_TIMER_1)...\r\n");
+    Status = XTmrCtr_Initialize(&TimerGameInstance, TIMER_GAME_DEVICE_ID);
+    if (Status != XST_SUCCESS) {
+        xil_printf("[INT][ERR] XTmrCtr_Initialize(GAME) = %d\r\n", Status);
+        return Status;
+    }
+
+    XTmrCtr_SetHandler(&TimerGameInstance, GameTimer_ISR, &TimerGameInstance);
+    XTmrCtr_SetOptions(&TimerGameInstance, 0,
+                       XTC_INT_MODE_OPTION | XTC_AUTO_RELOAD_OPTION | XTC_DOWN_COUNT_OPTION);
+
+    u32 load_game = seconds_to_ticks(GAME_TICK_SEC); // 40 ms
+    xil_printf("[INT] Game Timer ticks: %lu (%.2f ms)\r\n",
+               (unsigned long)load_game, GAME_TICK_SEC * 1000.0f);
+    XTmrCtr_SetResetValue(&TimerGameInstance, 0, load_game);
+
+    /* Conectar timers al GIC */
+    xil_printf("[INT] Conectando Timers IRQ al GIC...\r\n");
+
+    Status = XScuGic_Connect(&IntcInstance,
+                             TIMER_MUSIC_IRPT_ID,
+                             (Xil_ExceptionHandler)XTmrCtr_InterruptHandler,
+                             &TimerMusicInstance);
+    if (Status != XST_SUCCESS) {
+        xil_printf("[INT][ERR] XScuGic_Connect(MUSIC TIMER) = %d\r\n", Status);
+        return Status;
+    }
+
+    Status = XScuGic_Connect(&IntcInstance,
+                             TIMER_GAME_IRPT_ID,
+                             (Xil_ExceptionHandler)XTmrCtr_InterruptHandler,
+                             &TimerGameInstance);
+    if (Status != XST_SUCCESS) {
+        xil_printf("[INT][ERR] XScuGic_Connect(GAME TIMER) = %d\r\n", Status);
+        return Status;
+    }
+
+    XScuGic_Enable(&IntcInstance, TIMER_MUSIC_IRPT_ID);
+    XScuGic_Enable(&IntcInstance, TIMER_GAME_IRPT_ID);
+
+    // Arrancar timers
+    XTmrCtr_Start(&TimerMusicInstance, 0);
+    XTmrCtr_Start(&TimerGameInstance, 0);
+
+    xil_printf("[INT] Timers (1 ms + 40 ms) + GIC configurados OK\r\n");
+    return XST_SUCCESS;
+}
+
+/* === MENÚ UART === */
+void Show_Menu(void)
+{
+    xil_printf("=== Little SEP-viant ===\r\n");
+    xil_printf("1. Acelerometro\r\n");
+    xil_printf("2. Joystick\r\n");
+    xil_printf("Seleccione opcion: ");
+}
+
+/* === MAIN === */
+int main(void)
+{
+    int Status;
+    char opt;
+    u32 seed_val = 0;
+
+    // Variables de tiempo
+    int game_time_seconds = 60;
+    int tick_counter_1s   = 0;   // Cuenta "frames" de 40 ms -> 25 para 1 s
+    int moveCooldown      = 0;
+    int debug_print_rate  = 0;
+
+    u32 last_music_isr = 0;
+    u32 last_game_isr  = 0;
+
+    int game_over = 0;           // 0 = en juego, 1 = pantalla final mostrada
+
+    // Estado del botón de reset
+    int last_reset_btn = 0;
+
+    init_platform();
+    xil_printf("\r\n--- INICIO SISTEMA (2 timers + juego + canción) ---\r\n");
+
+    /* 1. Inicialización Hardware */
+
+    // GPIO LCD
+    xil_printf("[INIT] GPIO LCD...\r\n");
+    Status = XGpio_Initialize(&gpio0, GPIO_LCD_ID);
+    if (Status != XST_SUCCESS) {
+        xil_printf("[ERR] XGpio_Initialize (LCD) = %d\r\n", Status);
+        return XST_FAILURE;
+    }
+
+    // GPIO RESET
+    xil_printf("[INIT] GPIO RESET (AXI_GPIO_2)...\r\n");
+    Status = XGpio_Initialize(&gpioReset, GPIO_RESET_ID);
+    if (Status != XST_SUCCESS) {
+        xil_printf("[ERR] XGpio_Initialize (RESET) = %d\r\n", Status);
+        return XST_FAILURE;
+    }
+    // Canal 1 como entrada (asumimos botón en bit 0, activo en '1')
+    XGpio_SetDataDirection(&gpioReset, 1, 0xFFFFFFFF);
+
+    // SPI LCD
+    xil_printf("[INIT] SPI LCD...\r\n");
+    Status = XSpi_Init(&SpiInstance, SPI_LCD_ID);
+    if (Status != XST_SUCCESS) {
+        xil_printf("[ERR] XSpi_Init (LCD) = %d\r\n", Status);
+        return XST_FAILURE;
+    }
+
+    // SPI ADC (Joystick/Externo)
+    xil_printf("[INIT] SPI ADC...\r\n");
+    Status = XSpi_Init(&SpiInstance1, SPI_ADC_ID);
+    if (Status != XST_SUCCESS) {
+        xil_printf("[ERR] XSpi_Init (ADC) = %d\r\n", Status);
+        return XST_FAILURE;
+    }
+
+    // ADC Interno (XADC) para Acelerómetro / potenciómetros
+    xil_printf("[INIT] init_adc...\r\n");
+    Status = init_adc(&SpiInstance1, SPI_ADC_ID);
+    if (Status != XST_SUCCESS)
+        xil_printf("[WARN] init_adc error = %d\r\n", Status);
+    else
+        xil_printf("[OK] init_adc\r\n");
+
+    // I2C Sensores (Luz/Temp)
+    xil_printf("[INIT] I2C...\r\n");
+    Status = init_IIC();
+    if (Status != XST_SUCCESS)
+        xil_printf("[ERR] init_IIC = %d\r\n", Status);
+    else
+        xil_printf("[OK] I2C Init\r\n");
+
+    /* Pantalla */
+    xil_printf("[INIT] LCD...\r\n");
+    LCD_Init(SCAN_DIR_DFT);
+    LCD_Clear(WHITE);
+
+    // Pantalla inicial: "Configurando por UART"
+    GUI_DisString_EN(10, 40, "Configurando", &Font16, WHITE, BLUE);
+    GUI_DisString_EN(10, 60, "por UART...",   &Font16, WHITE, BLUE);
+
+    /* Objetos y Sensores */
+    xil_printf("[INIT] Objetos lógicos (Accel/Joystick/Luz/Temp)...\r\n");
+    Accelerometer acc; Accelerometer_init(&acc);
+    Joystick js;       Joystick_init(&js);
+    MotionJoystick mjs; MotionJoystick_init(&mjs);
+
+    LightSensor_init(&lightSensor);
+    TempSensor_init(&tempSensor);
+
+    /* 2. Configurar interrupciones (Timers 1 ms y 40 ms) */
+    xil_printf("[INIT] Configurando sistema de interrupciones (Timers)...\r\n");
+    Status = SetupInterruptSystem();
+    if (Status != XST_SUCCESS) {
+        xil_printf("[ERR] SetupInterruptSystem = %d\r\n", Status);
+        xil_printf(">>> Sin interrupciones no habrá ni juego fluido ni canción.\r\n");
+    }
+
+    /* 3. Menú de control del jugador (UART) */
+    Show_Menu();
+    opt = inbyte();
+    xil_printf("%c\r\n", opt);
+
+    seed_val = 2025;  // Fijo, para debug más determinista
+
+    if (opt == '2') {
+        currentControl = CTRL_JOYSTICK;
+        xil_printf("[CONF] Modo: Joystick\r\n");
+        LCD_Clear(WHITE);
+        GUI_DisString_EN(10, 50, "Calibrando Joy...", &Font12, WHITE, RED);
+        Joystick_calibrate(&js, 50);
+        xil_printf("[CONF] Joystick calibrado. center_x=%d center_y=%d\r\n",
+                   js.center_x, js.center_y);
+    } else {
+        currentControl = CTRL_ACCEL;
+        xil_printf("[CONF] Modo: Acelerometro\r\n");
+        LCD_Clear(WHITE);
+        GUI_DisString_EN(10, 50, "Calibrando Acc...", &Font12, WHITE, BLUE);
+        Accelerometer_calibrate(&acc, 50);
+        xil_printf("[CONF] Acelerometro calibrado.\r\n");
+    }
+
+    /* 4. Preguntar por UART si quiere música Tetris */
+    xil_printf("\r\n¿Quieres que suene la musica Tetris? (s/n): ");
+    char opt_music = inbyte();
+    xil_printf("%c\r\n", opt_music);
+
+    // Inicializar reproductor apuntando al IP
+    Tetris_Init(&gTetrisPlayer, TETRIS_IP_BASEADDR);
+
+    if (opt_music == 's' || opt_music == 'S') {
+        xil_printf("[MUSIC] Activando musica Tetris.\r\n");
+        Tetris_TogglePlay(&gTetrisPlayer);  // Comienza desde la primera nota
+        g_music_on = 1;                     // La ISR de 1 ms empezará a llamar Tetris_Tick_1ms
+    } else {
+        xil_printf("[MUSIC] Musica desactivada.\r\n");
+        g_music_on = 0;
+    }
+
+    /* 5. Inicializar laberinto y GUI */
+    LCD_Clear(WHITE);
+
+    GameState game;
+    Maze_GenerateRandom(&game, seed_val); // Genera laberinto
+
+    GUI_ResetDrawState();
+    GUI_DrawMazeAndPlayer(&game, lightSensor.mode, tempSensor.player_color);
+
+    xil_printf("[MAIN] Entrando al bucle principal...\r\n");
+
+    while (1) {
+
+        /* === Leer botón de RESET (GPIO2, bit 0) === */
+        u32 reset_val = XGpio_DiscreteRead(&gpioReset, 1);
+        int reset_pressed = (reset_val & 0x1U) ? 1 : 0; // Asumimos activo en '1'
+
+        if (reset_pressed && !last_reset_btn) {
+            xil_printf("[RESET] Boton presionado, reiniciando juego...\r\n");
+
+            // Reiniciar variables de juego
+            seed_val++;
+            game_time_seconds = 60;
+            tick_counter_1s   = 0;
+            moveCooldown      = 0;
+            debug_print_rate  = 0;
+            game_over         = 0;
+
+            // Nuevo laberinto
+            Maze_GenerateRandom(&game, seed_val);
+            GUI_ResetDrawState();
+            LCD_Clear(WHITE);
+            GUI_DrawMazeAndPlayer(&game, lightSensor.mode, tempSensor.player_color);
+
+            // Reiniciar canción si estaba activa
+            Tetris_Init(&gTetrisPlayer, TETRIS_IP_BASEADDR);
+            if (g_music_on) {
+                Tetris_TogglePlay(&gTetrisPlayer);
+            }
+        }
+        last_reset_btn = reset_pressed;
+
+        /* === Esperar al tick de juego (cada 40 ms, Timer GAME) === */
+        if (!game_tick_flag) {
+            // Pequeño respiro para no quemar CPU si algo va mal
+            delay_ms(1);
+            continue;
+        }
+        game_tick_flag = 0;  // Consumimos el tick
+
+        /* === Evento de 1 segundo (cada 25 frames de 40 ms) === */
+        tick_counter_1s++;
+        if (tick_counter_1s >= GAME_TICKS_PER_SEC) {
+            tick_counter_1s = 0;
+
+            int   old_temp    = tempSensor.current_temp;
+            int   old_lux     = lightSensor.lux_value;
+            int   old_mode    = lightSensor.mode;
+            COLOR old_color   = tempSensor.player_color;
+
+            // Leer Sensores
+            LightSensor_update(&lightSensor);
+            TempSensor_update(&tempSensor);
+
+            // Imprimir estado sensores
+            xil_printf("[SENSOR] Lux: %d | Temp: %d C | mode=%d | color=%u\r\n",
+                       lightSensor.lux_value,
+                       tempSensor.current_temp,
+                       (int)lightSensor.mode,
+                       (unsigned)tempSensor.player_color);
+
+            // Detectar cambios interesantes
+            if (tempSensor.current_temp != old_temp ||
+                tempSensor.player_color != old_color) {
+                xil_printf("[TEMP] Cambio: T: %d -> %d | Color: %u -> %u\r\n",
+                           old_temp, tempSensor.current_temp,
+                           (unsigned)old_color, (unsigned)tempSensor.player_color);
+            }
+
+            if (lightSensor.mode != old_mode) {
+                xil_printf("[LIGHT] Cambio de modo: %d -> %d (lux %d -> %d)\r\n",
+                           old_mode, lightSensor.mode, old_lux, lightSensor.lux_value);
+            }
+
+            // Debug de frecuencia de ISRs (esperado ~1000 y ~25)
+            u32 diff_music = isr_music_counter - last_music_isr;
+            u32 diff_game  = isr_game_counter  - last_game_isr;
+
+            last_music_isr = isr_music_counter;
+            last_game_isr  = isr_game_counter;
+
+            xil_printf("[INT] MusicTimer ISRs ultimo segundo: %lu\r\n",
+                       (unsigned long)diff_music);
+            xil_printf("[INT] GameTimer  ISRs ultimo segundo: %lu\r\n",
+                       (unsigned long)diff_game);
+
+            // Restar tiempo de juego
+            if (!game_over && game.state == GAME_RUNNING) {
+                game_time_seconds--;
+                xil_printf("[TIME] segundos restantes: %d\r\n", game_time_seconds);
+                if (game_time_seconds <= 0) {
+                    xil_printf("[TIME] TIEMPO AGOTADO -> GAME_TIMEOUT\r\n");
+                    game.state = GAME_TIMEOUT;
+                }
+            }
+        }
+
+        /* === Lectura de control y movimiento === */
+        char dir = 0;
+
+        if (!game_over && game.state == GAME_RUNNING) {
+
+            if (currentControl == CTRL_ACCEL) {
+                float gx, gy, gz;
+                float mvx, mvy;
+
+                Accelerometer_read_g(&acc, &gx, &gy, &gz);
+
+                // DEBUG ACELERÓMETRO (cada ~10 ticks para no saturar)
+                debug_print_rate++;
+                if (debug_print_rate >= 10) {
+                    xil_printf("[ACC] Gx=%.2f Gy=%.2f Gz=%.2f\r\n",
+                               gx, gy, gz);
+                    debug_print_rate = 0;
+                }
+
+                // Ejes intercambiados (como en tu código original)
+                mvx = Accelerometer_to_movement(&acc, gy);
+                mvy = Accelerometer_to_movement(&acc, gx);
+
+                if (fabsf(mvx) > 0.1f || fabsf(mvy) > 0.1f) {
+                    xil_printf("[ACC] mvx=%.3f mvy=%.3f\r\n", mvx, mvy);
+                }
+
+                if (fabsf(mvy) > fabsf(mvx)) {
+                    if (mvy > TILT_THRESHOLD)       dir = 'd';
+                    else if (mvy < -TILT_THRESHOLD) dir = 'u';
+                } else {
+                    if (mvx > TILT_THRESHOLD)       dir = 'r';
+                    else if (mvx < -TILT_THRESHOLD) dir = 'l';
+                }
+
+            } else { // Joystick
+                float vx, vy;
+                MotionJoystick_update(&mjs, &js, &vx, &vy);
+
+                if (fabsf(vx) > 0.1f || fabsf(vy) > 0.1f) {
+                    xil_printf("[JOY] vx=%.3f vy=%.3f\r\n", vx, vy);
+                }
+
+                if (fabsf(vy) > fabsf(vx)) {
+                    if (vy > 0.5f)       dir = 'd';
+                    else if (vy < -0.5f) dir = 'u';
+                } else {
+                    if (vx > 0.5f)       dir = 'r';
+                    else if (vx < -0.5f) dir = 'l';
+                }
+            }
+
+            if (moveCooldown > 0) moveCooldown--;
+
+            if (dir != 0 && moveCooldown == 0) {
+                int res = Game_TryMove(&game, dir);
+                xil_printf("[MOVE] dir=%c res=%d state=%d\r\n",
+                           dir, res, (int)game.state);
+
+                if (res != MOVE_INVALID) {
+                    moveCooldown = MOVE_COOLDOWN_TICKS;
+                }
+            }
+        }
+
+        /* === Pantalla de FIN DE JUEGO (una sola vez) === */
+        if (!game_over && game.state != GAME_RUNNING) {
+            LCD_Clear(BLACK);
+
+            if (game.state == GAME_WIN) {
+                GUI_DisString_EN(20, 40, "GANASTE!", &Font16, BLACK, GREEN);
+            } else if (game.state == GAME_TIMEOUT) {
+                GUI_DisString_EN(10, 40, "TIEMPO FUERA", &Font16, BLACK, RED);
+            } else {
+                GUI_DisString_EN(20, 40, "GAME OVER", &Font16, BLACK, RED);
+            }
+
+            // Mensaje en DOS lineas para que no se corte
+            GUI_DisString_EN(10, 70, "Presiona RESET",        &Font12, BLACK, WHITE);
+            GUI_DisString_EN(10, 90, "para jugar otra vez",   &Font12, BLACK, WHITE);
+
+            xil_printf("[END] Juego Terminado. Estado: %d\r\n", game.state);
+            game_over = 1;
+        }
+
+        /* === Dibujo del laberinto + jugador con tema y color === */
+        if (!game_over) {
+            GUI_DrawMazeAndPlayer(&game, lightSensor.mode, tempSensor.player_color);
+
+            // Tiempo en pantalla
+            char timeStr[16];
+            sprintf(timeStr, "T:%d ", game_time_seconds);
+
+            uint16_t txtC = (lightSensor.mode == LIGHT_MODE_DAY) ? BLACK : WHITE;
+            uint16_t bgC  = (lightSensor.mode == LIGHT_MODE_DAY) ? WHITE : BLACK;
+
+            GUI_DisString_EN(80, 120, timeStr, &Font8, bgC, txtC);
+        }
+
+        // Este delay es solo para no saturar mientras todo anda bien
+        delay_ms(LOOP_DELAY_MS);
+    }
+
+    cleanup_platform();
+    return 0;
+}

@@ -14,7 +14,7 @@ void TempSensor_update(TempSensor *ts)
     ts->current_temp = read_tmp();
 
     int t = ts->current_temp;
-    COLOR new_color;
+    COLOR new_color; //Definición de colores según temperatura
 
     if (t <= 25)          new_color = RED;    // muy frío
     else if (t <= 27)     new_color = YELLOW;

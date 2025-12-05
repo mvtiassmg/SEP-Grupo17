@@ -5,6 +5,9 @@
 #include <stdio.h>
 #include "LightSensor.h"
 
+// Se usan para implementar una técnica de "Dirty Rectangle" (https://wiki.c2.com/?DirtyRectangles):
+// Solo redibujamos lo que ha cambiado (la posición anterior del jugador)
+// en lugar de borrar y pintar toda la pantalla en cada frame (que sería muy lento).
 static int firstTime = 1;
 static int prevRow = -1;
 static int prevCol = -1;
@@ -18,7 +21,7 @@ uint16_t COLOR_WALL = BLUE;
 uint16_t COLOR_PATH = WHITE;
 uint16_t COLOR_TEXT = BLACK;
 
-void GUI_SetTheme(int mode) {
+void GUI_SetTheme(int mode) { //Se definen los colores del mapa según la intensidad de luz del sensor
     if (mode == LIGHT_MODE_DAY) {
         COLOR_BG   = WHITE;
         COLOR_WALL = BLUE;
@@ -43,7 +46,7 @@ void GUI_SetTheme(int mode) {
 #define MAZE_START_X   4
 #define MAZE_START_Y   4
 
-void GUI_ResetDrawState(void)
+void GUI_ResetDrawState(void) //Reset de dibujo de mapa
 {
     firstTime = 1;
     prevRow = -1;
@@ -54,9 +57,9 @@ void GUI_ResetDrawState(void)
     prevPlayerColor = 0;
 }
 
-static void GUI_DrawMazeCell(const Maze *m, int row, int col)
+static void GUI_DrawMazeCell(const Maze *m, int row, int col) //Asignación de colores según la casilla
 {
-    int x0 = MAZE_START_X + col * MAZE_TILE_SIZE;
+    int x0 = MAZE_START_X + col * MAZE_TILE_SIZE; //Conversión de filas y columnas a posiciones del LCD
     int y0 = MAZE_START_Y + row * MAZE_TILE_SIZE;
     int x1 = x0 + MAZE_TILE_SIZE - 1;
     int y1 = y0 + MAZE_TILE_SIZE - 1;
@@ -83,16 +86,15 @@ void GUI_DrawMazeAndPlayer(const GameState *game, int themeMode, COLOR playerCol
     const Player *p = &game->player;
     int forceRedraw = 0;
 
-    if (themeMode != prevThemeMode) {
+    if (themeMode != prevThemeMode) { //Detección de cambio de fondo
         GUI_SetTheme(themeMode);
         forceRedraw = 1;
         prevThemeMode = themeMode;
     }
 
-    if (playerColor != prevPlayerColor) {
+    if (playerColor != prevPlayerColor) { //Detección de cambio de color del personaje
         prevPlayerColor = playerColor;
-        // Opcional: Forzar redibujado solo del jugador si cambia el color
-        // pero aquí se actualizará en el siguiente ciclo de movimiento
+
     }
 
     if (firstTime || forceRedraw) {
@@ -108,6 +110,9 @@ void GUI_DrawMazeAndPlayer(const GameState *game, int themeMode, COLOR playerCol
         prevLives = -1;
     }
 
+    // Si el jugador se ha movido, no borramos directamente
+    // En su lugar, redibujamos la celda del laberinto (suelo, trampa, salida)
+    // en la posición DONDE ESTABA ANTES el jugador. Esto restaura el fondo.
     if (prevRow != p->row || prevCol != p->col) {
         if (prevRow >= 0 && prevCol >= 0 && prevRow < m->rows && prevCol < m->cols) {
             GUI_DrawMazeCell(m, prevRow, prevCol);
@@ -118,10 +123,15 @@ void GUI_DrawMazeAndPlayer(const GameState *game, int themeMode, COLOR playerCol
     int y0 = MAZE_START_Y + p->row * MAZE_TILE_SIZE;
     int x1 = x0 + MAZE_TILE_SIZE - 1;
     int y1 = y0 + MAZE_TILE_SIZE - 1;
+
+
+	// Se aplica un margen de 2px para que el jugador sea ligeramente más pequeño que el pasillo.
+	// Esto evita que visualmente "toque" o "borre" las paredes al moverse.
     int margin = 2;
 
     GUI_DrawRectangle(x0 + margin, y0 + margin, x1 - margin, y1 - margin, playerColor, DRAW_FULL, DOT_PIXEL_1X1);
 
+    // Verifica estados de fin de juego (Victoria/Derrota/Timeout).
     if (p->lives != prevLives || game->state != prevGameState) {
         char info[32];
         if (game->state == GAME_WIN) {
@@ -134,6 +144,8 @@ void GUI_DrawMazeAndPlayer(const GameState *game, int themeMode, COLOR playerCol
              sprintf(info, "V:%d S:%d", p->lives, p->score);
              GUI_DisString_EN(2, 125, info, &Font8, COLOR_BG, COLOR_TEXT);
         }
+        // Solo actualiza el texto de vidas/puntaje si los valores han cambiado
+
         prevLives = p->lives;
         prevGameState = game->state;
     }

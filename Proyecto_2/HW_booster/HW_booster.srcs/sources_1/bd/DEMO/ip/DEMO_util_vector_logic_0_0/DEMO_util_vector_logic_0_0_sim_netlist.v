@@ -3,8 +3,8 @@
 // Tool Version: Vivado v.2020.1 (win64) Build 2902540 Wed May 27 19:54:49 MDT 2020
 // Date        : Thu Dec  4 16:47:34 2025
 // Host        : Macbook running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode funcsim
-//               c:/Users/tomas/Downloads/SEP-Grupo17/Proyecto_2/HW_booster/HW_booster.srcs/sources_1/bd/DEMO/ip/DEMO_util_vector_logic_0_0/DEMO_util_vector_logic_0_0_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim -rename_top DEMO_util_vector_logic_0_0 -prefix
+//               DEMO_util_vector_logic_0_0_ DEMO_util_vector_logic_0_0_sim_netlist.v
 // Design      : DEMO_util_vector_logic_0_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.

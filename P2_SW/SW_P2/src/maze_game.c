@@ -1,6 +1,7 @@
 #include "maze_game.h"
 #include <stdlib.h>
 
+// Basado en https://github.com/jubayer98/Maze-Game-in-C/blob/master/maze.c y https://www.quora.com/Can-anyone-make-a-simple-15-by-15-maze-in-C-programming
 int random_int(int min, int max) {
     return min + (rand() % (max - min + 1));
 }
@@ -129,7 +130,7 @@ void Maze_InitLevel1(GameState *game)
         }
     }
 
-    /* Diseño del Nivel 1 (Tu diseño) */
+    /* Diseño del Nivel 1 */
 
     // Caminos básicos
     for (int c = 0; c <= 2; c++) m->cells[0][c] = CELL_PATH;
